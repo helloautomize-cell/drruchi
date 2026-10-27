@@ -1,0 +1,438 @@
+<style>
+/* ---------- inner page templates ---------- */
+.tabs-ip{position:sticky;top:env(safe-area-inset-top,0px);z-index:80;background:var(--forest);color:var(--soft);font-size:13.5px}
+.tabs-ip .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px;padding-block:10px}
+.tabs-ip b{color:var(--white);font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:17px}
+.tabs-ip .tb{display:flex;flex-wrap:wrap;gap:6px}
+.tabs-ip button{border:0;cursor:pointer;font:inherit;font-weight:650;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--white)}
+.tabs-ip button[aria-pressed="true"]{background:var(--blush);color:var(--forest)}
+
+.ihd{background:var(--forest);color:var(--white)}
+.ihd .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:18px}
+.ihd .logo{height:48px;width:auto}
+.ihd ul{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+.ihd li a{display:inline-flex;align-items:center;gap:4px;padding:10px 12px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14.5px;color:var(--white)}
+.ihd li a:hover,.ihd li a.on{background:rgba(255,255,255,.1)}
+.ihd li .ic{width:14px;height:14px;opacity:.6}
+.ihd .r{display:flex;align-items:center;gap:14px}
+.ihd .lang{font-size:13px;font-weight:650;color:var(--soft)}
+.ihd .lang b{color:var(--white)}
+
+.ihero{background:var(--forest);color:var(--white);padding-bottom:clamp(40px,5vw,72px)}
+.ihero .crumb{font-size:13.5px;color:var(--soft);padding-top:8px}
+.ihero .crumb a{color:var(--soft);text-decoration:none}
+.ihero .crumb a:hover{color:var(--white)}
+.ihero .g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center;margin-top:22px}
+.ihero h1{margin:16px 0 14px;font-size:clamp(44px,5.6vw,84px);line-height:.97;color:var(--white)}
+.ihero .sub{font-size:18px;color:var(--soft);margin:0 0 22px;max-width:46ch}
+.ihero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.ihero .chips .chip{background:var(--forest-2);color:var(--white);box-shadow:inset 0 0 0 1px rgba(245,228,222,.14)}
+.ihero .chips .chip .ic{color:var(--rose-soft)}
+.ihero .cta{display:flex;flex-wrap:wrap;gap:10px}
+.ihero .ph{position:relative;border-radius:var(--r-xl);overflow:hidden;aspect-ratio:5/4.4}
+.ihero .ph>img{width:100%;height:100%;object-fit:cover}
+.ihero .fl{position:absolute;padding:14px 16px;color:var(--forest);display:flex;align-items:center;gap:12px}
+.ihero .fl b{display:block;font-size:15px}
+.ihero .fl small{display:block;font-size:12.5px;color:var(--muted)}
+.ihero .fl .big{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:28px;line-height:1}
+.ihero .f1{left:16px;bottom:16px}.ihero .f2{right:16px;top:16px}
+.ihero .who{display:flex;align-items:center;gap:10px}
+.ihero .who img{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 25%}
+
+.sp{padding-block:clamp(60px,7vw,104px)}
+.sp.p{background:var(--petal)}.sp.b{background:var(--blush)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center}
+.two .ph{border-radius:var(--r-xl);overflow:hidden;aspect-ratio:3/2}
+.two .ph img{width:100%;height:100%;object-fit:cover}
+.prose p{margin:0 0 16px;font-size:17.5px;line-height:1.65;color:var(--muted)}
+.prose p:first-of-type{color:var(--forest)}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:34px}
+.tl div{background:var(--white);border-radius:var(--r-md);padding:18px;box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:6px}
+.tl div.k{background:var(--forest);color:var(--white);box-shadow:none}
+.tl b{font-family:var(--display);font-variation-settings:'SOFT' 100,'opsz' 144;font-weight:540;font-size:26px;line-height:1;color:var(--rose)}
+.tl .k b{color:var(--rose-soft)}
+.tl span{font-size:14.5px;line-height:1.4}
+.tl .k span{color:var(--soft)}
+
+/* cards and lists */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px}
+.cards.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.cards.c5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.cd{background:var(--white);border-radius:var(--r-lg);padding:22px;box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:12px;text-decoration:none}
+a.cd{transition:transform .25s}
+a.cd:hover{transform:translateY(-3px)}
+.cd b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:21px;line-height:1.15}
+.cd span{font-size:15px;color:var(--muted);line-height:1.5}
+.cd .badge .ic{width:26px;height:26px;color:var(--rose)}
+
+/* stepper */
+.steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;margin-top:40px;counter-reset:s}
+.steps div{position:relative;padding:0 16px 0 0}
+.steps div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--forest);color:var(--white);font-family:var(--display);font-size:20px;position:relative;z-index:1}
+.steps div::after{content:"";position:absolute;left:48px;right:0;top:23px;height:2px;background:var(--line)}
+.steps div:last-child::after{display:none}
+.steps b{display:block;margin:16px 0 6px;font-size:16.5px}
+.steps span{font-size:14.5px;color:var(--muted);line-height:1.5}
+
+/* results */
+.res3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px}
+.res3 figure{margin:0}
+.res3 .ba{border-radius:var(--r-lg);aspect-ratio:4/3}
+.res3 figcaption{margin-top:12px;font-weight:650;font-size:15px}
+.res3 figcaption span{display:block;font-weight:500;color:var(--muted);font-size:13.5px}
+
+/* quotes */
+.qs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:34px}
+.qs blockquote{margin:0;background:var(--white);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;gap:16px;box-shadow:inset 0 0 0 1px var(--line)}
+.qs p{margin:0;font-family:var(--display);font-variation-settings:'SOFT' 100;font-size:19px;line-height:1.4}
+.qs cite{font-style:normal;font-weight:650;font-size:14.5px;margin-top:auto}
+.qs cite span{display:block;font-weight:500;color:var(--muted);font-size:13px}
+
+/* cost + aftercare */
+.cost{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--r-lg);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.cost td{padding:16px 20px;border-bottom:1px solid var(--line);font-size:15.5px}
+.cost td:last-child{text-align:right;font-weight:650;white-space:nowrap}
+.cost tr.t td{background:var(--forest);color:var(--white);font-weight:700;border:0}
+.note{font-size:13.5px;color:var(--muted);margin-top:12px}
+.after{background:var(--forest);color:var(--white);border-radius:var(--r-lg);padding:28px}
+.after ul{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.after li{display:flex;gap:12px;font-size:15.5px;color:var(--soft)}
+.after li .ic{color:var(--rose-soft);flex:none;margin-top:2px}
+
+/* faq + where */
+.fw{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,4vw,64px)}
+.mini-c{display:flex;gap:14px;align-items:center;background:var(--white);border-radius:var(--r-md);padding:12px;box-shadow:inset 0 0 0 1px var(--line);margin-top:12px}
+.mini-c img{width:84px;height:64px;border-radius:14px;object-fit:cover;flex:none}
+.mini-c b{display:block;font-size:15.5px}
+.mini-c span{font-size:13.5px;color:var(--muted)}
+
+/* reels */
+.reels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:34px}
+
+/* related + cta band */
+.rel{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.rel a{text-decoration:none}
+.band2{background:var(--forest);color:var(--white);border-radius:var(--r-xl);padding:clamp(28px,4vw,52px);display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:24px;align-items:center}
+.band2 h2{margin:0;color:var(--white);font-size:clamp(32px,4vw,54px);line-height:1}
+.band2 p{margin:12px 0 0;color:var(--soft)}
+.band2 .cta{display:flex;flex-wrap:wrap;gap:10px}
+
+/* clinic */
+.info{background:var(--cream);color:var(--forest);border-radius:var(--r-lg);padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;margin-bottom:24px}
+.info div{display:flex;gap:12px;font-size:14.5px;line-height:1.45}
+.info .ic{color:var(--rose);flex:none;margin-top:2px}
+.info b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose);margin-bottom:2px}
+.drive{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.drive .chip b{color:var(--rose);font-variant-numeric:tabular-nums}
+.gal{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:220px 220px;gap:12px;margin-top:34px}
+.gal img{width:100%;height:100%;object-fit:cover;border-radius:var(--r-lg)}
+.gal img:first-child{grid-row:span 2}
+.docs2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
+.docs2 a{display:flex;gap:16px;align-items:center;background:var(--white);border-radius:var(--r-lg);padding:14px;text-decoration:none;box-shadow:inset 0 0 0 1px var(--line)}
+.docs2 img{width:96px;height:96px;border-radius:20px;object-fit:cover;object-position:50% 22%;flex:none}
+.docs2 b{display:block;font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:22px}
+.docs2 span{font-size:14px;color:var(--muted)}
+
+/* other pages map */
+.map{width:100%;border-collapse:collapse;margin-top:28px;background:var(--white);border-radius:var(--r-lg);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.map th,.map td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+.map th{background:var(--blush);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--rose)}
+.map td:first-child{font-weight:650;white-space:nowrap}
+.map code{font-size:13px;background:var(--petal);padding:2px 6px;border-radius:6px}
+
+.ftA{background:var(--forest);color:var(--soft);padding-block:64px 28px;margin-top:0}
+.ftA .cols{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:32px}
+.ftA h4{margin:0 0 14px;color:var(--white);font-size:13px;font-weight:750;letter-spacing:.14em;text-transform:uppercase}
+.ftA ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:15px}
+.ftA a{text-decoration:none}
+.ftA .bot{margin-top:48px;padding-top:22px;border-top:1px solid rgba(245,228,222,.16);display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:13px}
+
+@media (max-width:1080px){.ihd ul{display:none}.tl{grid-template-columns:repeat(3,minmax(0,1fr))}.cards.c5,.qs,.reels{grid-template-columns:1fr 1fr}.steps{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:30px}.steps div:nth-child(3)::after{display:none}}
+@media (max-width:860px){.ihero .g,.two,.fw,.band2{grid-template-columns:minmax(0,1fr)}.cards,.cards.c4,.res3{grid-template-columns:1fr 1fr}.ftA .cols{grid-template-columns:1fr 1fr}.gal{grid-template-columns:1fr 1fr;grid-template-rows:200px 160px 160px}.gal img:first-child{grid-column:span 2;grid-row:auto}.docs2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){.ihd .lang{display:none}.tl,.cards,.cards.c4,.cards.c5,.res3,.qs,.reels,.info{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:minmax(0,1fr)}.steps div::after{display:none}.ftA .cols{grid-template-columns:minmax(0,1fr)}.map td:first-child{white-space:normal}.ihero .fl{left:10px;right:10px}.ihero .f2{top:10px}.ihero .f1{bottom:10px}}
+</style>
+
+<div class="tabs-ip"><div class="wrap"><div><b>Dental Krafts · inner page templates</b><br><span>One template covers each page family. Switch pages:</span></div>
+<div class="tb" id="iptabs"><button data-p="doc" aria-pressed="true">Doctor profile</button><button data-p="treat" aria-pressed="false">Treatment page</button><button data-p="clinic" aria-pressed="false">Clinic page</button><button data-p="map" aria-pressed="false">Other pages</button></div></div></div>
+
+<header class="ihd"><div class="wrap"><img class="logo" src="img/dk-logo-reversed.svg" alt="Dental Krafts"><ul><li><a href="#">Treatments {i:chevron-down}</a></li><li><a href="#" class="on">Our dentists {i:chevron-down}</a></li><li><a href="#">Results</a></li><li><a href="#">Costs</a></li><li><a href="#">Clinics {i:chevron-down}</a></li><li><a href="#">Patient stories</a></li></ul><div class="r"><span class="lang"><b>EN</b> · 日本語 · 한국어</span><a class="btn btn-w btn-sm" href="#book">Book a visit</a></div></div></header>
+
+<!-- ======================= DOCTOR ======================= -->
+<main class="pg" data-p="doc">
+  <section class="ihero"><div class="wrap">
+    <div class="crumb"><a href="#">Home</a> / <a href="#">Our dentists</a> / Dr Ruchi Goel</div>
+    <div class="g">
+      <div>
+        <span class="eyebrow">{i:award:sm} Prosthodontist and implantologist · Dental Krafts</span>
+        <h1 class="d">Dr Ruchi <em>Goel</em></h1>
+        <p class="sub">BDS, MDS (Prosthodontics), All India Institute of Medical Sciences, New Delhi</p>
+        <div class="chips"><span class="chip">{i:medal:sm} AIIMS MDS entrance topper, 2012</span><span class="chip">{i:shield-check:sm} Reg. A-7387, Delhi State Dental Council</span><span class="chip">{i:star:sm} 98% on Practo, 268 patients</span></div>
+        <div class="cta"><a class="btn btn-w" href="#book">Book with Dr Ruchi <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-wa" href="#book">{i:whatsapp:sm} Chat on WhatsApp</a></div>
+      </div>
+      <div class="ph"><img src="img/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel, prosthodontist and implantologist" style="object-position:50% 25%">
+        <div class="glass fl f1"><span class="big tnum">98%</span><span><b>Practo patient votes</b><small>268 patients, as of Oct 2026</small></span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="wrap two">
+    <div><span class="eyebrow">About Dr Ruchi</span><h2 class="d h2">Rebuilding smiles, one <em>careful plan</em> at a time.</h2>
+      <div class="prose"><p>Dr Ruchi Goel is a prosthodontist: a dentist who specialises in replacing and rebuilding teeth. Her work covers dental implants, every type of denture, crowns and bridges, smile design and full-mouth rehabilitation.</p><p>She topped the AIIMS MDS entrance examination in 2012 and completed her postgraduate training in prosthodontics at AIIMS New Delhi, after clinical years at PGIMER Chandigarh and PGIMS Rohtak.</p><p>Patients mention one thing most often: she explains the plan, the alternatives and the cost before anything begins.</p></div></div>
+    <div class="ph"><img src="img/ai/dr-ruchi-at-work.webp" alt="Dr Ruchi Goel holding a dental implant model" style="object-position:50% 40%"></div>
+  </div></section>
+
+  <section class="sp p"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Credentials</span><h2 class="d h2">Trained at India's <em>top institutes.</em></h2></div></div>
+    <div class="tl">
+      <div><b class="tnum">2007</b><span>BDS, D.A.V. Centenary Dental College, Yamuna Nagar</span></div>
+      <div><b class="tnum">2008</b><span>General Dentist, Guru Gobind Singh Hospital</span></div>
+      <div><b class="tnum">2010</b><span>House Surgeon, PGIMER Chandigarh</span></div>
+      <div class="k"><b class="tnum">2012</b><span>First rank, AIIMS MDS entrance examination</span></div>
+      <div><b class="tnum">2012–15</b><span>Junior Resident, Prosthodontics, AIIMS</span></div>
+      <div class="k"><b class="tnum">2015</b><span>MDS Prosthodontics, AIIMS New Delhi</span></div>
+      <div><b class="tnum">2015</b><span>Co-founder, Dental Krafts</span></div>
+      <div><b class="tnum">2023</b><span>Published research on occlusal splints (IJPRD)</span></div>
+      <div><b class="tnum">2025</b><span>National Achievers Award</span></div>
+      <div><b>IDA · IPS</b><span>Indian Dental Association, Indian Prosthodontic Society</span></div>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">What Dr Ruchi treats</span><h2 class="d h2">Replacing and <em>rebuilding</em> teeth.</h2></div></div>
+    <div class="cards c4">
+      <a class="cd" href="#"><span class="badge">{i:tooth-implant}</span><b>Dental implants</b><span>Single, multiple and full-arch</span></a>
+      <a class="cd" href="#"><span class="badge">{i:teeth}</span><b>All-on-4 / All-on-6</b><span>A full set of fixed teeth</span></a>
+      <a class="cd" href="#"><span class="badge">{i:smile}</span><b>Dentures</b><span>Complete, partial, implant-held</span></a>
+      <a class="cd" href="#"><span class="badge">{i:tooth}</span><b>Crowns and bridges</b><span>Zirconia and ceramic</span></a>
+      <a class="cd" href="#"><span class="badge">{i:sparkles}</span><b>Smile design</b><span>Veneers and makeovers</span></a>
+      <a class="cd" href="#"><span class="badge">{i:tooth-check}</span><b>Full-mouth rehab</b><span>Worn teeth and bite problems</span></a>
+      <a class="cd" href="#"><span class="badge">{i:user-heart}</span><b>TMJ disorders</b><span>Jaw joint pain and clicking</span></a>
+      <a class="cd" href="#"><span class="badge">{i:shield-check}</span><b>Maxillofacial prosthetics</b><span>After surgery or injury</span></a>
+    </div>
+  </div></section>
+
+  <section class="sp b"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Her cases</span><h2 class="d h2">Cases planned by <em>Dr Ruchi.</em></h2></div><a class="link" href="#">See all results {i:arrow-right:sm}</a></div>
+    <div class="res3">
+      <figure><div class="ba"><img src="img/ba-13-smile-makeover__before.webp" alt="Before smile makeover"><img class="af" src="img/ba-13-smile-makeover__after.webp" alt="After smile makeover"><span class="kn"><i>{i:arrow-left:sm}</i></span><input type="range" min="0" max="100" value="50" aria-label="Before and after slider"><span class="tg l">Before</span><span class="tg r">After</span></div><figcaption>Smile makeover<span>Ceramic crowns on the upper front teeth</span></figcaption></figure>
+      <figure><div class="ba"><img src="img/ba-24-full-mouth-rehabilitation__before.webp" alt="Before full-mouth rehabilitation"><img class="af" src="img/ba-24-full-mouth-rehabilitation__after.webp" alt="After full-mouth rehabilitation"><span class="kn"><i>{i:arrow-left:sm}</i></span><input type="range" min="0" max="100" value="50" aria-label="Before and after slider"><span class="tg l">Before</span><span class="tg r">After</span></div><figcaption>Full-mouth rehabilitation<span>Bite and worn teeth rebuilt</span></figcaption></figure>
+      <figure><div class="ba"><img src="img/ba-11-complete-dentures-face__before.webp" alt="Before complete dentures"><img class="af" src="img/ba-11-complete-dentures-face__after.webp" alt="After complete dentures"><span class="kn"><i>{i:arrow-left:sm}</i></span><input type="range" min="0" max="100" value="50" aria-label="Before and after slider"><span class="tg l">Before</span><span class="tg r">After</span></div><figcaption>Complete dentures<span>Shown with the patient's consent</span></figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Dr Ruchi explains</span><h2 class="d h2">Short answers, <em>straight</em> from her.</h2></div></div>
+    <div class="reels">
+      <a class="reel" href="#"><img src="img/reel-01-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>The most common dental problem in the world</b><span>1 min</span></span></a>
+      <a class="reel" href="#"><img src="img/reel-02-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>A minute with Dr Ruchi</b><span>1 min</span></span></a>
+      <a class="reel" href="#"><img src="img/reel-03-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>Are you ignoring this early sign?</b><span>1 min</span></span></a>
+      <a class="reel" href="#"><img src="img/reel-04-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>Dental myths, busted</b><span>1 min</span></span></a>
+    </div>
+  </div></section>
+
+  <section class="sp p"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">What patients say</span><h2 class="d h2">"She takes her time, <em>never</em> in a hurry."</h2></div><span class="chip">{i:star:sm} 98% on Practo · 268 votes</span></div>
+    <div class="qs">
+      <blockquote><p>"Dr Ruchi explained the entire implant procedure in detail and planned the treatment very carefully."</p><cite>Aditya<span>Dental implant</span></cite></blockquote>
+      <blockquote><p>"She explained my issue in complete detail and helped resolve it. Her qualification truly shows in her work."</p><cite>Sachid Malhotra<span>Post and core</span></cite></blockquote>
+      <blockquote><p>"Takes time to explain issues, benefits and drawbacks. She takes her time with the procedure, never in a hurry."</p><cite>Anshul Yadav<span>Zirconia crowns</span></cite></blockquote>
+      <blockquote><p>"Dr Ruchi took the time to listen to my concerns and thoroughly explain the treatment options."</p><cite>Kuldeep Kaul<span>Dental implant</span></cite></blockquote>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="wrap fw">
+    <div><span class="eyebrow">Where to see Dr Ruchi</span><h2 class="d h2">Both clinics, <em>on set days.</em></h2><p class="lead">Call to confirm which clinic Dr Ruchi is at today.</p>
+      <div class="mini-c"><img src="img/sector-53-storefront.webp" alt=""><span><b>Sector 53 · Golf Course Road</b><span class="tnum">+91 98104 48720 · 10 am – 8 pm</span></span></div>
+      <div class="mini-c"><img src="img/sector-57-operatory.webp" alt=""><span><b>Sector 57 · Sushant Lok 2</b><span class="tnum">+91 95992 52018 · 10 am – 8:30 pm</span></span></div>
+    </div>
+    <div>{FAQDOC}</div>
+  </div></section>
+</main>
+
+<!-- ======================= TREATMENT ======================= -->
+<main class="pg" data-p="treat" hidden>
+  <section class="ihero"><div class="wrap">
+    <div class="crumb"><a href="#">Home</a> / <a href="#">Treatments</a> / Dental implants</div>
+    <div class="g">
+      <div>
+        <span class="eyebrow">{i:tooth-implant:sm} Replace missing teeth</span>
+        <h1 class="d">Dental implants <em>in Gurgaon</em></h1>
+        <p class="sub">A fixed tooth that looks, feels and chews like your own, planned by an AIIMS-trained prosthodontist.</p>
+        <div class="chips"><span class="chip who"><img src="img/ai/dr-ruchi-portrait.webp" alt="">Treated by Dr Ruchi Goel</span><span class="chip">{i:coin-rupee:sm} ₹30,000 – ₹55,000 per tooth</span></div>
+        <div class="cta"><a class="btn btn-w" href="#book">Book a consultation <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-wa" href="#book">{i:whatsapp:sm} WhatsApp</a></div>
+      </div>
+      <div class="ph"><img src="img/ai/treat-implants.webp" alt="A dental implant with a ceramic crown">
+        <div class="glass fl f1"><span class="badge">{i:clock}</span><span><b>3 to 6 months</b><small>From implant to final crown</small></span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Is this for you?</span><h2 class="d h2">When an implant <em>makes sense.</em></h2></div></div>
+    <div class="cards c4">
+      <div class="cd"><span class="badge">{i:tooth-alert}</span><b>A lost tooth</b><span>You've lost one or more teeth to decay, gum disease or an accident.</span></div>
+      <div class="cd"><span class="badge">{i:teeth}</span><b>A loose denture</b><span>A removable denture or bridge feels loose or uncomfortable.</span></div>
+      <div class="cd"><span class="badge">{i:shield-check}</span><b>Shifting teeth</b><span>You want to stop neighbouring teeth from drifting into the gap.</span></div>
+      <div class="cd"><span class="badge">{i:smile}</span><b>Eating freely</b><span>You'd like to bite into an apple again without thinking about it.</span></div>
+    </div>
+  </div></section>
+
+  <section class="sp p"><div class="wrap two">
+    <div class="ph"><img src="img/ai/dr-ruchi-at-work.webp" alt="Dr Ruchi Goel explaining an implant model" style="object-position:55% 40%"></div>
+    <div><span class="eyebrow">How an implant works</span><h2 class="d h2">A new root, <em>then</em> a new tooth.</h2>
+      <div class="prose"><p>A small titanium post is placed in the jawbone where the root used to be. Over 3 to 6 months the bone bonds to it.</p><p>A connector (abutment) and a custom crown then sit on top, so you get a tooth that stays put, without cutting down the neighbouring teeth as a bridge does.</p></div></div>
+  </div></section>
+
+  <section class="sp"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Your options</span><h2 class="d h2">One tooth or <em>a full set.</em></h2></div></div>
+    <div class="cards c5">
+      <div class="cd"><b>Single implant</b><span>One missing tooth, one implant, one crown.</span></div>
+      <div class="cd"><b>Implant bridge</b><span>Several missing teeth in a row, held by two or more implants.</span></div>
+      <div class="cd"><b>All-on-4 / All-on-6</b><span>A full set of fixed teeth on four to six implants.</span></div>
+      <div class="cd"><b>Implant-retained denture</b><span>Your denture clicks onto two to four implants and stops slipping.</span></div>
+      <div class="cd"><b>With bone grafting</b><span>If bone has shrunk after a long gap, it can often be rebuilt first.</span></div>
+    </div>
+  </div></section>
+
+  <section class="sp b"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Step by step</span><h2 class="d h2">What <em>happens</em>, and when.</h2></div></div>
+    <div class="steps">
+      <div><b>Consultation and scan</b><span>Dr Ruchi checks bone height and width on an X-ray or 3D scan.</span></div>
+      <div><b>Plan and estimate</b><span>You see where the implant goes, the timeline and the cost, in writing.</span></div>
+      <div><b>Placement</b><span>Local anaesthesia, usually about an hour for one implant.</span></div>
+      <div><b>Healing</b><span>3 to 6 months. You may wear a temporary tooth.</span></div>
+      <div><b>Final crown</b><span>A zirconia or ceramic crown matched to your teeth.</span></div>
+      <div><b>Reviews</b><span>Check-ups and cleaning keep it healthy long term.</span></div>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Results</span><h2 class="d h2">Implant cases from <em>our clinics.</em></h2></div><a class="link" href="#">All results {i:arrow-right:sm}</a></div>
+    <div class="res3">
+      <figure><div class="ba"><img src="img/ba-03-back-teeth-implant__before.webp" alt="Before back-teeth implant"><img class="af" src="img/ba-03-back-teeth-implant__after.webp" alt="After back-teeth implant"><span class="kn"><i>{i:arrow-left:sm}</i></span><input type="range" min="0" max="100" value="50" aria-label="Before and after slider"><span class="tg l">Before</span><span class="tg r">After</span></div><figcaption>Back-teeth implant<span>Missing molar replaced</span></figcaption></figure>
+      <figure><div class="ba"><img src="img/ba-24-full-mouth-rehabilitation__before.webp" alt="Before"><img class="af" src="img/ba-24-full-mouth-rehabilitation__after.webp" alt="After"><span class="kn"><i>{i:arrow-left:sm}</i></span><input type="range" min="0" max="100" value="50" aria-label="Before and after slider"><span class="tg l">Before</span><span class="tg r">After</span></div><figcaption>Full-mouth rehabilitation<span>Implants and crowns</span></figcaption></figure>
+      <figure><div class="ba"><img src="img/ba-12-smile-makeover__before.webp" alt="Before"><img class="af" src="img/ba-12-smile-makeover__after.webp" alt="After"><span class="kn"><i>{i:arrow-left:sm}</i></span><input type="range" min="0" max="100" value="50" aria-label="Before and after slider"><span class="tg l">Before</span><span class="tg r">After</span></div><figcaption>Front teeth restored<span>Crowns after a long gap</span></figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="sp p"><div class="wrap two" style="align-items:start">
+    <div><span class="eyebrow">Cost</span><h2 class="d h2">Typical <em>cost.</em></h2>
+      <table class="cost"><tr><td>Consultation and X-rays</td><td class="tnum">₹500 – ₹2,000</td></tr><tr><td>Implant placement</td><td class="tnum">₹20,000 – ₹40,000</td></tr><tr><td>Abutment and crown</td><td class="tnum">₹10,000 – ₹20,000</td></tr><tr class="t"><td>Implant and crown, typical total</td><td class="tnum">₹30,000 – ₹55,000</td></tr><tr><td>Bone graft or sinus lift, if needed</td><td>quoted after scan</td></tr></table>
+      <p class="note">Typical range, confirmed after your consultation. Your estimate itemises each part.</p></div>
+    <div class="after"><span class="eyebrow">Aftercare</span><h3 class="d" style="margin:10px 0 0;font-size:30px;color:var(--white)">Looking after your implant</h3><ul>
+      <li>{i:check}Soft food, and no hard chewing on that side for the first few days.</li>
+      <li>{i:check}Brush and floss around it like a natural tooth.</li>
+      <li>{i:check}Don't smoke. It raises the risk of the implant failing.</li>
+      <li>{i:check}Come in for a check-up every 6 months.</li></ul></div>
+  </div></section>
+
+  <section class="sp"><div class="wrap fw">
+    <div><span class="eyebrow">FAQ</span><h2 class="d h2">Implant <em>questions.</em></h2><p class="lead">Ask us anything on WhatsApp before you book.</p>
+      <div class="rel"><span class="chip">Related:</span><a class="chip" href="#">All-on-4</a><a class="chip" href="#">Dentures</a><a class="chip" href="#">Crowns and bridges</a><a class="chip" href="#">Treatment costs</a></div></div>
+    <div>{FAQTREAT}</div>
+  </div></section>
+</main>
+
+<!-- ======================= CLINIC ======================= -->
+<main class="pg" data-p="clinic" hidden>
+  <section class="ihero"><div class="wrap">
+    <div class="crumb"><a href="#">Home</a> / <a href="#">Clinics</a> / Sector 53</div>
+    <div class="g">
+      <div>
+        <span class="eyebrow">{i:map-pin:sm} South Point Mall · DLF Phase 5</span>
+        <h1 class="d">Dental Krafts, <em>Sector 53</em></h1>
+        <p class="sub">On the 2nd floor of South Point Mall. Specialist dental care, five minutes off Golf Course Road.</p>
+        <div class="info">
+          <div>{i:map-pin}<span><b>Address</b>DSP-211, 2nd Floor, South Point Mall, Golf Course Road, Sector 53, Gurugram 122002</span></div>
+          <div>{i:clock}<span><b>Hours</b>Mon, Tue, Thu–Sun · 10 am – 8 pm<br>Closed Wednesdays</span></div>
+          <div>{i:phone-call}<span><b>Phone</b><span class="tnum">+91 98104 48720</span></span></div>
+          <div>{i:navigation}<span><b>Status</b><span class="xlive2">Open today</span></span></div>
+        </div>
+        <div class="cta"><a class="btn btn-w" href="#book">Book at Sector 53 <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-wa" href="#book">{i:whatsapp:sm} WhatsApp</a><a class="btn btn-sm" style="background:transparent;color:var(--white);box-shadow:inset 0 0 0 1.5px rgba(255,251,245,.6)" href="#">{i:map-route:sm} Directions</a></div>
+      </div>
+      <div class="ph"><img src="img/sector-53-storefront.webp" alt="Dental Krafts Sector 53 storefront, South Point Mall">
+        <div class="glass fl f1"><span class="big tnum">5.0</span><span><b>Practo · Sector 53</b><small>67 patient stories</small></span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="wrap two" style="align-items:start">
+    <div><span class="eyebrow">Getting here</span><h2 class="d h2">Take the lift to the <em>2nd floor.</em></h2>
+      <div class="prose"><p>South Point Mall is on Golf Course Road in DLF Phase 5, Sector 53. We're at DSP-211 on the 2nd floor.</p><p>Parking and which gate to use: to be confirmed by the clinic.</p></div>
+      <div class="drive"><span class="chip">Golf Course Rd <b>5 min</b></span><span class="chip">Ardee City <b>10</b></span><span class="chip">MG Road <b>14</b></span><span class="chip">DLF Phase 3 <b>15</b></span><span class="chip">DLF Phase 2 <b>17</b></span><span class="chip">Cyber City <b>17</b></span><span class="chip">HUDA City Centre <b>20</b></span><span class="chip">Golf Course Ext Rd <b>20</b></span></div>
+    </div>
+    <div><span class="eyebrow">Your dentists here</span><h2 class="d h2">Both specialists <em>consult here.</em></h2>
+      <div class="docs2"><a href="#"><img src="img/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel"><span><b>Dr Ruchi Goel</b><span>Prosthodontist · implants, dentures, crowns</span></span></a><a href="#"><img src="img/ai/dr-parmod-portrait.webp" alt="Dr Parmod Gulia"><span><b>Dr Parmod Gulia</b><span>Pediatric dentist · kids, root canals</span></span></a></div>
+      <p class="note">Call to check who is in today. Weekly schedule to be added.</p>
+    </div>
+  </div></section>
+
+  <section class="sp p"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Inside the clinic</span><h2 class="d h2">Calm, clean and <em>easy to find.</em></h2></div></div>
+    <div class="gal"><img src="img/reception-lounge-wide.webp" alt="Reception lounge"><img src="img/storefront-signage-reception.webp" alt="Storefront and reception"><img src="img/reception-lounge.webp" alt="Reception with the logo wall"><img src="img/dk-doctors-performing-procedure-1.webp" alt="The doctors during a procedure"><img src="img/storefront-night-signage.webp" alt="Clinic signage at night"></div>
+  </div></section>
+
+  <section class="sp"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Treatments at this clinic</span><h2 class="d h2">Every treatment, <em>under one roof.</em></h2></div></div>
+    <div class="cards c4">
+      <a class="cd" href="#"><span class="badge">{i:tooth-implant}</span><b>Dental implants</b><span>from ₹30,000</span></a>
+      <a class="cd" href="#"><span class="badge">{i:tooth-root}</span><b>Root canal</b><span>from ₹6,000</span></a>
+      <a class="cd" href="#"><span class="badge">{i:tooth}</span><b>Crowns and bridges</b><span>from ₹12,000</span></a>
+      <a class="cd" href="#"><span class="badge">{i:first-tooth}</span><b>Kids' dentistry</b><span>₹500 consultation</span></a>
+    </div>
+    <p class="lead" style="margin-top:30px;max-width:none">We see patients from DLF Phase 5, Sectors 42, 43, 53, 54 and 55, Sushant Lok 1, Nirvana Country, Ardee City and the Golf Course Road residences.</p>
+  </div></section>
+</main>
+
+<!-- ======================= OTHER PAGES MAP ======================= -->
+<main class="pg" data-p="map" hidden>
+  <section class="sp"><div class="wrap">
+    <span class="eyebrow">Other pages</span><h1 class="d h2">Built from <em>sections you've seen.</em></h1>
+    <p class="lead">Every remaining page reuses the homepage sections and these three templates, with copy from <code>06a-content-core-pages.md</code>.</p>
+    <table class="map">
+      <tr><th>Page</th><th>Build it from</th></tr>
+      <tr><td>/our-dentists</td><td>Inner hero with <code>doctors-duo.webp</code>, then homepage Dentists C, then a "How we work together" band (CTA band style)</td></tr>
+      <tr><td>/dr-parmod-gulia</td><td>Doctor template. Use <code>dr-parmod-portrait</code> and <code>dr-parmod-at-work</code>, the kids photos, and his timeline and reviews from 06a §4</td></tr>
+      <tr><td>/treatments</td><td>Inner hero, then homepage Treatments B (index with preview), expanded to all 21 treatments in the 6 groups</td></tr>
+      <tr><td>21 treatment pages</td><td>Treatment template, one data entry each in <code>treatments.ts</code>, copy from <code>06b</code>, image from the image map</td></tr>
+      <tr><td>/treatment-costs</td><td>Inner hero, then homepage Costs B (price list with tabs) showing every row, then the "what changes the price" cards and the CTA band</td></tr>
+      <tr><td>/gallery</td><td>Inner hero, then homepage Results B (hover grid) with all 33 cases, filter chips and a lightbox slider</td></tr>
+      <tr><td>/patient-stories</td><td>Inner hero, then homepage Stories C (video and quotes), all reviews with filters, and links to Practo and Justdial</td></tr>
+      <tr><td>Sector 57 and SEO landings</td><td>Clinic template with that branch's data (06a §10 to §12)</td></tr>
+      <tr><td>/medical-tourism</td><td>Inner hero, then the Treatment template's stepper (send photos, estimate, travel, treatment, follow-up), then Dentists C and Results B</td></tr>
+      <tr><td>/japanese, /korean</td><td>A single page each: homepage hero E (translated), Dentists C, Treatments B and Clinics A, set in Noto Sans JP/KR for body text</td></tr>
+      <tr><td>/about-us</td><td>Inner hero with <code>doctors-duo</code>, the story in the prose layout, Why B values, the timeline and Recognition A</td></tr>
+      <tr><td>/contact-us</td><td>Homepage Booking B (three steps) and Clinics A</td></tr>
+      <tr><td>/blog and posts</td><td>A card grid on petal with category chips. The post template has an author box (doctor card), a table of contents and the CTA band</td></tr>
+      <tr><td>404</td><td>Forest band, "This page has moved.", plus Treatments B and the CTA band</td></tr>
+    </table>
+  </div></section>
+</main>
+
+<section class="sp" id="book" style="padding-top:0"><div class="wrap"><div class="band2"><div><h2 class="d">Ready to <em>talk it through?</em></h2><p>₹500 consultation with an exam. You'll see your options and the cost before anything begins.</p></div><div class="cta"><a class="btn btn-w" href="#">Book a visit <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-wa" href="#">{i:whatsapp:sm} WhatsApp</a></div></div></div></section>
+
+<footer class="ftA on-dark"><div class="wrap">
+  <div class="cols">
+    <div><img src="img/dk-logo-reversed.svg" alt="Dental Krafts" style="height:52px;width:auto;margin-bottom:16px"><p style="margin:0 0 18px;max-width:34ch">Specialist dental care in Gurgaon, from dentists trained at AIIMS and PGIMER.</p><a class="btn btn-w btn-sm" href="#book">Book a visit</a></div>
+    <div><h4>Treatments</h4><ul><li><a href="#">Dental implants</a></li><li><a href="#">Root canal</a></li><li><a href="#">Crowns and bridges</a></li><li><a href="#">Smile makeover</a></li><li><a href="#">Kids' dentistry</a></li></ul></div>
+    <div><h4>Clinics</h4><ul><li>Sector 53 · Golf Course Road</li><li class="tnum">+91 98104 48720</li><li>Sector 57 · Sushant Lok 2</li><li class="tnum">+91 95992 52018</li><li>kraftsdental@gmail.com</li></ul></div>
+    <div><h4>Dental Krafts</h4><ul><li><a href="#">Our dentists</a></li><li><a href="#">Results</a></li><li><a href="#">Costs</a></li><li><a href="#">Patient stories</a></li><li><a href="#">日本語 · 한국어</a></li></ul></div>
+  </div>
+  <div class="bot"><span>Dr Ruchi Goel, Reg. A-7387 · Dr Parmod Gulia, Reg. A-12323 · Delhi State Dental Council</span><span>© 2026 Dental Krafts · Privacy · Terms</span></div>
+</div></footer>
+<nav class="mbar" aria-label="Quick actions"><a class="btn btn-s" href="#">{i:phone-call:sm} Call</a><a class="btn btn-wa" href="#">{i:whatsapp:sm} WhatsApp</a><a class="btn btn-p" href="#book">{i:calendar-check:sm} Book</a></nav>
+
+<script>
+(function(){
+  var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+  function show(p){$$(".pg").forEach(function(m){m.hidden=m.getAttribute("data-p")!==p});$$("#iptabs button").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-p")===p?"true":"false")});try{localStorage.setItem("dk-ip",p)}catch(e){}}
+  $$("#iptabs button").forEach(function(b){b.addEventListener("click",function(){show(b.getAttribute("data-p"));window.scrollTo({top:0})})});
+  try{var s=localStorage.getItem("dk-ip");if(s)show(s)}catch(e){}
+  $$(".ba").forEach(function(box){var r=box.querySelector("input");if(r)r.addEventListener("input",function(){box.style.setProperty("--x",r.value+"%")})});
+  var d=new Date(),ist=new Date(d.getTime()+(d.getTimezoneOffset()+330)*60000),day=ist.getDay(),m=ist.getHours()*60+ist.getMinutes(),t;
+  if(day===3)t="Closed today (Wednesday)";else if(m<600)t="Opens today at 10 am";else if(m<1200)t="Open now · until 8 pm";else t="Opens "+((day+1)%7===3?"Thursday":"tomorrow")+" at 10 am";
+  $$(".xlive2").forEach(function(e){e.textContent=t});
+})();
+</script>

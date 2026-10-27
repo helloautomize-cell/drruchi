@@ -1,0 +1,54 @@
+TITLE: Dental Krafts Gallery | Before & After Transformations
+DESC: Explore the Dental Krafts Gallery - real patient transformations from treatments like veneers, implants, crowns, dentures, smile makeovers & more.
+IMAGES:
+  /img/japan.webp | Japan flag
+  /img/korea.webp | Korea flag
+  /img/logo.svg | Dental Krafts Logo
+  img/after-before/img-before-after-001.webp | dental treatment gurgaon
+  img/after-before/img-before-after-002.webp | best dental treatment gurgaon
+  img/after-before/img-before-after-003.webp | dental treatment gurgaon
+  img/after-before/img-before-after-004.webp | dental treatment gurgaon
+  img/after-before/dental-krafts-bf-01.webp | fixed teeth treatment gurgaon
+  img/after-before/dental-krafts-bf-02.webp | fixed dentures treatment gurgaon
+  img/after-before/dental-krafts-bf-03.webp | dental veneers treatment gurgaon
+  img/after-before/dental-krafts-bf-04.webp | fixed teeth treatment clinic gurugram
+  img/after-before/dental-krafts-bf-05.webp | best fixed teeth treatment gurgaon
+  img/after-before/dental-krafts-bf-06.webp | full mouth rehabilitation treatment gurgaon
+  img/after-before/dental-krafts-bf-07.webp | full mouth rehabilitation treatment gurgaon
+  img/after-before/dental-krafts-bf-08.webp | full mouth rehabilitation treatment gurgaon
+  img/after-before/dental-krafts-bf-09.webp | full mouth rehabilitation treatment gurgaon
+  img/after-before/dental-krafts-bf-10.webp | full mouth rehabilitation treatment gurgaon
+  img/after-before/dental-krafts-bf-11.webp | full mouth rehabilitation treatment gurgaon
+  img/after-before/dental-krafts-bf-12.webp | full mouth rehabilitation treatment gurgaon
+  img/after-before/dental-krafts-13.webp | teeth whitening treatment gurgaon
+  img/after-before/dental-krafts-14.webp | Dentures Treatment Gurgaon
+  img/after-before/dental-krafts-bf-15.webp | teeth implant gurgaon
+  img/after-before/dental-krafts-bf-01.webp | teeth straightening gurgaon
+  img/after-before/dental-krafts-bf-02.webp | best teeth straightening gurgaon
+  img/after-before/dental-krafts-bf-03.webp | teeth whitening gurgaon
+  img/after-before/dental-krafts-ab-01.webp | smile makeover treatment gurgaon
+  img/after-before/dental-krafts-ab-02.webp | Smile makeover gurgaon
+  img/after-before/dental-krafts-ab-03.webp | Dentures treatment gurgaon
+  img/after-before/dental-krafts-ab-04.webp | Front cap on teeth in gurgaon
+  img/after-before/dental-krafts-ab-05.webp | Crowns treatment gurgaon
+  img/after-before/before-after.webp | teeth whitening treatment gurgaon
+  img/after-before/before-after-00.webp | direct veneers treatment gurgaon
+  img/after-before/before-after-pic.webp | teeth whitening treatment gurgaon
+  img/after-before/before-after-16.webp | Full mouth rehabiliation gurgaon
+  img/after-before/before-after-17.webp | Back teeth implant treatment gurgaon
+  img/after-before/before-after-18.webp | back implant teeth gurgaon
+  img/after-before/before-after-19.webp | back teeth implant gurugram
+  img/after-before/before-after-20.webp | teeth cleaning treatment gurugram
+  img/after-before/before-after-21.webp | gap filling treatment gurugram
+  /img/dental-krafts-logo.svg | Dental Krafts Logo
+
+TEXT:
+Dental Krafts Gallery | Before & After Transformations
+Gallery
+Home
+Gallery
+After & Before Results
+Patient's Transformations
++919810448720
++919810448720
+Book Consultation

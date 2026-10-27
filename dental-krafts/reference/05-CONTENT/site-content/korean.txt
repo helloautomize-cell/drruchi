@@ -1,0 +1,184 @@
+TITLE: 구르가온(구루그람) 치과｜Dental Krafts 덴탈크래프츠
+DESC: 인도 구르가온 섹터 53·섹터 57의 치과. AIIMS·PGIMER 출신의 Ruchi Goel 원장과 Parmod Gulia 원장이 예방 진료부터 임플란트, 소아치과까지 진료합니다.
+IMAGES:
+  /img/japan.webp | 日本語
+  /img/korea.webp | 한국어
+  /img/logo.svg | Dental Krafts 로고
+  /img/logo.svg | Dental Krafts 로고
+  /img/dental-krafts-banner.webp | dental-krafts-banner.webp
+  img/icon/restore-missing-teeth.svg | 임플란트
+  img/icon/brighten-your-smile.svg | 치아 미백
+  img/icon/urgent-dental-care.svg | 응급 진료
+  img/icon/no-dental-pain.svg | 치통
+  img/about-us-img.webp | 덴탈크래프츠 구르가온
+  img/pattern_shape_1.png | 모양
+  https://dentalkrafts.com/img/aiims-img.webp | Dr. Kazuhiko Nakano(오사카 대학교)와의 학술 교류
+  https://dentalkrafts.com/img/1r.webp | Dr. Jun Aida(도쿄 치과대학)와의 학술 교류
+  https://dentalkrafts.com/img/20250322_223333.webp | Youngnim Choi 교수(서울대학교)와의 학술 교류
+  img/services/cosmetic-dentistry.webp | 구르가온 미용치과
+  img/services/icon/cosmetic-dentistry.svg | 구르가온 미용 치과
+  img/services/dental-crowns.webp | 구르가온 치과 크라운 치료
+  img/services/icon/dental-crowns.svg | 구르가온 치과 크라운 치료
+  img/services/dental-fillings.webp | 구르가온의 치과 충전 치료
+  img/services/icon/dental-fillings.svg | 구르가온 치과 충전 치료
+  img/services/dental-implants.webp | 구르가온 임플란트
+  img/services/icon/dental-implants.svg | 구르가온 임플란트
+  img/services/dental-veneers.webp | 구르가온 치과 베니어판 치료
+  img/services/icon/dental-veneers.svg | 구르가온의 치과 베니어판 치료
+  img/services/dentures.webp | 구르가온 틀니치료
+  img/services/icon/dentures.svg | 구르가온 틀니 치료
+  img/language/emergency-dentist.webp | 구르가온의 응급 치과
+  img/language/emergency-dentist.svg | 구르가온의 응급 치과의사
+  img/language/general-dentistry.webp | 구르가온의 일반 치과의사
+  img/language/general-dentistry.svg | 구르가온의 일반 치과
+  img/language/gum-disease.webp | 구르가온 잇몸질환 치료
+  img/language/gum-disease.svg | 구르가온의 잇몸질환 치료
+  img/language/invisalign.webp | 구르가온 인비절라인 치료
+  img/language/invisalign.svg | 구르가온 인비절라인 치료
+  img/language/kids-dentist.webp | 구르가온의 어린이 치과의사
+  img/language/children-dentist.svg | 구르가온의 소아치과 의사
+  img/language/root-canal-treatment.webp | 구르가온 근관치료
+  img/language/root-canal-treatment.svg | 구르가온 근관치료
+  img/language/smile-makeover.webp | 구르가온 미소 화장
+  img/language/smile-makeup.svg | 스마일 메이크오버 구르가온
+  img/language/teeth-cleaning.webp | 구르가온 치아 청소 치료
+  img/language/teeth-cleaning.svg | 구르가온의 치아교정 치료
+  img/language/teeth-braces.webp | 구르가온의 치아 교정기
+  img/language/braces.svg | 구르가온의 교정기
+  img/language/tooth-pain.webp | 치통치료 구르가온
+  img/language/toothache.svg | 치아통증치료 구르가온
+  img/language/teeth-whitening.webp | 구르가온 치아미백치료
+  img/language/teeth-whitening.svg | 치아미백치료 구르가온
+  img/language/wisdom-tooth-extraction.webp | 사랑니 발치치료 구르가온
+  img/language/tess-extract-of-wisdom.svg | 사랑니 발치치료 구르가온
+  img/service/why-choose-dental-krafts.webp | 구르가온 치과
+  img/after-before/dental-krafts-bf-01.webp | 고정치아치료 구르가온
+  img/after-before/dental-krafts-bf-02.webp | 고정틀니치료 구르가온
+  img/after-before/dental-krafts-bf-03.webp | 치아베니어 치료 구르가온
+  img/after-before/dental-krafts-bf-04.webp | 고정치치료클리닉 구르가온
+  img/after-before/dental-krafts-bf-05.webp | 구르가온 고정 치아 치료
+  img/after-before/dental-krafts-bf-06.webp | 구강재활치료 구르가온
+  img/service/best-dentist-in-gurgaon.webp | 구르가온 치과
+  img/dental-krafts-sec-53.webp | 섹터 53 구르가온 치과 센터
+  img/dental-krafts-sec-57.webp | 섹터 57 구르가온 치과 센터
+  img/review/chandan-sharma.webp | 행복한 환자 - Chandan Sharma
+  img/review/yash-bairagi.webp | 행복한 환자 - Yash Bairagi
+  img/review/shirin-kujur.webp | 행복한 환자 - Shirin Kujur
+  img/review/ashwin-gupta.webp | 행복한 환자 - Ashwin Gupta
+  img/review/vrinda-gupta.webp | 행복한 환자 - Vrinda Gupta
+  /img/appointment.svg | 예약 문의
+  https://dentalkrafts.com/img/dental-krafts-logo.svg | Dental Krafts 로고
+  https://dentalkrafts.com/img/whatsapp_logo.svg | WhatsApp
+  https://dentalkrafts.com/img/calling-icon.svg | 전화
+
+TEXT:
+구르가온(구루그람) 치과｜Dental Krafts 덴탈크래프츠
+                           구르가온의 치과, 덴탈크래프츠
+                           섹터 53과 섹터 57 두 곳에서 예방 진료부터 임플란트까지 진료합니다
+                           치과를 고를 때는 진료 내용뿐 아니라, 충분한 설명을 듣고 납득한 뒤 진행할 수 있는지도 중요합니다. 덴탈크래프츠는 검사 결과와 비용을 먼저 설명드린 뒤 치료를 시작합니다.
+예약하기
+치아가 깨지거나 부러졌을 때
+웃을 때 치아가 신경 쓰일 때
+치아 사이가 벌어졌을 때
+시리거나 아플 때
+덴탈크래프츠 소개
+덴탈크래프츠는 구르가온 섹터 53(사우스포인트몰)과 섹터 57(베스텍 센트럴스퀘어몰)에서 진료하는 치과입니다. Ruchi Goel 원장은 AIIMS 뉴델리에서 보철·임플란트를 전공했고, Parmod Gulia 원장은 PGIMER 찬디가르에서 소아·예방치과를 전공했습니다. 검사 결과와 예상 비용을 설명드린 뒤 진료를 진행합니다.
+접근성 좋은 두 곳
+섹터 53점은 골프코스로드의 사우스포인트몰, 섹터 57점은 수샨트록 2의 베스텍 센트럴스퀘어몰에 있습니다. DLF 각 페이즈에서 모두 가깝습니다.
+폭넓은 진료 범위
+임플란트, 치아교정, 신경치료, 소아치과, 미백, 심미치과, 크라운·브리지 수복까지 한 곳에서 진료합니다.
+학술 교류
+Dr. Kazuhiko Nakano
+오사카 대학교
+일본
+Dr. Jun Aida
+도쿄 치과 대학
+일본
+Youngnim Choi, DDS, PhD
+서울대학교
+대한민국
+주요 진료 항목
+심미치과
+심미치과에서는 치아의 색, 모양, 배열에 관한 상담을 진행합니다. 원하시는 방향과 치아 상태를 확인한 뒤 선택지와 비용을 설명드립니다.
+크라운
+크라운은 약해진 치아를 덮어 보호하고, 씹는 기능과 외형을 회복시키는 치료입니다. 내구성이 뛰어나며, 큰 충전물로 해결하기 어려운 경우의 선택지가 됩니다.
+충치 치료
+충치 치료에는 레진(흰색 재료)이나 글래스아이오노머 등을 사용합니다. 충치의 크기와 위치에 따라 적합한 재료를 제안드립니다.
+임플란트
+임플란트는 상실된 치아 자리에 인공 치근을 식립하고 그 위에 보철물을 장착하는 치료입니다. 골 상태와 전신 건강에 따라 적응증이 다르므로 검사 후 설명드립니다.
+라미네이트
+라미네이트는 치아 표면에 얇은 세라믹을 부착해 색과 모양을 개선하는 치료입니다. 적응증과 삭제량은 진료 후 안내드립니다.
+틀니
+틀니는 구강 상태에 맞추어 제작합니다. 부분틀니와 전체틀니 모두 가능하며, 장착 후 조정도 함께 진행합니다.
+응급 진료
+치아가 깨졌거나 통증이 심한 경우, 보철물이 빠진 경우 등 갑작스러운 문제도 진료합니다. 진료 시간 내에 전화로 연락 주시기 바랍니다.
+일반 진료
+충치와 잇몸질환 치료, 정기 검진, 스케일링 등 일상적인 치과 진료를 담당합니다.
+잇몸질환
+잇몸질환은 치아를 지지하는 잇몸과 뼈에 염증이 생기는 질환입니다. 진행되면 치아가 흔들릴 수 있어, 조기 검사와 정기적인 스케일링이 중요합니다.
+인비절라인
+인비절라인은 투명한 장치를 사용하는 교정 방법입니다. 금속 장치가 드러나는 것이 부담스러운 성인 환자분들도 선택합니다. 적응 여부는 검사 후 판단합니다.
+소아치과
+소아치과에서는 충치 치료뿐 아니라 예방과 구강 성장 관찰도 함께 진행합니다. Parmod Gulia 원장은 PGIMER 찬디가르에서 소아·예방치과를 전공했습니다.
+신경치료
+신경치료는 치아 내부(치수)가 세균에 감염된 경우 내부를 세정하고 밀폐하는 치료입니다. 치아를 보존하기 위한 치료이며 보통 여러 차례 내원이 필요합니다.
+스마일 메이크오버
+스마일 메이크오버는 미백, 라미네이트, 교정 등을 조합해 웃을 때 보이는 치아의 색과 형태, 배열을 개선하는 치료 계획입니다. 내용과 비용은 진료 후 제안드립니다.
+스케일링
+스케일링은 치석과 착색을 제거해 잇몸 건강을 유지하는 처치입니다. 통증이 걱정되시는 분께는 과정을 설명드리면서 진행합니다.
+치아교정
+치열과 교합에 관한 상담을 진행합니다. 장치 교정과 투명 교정 중 어느 쪽이 적합한지는 검사와 치아 모형 확인 후 제안드립니다.
+치통
+치통의 원인은 충치, 잇몸질환, 치아 파절, 시린 증상 등 여러 가지입니다. 방사선 사진과 구강 검사로 원인을 확인한 뒤 치료 방향을 설명드립니다.
+치아 미백
+미백은 약제를 이용해 치아의 변색을 밝게 하는 처치입니다. 효과는 개인차가 있으며, 원래 치아 색과 변색 원인에 따라 결과가 달라집니다.
+사랑니 발치
+사랑니(제3대구치)는 나는 방향이나 공간 부족으로 통증과 부기의 원인이 될 수 있습니다. 방사선 소견과 증상을 확인한 뒤 발치 필요 여부를 설명드립니다.
+선택받는 이유
+덴탈크래프츠가 중요하게 생각하는 것
+치과를 고를 때 궁금한 점은, 필요한 치료가 가능한지 그리고 설명을 듣고 납득한 뒤 진행할 수 있는지일 것입니다.
+덴탈크래프츠에서는 일반 치과부터 보철·임플란트, 소아치과, 교정까지 같은 병원에서 진료합니다. 치료 선택지와 예상 비용은 검사 결과를 함께 보면서 설명드립니다.
+증례 사진
+치료 전후 변화
+덴탈크래프츠의 진료 방침
+덴탈크래프츠는 Ruchi Goel 원장(AIIMS 뉴델리 / 보철·임플란트)과 Parmod Gulia 원장(PGIMER 찬디가르 / 소아·예방치과)이 진료를 담당합니다. 일반 치과, 신경치료, 소아치과, 미백, 임플란트까지 진료하며, 치료 전에 검사 결과와 예상 비용을 설명드린 뒤 진행합니다. 섹터 53점과 섹터 57점 어느 곳에서나 진료받으실 수 있습니다.
+덴탈크래프츠 섹터 53점
+골프코스로드 DLF 페이즈 5의 사우스포인트몰 2층에 있습니다. 일반 치과, 보철, 임플란트, 소아치과까지 폭넓게 진료합니다. 진료 시간은 10:00~20:00이며 수요일은 휴진입니다.
+덴탈크래프츠 섹터 57점
+수샨트록 2, 베스텍 센트럴스퀘어몰 1층에 있습니다. 스케일링부터 교정, 임플란트까지 진료합니다. 진료 시간은 10:00~20:30이며 수요일은 휴진입니다.
+리뷰
+환자분들의 후기
+※ 영어로 작성된 후기를 한국어로 번역해 게재했습니다.
+Chandan Sharma
+Parmod 원장님께 4년 가까이 다니고 있습니다. 진료가 늘 꼼꼼하고 서두르지 않으십니다. 편하게 말씀드릴 수 있어 안심하고 맡기게 됩니다.
+Yash Bairagi
+치아 교정 때문에 투명 장치를 맞췄습니다. 경과가 좋고 변화도 느끼고 있습니다. 원장님이 하나하나 자세히 설명해 주십니다. 병원도 깨끗하고 직원분들도 친절합니다.
+Shirin Kujur
+집 근처 치과를 찾다가 이곳을 알게 되었습니다. Ruchi 원장님이 제 상태를 확인하신 뒤 치료 과정을 차근차근 설명해 주셨습니다. 결과도 만족스럽습니다.
+Ashwin Gupta
+어머니 치료 때문에 정기적으로 다니고 있습니다. 치료 경과가 좋고 직원분들도 친절합니다. 원장님이 이야기를 잘 들어 주시고 시간을 충분히 들여 진료해 주십니다.
+Vrinda Gupta
+아들 신경치료로 Parmod 원장님께 진료받았습니다. 매우 꼼꼼하시고 아이에게도 인내심 있게 대해 주십니다. 안심하고 맡길 수 있었습니다.
+문의처
+상담을 기다리고 있습니다.
+진료 시간 
+섹터 57점 10:00~20:30 / 섹터 53점 10:00~20:00
+휴진일 
+수요일
+전화(섹터 53점) 
++91 98104 48720
+전화(섹터 57점) 
++91 95992 52018
+이메일 
+[email protected]
+이 칸은 비워 두세요
+예약 및 문의
+성함
+이메일 주소
+전화번호
+희망 날짜
+문의 내용
+보내기
+보내 주신 내용에 대해 Dental Krafts에서 연락드릴 수 있습니다. 자세한 내용은 
+개인정보 처리방침
+을 확인해 주세요.

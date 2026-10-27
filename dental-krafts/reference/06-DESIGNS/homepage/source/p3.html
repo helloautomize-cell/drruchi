@@ -1,0 +1,394 @@
+<style>
+/* why A */
+.wA .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.wA .p{display:grid;grid-template-columns:200px minmax(0,1fr);background:var(--white);border-radius:var(--r-xl);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.wA .p .ph{min-height:220px}
+.wA .p .in{padding:24px 26px;display:flex;flex-direction:column;gap:10px}
+.wA .p p{margin:0;color:var(--muted);font-size:15px}
+/* why B */
+.wB .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.wB .ph{aspect-ratio:4/4.3;border-radius:var(--r-xl)}
+.wB .ph img{transition:opacity .4s}
+.wB .items{display:flex;flex-direction:column;gap:10px;margin-top:26px}
+.wB .it{border:0;text-align:left;cursor:pointer;background:transparent;border-radius:var(--r-md);padding:16px 18px;display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:start;transition:background .25s}
+.wB .it b{display:block;font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:22px;line-height:1.2}
+.wB .it span.t{display:block;color:var(--muted);font-size:15px;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s,opacity .3s,margin .3s}
+.wB .it[aria-expanded="true"]{background:var(--white);box-shadow:var(--sh)}
+.wB .it[aria-expanded="true"] span.t{max-height:140px;opacity:1;margin-top:6px}
+/* why C */
+.wC .tbl{background:var(--white);border-radius:var(--r-xl);box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line);overflow:hidden}
+.wC .tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);border-bottom:1px solid var(--line)}
+.wC .tr:last-child{border:0}
+.wC .tr > div{padding:22px 26px;display:flex;gap:16px;align-items:flex-start}
+.wC .tr > div:first-child{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:520;font-size:21px;line-height:1.3}
+.wC .tr > div:last-child{background:var(--petal);color:var(--forest)}
+.wC .th > div{padding-block:16px;font-family:var(--body)!important;font-size:12.5px!important;font-weight:750!important;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+.wC .th > div:last-child{background:var(--forest);color:var(--rose-soft)}
+.wC .ok{width:30px;height:30px;border-radius:50%;background:var(--forest);color:var(--white);display:grid;place-items:center;flex:none}
+.wC .ok .ic{width:16px;height:16px}
+
+/* videos A */
+.vA .rail{grid-auto-columns:minmax(210px,1fr)}
+/* videos B */
+.vB .grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.vB .stage{background:var(--forest);border-radius:var(--r-xl);padding:22px}
+.vB .stage .reel{border-radius:22px}
+.vB .pl{display:flex;flex-direction:column;gap:8px}
+.vB .pl button{border:0;cursor:pointer;text-align:left;background:transparent;display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:16px;align-items:center;padding:10px;border-radius:var(--r-md);transition:background .2s}
+.vB .pl button:hover{background:var(--petal)}
+.vB .pl button[aria-pressed="true"]{background:var(--white);box-shadow:var(--sh)}
+.vB .pl img{width:64px;height:84px;object-fit:cover;border-radius:12px}
+.vB .pl b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:19px;line-height:1.25;display:block}
+.vB .pl span{font-size:13.5px;color:var(--muted)}
+.vB .pl .ic{color:var(--rose)}
+/* videos C */
+.vC .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.vC .q{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:20px;align-items:center;background:var(--white);border-radius:var(--r-xl);box-shadow:inset 0 0 0 1px var(--line);padding:22px 22px 22px 28px;text-decoration:none;transition:transform .3s,box-shadow .3s}
+.vC .q:hover{transform:translateY(-3px);box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line)}
+.vC .q b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:520;font-size:25px;line-height:1.2;display:block;margin:10px 0 14px}
+.vC .q .ph{aspect-ratio:9/12;border-radius:18px}
+.vC .q .play{top:auto;right:auto;left:50%;top:50%;transform:translate(-50%,-50%)}
+
+/* stories A */
+.sA .cols{columns:3;column-gap:18px}
+.sA .qc{break-inside:avoid;margin-bottom:18px;background:var(--white);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line);padding:24px;display:flex;flex-direction:column;gap:14px}
+.sA .qc p{margin:0;font-size:16.5px;line-height:1.6}
+.sA .qc.hl{background:var(--forest);color:var(--white);box-shadow:none}
+.sA .qc.hl p{font-family:var(--display);font-variation-settings:'SOFT' 100,'opsz' 40;font-size:23px;line-height:1.35}
+.sA .who{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted)}
+.sA .qc.hl .who{color:var(--soft)}
+.sA .who b{display:block;color:var(--forest);font-size:15px}
+.sA .qc.hl .who b{color:var(--white)}
+.sA .qc.hl .ini{background:var(--forest-2);color:var(--rose-soft)}
+.sA .plats{display:flex;flex-wrap:wrap;gap:10px}
+/* stories B */
+.sB .box{background:var(--petal);border-radius:var(--r-xl);padding:clamp(28px,5vw,72px);display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:40px;align-items:end}
+.sB .mark{font-family:var(--display);font-size:120px;line-height:1;color:var(--clay);height:64px;display:block;margin-top:18px;overflow:hidden}
+.sB blockquote{margin:0;font-family:var(--display);font-variation-settings:'SOFT' 100,'opsz' 144;font-weight:420;font-size:clamp(26px,3.3vw,46px);line-height:1.2;letter-spacing:-.015em;transition:opacity .35s;min-height:3.6em}
+.sB .by{margin-top:22px;display:flex;gap:12px;align-items:center;font-size:15px;color:var(--muted)}
+.sB .by b{color:var(--forest)}
+.sB .side{display:flex;flex-direction:column;gap:14px}
+.sB .cnt{font-family:var(--display);font-variation-settings:'SOFT' 100;font-size:46px;font-weight:540}
+.sB .cnt span{font-size:20px;color:var(--muted)}
+/* stories C */
+.sC .grid{display:grid;grid-template-columns:300px minmax(0,1fr);gap:22px}
+.sC .stack{display:flex;flex-direction:column;gap:16px}
+.sC .qc{background:var(--white);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line);padding:26px;display:flex;flex-direction:column;gap:14px;flex:1}
+.sC .qc p{margin:0;font-family:var(--display);font-variation-settings:'SOFT' 100,'opsz' 40;font-size:21px;line-height:1.4}
+.sC .rate{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sC .rate div{background:var(--forest);color:var(--white);border-radius:var(--r-lg);padding:20px 22px}
+.sC .rate b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-size:40px;font-weight:540;display:block;line-height:1}
+.sC .rate span{color:var(--soft);font-size:14px}
+
+/* recognition A */
+.gA{background:var(--forest);color:var(--white)}
+.gA .rail{grid-auto-columns:minmax(300px,1fr)}
+.gA figure{margin:0;display:flex;flex-direction:column;gap:12px}
+.gA figure .ph{aspect-ratio:4/3;border-radius:var(--r-lg)}
+.gA figcaption{font-size:15px;color:var(--soft);max-width:34ch}
+.gA .arw{background:transparent;color:var(--white);box-shadow:inset 0 0 0 1.5px rgba(245,228,222,.5)}
+.gA .arw:hover{background:var(--cream);color:var(--forest)}
+/* recognition B */
+.gB .grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,64px);align-items:center}
+.gB .ph{aspect-ratio:3/3.6;border-radius:var(--r-xl)}
+.gB .ph img{object-position:50% 25%}
+.gB ul{list-style:none;margin:26px 0 0;padding:0;border-top:1px solid var(--line)}
+.gB li{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.gB li .ill{width:64px;height:64px}
+.gB li b{display:block;font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:20px;line-height:1.25}
+.gB li span{font-size:14px;color:var(--muted)}
+.gB li .yr{font-family:var(--display);font-variation-settings:'SOFT' 100;font-size:22px;color:var(--rose)}
+/* recognition C */
+.gC .mosaic{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:200px;gap:14px}
+.gC .mosaic .ph{border-radius:var(--r-lg)}
+.gC .m1{grid-column:span 2;grid-row:span 2}
+.gC .tile{border-radius:var(--r-lg);background:var(--petal);padding:22px;display:flex;flex-direction:column;justify-content:space-between;gap:10px}
+.gC .tile b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:20px;line-height:1.25}
+.gC .tile span{font-size:13.5px;color:var(--muted)}
+.gC .tile.d{background:var(--forest);color:var(--white)}
+.gC .tile.d span{color:var(--soft)}
+.gC .tile .ill{width:60px;height:60px}
+.gC .ani{display:flex;align-items:center;justify-content:center;background:var(--white);box-shadow:inset 0 0 0 1px var(--line)}
+.gC .ani img{max-height:60px;width:auto}
+
+/* kids A */
+.kA .band{background:var(--forest);color:var(--white);border-radius:44px;padding:clamp(28px,5vw,72px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center;position:relative}
+.kA .band .ill{position:absolute;right:28px;top:-44px;width:120px;height:120px}
+.kA ul{list-style:none;margin:24px 0 30px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kA li{display:flex;gap:12px;align-items:center;background:var(--forest-2);border-radius:16px;padding:12px 14px;font-size:15px;font-weight:600}
+.kA li .ic{color:var(--rose-soft)}
+.kA .pics{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kA .pics .ph{border-radius:999px 999px 24px 24px;aspect-ratio:3/4}
+.kA .pics .ph:nth-child(2){margin-top:56px}
+/* kids B */
+.kB .tl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;position:relative;margin-top:10px}
+.kB .tl::before{content:"";position:absolute;left:8%;right:8%;top:70px;height:2px;background:var(--line)}
+.kB .st{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.kB .st .ring{width:140px;height:140px;border-radius:50%;background:var(--white);box-shadow:inset 0 0 0 1px var(--line),var(--sh);display:grid;place-items:center}
+.kB .st .ill{width:88px;height:88px}
+.kB .st .age{font-size:12.5px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+.kB .st b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:22px;line-height:1.2}
+.kB .st span{font-size:14.5px;color:var(--muted);max-width:26ch}
+.kB .foot{margin-top:40px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--white);border-radius:var(--r-lg);padding:18px 22px;box-shadow:inset 0 0 0 1px var(--line)}
+.kB .foot p{margin:0;display:flex;gap:14px;align-items:center}
+.kB .foot img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 20%}
+/* kids C */
+.kC .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.kC .pq{font-family:var(--display);font-variation-settings:'SOFT' 100,'opsz' 144;font-weight:420;font-size:clamp(24px,2.6vw,34px);line-height:1.25;margin:16px 0 14px}
+.kC .steps{list-style:none;margin:28px 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.kC .steps li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;align-items:start;background:var(--white);border-radius:var(--r-md);padding:16px 18px;box-shadow:inset 0 0 0 1px var(--line)}
+.kC .steps .n{width:44px;height:44px;border-radius:50%;background:var(--forest);color:var(--white);display:grid;place-items:center;font-family:var(--display);font-size:19px}
+.kC .steps b{display:block}
+.kC .steps span{font-size:14.5px;color:var(--muted)}
+.kC .art{position:relative}
+.kC .art .ph{aspect-ratio:4/4.6;border-radius:var(--r-xl)}
+.kC .art .glass{position:absolute;left:20px;right:20px;bottom:20px;padding:16px 18px;display:flex;gap:14px;align-items:center}
+.kC .art .glass img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 20%}
+
+@media (max-width:980px){
+  .wA .grid,.wB .grid,.vB .grid,.sC .grid,.gB .grid,.kA .band,.kC .grid{grid-template-columns:minmax(0,1fr)}
+  .sA .cols{columns:2}
+  .sB .box{grid-template-columns:minmax(0,1fr)}
+  .vB .stage{max-width:340px}
+  .kB .tl{grid-template-columns:1fr 1fr;row-gap:32px}
+  .kB .tl::before{display:none}
+  .gC .mosaic{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .wA .p{grid-template-columns:minmax(0,1fr)}
+  .wA .p .ph{min-height:0;aspect-ratio:16/9}
+  .wC .tr{grid-template-columns:minmax(0,1fr)}
+  .wC .th > div:first-child{display:none}
+  .vC .grid{grid-template-columns:minmax(0,1fr)}
+  .vC .q{grid-template-columns:minmax(0,1fr) 90px}
+  .sA .cols{columns:1}
+  .kA ul{grid-template-columns:minmax(0,1fr)}
+  .kB .tl{grid-template-columns:minmax(0,1fr)}
+  .gC .mosaic{grid-template-columns:minmax(0,1fr);grid-auto-rows:auto}
+  .gC .m1{grid-column:auto;grid-row:auto}
+  .gC .mosaic .ph{aspect-ratio:4/3}
+  .sC .rate{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+
+<!-- =========================== 06 WHY =========================== -->
+<section class="opt" id="s-why" data-s="why">
+{RAIL:why:06:Why patients stay:A=Photo pillars|B=Spotlight list|C=Questions to ask any dentist}
+
+<div class="v" data-v="A">
+  <div class="wA sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Why Dental Krafts</span><h2 class="d h2">Why families stay with us <em>for years.</em></h2></div></div>
+    <div class="grid">
+      <div class="p"><div class="ph"><img src="img/dk-doctors-performing-procedure-1.webp" alt="Both dentists treating a patient"></div><div class="in"><span class="badge">{i:award}</span><h3 class="d h3">Specialists, not generalists</h3><p>A prosthodontist and a pediatric dentist under one roof, trained at AIIMS and PGIMER, two of India's top medical institutes.</p></div></div>
+      <div class="p"><div class="ph"><img src="img/reception-lounge.webp" alt="Dental Krafts reception with illuminated logo wall"></div><div class="in"><span class="badge">{i:receipt}</span><h3 class="d h3">The plan and the price, first</h3><p>You'll see your X-rays, your options and what each one costs. If you don't need treatment, we'll tell you.</p></div></div>
+      <div class="p"><div class="ph"><img src="img/dk-doctors-performing-procedure-2.webp" alt="Sterile instrument tray during a procedure"></div><div class="in"><span class="badge">{i:sterilizer}</span><h3 class="d h3">Hospital-grade hygiene</h3><p>Instruments are sterilised and pouch-sealed for every patient, and single-use items are used once.</p></div></div>
+      <div class="p"><div class="ph"><img src="img/storefront-signage-reception.webp" alt="Dental Krafts storefront with gold signage"></div><div class="in"><span class="badge">{i:map-pin}</span><h3 class="d h3">Two clinics, six days a week</h3><p>Golf Course Road and Sushant Lok 2, 10 am until 8 or 8:30 pm. Closed Wednesdays.</p></div></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="wB sec"><div class="wrap grid">
+    <div class="ph"><img id="wb-img" src="img/dk-doctors-performing-procedure-1.webp" alt=""></div>
+    <div><span class="eyebrow">Why Dental Krafts</span><h2 class="d h2">Why families stay with us <em>for years.</em></h2>
+      <div class="items" id="wb">
+        <button class="it" aria-expanded="true" data-img="dk-doctors-performing-procedure-1"><span class="badge">{i:award}</span><span><b>Specialists, not generalists</b><span class="t">A prosthodontist and a pediatric dentist under one roof, both trained at AIIMS and PGIMER.</span></span></button>
+        <button class="it" aria-expanded="false" data-img="reception-lounge"><span class="badge">{i:receipt}</span><span><b>The plan and the price, before we start</b><span class="t">Your X-rays, your options and what each one costs. Second opinions are welcome.</span></span></button>
+        <button class="it" aria-expanded="false" data-img="dk-doctors-performing-procedure-2"><span class="badge">{i:sterilizer}</span><span><b>Hospital-grade hygiene</b><span class="t">Instruments sterilised and pouch-sealed for every patient. Single-use items used once.</span></span></button>
+        <button class="it" aria-expanded="false" data-img="storefront-signage-reception"><span class="badge">{i:clock}</span><span><b>Two clinics, six days a week</b><span class="t">Golf Course Road and Sushant Lok 2, 10 am until 8 or 8:30 pm. Closed Wednesdays.</span></span></button>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="wC sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Why Dental Krafts</span><h2 class="d h2">Questions worth asking <em>any dentist.</em></h2><p class="lead">Here are our answers.</p></div></div>
+    <div class="tbl">
+      <div class="tr th"><div>The question</div><div>At Dental Krafts</div></div>
+      <div class="tr"><div>Who will actually treat me?</div><div><span class="ok">{i:check}</span>The specialists who founded the clinic: an AIIMS prosthodontist and a PGIMER pediatric dentist.</div></div>
+      <div class="tr"><div>When will I know the cost?</div><div><span class="ok">{i:check}</span>Before anything begins. You'll see your X-rays, your options and the price of each.</div></div>
+      <div class="tr"><div>Do I really need this treatment?</div><div><span class="ok">{i:check}</span>If you don't, we'll say so. Second opinions are welcome; bring your X-rays.</div></div>
+      <div class="tr"><div>How are instruments cleaned?</div><div><span class="ok">{i:check}</span>Sterilised and pouch-sealed for every patient. Single-use items are used once.</div></div>
+      <div class="tr"><div>Can I come after work?</div><div><span class="ok">{i:check}</span>Yes. Open until 8 pm (Sector 53) and 8:30 pm (Sector 57), weekends too. Closed Wednesdays.</div></div>
+    </div>
+  </div></div>
+</div>
+</section>
+
+<!-- =========================== 07 VIDEOS =========================== -->
+<section class="opt" id="s-videos" data-s="videos">
+{RAIL:videos:07:Dr Ruchi explains:A=Reel rail|B=Player with playlist|C=Question cards}
+
+<div class="v" data-v="A">
+  <div class="vA sec"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Short answers from Dr Ruchi</span><h2 class="d h2">Your questions, <em>answered in a minute.</em></h2></div><div class="arrows"><button class="arw" data-rail="va" data-dir="-1" aria-label="Previous">{i:arrow-left}</button><button class="arw" data-rail="va" data-dir="1" aria-label="Next">{i:arrow-right}</button></div></div>
+    <div class="rail" id="va">
+      <a class="reel" href="#s-videos"><img src="img/reel-01-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>The most common dental problem in the world</b><span>1 min</span></span></a>
+      <a class="reel" href="#s-videos"><img src="img/reel-03-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>Are you ignoring this early sign?</b><span>1 min</span></span></a>
+      <a class="reel" href="#s-videos"><img src="img/reel-04-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>Dental myths, busted</b><span>1 min</span></span></a>
+      <a class="reel" href="#s-videos"><img src="img/reel-06-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>Top 5 habits for healthy teeth</b><span>1 min</span></span></a>
+      <a class="reel" href="#s-videos"><img src="img/reel-02-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>A minute with Dr Ruchi</b><span>1 min</span></span></a>
+      <a class="reel" href="#s-videos"><img src="img/reel-05-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span><span class="cap"><b>Meet Dr Parmod, kids' specialist</b><span>1 min</span></span></a>
+    </div>
+    <div style="margin-top:26px"><a class="link" href="#s-videos">{i:youtube:sm} More videos on YouTube {i:arrow-up-right:sm}</a></div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="vB sec" style="background:var(--petal)"><div class="wrap grid">
+    <div class="stage"><a class="reel" href="#s-videos"><img id="vb-img" src="img/reel-01-dr-ruchi-explains.webp" alt=""><span class="play" style="width:64px;height:64px;top:50%;left:50%;right:auto;transform:translate(-50%,-50%)">{i:play}</span></a></div>
+    <div><span class="eyebrow">Short answers from Dr Ruchi</span><h2 class="d h2">Your questions, <em>answered in a minute.</em></h2>
+      <div class="pl" id="vb">
+        <button aria-pressed="true" data-img="reel-01-dr-ruchi-explains"><img src="img/reel-01-dr-ruchi-explains.webp" alt=""><span><b>The most common dental problem in the world</b><span>Dr Ruchi Goel · 1 min</span></span>{i:play}</button>
+        <button aria-pressed="false" data-img="reel-03-dr-ruchi-explains"><img src="img/reel-03-dr-ruchi-explains.webp" alt=""><span><b>Are you ignoring this early sign?</b><span>Dr Ruchi Goel · 1 min</span></span>{i:play}</button>
+        <button aria-pressed="false" data-img="reel-04-dr-ruchi-explains"><img src="img/reel-04-dr-ruchi-explains.webp" alt=""><span><b>Dental myths, busted</b><span>Dr Ruchi Goel · 1 min</span></span>{i:play}</button>
+        <button aria-pressed="false" data-img="reel-06-dr-ruchi-explains"><img src="img/reel-06-dr-ruchi-explains.webp" alt=""><span><b>Top 5 habits for healthy teeth</b><span>Dr Ruchi Goel · 1 min</span></span>{i:play}</button>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="vC sec"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Short answers from Dr Ruchi</span><h2 class="d h2">Ask Dr Ruchi.</h2></div><a class="link" href="#s-videos">{i:youtube:sm} All videos {i:arrow-up-right:sm}</a></div>
+    <div class="grid">
+      <a class="q" href="#s-videos"><div><span class="chip">{i:video} 1 min</span><b>“What is the most common dental problem in the world?”</b><span class="link">Watch the answer {i:arrow-right:sm}</span></div><div class="ph"><img src="img/reel-01-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span></div></a>
+      <a class="q" href="#s-videos"><div><span class="chip">{i:video} 1 min</span><b>“Am I ignoring an early sign?”</b><span class="link">Watch the answer {i:arrow-right:sm}</span></div><div class="ph"><img src="img/reel-03-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span></div></a>
+      <a class="q" href="#s-videos"><div><span class="chip">{i:video} 1 min</span><b>“Is that dental myth actually true?”</b><span class="link">Watch the answer {i:arrow-right:sm}</span></div><div class="ph"><img src="img/reel-04-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span></div></a>
+      <a class="q" href="#s-videos"><div><span class="chip">{i:video} 1 min</span><b>“Which daily habits keep teeth healthy?”</b><span class="link">Watch the answer {i:arrow-right:sm}</span></div><div class="ph"><img src="img/reel-06-dr-ruchi-explains.webp" alt=""><span class="play">{i:play}</span></div></a>
+    </div>
+  </div></div>
+</div>
+</section>
+
+<!-- =========================== 08 STORIES =========================== -->
+<section class="opt" id="s-stories" data-s="stories">
+{RAIL:stories:08:Patient stories:A=Quote wall|B=One big quote|C=Video and quotes}
+
+<div class="v" data-v="A">
+  <div class="sA sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Patient stories</span><h2 class="d h2">In our patients' <em>own words.</em></h2></div><div class="plats"><span class="chip chip-r">{i:star} Practo 5.0 · 1,000+ stories</span><span class="chip chip-r">{i:star} Justdial 4.9 · 1,240+ ratings</span></div></div>
+    <div class="cols">
+      <div class="qc hl"><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><p>“Six years after my implant… it is no different from my other teeth, colour-wise or size-wise. Even my wife could not notice it.”</p><div class="who"><span class="ini">S</span><span><b>Subhash</b>Implant with bone graft · Dr Parmod Gulia</span></div></div>
+      <div class="qc"><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><p>“The best part was their honesty. They only suggested what was truly needed and explained every option before treatment.”</p><div class="who"><span class="ini">DK</span><span><b>Dewesh Kumar</b>Aligners and implants</span></div></div>
+      <div class="qc"><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><p>“Dr Ruchi explained the entire implant procedure in detail and planned the treatment very carefully… transparent about the procedure and charges.”</p><div class="who"><span class="ini">A</span><span><b>Aditya</b>Dental implant · Dr Ruchi Goel</span></div></div>
+      <div class="qc"><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><p>“Thank you for taking such care of our 6-year-old son during his dental surgery… the step-by-step approach, without ever rushing into treatment.”</p><div class="who"><span class="ini">P</span><span><b>Parent</b>Pediatric treatment under GA · Dr Parmod Gulia</span></div></div>
+      <div class="qc"><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><p>“My mother had a root canal and a ceramic crown here. It has been many years and she has not faced any problem at all.”</p><div class="who"><span class="ini">AS</span><span><b>Anushka Singh</b>Family patient for six years</span></div></div>
+      <div class="qc"><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><p>“I came from the USA for a short period… I had two root canals and a wisdom tooth removed in a single sitting.”</p><div class="who"><span class="ini">V</span><span><b>Verified patient</b>Dr Parmod Gulia</span></div></div>
+    </div>
+    <div style="margin-top:12px"><a class="btn btn-s" href="#s-stories">Read 1,000+ stories on Practo {i:arrow-up-right:sm}</a></div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="sB sec"><div class="wrap">
+    <div class="box">
+      <div><span class="eyebrow">Patient stories</span><span class="mark" aria-hidden="true">“</span><blockquote id="sb-q">The best part was their honesty. They only suggested what was truly needed and explained every option before treatment.</blockquote><div class="by"><span class="ini" id="sb-i">DK</span><span><b id="sb-n">Dewesh Kumar</b> · <span id="sb-t">aligners and implants</span> · Practo</span></div></div>
+      <div class="side"><div class="cnt tnum"><span id="sb-c">01</span><span> / 06</span></div><div class="arrows"><button class="arw" id="sb-p" aria-label="Previous story">{i:arrow-left}</button><button class="arw" id="sb-x" aria-label="Next story">{i:arrow-right}</button></div><span class="chip chip-r" style="align-self:flex-start">{i:star} 5.0 on Practo · 1,000+ stories</span></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="sC sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Patient stories</span><h2 class="d h2">In our patients' <em>own words.</em></h2></div></div>
+    <div class="grid">
+      <a class="reel" href="#s-stories"><img src="img/reel-07-patient-rekha-seth.webp" alt="Rekha Seth, a Dental Krafts patient"><span class="play">{i:play}</span><span class="cap"><b>Rekha Seth on her treatment</b><span>Video story · 1 min</span></span></a>
+      <div class="stack">
+        <div class="qc"><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><p>“Dr Ruchi explained the entire implant procedure in detail and planned the treatment very carefully… transparent about the procedure and charges.”</p><div class="who" style="display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted)"><span class="ini">A</span><span><b style="color:var(--forest)">Aditya</b> · dental implant</span></div></div>
+        <div class="qc"><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><p>“Thank you for taking such care of our 6-year-old son… without ever rushing into treatment.”</p><div class="who" style="display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted)"><span class="ini">P</span><span><b style="color:var(--forest)">Parent</b> · pediatric treatment</span></div></div>
+        <div class="rate"><div><b class="tnum">5.0</b><span>Practo · 1,000+ patient stories</span></div><div><b class="tnum">4.9</b><span>Justdial · 1,240+ ratings</span></div></div>
+      </div>
+    </div>
+  </div></div>
+</div>
+</section>
+
+<!-- =========================== 09 RECOGNITION =========================== -->
+<section class="opt" id="s-rec" data-s="recognition">
+{RAIL:recognition:09:Recognition:A=Photo strip on forest|B=Featured award and list|C=Honours mosaic}
+
+<div class="v" data-v="A">
+  <div class="gA sec on-dark"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Recognition</span><h2 class="d h2" style="color:var(--white)">Recognised by peers <em>and the profession.</em></h2></div><div class="arrows"><button class="arw" data-rail="ga" data-dir="-1" aria-label="Previous">{i:arrow-left}</button><button class="arw" data-rail="ga" data-dir="1" aria-label="Next">{i:arrow-right}</button></div></div>
+    <div class="rail" id="ga">
+      <figure><div class="ph"><img src="img/national-achievers-2025-gulshan-grover-1.webp" alt=""></div><figcaption>National Achievers Award 2025, presented to Dr Ruchi Goel by Gulshan Grover</figcaption></figure>
+      <figure><div class="ph"><img src="img/aiims-prosthodontics-celebration.webp" alt=""></div><figcaption>A token of appreciation from the HOD, Division of Prosthodontics, AIIMS New Delhi</figcaption></figure>
+      <figure><div class="ph"><img src="img/parmod-gulia-mds-degree-health-minister.webp" alt="" style="object-position:50% 20%"></div><figcaption>Dr Parmod Gulia receives his MDS from the Union Health Minister</figcaption></figure>
+      <figure><div class="ph"><img src="img/national-achievers-2025-mahima-chaudhry.webp" alt=""></div><figcaption>With Mahima Chaudhry at the National Achievers Award 2025</figcaption></figure>
+      <figure><div class="ph"><img src="img/prime-impact-excellence-award.webp" alt="" style="object-position:50% 30%"></div><figcaption>Business and Profession Excellence Award</figcaption></figure>
+      <figure><div class="ph"><img src="img/clinic-celebrity-visit-king.webp" alt=""></div><figcaption>Singer King visits Dental Krafts</figcaption></figure>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="gB sec"><div class="wrap grid">
+    <div class="ph"><img src="img/national-achievers-2025-gulshan-grover-1.webp" alt="Dr Ruchi Goel receiving the National Achievers Award 2025"></div>
+    <div><span class="eyebrow">Recognition</span><h2 class="d h2">Recognised by peers <em>and the profession.</em></h2>
+      <ul>
+        <li><img class="ill" src="img/3d/trophy_3d.webp" alt=""><span><b>National Achievers Award</b><span>Presented to Dr Ruchi Goel by Gulshan Grover</span></span><span class="yr tnum">2025</span></li>
+        <li><img class="ill" src="img/3d/sports_medal_3d.webp" alt=""><span><b>AIIMS MDS entrance, rank 1</b><span>Dr Ruchi Goel</span></span><span class="yr tnum">2012</span></li>
+        <li><img class="ill" src="img/3d/graduation_cap_3d.webp" alt=""><span><b>MDS silver medal, PGIMER</b><span>Dr Parmod Gulia, received from the Union Health Minister</span></span><span class="yr tnum">2013</span></li>
+        <li><img class="ill" src="img/3d/glowing_star_3d.webp" alt=""><span><b>ISPPD best paper</b><span>Dr Parmod Gulia</span></span><span class="yr tnum">2014</span></li>
+      </ul>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="gC sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Recognition</span><h2 class="d h2">Recognised by peers <em>and the profession.</em></h2></div></div>
+    <div class="mosaic">
+      <div class="ph m1"><img src="img/national-achievers-2025-gulshan-grover-1.webp" alt="National Achievers Award 2025"></div>
+      <div class="tile d on-dark"><img class="ill" src="img/3d/trophy_3d.webp" alt=""><div><b>National Achievers Award 2025</b><br><span>Dr Ruchi Goel</span></div></div>
+      <div class="ph"><img src="img/aiims-prosthodontics-celebration.webp" alt="AIIMS Prosthodontics appreciation"></div>
+      <div class="ph"><img src="img/parmod-gulia-mds-degree-health-minister.webp" alt="Dr Parmod Gulia receiving his MDS" style="object-position:50% 20%"></div>
+      <div class="tile"><img class="ill" src="img/3d/graduation_cap_3d.webp" alt=""><div><b>MDS from the Union Health Minister</b><br><span>Dr Parmod Gulia</span></div></div>
+      <div class="tile ani"><img src="img/press-ani-logo.webp" alt="ANI"></div>
+      <div class="tile ani"><span style="font-family:'Times New Roman',Georgia,serif;font-size:30px;font-weight:700;color:var(--forest)">The Tribune</span></div>
+      <div class="ph"><img src="img/national-achievers-2025-mahima-chaudhry.webp" alt="With Mahima Chaudhry at the National Achievers Award 2025"></div>
+      <div class="ph"><img src="img/clinic-celebrity-visit-king.webp" alt="Singer King visits Dental Krafts"></div>
+    </div>
+  </div></div>
+</div>
+</section>
+
+<!-- =========================== 10 KIDS =========================== -->
+<section class="opt" id="s-kids" data-s="kids">
+{RAIL:kids:10:Kids:A=Forest band with photos|B=Age timeline|C=For parents}
+
+<div class="v" data-v="A">
+  <div class="kA sec"><div class="wrap"><div class="band on-dark">
+    <img class="ill" src="img/3d/teddy_bear_3d.webp" alt="">
+    <div><span class="eyebrow">For children</span><h2 class="d h2" style="color:var(--white)">Their first dentist should be <em>a children's dentist.</em></h2><p class="lead">Dr Parmod Gulia trained in pediatric and preventive dentistry at PGIMER Chandigarh. He sees babies, children, teens and children with special needs, and when it's the kindest option, treatment can be done under general anaesthesia in a hospital setting.</p>
+      <ul><li>{i:first-tooth}First visit by the first birthday</li><li>{i:shield-check}Sealants and fluoride</li><li>{i:tooth}Space maintainers</li><li>{i:tooth-check}Tooth-coloured fillings and kids' crowns</li><li>{i:heart}Sports mouthguards</li><li>{i:child}Children with special needs</li></ul>
+      <a class="btn btn-w" href="#s-book">Book your child's visit <span class="bic">{i:arrow-right:sm}</span></a></div>
+    <div class="pics"><div class="ph"><img src="img/kids-operatory-mural.webp" alt="The children's treatment room with a painted mural"></div><div class="ph"><img src="img/kids-real-patients-collage.webp" alt="Children smiling during their visit"></div></div>
+  </div></div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="kB sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">For children</span><h2 class="d h2">A children's dentist, <em>at every age.</em></h2><p class="lead">Dr Parmod Gulia, MDS in pediatric and preventive dentistry from PGIMER Chandigarh.</p></div></div>
+    <div class="tl">
+      <div class="st"><span class="ring"><img class="ill" src="img/3d/baby_3d_default.webp" alt=""></span><span class="age">By the first birthday</span><b>The first visit</b><span>A gentle look at new teeth and advice for parents.</span></div>
+      <div class="st"><span class="ring"><img class="ill" src="img/3d/toothbrush_3d.webp" alt=""></span><span class="age">Toddlers</span><b>Fluoride and habits</b><span>Stopping cavities before they start.</span></div>
+      <div class="st"><span class="ring"><img class="ill" src="img/3d/teddy_bear_3d.webp" alt=""></span><span class="age">School years</span><b>Sealants and fillings</b><span>Tooth-coloured fillings, kids' crowns, space maintainers.</span></div>
+      <div class="st"><span class="ring"><img class="ill" src="img/3d/shield_3d.webp" alt=""></span><span class="age">Teens</span><b>Mouthguards and braces</b><span>Sports mouthguards, and straightening when it's needed.</span></div>
+    </div>
+    <div class="foot"><p><img src="img/ai/dr-parmod-portrait.webp" alt=""><span>When it's the kindest option, treatment can be done under general anaesthesia in a hospital setting.</span></p><a class="btn btn-p" href="#s-book">Book your child's visit</a></div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="kC sec"><div class="wrap grid">
+    <div><span class="eyebrow">For parents</span><h2 class="d h2">Their first dentist should be <em>a children's dentist.</em></h2>
+      <p class="pq">“Thank you for taking such care of our 6-year-old son… the step-by-step approach, without ever rushing into treatment.”</p><span style="color:var(--muted);font-size:14.5px">A parent · Practo</span>
+      <ol class="steps"><li><span class="n">1</span><span><b>Meet and play</b><span>Your child sits in the chair and meets Dr Parmod at their own pace.</span></span></li><li><span class="n">2</span><span><b>A gentle check</b><span>Teeth, gums and habits, explained to you in plain words.</span></span></li><li><span class="n">3</span><span><b>A plan you can see</b><span>What's needed, what isn't, and what it costs, before anything begins.</span></span></li></ol>
+      <a class="btn btn-p" href="#s-book">Book your child's visit <span class="bic">{i:arrow-right:sm}</span></a></div>
+    <div class="art"><div class="ph"><img src="img/kids-operatory-mural.webp" alt="The children's treatment room"></div><div class="glass"><img src="img/ai/dr-parmod-portrait.webp" alt=""><span><b>Dr Parmod Gulia</b><br><span style="color:var(--muted);font-size:14px">MDS Pedodontics, PGIMER · silver medal</span></span></div></div>
+  </div></div>
+</div>
+</section>

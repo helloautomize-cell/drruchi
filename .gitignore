@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# next.js build output & cache
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# environment files
+.env
+.env*.local
+
+# large binaries — keep locally, do not push
+videos.zip
+dental-krafts-final-handoff.zip
+dental-krafts-assets-orig/
+
+# misc
+.vercel
+*.log
+Thumbs.db
+.DS_Store

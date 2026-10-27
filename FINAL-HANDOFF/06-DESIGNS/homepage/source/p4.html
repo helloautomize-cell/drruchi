@@ -1,0 +1,383 @@
+<style>
+/* costs A */
+.cA .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.cA .rc{background:var(--white);border-radius:var(--r-xl);box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line);padding:30px 32px;position:relative}
+.cA .rc .ill{position:absolute;right:24px;top:-40px;width:86px;height:86px}
+.cA .rc h3{margin:0 0 6px;font-size:24px}
+.cA .rc small{color:var(--muted)}
+.cA .ln{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:16px 0;border-bottom:1.5px dashed var(--line)}
+.cA .ln:last-of-type{border:0}
+.cA .ln span{display:flex;gap:12px;align-items:center;font-weight:600}
+.cA .ln span .ic{color:var(--rose)}
+.cA .ln b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:26px}
+.cA .nt{margin-top:14px;background:var(--petal);border-radius:16px;padding:14px 16px;font-size:14px;color:var(--muted);display:flex;gap:10px}
+/* costs B */
+.cB .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.cB .tbl{background:var(--white);border-radius:var(--r-xl);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.cB .row{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:18px;align-items:center;padding:20px 26px;border-bottom:1px solid var(--line)}
+.cB .row:last-child{border:0}
+.cB .row b{display:block;font-size:17px}
+.cB .row span.s{font-size:14px;color:var(--muted)}
+.cB .row .pr{text-align:right}
+.cB .row .pr small{display:block;font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+.cB .row .pr b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:26px}
+/* costs C */
+.cC .box{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--forest);color:var(--white);border-radius:var(--r-xl);overflow:hidden}
+.cC .l{padding:clamp(28px,4vw,52px)}
+.cC .l .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.cC .l button.chip{background:var(--forest-2);color:var(--white);box-shadow:inset 0 0 0 1px rgba(245,228,222,.16)}
+.cC .l button.chip[aria-pressed="true"]{background:var(--blush);color:var(--forest)}
+.cC .r{background:var(--cream);color:var(--forest);padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;gap:14px;position:relative}
+.cC .r .ill{width:80px;height:80px}
+.cC .r .from{font-size:13px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+.cC .r .amt{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:clamp(48px,6vw,80px);line-height:.95}
+.cC .r ul{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.cC .r li{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--muted)}
+.cC .r li .ic{color:var(--moss);width:20px;height:20px;margin-top:2px}
+
+/* clinics A */
+.clA .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.clA .cl{background:var(--white);border-radius:var(--r-xl);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column}
+.clA .cl .ph{aspect-ratio:16/9}
+.clA .cl .st{position:absolute;left:16px;top:16px;padding:8px 14px;display:flex;gap:10px;align-items:center;font-size:13.5px;font-weight:650;border-radius:999px}
+.clA .cl .in{padding:24px 26px 26px;display:flex;flex-direction:column;gap:12px;flex:1}
+.clA .cl .ad{display:flex;gap:12px;color:var(--muted);font-size:15px}
+.clA .cl .ad .ic{color:var(--rose);margin-top:2px}
+.clA .near{display:flex;flex-wrap:wrap;gap:6px}
+.clA .near span{font-size:13px;padding:5px 10px;border-radius:999px;background:var(--petal)}
+.clA .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:6px}
+.intl{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;background:var(--forest);color:var(--white);border-radius:var(--r-lg);padding:20px 24px}
+.intl p{margin:0;display:flex;gap:14px;align-items:center;color:var(--soft)}
+.intl p b{color:var(--white)}
+.intl .ill{width:54px;height:54px}
+.intl .chip{background:var(--forest-2);color:var(--white);box-shadow:none}
+/* clinics B */
+.clB .sw{display:inline-flex;background:var(--petal);padding:6px;border-radius:999px;gap:4px;margin-bottom:24px;flex-wrap:wrap}
+.clB .sw button{border:0;cursor:pointer;background:transparent;border-radius:999px;padding:10px 18px;font-weight:650}
+.clB .sw button[aria-pressed="true"]{background:var(--forest);color:var(--white)}
+.clB .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:22px}
+.clB .ph{border-radius:var(--r-xl);min-height:420px}
+.clB .info{background:var(--white);border-radius:var(--r-xl);box-shadow:inset 0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;gap:16px}
+.clB .info h3{margin:0;font-size:30px}
+.clB .wk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.clB .wk div{border-radius:12px;padding:10px 4px;text-align:center;font-size:12.5px;background:var(--petal);font-weight:650}
+.clB .wk div small{display:block;font-weight:500;color:var(--muted);font-size:11px}
+.clB .wk div.x{background:transparent;box-shadow:inset 0 0 0 1px var(--line);color:var(--muted)}
+.clB .wk div.td{background:var(--forest);color:var(--white)}
+.clB .wk div.td small{color:var(--soft)}
+.clB .kv{display:flex;flex-direction:column;gap:10px;font-size:15px}
+.clB .kv div{display:flex;gap:12px;color:var(--muted)}
+.clB .kv .ic{color:var(--rose)}
+/* clinics C */
+.clC .box{background:var(--petal);border-radius:var(--r-xl);padding:clamp(24px,4vw,52px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,52px);align-items:center}
+.clC .areas{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.clC .res{background:var(--white);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg)}
+.clC .res .ph{aspect-ratio:16/9}
+.clC .res .ph img{transition:opacity .35s}
+.clC .res .in{padding:22px 24px 24px;display:flex;flex-direction:column;gap:8px}
+.clC .res .in .tag{font-size:12.5px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:var(--moss)}
+.clC .res h3{margin:0;font-size:28px}
+.clC .res span{color:var(--muted);font-size:15px}
+
+/* faq A */
+.fA .grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start}
+.fA .stick{position:sticky;top:90px}
+/* faq B */
+.fB .srch{display:flex;align-items:center;gap:12px;background:var(--white);border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);padding:6px 6px 6px 20px;max-width:620px;margin:10px 0 18px}
+.fB .srch input{border:0;background:transparent;flex:1;min-width:0;min-height:48px;font-size:16.5px}
+.fB .srch input:focus{outline:none}
+.fB .srch:focus-within{box-shadow:inset 0 0 0 2px var(--forest)}
+.fB .cols{columns:2;column-gap:40px;margin-top:14px}
+.fB details.qa{break-inside:avoid}
+.fB .none{color:var(--muted);padding:20px 0}
+/* faq C */
+.fC .grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.fC .askc{background:var(--forest);color:var(--white);border-radius:var(--r-xl);overflow:hidden;position:sticky;top:90px}
+.fC .askc .ph{aspect-ratio:4/3}
+.fC .askc .ph img{object-position:50% 20%}
+.fC .askc .in{padding:24px;display:flex;flex-direction:column;gap:12px}
+.fC .askc p{margin:0;color:var(--soft)}
+.fC .qa{background:var(--white);border-radius:var(--r-md);box-shadow:inset 0 0 0 1px var(--line);padding:0 22px;margin-bottom:10px;border-bottom:0}
+
+/* booking A */
+.bkA .box{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:start}
+.bkA .info{display:flex;flex-direction:column;gap:16px}
+.bkA .ic-row{display:flex;gap:14px;align-items:center;background:var(--white);border-radius:var(--r-md);padding:14px 16px;box-shadow:inset 0 0 0 1px var(--line)}
+.bkA .ic-row b{display:block}
+.bkA .ic-row span{font-size:14px;color:var(--muted)}
+.bkA form{background:var(--white);border-radius:var(--r-xl);box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line);padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bkA .full{grid-column:1/-1}
+.okmsg{grid-column:1/-1;background:var(--mint);color:var(--forest);border-radius:16px;padding:14px 16px;font-weight:600;display:flex;gap:10px;align-items:center}
+.consent{grid-column:1/-1;font-size:12.5px;color:var(--muted);margin:0}
+/* booking B */
+.bkB .box{max-width:860px;margin:0 auto;background:var(--white);border-radius:var(--r-xl);box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line);overflow:hidden}
+.bkB .stp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.bkB .stp div{padding:16px 20px;display:flex;gap:10px;align-items:center;font-weight:650;font-size:14.5px;color:var(--muted)}
+.bkB .stp div i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--line);font-size:13px}
+.bkB .stp div.on{color:var(--forest)}
+.bkB .stp div.on i{background:var(--forest);color:var(--white);box-shadow:none}
+.bkB .stp div.dn i{background:var(--mint);color:var(--moss);box-shadow:none}
+.bkB .pane{padding:clamp(22px,3vw,36px)}
+.bkB .opts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0 24px}
+.bkB .op{border:0;cursor:pointer;background:var(--petal);border-radius:18px;padding:16px 14px;display:flex;flex-direction:column;gap:10px;text-align:left;font-weight:650;font-size:14.5px;line-height:1.25}
+.bkB .op .ic{color:var(--rose);width:26px;height:26px}
+.bkB .op[aria-pressed="true"]{background:var(--forest);color:var(--white)}
+.bkB .op[aria-pressed="true"] .ic{color:var(--rose-soft)}
+.bkB .nav2{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.bkB .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 24px}
+/* booking C */
+.bkC .box{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.bkC .chat{background:#EFE6DD;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg);max-width:440px}
+.bkC .chat .hd{background:var(--forest);color:var(--white);display:flex;gap:12px;align-items:center;padding:14px 18px}
+.bkC .chat .hd img{width:42px;height:42px;border-radius:50%;background:var(--white);padding:4px;object-fit:contain}
+.bkC .chat .hd small{display:block;color:var(--soft);font-size:12.5px}
+.bkC .msgs{padding:18px;display:flex;flex-direction:column;gap:10px;min-height:250px}
+.bkC .m{max-width:84%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.06)}
+.bkC .m.in{background:var(--white);border-top-left-radius:4px;align-self:flex-start}
+.bkC .m.out{background:#D7EBD9;border-top-right-radius:4px;align-self:flex-end}
+.bkC .m small{display:block;text-align:right;font-size:11px;color:var(--muted);margin-top:2px}
+.bkC .compose{display:flex;gap:8px;padding:10px 12px 14px}
+.bkC .compose select{flex:1;min-width:0;border:0;border-radius:999px;padding:0 16px;min-height:46px;background:var(--white);font-size:14.5px}
+.bkC .compose button{width:46px;height:46px;border-radius:50%;border:0;background:#1F7A4D;color:var(--white);display:grid;place-items:center;cursor:pointer;flex:none}
+
+/* footer A */
+.ftA{background:var(--forest);color:var(--soft);padding-block:64px 28px}
+.ftA .cols{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:32px}
+.ftA h4{margin:0 0 14px;color:var(--white);font-size:13px;font-weight:750;letter-spacing:.14em;text-transform:uppercase}
+.ftA ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;font-size:15px}
+.ftA a{text-decoration:none}
+.ftA a:hover{color:var(--white)}
+.ftA .bot{margin-top:48px;padding-top:22px;border-top:1px solid rgba(245,228,222,.16);display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:13px}
+/* footer B */
+.ftB{background:var(--petal);padding-block:clamp(56px,7vw,96px) 28px}
+.ftB .cta{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:flex-end;justify-content:space-between;padding-bottom:48px;border-bottom:1px solid var(--line)}
+.ftB .cta h2{margin:0;font-size:clamp(48px,8vw,120px);line-height:.92;letter-spacing:-.04em}
+.ftB .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;padding-block:36px}
+.ftB .row b{display:block;color:var(--forest);margin-bottom:6px}
+.ftB .row span{color:var(--muted);font-size:14.5px}
+.ftB .bot{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:13px;color:var(--muted);padding-top:22px;border-top:1px solid var(--line)}
+/* footer C */
+.ftC{background:var(--cream);border-top:1px solid var(--line);padding-block:40px 28px}
+.ftC .top{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.ftC .card{padding:18px 20px;display:flex;gap:14px;align-items:center}
+.ftC .card b{display:block}
+.ftC .card span{font-size:14px;color:var(--muted)}
+.ftC .bot{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:13px;color:var(--muted)}
+.ftC .soc{display:flex;gap:8px}
+.ftC .soc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--line)}
+
+@media (max-width:980px){
+  .cA .grid,.cC .box,.clB .grid,.clC .box,.fA .grid,.fC .grid,.bkA .box,.bkC .box{grid-template-columns:minmax(0,1fr)}
+  .fA .stick,.fC .askc{position:static}
+  .ftA .cols{grid-template-columns:1fr 1fr}
+  .ftC .top{grid-template-columns:minmax(0,1fr)}
+  .bkB .opts{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .clA .grid,.fB .cols{grid-template-columns:minmax(0,1fr);columns:1}
+  .bkA form,.bkB .two{grid-template-columns:minmax(0,1fr)}
+  .bkB .stp div span{display:none}
+  .ftA .cols,.ftB .row{grid-template-columns:minmax(0,1fr)}
+  .clB .wk{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .clB .ph{min-height:260px}
+  .cB .row{grid-template-columns:44px minmax(0,1fr);padding:16px 18px}
+  .cB .row .pr{grid-column:2;text-align:left}
+}
+</style>
+
+<!-- =========================== 11 COSTS =========================== -->
+<section class="opt" id="s-costs" data-s="costs">
+{RAIL:costs:11:Costs teaser:A=Estimate card|B=Price list with tabs|C=Cost finder}
+
+<div class="v" data-v="A">
+  <div class="cA sec" style="background:var(--petal)"><div class="wrap grid">
+    <div><span class="eyebrow">Costs</span><h2 class="d h2">Know the cost <em>before</em> you sit in the chair.</h2><p class="lead">Typical starting prices. Your exact estimate comes after the examination and any X-rays, and it's written down for you.</p><div style="margin-top:26px"><a class="btn btn-p" href="#s-costs">See all treatment costs <span class="bic">{i:arrow-right:sm}</span></a></div></div>
+    <div class="rc"><img class="ill" src="img/3d/receipt_3d.webp" alt=""><h3 class="d">Typical starting prices</h3><small>Dental Krafts · both clinics</small>
+      <div class="ln"><span>{i:user-heart} Consultation and examination</span><b class="tnum">₹500</b></div>
+      <div class="ln"><span>{i:tooth-root} Root canal</span><b class="tnum">from ₹6,000</b></div>
+      <div class="ln"><span>{i:tooth} Ceramic crown</span><b class="tnum">from ₹12,000</b></div>
+      <div class="ln"><span>{i:tooth-implant} Implant</span><b class="tnum">from ₹30,000</b></div>
+      <div class="nt">{i:shield-check:sm} X-rays, if needed, are charged separately and explained first.</div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="cB sec"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Costs</span><h2 class="d h2">Know the cost <em>before</em> you sit in the chair.</h2></div><a class="link" href="#s-costs">All treatment costs {i:arrow-right:sm}</a></div>
+    <div class="tabs" id="cb-t"><button class="chip" aria-pressed="true" data-g="all">Most asked</button><button class="chip" aria-pressed="false" data-g="rep">Replace teeth</button><button class="chip" aria-pressed="false" data-g="save">Save a tooth</button><button class="chip" aria-pressed="false" data-g="smile">Smile</button></div>
+    <div class="tbl" id="cb-l"></div>
+    <p style="margin:16px 0 0;font-size:14px;color:var(--muted)">Typical ranges. Your exact estimate comes after the examination and any X-rays.</p>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="cC sec"><div class="wrap"><div class="box">
+    <div class="l on-dark"><span class="eyebrow">Cost finder</span><h2 class="d h2" style="color:var(--white)">What will it <em>roughly cost?</em></h2><p class="lead">Pick a treatment to see where prices start. Your dentist confirms the exact figure after the exam.</p>
+      <div class="chips" id="cc-c"><button class="chip" aria-pressed="true" data-k="imp">Implant</button><button class="chip" aria-pressed="false" data-k="rct">Root canal</button><button class="chip" aria-pressed="false" data-k="crown">Ceramic crown</button><button class="chip" aria-pressed="false" data-k="white">Whitening</button><button class="chip" aria-pressed="false" data-k="dent">Dentures</button><button class="chip" aria-pressed="false" data-k="con">Consultation</button></div></div>
+    <div class="r" aria-live="polite"><img class="ill" id="cc-i" src="img/3d/tooth_3d.webp" alt=""><span class="from">Starts from</span><span class="amt tnum" id="cc-a">₹30,000</span><b id="cc-n">Dental implant</b><ul id="cc-u"></ul><a class="btn btn-p" href="#s-book" style="align-self:flex-start;margin-top:8px">Get my exact estimate</a></div>
+  </div></div></div>
+</div>
+</section>
+
+<!-- =========================== 12 CLINICS =========================== -->
+<section class="opt" id="s-clin" data-s="clinics">
+{RAIL:clinics:12:Clinics:A=Two clinic cards|B=Switch with weekly hours|C=Which is closer?}
+
+<div class="v" data-v="A">
+  <div class="clA sec"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Clinics</span><h2 class="d h2">Two clinics. <em>Pick the closer one.</em></h2></div></div>
+    <div class="grid">
+      <article class="cl"><div class="ph"><img src="img/sector-53-storefront.webp" alt="Dental Krafts Sector 53 storefront, South Point Mall"><span class="glass st"><span class="live"></span>Open today · 10 am – 8 pm</span></div><div class="in"><h3 class="d h3" style="font-size:28px">Sector 53 · Golf Course Road</h3><div class="ad">{i:map-pin}<span>DSP-211, 2nd Floor, South Point Mall, Golf Course Road, DLF Phase 5, Gurugram 122002</span></div><div class="ad">{i:phone-call}<span class="tnum">+91 98104 48720</span></div><div class="near"><span>DLF Phase 5</span><span>Sectors 54 and 55</span><span>Sushant Lok</span><span>Nirvana Country</span></div><div class="acts"><a class="btn btn-p btn-sm" href="#s-clin">{i:navigation:sm} Directions</a><a class="btn btn-s btn-sm" href="#s-clin">{i:phone-call:sm} Call Sector 53</a></div></div></article>
+      <article class="cl"><div class="ph"><img src="img/sector-57-operatory.webp" alt="Dental Krafts Sector 57 treatment room"><span class="glass st"><span class="live"></span>Open today · 10 am – 8:30 pm</span></div><div class="in"><h3 class="d h3" style="font-size:28px">Sector 57 · Sushant Lok 2</h3><div class="ad">{i:map-pin}<span>UG-12, 1st Floor, Bestech Central Square Mall, opposite Hong Kong Bazaar, Gurugram 122011</span></div><div class="ad">{i:phone-call}<span class="tnum">+91 95992 52018</span></div><div class="near"><span>Sectors 56 and 57</span><span>Sushant Lok 2</span><span>Golf Course Extension Road</span></div><div class="acts"><a class="btn btn-p btn-sm" href="#s-clin">{i:navigation:sm} Directions</a><a class="btn btn-s btn-sm" href="#s-clin">{i:phone-call:sm} Call Sector 57</a></div></div></article>
+    </div>
+    <div class="intl on-dark"><p><img class="ill" src="img/3d/globe_showing_asia-australia_3d.webp" alt=""><span><b>Visiting or working in Gurgaon?</b><br>Japanese, Korean and international patients get a written plan and estimate for their insurer.</span></p><span style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip">日本語</span><span class="chip">한국어</span><a class="btn btn-w btn-sm" href="#s-clin">Dental tourism</a></span></div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="clB sec" style="background:var(--petal)"><div class="wrap">
+    <span class="eyebrow">Clinics</span><h2 class="d h2">Two clinics. <em>Pick the closer one.</em></h2>
+    <div class="sw" id="clb-s"><button aria-pressed="true" data-c="53">Sector 53 · Golf Course Road</button><button aria-pressed="false" data-c="57">Sector 57 · Sushant Lok 2</button></div>
+    <div class="grid">
+      <div class="ph"><img id="clb-img" src="img/storefront-signage-reception.webp" alt="Dental Krafts clinic"></div>
+      <div class="info"><h3 class="d" id="clb-n">Sector 53 · Golf Course Road</h3>
+        <div class="kv"><div>{i:map-pin}<span id="clb-a">DSP-211, 2nd Floor, South Point Mall, Golf Course Road, DLF Phase 5, Gurugram 122002</span></div><div>{i:phone-call}<span class="tnum" id="clb-p">+91 98104 48720</span></div></div>
+        <div class="wk" id="clb-w"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:auto"><a class="btn btn-p btn-sm" href="#s-clin">{i:navigation:sm} Directions</a><a class="btn btn-s btn-sm" href="#s-clin">{i:phone-call:sm} Call</a><a class="btn btn-wa btn-sm" href="#s-book">{i:whatsapp:sm} WhatsApp</a></div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="clC sec"><div class="wrap"><div class="box">
+    <div><span class="eyebrow">Clinics</span><h2 class="d h2">Which clinic is <em>closer to you?</em></h2><p class="lead">Tap where you live or work.</p>
+      <div class="areas" id="clc"><button class="chip" aria-pressed="true" data-c="53">DLF Phase 5</button><button class="chip" aria-pressed="false" data-c="53">Golf Course Road</button><button class="chip" aria-pressed="false" data-c="53">Sectors 54 and 55</button><button class="chip" aria-pressed="false" data-c="53">Nirvana Country</button><button class="chip" aria-pressed="false" data-c="57">Sushant Lok 2</button><button class="chip" aria-pressed="false" data-c="57">Sectors 56 and 57</button><button class="chip" aria-pressed="false" data-c="57">Golf Course Extension</button><button class="chip" aria-pressed="false" data-c="53">Sushant Lok 1</button></div>
+      <span style="font-size:14px;color:var(--muted)">Both dentists consult at both clinics on set days. Call to check who's in.</span></div>
+    <div class="res"><div class="ph"><img id="clc-img" src="img/sector-53-storefront.webp" alt=""></div><div class="in"><span class="tag">{i:check:sm} Closest to you</span><h3 class="d" id="clc-n">Sector 53 · Golf Course Road</h3><span id="clc-a">South Point Mall, 2nd Floor · 10 am – 8 pm · closed Wednesdays</span><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px"><a class="btn btn-p btn-sm" href="#s-clin">{i:navigation:sm} Directions</a><a class="btn btn-s btn-sm" href="#s-clin" id="clc-p">{i:phone-call:sm} 98104 48720</a></div></div></div>
+  </div></div></div>
+</div>
+</section>
+
+<!-- =========================== 13 FAQ =========================== -->
+<section class="opt" id="s-faq" data-s="faq">
+{RAIL:faq:13:FAQ:A=Sticky heading and list|B=Search and topics|C=Ask the dentist card}
+
+<div class="v" data-v="A">
+  <div class="fA sec" style="background:var(--petal)"><div class="wrap grid">
+    <div class="stick"><span class="eyebrow">Questions</span><h2 class="d h2">Good questions, <em>plain answers.</em></h2><p class="lead">Can't find yours? Ask us on WhatsApp and we'll reply within working hours.</p><div style="margin-top:22px"><a class="btn btn-wa" href="#s-book">{i:whatsapp:sm} Ask on WhatsApp</a></div></div>
+    <div>{FAQ}</div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="fB sec"><div class="wrap">
+    <span class="eyebrow">Questions</span><h2 class="d h2">Good questions, <em>plain answers.</em></h2>
+    <label class="srch" for="fb-q">{i:search}<input id="fb-q" type="search" placeholder="Search, for example “root canal” or “weekends”"></label>
+    <div class="filters" id="fb-t" style="margin-bottom:0"><button class="chip" aria-pressed="true" data-t="">All</button><button class="chip" aria-pressed="false" data-t="visit">Visiting</button><button class="chip" aria-pressed="false" data-t="cost">Costs</button><button class="chip" aria-pressed="false" data-t="treat">Treatment</button><button class="chip" aria-pressed="false" data-t="kids">Kids</button></div>
+    <div class="cols" id="fb-l">{FAQ}</div><p class="none" id="fb-n" hidden>No questions match. Try another word, or ask us on WhatsApp.</p>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="fC sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Questions</span><h2 class="d h2">Good questions, <em>plain answers.</em></h2></div></div>
+    <div class="grid">
+      <aside class="askc on-dark"><div class="ph"><img src="img/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel"></div><div class="in"><b class="d" style="font-size:24px;color:var(--white)">Still unsure?</b><p>Send your question or your X-rays on WhatsApp. The team replies within working hours.</p><a class="btn btn-wa" href="#s-book">{i:whatsapp:sm} Ask on WhatsApp</a></div></aside>
+      <div>{FAQ}</div>
+    </div>
+  </div></div>
+</div>
+</section>
+
+<!-- =========================== 14 BOOKING =========================== -->
+<section class="opt" id="s-book" data-s="booking">
+{RAIL:booking:14:Booking:A=Form with contact details|B=Three-step booking|C=WhatsApp first}
+
+<div class="v" data-v="A">
+  <div class="bkA sec"><div class="wrap box">
+    <div class="info"><span class="eyebrow">Book a visit</span><h2 class="d h2">Book <em>a visit.</em></h2><p class="lead">Tell us a little, and we'll call you back within working hours to confirm a time.</p>
+      <div class="ic-row"><span class="badge">{i:phone-call}</span><span><b class="tnum">+91 98104 48720</b><span>Sector 53 · 10 am – 8 pm</span></span></div>
+      <div class="ic-row"><span class="badge">{i:phone-call}</span><span><b class="tnum">+91 95992 52018</b><span>Sector 57 · 10 am – 8:30 pm</span></span></div>
+      <div class="ic-row"><span class="badge">{i:calendar}</span><span><b>Closed Wednesdays</b><span>Open Saturday and Sunday</span></span></div></div>
+    <form id="ba-f" novalidate>
+      <label class="f" for="ba-n">Your name<input id="ba-n" autocomplete="name" placeholder="Full name"></label>
+      <label class="f" for="ba-p">Phone number<input id="ba-p" inputmode="numeric" autocomplete="tel" placeholder="10-digit mobile"></label>
+      <label class="f" for="ba-c">Clinic<select id="ba-c"><option>Either</option><option>Sector 53</option><option>Sector 57</option></select></label>
+      <label class="f" for="ba-d">Dentist<select id="ba-d"><option>Either</option><option>Dr Ruchi Goel</option><option>Dr Parmod Gulia</option></select></label>
+      <label class="f" for="ba-w">What's the concern?<select id="ba-w"><option>Missing teeth</option><option>Tooth pain</option><option>Broken or chipped tooth</option><option>Gaps or crooked teeth</option><option>Stained teeth</option><option>My child's teeth</option><option>Dentures</option><option>A second opinion</option></select></label>
+      <label class="f" for="ba-t">Preferred date<input id="ba-t" type="date"></label>
+      <label class="f full" for="ba-x">Anything else? (optional)<textarea id="ba-x" placeholder="For example, I have my X-rays with me"></textarea></label>
+      <button class="btn btn-p full" type="submit">Request appointment</button>
+      <p class="consent">By submitting, you agree that Dental Krafts may contact you about your enquiry. This preview doesn't send anything.</p>
+      <div class="okmsg" id="ba-ok" hidden></div>
+    </form>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="bkB sec" style="background:var(--petal)"><div class="wrap">
+    <div style="text-align:center;margin-bottom:28px"><span class="eyebrow">Book a visit</span><h2 class="d h2">Three quick steps.</h2></div>
+    <div class="box">
+      <div class="stp" id="bb-s"><div class="on"><i>1</i><span>What's wrong</span></div><div><i>2</i><span>Where and who</span></div><div><i>3</i><span>Your details</span></div></div>
+      <div class="pane" data-p="1"><b class="d" style="font-size:24px">What brings you in?</b>
+        <div class="opts" id="bb-o"><button class="op" aria-pressed="true">{i:tooth-implant}Missing teeth</button><button class="op" aria-pressed="false">{i:tooth-root}Tooth pain</button><button class="op" aria-pressed="false">{i:broken-tooth}Broken tooth</button><button class="op" aria-pressed="false">{i:braces-teeth}Crooked teeth</button><button class="op" aria-pressed="false">{i:sparkles}Stained teeth</button><button class="op" aria-pressed="false">{i:first-tooth}My child's teeth</button><button class="op" aria-pressed="false">{i:teeth}Dentures</button><button class="op" aria-pressed="false">{i:x-ray}Second opinion</button></div>
+        <div class="nav2"><span style="color:var(--muted);font-size:14px">Takes about a minute</span><button class="btn btn-p" data-go="2">Continue {i:arrow-right:sm}</button></div></div>
+      <div class="pane" data-p="2" hidden><b class="d" style="font-size:24px">Where and with whom?</b>
+        <div class="two"><label class="f" for="bb-c">Clinic<select id="bb-c"><option>Either clinic</option><option>Sector 53 · Golf Course Road</option><option>Sector 57 · Sushant Lok 2</option></select></label><label class="f" for="bb-d">Dentist<select id="bb-d"><option>Either dentist</option><option>Dr Ruchi Goel</option><option>Dr Parmod Gulia</option></select></label><label class="f" for="bb-t">Preferred date<input id="bb-t" type="date"></label><label class="f" for="bb-h">Time of day<select id="bb-h"><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label></div>
+        <div class="nav2"><button class="btn btn-s" data-go="1">{i:arrow-left:sm} Back</button><button class="btn btn-p" data-go="3">Continue {i:arrow-right:sm}</button></div></div>
+      <div class="pane" data-p="3" hidden><b class="d" style="font-size:24px">How do we reach you?</b>
+        <div class="two"><label class="f" for="bb-n">Your name<input id="bb-n" placeholder="Full name"></label><label class="f" for="bb-p">Phone number<input id="bb-p" inputmode="numeric" placeholder="10-digit mobile"></label></div>
+        <div class="nav2"><button class="btn btn-s" data-go="2">{i:arrow-left:sm} Back</button><button class="btn btn-p" id="bb-go">Request appointment</button></div>
+        <div class="okmsg" id="bb-ok" hidden style="margin-top:16px"></div></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="bkC sec"><div class="wrap box">
+    <div><span class="eyebrow">Book a visit</span><h2 class="d h2">Message us. <em>We'll set it up.</em></h2><p class="lead">Most patients book on WhatsApp. Pick your concern and the message writes itself. Prefer a call? Use the numbers below.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:24px"><span class="chip chip-r">{i:phone-call} Sector 53 · 98104 48720</span><span class="chip chip-r">{i:phone-call} Sector 57 · 95992 52018</span></div></div>
+    <div class="chat">
+      <div class="hd"><img src="img/dk-logo-colour.svg" alt=""><span><b>Dental Krafts</b><small>Replies within working hours</small></span></div>
+      <div class="msgs"><div class="m in">Hello! How can we help you today?<small>10:02</small></div><div class="m out" id="bc-m">Hello Dental Krafts, I'd like to book a visit for missing teeth at Sector 57.<small>10:03</small></div><div class="m in">Of course. Dr Ruchi has slots on Thursday evening. Shall we book 6:30 pm?<small>10:04</small></div></div>
+      <div class="compose"><select id="bc-c" aria-label="Concern"><option>missing teeth</option><option>tooth pain</option><option>a broken tooth</option><option>my child's teeth</option><option>dentures</option><option>a second opinion</option></select><select id="bc-l" aria-label="Clinic"><option>Sector 57</option><option>Sector 53</option></select><button aria-label="Open WhatsApp">{i:whatsapp}</button></div>
+    </div>
+  </div></div>
+</div>
+</section>
+
+<!-- =========================== 15 FOOTER =========================== -->
+<section class="opt" id="s-foot" data-s="footer">
+{RAIL:footer:15:Footer:A=Forest columns|B=Big booking call|C=Light and compact}
+
+<div class="v" data-v="A">
+  <footer class="ftA on-dark"><div class="wrap">
+    <div class="cols">
+      <div><img src="img/dk-logo-reversed.svg" alt="Dental Krafts" style="height:52px;width:auto;margin-bottom:16px"><p style="margin:0 0 18px;max-width:34ch">Specialist dental care in Gurgaon, from dentists trained at AIIMS and PGIMER.</p><a class="btn btn-w btn-sm" href="#s-book">Book a visit</a></div>
+      <div><h4>Treatments</h4><ul><li><a href="#s-treat">Dental implants</a></li><li><a href="#s-treat">Root canal</a></li><li><a href="#s-treat">Crowns and bridges</a></li><li><a href="#s-treat">Smile makeover</a></li><li><a href="#s-treat">Kids' dentistry</a></li></ul></div>
+      <div><h4>Clinics</h4><ul><li>Sector 53 · Golf Course Road</li><li class="tnum">+91 98104 48720</li><li>Sector 57 · Sushant Lok 2</li><li class="tnum">+91 95992 52018</li><li>kraftsdental@gmail.com</li></ul></div>
+      <div><h4>Dental Krafts</h4><ul><li><a href="#s-docs">Our dentists</a></li><li><a href="#s-res">Results</a></li><li><a href="#s-costs">Costs</a></li><li><a href="#s-videos">Videos</a></li><li><a href="#s-faq">FAQ</a></li></ul></div>
+    </div>
+    <div class="bot"><span>Dr Ruchi Goel, Reg. A-7387 · Dr Parmod Gulia, Reg. A-12323 · Delhi State Dental Council</span><span>© 2026 Dental Krafts · Privacy · Terms</span></div>
+  </div></footer>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <footer class="ftB"><div class="wrap">
+    <div class="cta"><h2 class="d">Book <em>a visit.</em></h2><div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-p" href="#s-book">Book online <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-wa" href="#s-book">{i:whatsapp:sm} WhatsApp</a></div></div>
+    <div class="row"><div><b>Sector 53 · Golf Course Road</b><span>South Point Mall, 2nd Floor · 10 am – 8 pm<br><span class="tnum">+91 98104 48720</span></span></div><div><b>Sector 57 · Sushant Lok 2</b><span>Bestech Central Square, 1st Floor · 10 am – 8:30 pm<br><span class="tnum">+91 95992 52018</span></span></div><div><b>Closed Wednesdays</b><span>Open Saturday and Sunday.<br>kraftsdental@gmail.com</span></div></div>
+    <div class="bot"><span>Dr Ruchi Goel, Reg. A-7387 · Dr Parmod Gulia, Reg. A-12323 · Delhi State Dental Council</span><span>© 2026 Dental Krafts · Privacy · Terms</span></div>
+  </div></footer>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <footer class="ftC"><div class="wrap">
+    <div class="top"><img src="img/dk-logo-colour.svg" alt="Dental Krafts" style="height:54px;width:auto"><div class="card"><span class="badge">{i:map-pin}</span><span><b>Sector 53 · Golf Course Road</b><span class="tnum">+91 98104 48720 · 10 am – 8 pm</span></span></div><div class="card"><span class="badge">{i:map-pin}</span><span><b>Sector 57 · Sushant Lok 2</b><span class="tnum">+91 95992 52018 · 10 am – 8:30 pm</span></span></div></div>
+    <div class="bot"><span>Specialist dental care in Gurgaon · Dr Ruchi Goel, Reg. A-7387 · Dr Parmod Gulia, Reg. A-12323</span><span class="soc"><a href="#s-foot" aria-label="YouTube">{i:youtube:sm}</a><a href="#s-foot" aria-label="WhatsApp">{i:whatsapp:sm}</a></span></div>
+  </div></footer>
+</div>
+</section>
+
+<nav class="mbar" aria-label="Quick actions"><a class="btn btn-s" href="#s-clin">{i:phone-call:sm} Call</a><a class="btn btn-wa" href="#s-book">{i:whatsapp:sm} WhatsApp</a><a class="btn btn-p" href="#s-book">{i:calendar-check:sm} Book a visit</a></nav>

@@ -1,0 +1,882 @@
+<style>
+/* ---------- shared hero bits ---------- */
+.credit{font-size:11.5px;letter-spacing:.02em;opacity:.72}
+.credit a{color:inherit}
+.stat-live{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:650}
+.stat-live i{width:9px;height:9px;border-radius:50%;background:#3FB27F;box-shadow:0 0 0 5px rgba(63,178,127,.2);flex:none}
+.stat-live.off i{background:#D9A441;box-shadow:0 0 0 5px rgba(217,164,65,.2)}
+.ibtn{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:0;cursor:pointer;background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+@keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.rise.d2{animation-delay:.12s}.rise.d3{animation-delay:.24s}.rise.d4{animation-delay:.36s}
+
+/* ---------- A · Full-bleed smile ---------- */
+.xA{position:relative;min-height:min(100svh,920px);color:var(--white);display:flex;flex-direction:column;overflow:hidden;background:#2B201B;isolation:isolate}
+.xA>.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 30%;z-index:-2;animation:kb 16s ease-out both}
+.xA>.tint{position:absolute;inset:0;background:rgba(24,18,15,.34);z-index:-1}
+.xA .hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-block:20px;border-bottom:1px solid rgba(255,251,245,.22)}
+.xA .hd .l,.xA .hd .r{display:flex;align-items:center;gap:22px}
+.xA .hd .r{justify-content:flex-end;gap:10px}
+.xA .hd a.tx,.xA .hd button.tx{display:inline-flex;align-items:center;gap:10px;background:none;border:0;color:inherit;font:inherit;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.xA .hd .tx .ibtn{width:40px;height:40px}
+.xA .hd .logo{height:54px;width:auto}
+.xA .ghost{background:transparent;color:var(--white);box-shadow:inset 0 0 0 1.5px rgba(255,251,245,.7)}
+.xA .ghost:hover{background:rgba(255,251,245,.12)}
+.xA .body{margin-top:auto;padding-block:48px 34px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px;align-items:end}
+.xA .eyebrow{color:var(--rose-soft)}
+.xA h1{margin:18px 0 0;font-size:clamp(48px,7.6vw,118px);line-height:.94;color:var(--white);text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.xA h1 em{color:var(--rose-soft)}
+.xA .side p{margin:0 0 22px;font-size:17.5px;line-height:1.55;color:rgba(255,251,245,.9);max-width:40ch}
+.xA .side .cta{display:flex;flex-wrap:wrap;gap:10px}
+.xA .xs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(255,251,245,.22)}
+.xA .xs>div{padding:18px 18px 22px 0;display:flex;gap:12px;align-items:center;font-size:14px;color:rgba(255,251,245,.85)}
+.xA .xs>div+div{padding-left:18px;border-left:1px solid rgba(255,251,245,.22)}
+.xA .xs b{display:block;color:var(--white);font-size:15px}
+.xA .xs .ic{color:var(--rose-soft);width:26px;height:26px;flex:none}
+.xA .credit{position:absolute;right:16px;bottom:8px}
+
+/* ---------- B · Arch portraits ---------- */
+.xB{background:var(--petal);padding-bottom:36px}
+.xB .pill{display:flex;align-items:center;gap:14px;background:var(--white);border-radius:999px;box-shadow:var(--sh),inset 0 0 0 1px var(--line);padding:8px 8px 8px 24px;margin-top:16px}
+.xB .pill .logo{height:40px;width:auto}
+.xB .pill ul{display:flex;gap:2px;list-style:none;margin:0 auto;padding:0}
+.xB .pill li a{display:inline-flex;align-items:center;gap:4px;padding:10px 13px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14.5px}
+.xB .pill li a:hover{background:var(--petal)}
+.xB .pill li .ic{width:14px;height:14px;opacity:.6}
+.xB .pill .mob{display:none}
+.xB .find{display:flex;align-items:center;gap:6px;background:var(--petal);border-radius:999px;padding:5px 5px 5px 16px}
+.xB .find .ic{color:var(--rose);width:18px;height:18px}
+.xB .find select{border:0;background:transparent;font:inherit;font-size:14.5px;font-weight:600;color:var(--forest);padding:8px 4px;cursor:pointer}
+.xB .stage{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.5fr) minmax(0,.9fr);gap:clamp(20px,3vw,44px);align-items:center;padding-block:clamp(32px,4vw,56px) 34px}
+.xB .arch{position:relative;border-radius:999px 999px 34px 34px;overflow:hidden;aspect-ratio:3/4.3;background:var(--blush)}
+.xB .arch img{width:100%;height:100%;object-fit:cover}
+.xB .arch.r{margin-top:90px}
+.xB .arch.l{margin-bottom:60px}
+.xB .stk{position:absolute;left:12px;right:12px;bottom:12px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+.xB .stk .ill{width:44px;height:44px;flex:none}
+.xB .stk b{display:block;font-size:15px;line-height:1.2}
+.xB .stk span{font-size:12.5px;color:var(--muted)}
+.xB .mid{text-align:center}
+.xB h1{margin:18px auto 18px;font-size:clamp(44px,5.6vw,84px);line-height:.98;max-width:12ch}
+.xB .mid .lead{margin:0 auto}
+.xB .mid .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px}
+.xB .q{margin-top:34px;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rose)}
+.xB .cons{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
+.xB .cons a{display:inline-flex;align-items:center;gap:8px;background:var(--white);border-radius:999px;padding:10px 16px;text-decoration:none;font-weight:600;font-size:14.5px;box-shadow:inset 0 0 0 1px var(--line);transition:background .2s,color .2s}
+.xB .cons a .ic{color:var(--rose);width:18px;height:18px}
+.xB .cons a:hover{background:var(--forest);color:var(--white)}
+.xB .cons a:hover .ic{color:var(--rose-soft)}
+.xB .tr{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.xB .tr a{background:var(--white);border-radius:22px;padding:16px;display:flex;align-items:center;gap:12px;text-decoration:none;box-shadow:inset 0 0 0 1px var(--line);transition:transform .2s}
+.xB .tr a:hover{transform:translateY(-3px)}
+.xB .tr img{width:52px;height:52px;border-radius:14px;object-fit:cover;flex:none}
+.xB .tr b{display:block;font-size:15px;line-height:1.2}
+.xB .tr span{font-size:12.5px;color:var(--muted)}
+.xB .credit{text-align:center;margin-top:14px;color:var(--muted)}
+
+/* ---------- C · Expanding panels ---------- */
+.xC{background:var(--cream);padding-bottom:36px}
+.xC .hd{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:18px}
+.xC .hd .logo{height:48px;width:auto}
+.xC .hd ul{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+.xC .hd li a{display:inline-flex;align-items:center;gap:4px;padding:10px 12px;text-decoration:none;font-weight:600;font-size:14.5px;border-radius:999px}
+.xC .hd li a:hover{background:var(--petal)}
+.xC .hd li .ic{width:14px;height:14px;opacity:.6}
+.xC .seg3{display:flex;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--forest);overflow:hidden}
+.xC .seg3 a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;font-size:13px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--forest)}
+.xC .seg3 a+a{box-shadow:inset 1.5px 0 0 var(--forest)}
+.xC .seg3 a:hover{background:var(--petal)}
+.xC .seg3 a.on{background:var(--forest);color:var(--white)}
+.xC .seg3 .ic{width:16px;height:16px}
+.xC .top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:40px;align-items:end;padding-block:clamp(26px,3vw,44px) 30px}
+.xC h1{margin:16px 0 0;font-size:clamp(46px,6.4vw,100px);line-height:.95}
+.xC .top p{margin:0 0 20px;font-size:17px;color:var(--muted)}
+.xC .top .cta{display:flex;flex-wrap:wrap;gap:10px}
+.xC .pans{display:flex;gap:12px;height:clamp(420px,60vh,600px)}
+.xC .pn{position:relative;flex:1;min-width:0;border-radius:var(--r-xl);overflow:hidden;background:var(--forest);color:var(--white);text-decoration:none;transition:flex .7s cubic-bezier(.2,.7,.2,1)}
+.xC .pn.on{flex:2.6}
+.xC .pn img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.xC .pn.on img{transform:scale(1.03)}
+.xC .pn .lab{position:absolute;left:14px;right:14px;bottom:14px;background:rgba(30,58,48,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:22px;padding:16px 18px;display:flex;align-items:center;gap:14px}
+.xC .pn .lab .n{font-family:var(--display);font-variation-settings:'SOFT' 100;font-size:14px;color:var(--rose-soft);flex:none}
+.xC .pn .lab b{display:block;font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:520;font-size:22px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xC .pn .lab .sub{display:block;font-size:13.5px;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-height:0;opacity:0;transition:max-height .5s,opacity .5s}
+.xC .pn.on .lab .sub{max-height:24px;opacity:1}
+.xC .pn:not(.on) .lab{right:auto;padding:12px 16px}
+.xC .pn:not(.on) .lab>span:not(.n){display:none}
+.xC .pn .go{margin-left:auto;flex:none;width:40px;height:40px;border-radius:50%;background:var(--cream);color:var(--forest);display:grid;place-items:center;opacity:0;transition:opacity .4s}
+.xC .pn.on .go{opacity:1}
+.xC .pn .play{top:16px;right:16px}
+.xC .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 30px;margin-top:18px;font-size:14px;color:var(--muted)}
+.xC .foot span{display:inline-flex;gap:8px;align-items:center}
+.xC .foot .ic{color:var(--rose)}
+
+/* ---------- D · Editorial frame with rotating word ---------- */
+.xD{background:var(--cream);padding-bottom:40px}
+.xD .ut{border-bottom:1px solid var(--line);font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.xD .ut .wrap{display:flex;justify-content:space-between;gap:16px;padding-block:10px}
+.xD .ut b{color:var(--forest)}
+.xD .hd{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-block:16px;border-bottom:1px solid var(--line)}
+.xD .hd ul{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+.xD .hd li a{display:inline-flex;align-items:center;gap:4px;padding:8px 10px;text-decoration:none;font-weight:600;font-size:14.5px;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:7px;text-decoration-color:transparent;transition:text-decoration-color .25s}
+.xD .hd li a:hover{text-decoration-color:var(--rose)}
+.xD .hd li .ic{display:none}
+.xD .hd li:nth-child(n+4){display:none}
+.xD .hd .logo{height:54px;width:auto}
+.xD .hd .r{display:flex;justify-content:flex-end;gap:10px}
+.xD .top{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;align-items:end;padding-block:clamp(30px,4vw,56px) 28px}
+.xD h1{margin:0;font-size:clamp(46px,7.4vw,120px);line-height:.98}
+.xD .rot{display:block;position:relative;height:1.06em;overflow:hidden}
+.xD .rot span{position:absolute;left:0;top:0;white-space:nowrap;font-style:italic;font-weight:400;color:var(--rose);transform:translateY(105%);opacity:0;transition:transform .8s cubic-bezier(.7,0,.2,1),opacity .5s}
+.xD .rot span.on{transform:none;opacity:1}
+.xD .rot span.out{transform:translateY(-105%);opacity:0}
+.xD .top p{margin:0 0 20px;font-size:16.5px;color:var(--muted)}
+.xD .top .cta{display:flex;flex-direction:column;gap:10px}
+.xD .top .cta .btn{justify-content:center}
+.xD .frame{border:1px solid var(--forest);border-radius:40px;padding:12px}
+.xD .pic{position:relative;border-radius:30px;overflow:hidden;aspect-ratio:21/8.6;background:var(--blush)}
+.xD .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity 1s,transform 6s ease-out}
+.xD .pic img.on{opacity:1;transform:none}
+.xD .pic .k{position:absolute;left:22px;top:20px;font-size:12px;font-weight:750;letter-spacing:.16em;text-transform:uppercase;color:var(--forest);background:var(--cream);border-radius:999px;padding:8px 14px}
+.xD .pic .cap{position:absolute;right:16px;bottom:16px;max-width:360px;padding:16px 18px;display:flex;gap:14px;align-items:center}
+.xD .pic .cap .badge{flex:none}
+.xD .pic .cap b{display:block;font-size:15.5px}
+.xD .pic .cap span{font-size:13.5px;color:var(--muted)}
+.xD .dots{position:absolute;left:22px;bottom:22px;display:flex;gap:6px}
+.xD .dots button{width:34px;height:4px;border-radius:4px;border:0;padding:0;background:rgba(255,251,245,.55);cursor:pointer;overflow:hidden;position:relative}
+.xD .dots button.on::after{content:"";position:absolute;inset:0;background:var(--forest);transform-origin:left;animation:dfill 3.6s linear both}
+.xD .dots.paused button.on::after{animation:none;transform:none}
+@keyframes dfill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.xD .facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:26px}
+.xD .facts div{padding:4px 22px}
+.xD .facts div+div{border-left:1px solid var(--line)}
+.xD .facts b{display:block;font-family:var(--display);font-variation-settings:'SOFT' 100,'opsz' 144;font-weight:520;font-size:clamp(28px,3vw,40px);line-height:1.05;color:var(--forest)}
+.xD .facts span{font-size:14px;color:var(--muted)}
+.xD .credit{margin-top:18px;color:var(--muted)}
+
+/* ---------- E · Cinematic forest with concierge ---------- */
+.xE{background:var(--forest);color:var(--white);overflow:hidden;position:relative}
+.xE .hd{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:18px}
+.xE .hd .logo{height:48px;width:auto}
+.xE .hd ul{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+.xE .hd li a{display:inline-flex;align-items:center;gap:4px;padding:10px 12px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14.5px;color:var(--white)}
+.xE .hd li a:hover{background:rgba(255,255,255,.08)}
+.xE .hd li .ic{width:14px;height:14px;opacity:.6}
+.xE .hd .r{display:flex;align-items:center;gap:16px}
+.xE .hd .stat-live{color:var(--soft)}
+.xE .stage{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(24px,3vw,48px);align-items:stretch;padding-block:clamp(18px,2.5vw,34px) clamp(30px,3vw,44px)}
+.xE .l{display:flex;flex-direction:column;justify-content:center}
+.xE h1{margin:18px 0 18px;font-size:clamp(44px,5.6vw,86px);line-height:.97;color:var(--white)}
+.xE .lead{color:var(--soft)}
+.xE .cc{margin-top:28px;background:var(--cream);color:var(--forest);border-radius:30px;padding:20px;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
+.xE .cc .t{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12.5px;font-weight:750;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+.xE .cc .t span{letter-spacing:0;text-transform:none;font-weight:600;color:var(--muted);font-size:13px}
+.xE .cc .ch{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.xE .cc .ch button{display:inline-flex;align-items:center;gap:7px;border:0;cursor:pointer;background:var(--petal);color:var(--forest);font:inherit;font-weight:600;font-size:14px;padding:9px 14px;border-radius:999px;transition:background .2s,color .2s}
+.xE .cc .ch button .ic{width:17px;height:17px;color:var(--rose)}
+.xE .cc .ch button:hover{background:var(--blush)}
+.xE .cc .ch button[aria-pressed="true"]{background:var(--forest);color:var(--white)}
+.xE .cc .ch button[aria-pressed="true"] .ic{color:var(--rose-soft)}
+.xE .cc .res{display:flex;align-items:center;gap:14px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.xE .cc .who{display:flex;flex:none}
+.xE .cc .who img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 20%;box-shadow:0 0 0 3px var(--cream)}
+.xE .cc .who img+img{margin-left:-14px}
+.xE .cc .res b{display:block;font-size:16px}
+.xE .cc .res .s{font-size:13.5px;color:var(--muted)}
+.xE .cc .res .btn{margin-left:auto;flex:none}
+.xE .r{position:relative}
+.xE .ph{position:relative;height:100%;min-height:560px;border-radius:var(--r-xl);overflow:hidden;background:#123}
+.xE .ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;opacity:0;transition:opacity .8s}
+.xE .ph>img.on{opacity:1}
+.xE .fl{position:absolute;padding:14px 16px;color:var(--forest);display:flex;align-items:center;gap:12px}
+.xE .f1{left:18px;top:18px}
+.xE .f1 b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:26px;line-height:1}
+.xE .f1 small{display:block;font-size:12.5px;color:var(--muted)}
+.xE .f2{right:18px;bottom:18px;padding:10px 14px 10px 10px;text-decoration:none;max-width:300px}
+.xE .f2 .mini{display:flex;border-radius:14px;overflow:hidden;flex:none}
+.xE .f2 .mini img{width:56px;height:64px;object-fit:cover}
+.xE .f2 b{display:block;font-size:14.5px}
+.xE .f2 span{font-size:12.5px;color:var(--muted)}
+.xE .f2 .arw2{width:34px;height:34px;border-radius:50%;background:var(--forest);color:var(--white);display:grid;place-items:center;flex:none}
+.xE .credit{position:absolute;left:18px;bottom:12px;color:var(--white)}
+.xE .band{border-top:1px solid rgba(245,228,222,.14);overflow:hidden}
+.xE .band .mq{display:flex;width:max-content;animation:mq 50s linear infinite;padding-block:18px}
+.xE .band span{display:inline-flex;align-items:center;gap:12px;padding:0 26px;font-size:14px;font-weight:600;color:var(--soft);white-space:nowrap}
+.xE .band .ic{color:var(--rose-soft);width:18px;height:18px}
+
+@media (max-width:1080px){
+  .xB .pill ul,.xC .hd ul,.xE .hd ul{display:none}
+  .xB .pill{justify-content:space-between}
+  .xB .tr{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:980px){
+  .xA .body,.xC .top,.xD .top,.xE .stage{grid-template-columns:minmax(0,1fr)}
+  .xA .xs{grid-template-columns:1fr 1fr}
+  .xA .xs>div:nth-child(3){padding-left:0;border-left:0}
+  .xA .xs>div:nth-child(n+3){border-top:1px solid rgba(255,251,245,.22)}
+  .xB .stage{grid-template-columns:1fr 1fr}
+  .xB .mid{grid-column:1/-1;order:-1}
+  .xB .arch.r,.xB .arch.l{margin:0}
+  .xD .top .cta{flex-direction:row;flex-wrap:wrap}
+  .xD .hd ul{display:none}
+  .xD .pic{aspect-ratio:16/10}
+  .xD .facts{grid-template-columns:1fr 1fr;row-gap:18px}
+  .xD .facts div:nth-child(3){border-left:0}
+  .xE .ph{min-height:420px}
+}
+@media (max-width:760px){
+  .xA .hd .l .tx span,.xA .hd .r .ghost{display:none}
+  .xA .hd .logo{height:42px}
+  .xA>.bg{object-position:72% 30%}
+  .xA .xs{display:none}
+  .xA .body{padding-bottom:40px}
+  .xB .find{display:none}
+  .xB .pill .mob{display:inline-flex}
+  .xB .pill{padding-left:16px}
+  .xB .tr{grid-template-columns:1fr 1fr}
+  .xB .stk{left:8px;right:8px;bottom:8px;padding:10px}
+  .xB .stk .ill{display:none}
+  .xC .hd .seg3 a:not(.on){display:none}
+  .xC .pans{height:auto;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * max(20px,env(safe-area-inset-left,0px)));padding-inline:max(20px,env(safe-area-inset-left,0px));scrollbar-width:none}
+  .xC .pn,.xC .pn.on{flex:0 0 78%;height:440px;scroll-snap-align:start}
+  .xC .pn .lab .sub,.xC .pn .go{max-height:24px;opacity:1}
+  .xC .pn .lab b{font-size:19px;white-space:normal}
+  .xC .pn:not(.on) .lab{right:14px;padding:16px 18px}
+  .xC .pn:not(.on) .lab>span:not(.n){display:block}
+  .xC .pn:not(.on) .lab>.go{display:grid}
+  .xD .ut .wrap span:last-child,.xD .hd .r .btn-s{display:none}
+  .xD .hd{grid-template-columns:auto 1fr}
+  .xD .hd .l{display:none}
+  .xD .hd .logo{height:44px}
+  .xD .pic .cap{left:12px;right:12px;bottom:12px;max-width:none}
+  .xD .dots{left:auto;right:22px;top:24px;bottom:auto}
+  .xD .facts{grid-template-columns:1fr 1fr}
+  .xD .facts div{padding:4px 14px}
+  .xE .hd .stat-live{display:none}
+  .xE .cc .res{flex-wrap:wrap}
+  .xE .cc .res .btn{margin-left:0;width:100%;justify-content:center}
+  .xE .f2{left:12px;right:12px;bottom:12px;max-width:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .xA>.bg,.xE .ph>img,.rise{animation:none}
+  .xE .band .mq{animation:none}
+}
+
+/* hero A */
+.hA{background:var(--cream)}
+.hA .grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:clamp(28px,4vw,64px);align-items:center;padding-block:clamp(28px,4vw,56px) 0}
+.hA h1{margin:20px 0 20px;font-size:clamp(44px,5.8vw,84px);line-height:.98}
+.hA .cta{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 30px}
+.hA .proof{display:flex;align-items:center;gap:14px;font-size:14.5px;color:var(--muted)}
+.hA .proof b{color:var(--forest)}
+.hA .art{position:relative}
+.hA .art .ph{aspect-ratio:4/4.5;border-radius:240px 240px var(--r-xl) var(--r-xl)}
+.hA .art .ph img{object-position:20% 72%}
+.hA .f1{position:absolute;left:-28px;bottom:42px;padding:14px 18px;display:flex;align-items:center;gap:14px;max-width:270px}
+.hA .f1 b{display:block;font-size:15.5px}
+.hA .f1 span{font-size:13.5px;color:var(--muted)}
+.hA .f2{position:absolute;right:-16px;top:56px;padding:12px 18px 12px 12px;display:flex;align-items:center;gap:10px}
+.hA .f2 .ill{width:58px;height:58px}
+.hA .f2 small{display:block;font-size:12.5px;color:var(--muted)}
+.hA .f2 b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:21px}
+.live{width:12px;height:12px;border-radius:50%;background:#2E8B57;box-shadow:0 0 0 6px rgba(46,139,87,.16);flex:none}
+.finder{margin-top:clamp(36px,5vw,64px);margin-bottom:8px;background:var(--white);border-radius:32px;box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line);padding:12px;display:grid;grid-template-columns:1.3fr 1fr 1fr auto;gap:8px;align-items:stretch;position:relative;z-index:2}
+.finder label{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 18px;border-radius:22px;font-size:12px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);min-width:0}
+.finder label:hover{background:var(--petal)}
+.finder select{border:0;background:transparent;font-size:16.5px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--forest);padding:0;cursor:pointer;width:100%;appearance:none}
+.finder .sep{border-left:1px solid var(--line)}
+.finder .btn{min-height:64px;border-radius:24px;padding:0 28px}
+.hA-band{background:var(--petal);padding-block:76px 28px;margin-top:-56px}
+.hA-band .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:center;font-size:14px;color:var(--muted)}
+.hA-band span{display:inline-flex;gap:8px;align-items:center}
+.hA-band .ic{color:var(--rose)}
+
+/* hero B */
+.hB{background:var(--petal)}
+.hB .top{padding-block:clamp(30px,4vw,60px) clamp(28px,3vw,40px)}
+.hB h1{margin:22px 0 0;font-size:clamp(46px,7.4vw,112px);line-height:.95;letter-spacing:-.035em;max-width:14ch}
+.hB h1 .inl{display:inline-block;vertical-align:middle;width:1.9em;height:.82em;border-radius:999px;overflow:hidden;margin:0 .08em;position:relative;top:-.06em;box-shadow:0 0 0 4px var(--white)}
+.hB h1 .inl img{width:100%;height:100%;object-fit:cover;object-position:22% 64%}
+.hB .row{display:grid;grid-template-columns:minmax(0,1.1fr) 230px minmax(0,1fr);gap:22px;align-items:stretch;padding-bottom:clamp(48px,6vw,88px)}
+.hB .c1{display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:30px;background:var(--white);border-radius:var(--r-lg)}
+.hB .c1 .cta{display:flex;flex-wrap:wrap;gap:10px}
+.hB .stats{display:grid;grid-template-rows:repeat(3,1fr);gap:12px}
+.hB .stat{display:flex;align-items:center;gap:16px;background:var(--white);border-radius:var(--r-md);padding:14px 18px}
+.hB .stat .ill{width:54px;height:54px}
+.hB .stat b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:30px;line-height:1;display:block}
+.hB .stat span{font-size:13.5px;color:var(--muted)}
+
+/* hero C */
+.hC{background:var(--forest);color:var(--white)}
+.hC .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(28px,4vw,64px);align-items:center;padding-block:clamp(28px,4vw,56px) clamp(56px,7vw,96px)}
+.hC h1{margin:20px 0 18px;font-size:clamp(44px,5.6vw,80px);line-height:.98;color:var(--white)}
+.hC .cons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:30px}
+.hC .con{border:0;cursor:pointer;text-align:left;background:var(--forest-2);color:var(--white);border-radius:20px;padding:16px 14px;display:flex;flex-direction:column;gap:12px;font-weight:600;font-size:14.5px;line-height:1.25;transition:background .2s,transform .2s;box-shadow:inset 0 0 0 1px rgba(245,228,222,.12)}
+.hC .con .ic{color:var(--rose-soft);width:26px;height:26px}
+.hC .con:hover{background:#30554A;transform:translateY(-2px)}
+.hC .con[aria-pressed="true"]{background:var(--blush);color:var(--forest)}
+.hC .con[aria-pressed="true"] .ic{color:var(--rose)}
+.hC .art{position:relative}
+.hC .art .ph{aspect-ratio:4/4.6;border-radius:var(--r-xl)}
+.hC .art .ph img{object-position:20% 72%}
+.hC .cred{position:absolute;left:-30px;bottom:30px;background:var(--cream);color:var(--forest);border-radius:24px;padding:18px 20px;box-shadow:var(--sh-lg);display:flex;flex-direction:column;gap:10px;min-width:250px}
+.hC .cred div{display:flex;gap:12px;align-items:center;font-size:14px}
+.hC .cred b{display:block;font-size:15px}
+.hC .spark{position:absolute;right:18px;top:-34px;width:96px;height:96px;z-index:2}
+.hC .reply{margin-top:18px;font-size:14.5px;color:var(--soft);min-height:24px}
+.hC .reply b{color:var(--white)}
+
+/* trust A */
+.tA{background:var(--white);border-block:1px solid var(--line);overflow:hidden}
+.tA .mq{display:flex;gap:0;width:max-content;animation:mq 46s linear infinite;padding-block:26px}
+.tA:hover .mq{animation-play-state:paused}
+.tA .it{display:flex;align-items:center;gap:12px;padding:0 30px;font-weight:650;font-size:16px;white-space:nowrap;border-right:1px solid var(--line)}
+.tA .it .badge{width:44px;height:44px;border-radius:14px}
+.tA .it .badge .ic{width:22px;height:22px}
+.tA .it small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.tA .press{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px 40px;padding-block:22px;border-top:1px solid var(--line);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.tA .press img{height:44px;width:auto;filter:grayscale(1);opacity:.75}
+.tA .press .trib{font-family:"Times New Roman",Georgia,serif;font-size:24px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--forest);opacity:.75}
+
+/* trust B */
+.tB .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.tB .c{background:var(--white);border-radius:var(--r-lg);box-shadow:inset 0 0 0 1px var(--line);padding:26px 24px;display:flex;flex-direction:column;gap:10px;min-height:240px;transition:transform .3s,box-shadow .3s}
+.tB .c:hover{transform:translateY(-4px);box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line)}
+.tB .c .ill{width:76px;height:76px;margin-bottom:auto}
+.tB .c b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:44px;line-height:1}
+.tB .c span{color:var(--muted);font-size:14.5px}
+
+/* trust C */
+.tC .box{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--white);border-radius:var(--r-xl);box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line);overflow:hidden}
+.tC .cell{padding:34px 32px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.tC .cell + .cell{border-left:1px solid var(--line)}
+.tC .big{display:flex;align-items:baseline;gap:12px}
+.tC .big b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:72px;line-height:.9}
+.tC .src{display:flex;align-items:center;gap:8px;font-weight:700}
+.tC .cell small{color:var(--muted);font-size:14px}
+.tC .q{font-family:var(--display);font-variation-settings:'SOFT' 100,'opsz' 40;font-size:19px;line-height:1.4;font-weight:420;transition:opacity .4s}
+.tC .qd{display:flex;gap:6px;margin-top:auto}
+.tC .qd i{width:22px;height:4px;border-radius:2px;background:var(--line)}
+.tC .qd i.on{background:var(--forest)}
+
+/* doctors A */
+.dA .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.dA .doc{background:var(--white);border-radius:var(--r-xl);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column}
+.dA .doc .ph{aspect-ratio:16/11}
+.dA .doc .ph img{object-position:50% 22%;transition:transform .8s ease}
+.dA .doc:hover .ph img{transform:scale(1.04)}
+.dA .doc .tag{position:absolute;left:18px;bottom:18px;padding:12px 16px}
+.dA .doc .tag b{display:block;font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:24px;line-height:1.1}
+.dA .doc .tag span{font-size:13.5px;color:var(--muted)}
+.dA .body{padding:24px 26px 26px;display:flex;flex-direction:column;gap:16px;flex:1}
+.dA .chips{display:flex;flex-wrap:wrap;gap:8px}
+.dA .body p{margin:0;color:var(--muted)}
+.dA .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+.strip{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;background:var(--petal);border-radius:var(--r-lg);padding:18px 22px}
+.strip p{margin:0;display:flex;align-items:center;gap:14px;font-weight:600}
+
+/* doctors B */
+.dB .tabs{display:inline-flex;background:var(--petal);border-radius:999px;padding:6px;gap:4px;margin-bottom:26px;flex-wrap:wrap}
+.dB .tabs button{border:0;cursor:pointer;background:transparent;border-radius:999px;padding:8px 18px 8px 8px;display:flex;align-items:center;gap:10px;font-weight:650}
+.dB .tabs img{width:38px;height:38px;border-radius:50%;object-fit:cover;object-position:50% 20%}
+.dB .tabs button[aria-selected="true"]{background:var(--white);box-shadow:var(--sh)}
+.dB .panel{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(24px,4vw,56px);align-items:center}
+.dB .panel .ph{aspect-ratio:4/4.4;border-radius:var(--r-xl)}
+.dB .panel .ph img{object-position:50% 20%}
+.dB .role{font-size:16px;color:var(--rose);font-weight:650}
+.dB .tl{list-style:none;margin:24px 0;padding:0;display:flex;flex-direction:column}
+.dB .tl li{display:grid;grid-template-columns:70px 22px minmax(0,1fr);gap:14px;align-items:start;padding-bottom:18px;position:relative}
+.dB .tl li::before{content:"";position:absolute;left:80px;top:22px;bottom:0;width:1.5px;background:var(--line)}
+.dB .tl li:last-child::before{display:none}
+.dB .tl .y{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:560;font-size:20px}
+.dB .tl .dt{width:22px;height:22px;border-radius:50%;background:var(--white);box-shadow:inset 0 0 0 5px var(--clay);margin-top:3px}
+.dB .tl b{display:block}
+.dB .tl span{font-size:14.5px;color:var(--muted)}
+.dB .acts{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* doctors C */
+.dC .grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:22px}
+.dC .lead-c{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);background:var(--forest);color:var(--white);border-radius:var(--r-xl);overflow:hidden}
+.dC .lead-c .ph{min-height:100%}
+.dC .lead-c .ph img{object-position:42% 20%}
+.dC .lead-c .t{padding:34px 32px;display:flex;flex-direction:column;gap:14px}
+.dC .lead-c h3{margin:0;font-size:36px;line-height:1.05;color:var(--white)}
+.dC .lead-c p{margin:0;color:var(--soft)}
+.dC .lead-c .kv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.dC .lead-c .kv div{background:var(--forest-2);border-radius:16px;padding:12px 14px;font-size:13.5px;color:var(--soft)}
+.dC .lead-c .kv b{display:block;color:var(--white);font-size:15px}
+.dC .side{display:flex;flex-direction:column;gap:22px}
+.dC .mini{background:var(--white);border-radius:var(--r-xl);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column;flex:1}
+.dC .mini .ph{aspect-ratio:16/9}
+.dC .mini .ph img{object-position:50% 22%}
+.dC .mini .t{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px}
+.dC .mini h3{margin:0;font-size:25px}
+.dC .mini span{color:var(--muted);font-size:14.5px}
+.dC .ask{background:var(--petal);border-radius:var(--r-xl);padding:22px;display:flex;flex-direction:column;gap:12px}
+.dC .ask .avs img{width:46px;height:46px;object-position:50% 20%}
+
+/* treatments A */
+.trA .bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:minmax(200px,auto);gap:16px}
+.trA .t{border-radius:var(--r-lg);padding:26px;display:flex;flex-direction:column;gap:10px;text-decoration:none;position:relative;overflow:hidden;background:var(--white);box-shadow:inset 0 0 0 1px var(--line);transition:transform .3s,box-shadow .3s}
+.trA .t:hover{transform:translateY(-3px);box-shadow:var(--sh-lg),inset 0 0 0 1px var(--line)}
+.trA .t .h3{margin-top:auto}
+.trA .t p{margin:0;color:var(--muted);font-size:15px;max-width:40ch}
+.trA .t .pr{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:700;color:var(--rose);font-size:14.5px;padding-top:12px;border-top:1px solid var(--line);margin-top:6px}
+.trA .t .go{width:40px;height:40px;border-radius:50%;background:var(--forest);color:var(--white);display:grid;place-items:center;flex:none}
+.trA .t .go .ic{width:18px;height:18px}
+.trA .big{grid-column:span 7;grid-row:span 2;padding:0;background:var(--forest);color:var(--white);box-shadow:none}
+.trA .big .ph{height:58%;min-height:240px}
+.trA .big .ph img{object-position:50% 50%}
+.trA .big .in{padding:26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.trA .big p{color:var(--soft)}
+.trA .big .pr{color:var(--rose-soft);border-color:rgba(245,228,222,.18)}
+.trA .big .go{background:var(--cream);color:var(--forest)}
+.trA .s5{grid-column:span 5}
+.trA .s4{grid-column:span 4}
+.trA .kids{background:var(--petal);box-shadow:none}
+.trA .t .ill{position:absolute;right:18px;top:18px;width:70px;height:70px}
+
+/* treatments B */
+.trB .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:start}
+.trB .list{border-top:1px solid var(--line)}
+.trB .row{display:grid;grid-template-columns:56px minmax(0,1fr) auto 44px;gap:18px;align-items:center;padding:20px 8px;border-bottom:1px solid var(--line);cursor:pointer;text-decoration:none;border-radius:4px;transition:background .25s,padding .25s}
+.trB .row:hover,.trB .row.on{background:var(--petal);padding-inline:18px}
+.trB .row b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:540;font-size:24px;line-height:1.15;display:block}
+.trB .row span.s{font-size:14.5px;color:var(--muted)}
+.trB .row .p{font-weight:700;color:var(--rose);font-size:14.5px;white-space:nowrap}
+.trB .row .ar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px var(--line);transition:background .25s,color .25s}
+.trB .row.on .ar,.trB .row:hover .ar{background:var(--forest);color:var(--white);box-shadow:none}
+.trB .prev{position:sticky;top:90px;border-radius:var(--r-xl);overflow:hidden;background:var(--forest);color:var(--white)}
+.trB .prev .ph{aspect-ratio:4/3.3}
+.trB .prev .ph img{transition:opacity .35s}
+.trB .prev .in{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px}
+.trB .prev .in span{color:var(--soft);font-size:14.5px}
+.trB .prev .who{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--soft)}
+.trB .prev .who img{width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:50% 20%}
+
+/* treatments C */
+.trC .rail{grid-auto-columns:minmax(270px,1fr)}
+.trC .card3{background:var(--white);border-radius:var(--r-xl);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;min-height:430px;transition:transform .3s}
+.trC .card3:hover{transform:translateY(-4px)}
+.trC .card3 .top{background:var(--petal);aspect-ratio:1.25/1;display:grid;place-items:center}
+.trC .card3 .top .ill{width:132px;height:132px;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.trC .card3:hover .top .ill{transform:translateY(-6px) rotate(-4deg) scale(1.05)}
+.trC .card3 .in{padding:22px 22px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
+.trC .card3 .in p{margin:0;color:var(--muted);font-size:15px}
+.trC .card3 .pr{margin-top:auto;display:flex;justify-content:space-between;align-items:center}
+.trC .prog{height:3px;background:var(--line);border-radius:2px;margin-top:22px;overflow:hidden}
+.trC .prog i{display:block;height:100%;width:30%;background:var(--forest);border-radius:2px;transition:transform .2s,width .2s}
+
+/* results A */
+.rA .grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(24px,3vw,44px);align-items:center}
+.rA .ba{border-radius:var(--r-xl)}
+.rA .thumbs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;margin-top:14px}
+.rA .thumbs button{border:0;padding:0;cursor:pointer;border-radius:14px;overflow:hidden;aspect-ratio:1.5/1;opacity:.6;transition:opacity .2s,box-shadow .2s;background:var(--blush)}
+.rA .thumbs button img{width:100%;height:100%;object-fit:cover}
+.rA .thumbs button[aria-pressed="true"]{opacity:1;box-shadow:0 0 0 3px var(--forest)}
+.rA .cap b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:520;font-size:28px;line-height:1.2;display:block;margin:14px 0 14px}
+.rA .fine{font-size:13.5px;color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+
+/* results B */
+.rB .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.rB .case{display:flex;flex-direction:column;gap:12px}
+.rB .case .ba{border-radius:var(--r-md)}
+.rB .case .ba .af{clip-path:inset(0 0 0 100%);transition:clip-path .7s cubic-bezier(.6,0,.2,1)}
+.rB .case:hover .ba .af,.rB .case:focus-within .ba .af{clip-path:inset(0 0 0 0)}
+.rB .case b{font-weight:650;font-size:15.5px;line-height:1.35}
+.rB .case .tg2{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
+
+/* results C */
+.rC .spread{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.8fr);gap:14px;align-items:stretch}
+.rC .half{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:1.15/1;background:var(--blush)}
+.rC .half img{width:100%;height:100%;object-fit:cover;transition:opacity .35s}
+.rC .half .tg{position:absolute;left:14px;top:14px;background:var(--cream);color:var(--forest);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.rC .half.after .tg{background:var(--forest);color:var(--white)}
+.rC .info{background:var(--forest);color:var(--white);border-radius:var(--r-lg);padding:26px;display:flex;flex-direction:column;gap:14px}
+.rC .info .n{font-family:var(--display);font-variation-settings:'SOFT' 100;font-size:15px;color:var(--rose-soft)}
+.rC .info b{font-family:var(--display);font-variation-settings:'SOFT' 100;font-weight:500;font-size:25px;line-height:1.25}
+.rC .info .arrows{margin-top:auto}
+.rC .info .arw{background:transparent;color:var(--white);box-shadow:inset 0 0 0 1.5px rgba(245,228,222,.5)}
+.rC .info .arw:hover{background:var(--cream);color:var(--forest)}
+
+@media (max-width:980px){
+  .hA .grid,.hC .grid,.dB .panel,.dC .grid,.trB .grid,.rA .grid{grid-template-columns:minmax(0,1fr)}
+  .hA .f1{left:12px}.hA .f2{right:12px}.hC .cred{left:12px}
+  .finder{grid-template-columns:1fr 1fr}
+  .finder .sep{border:0}
+  .finder .btn{grid-column:1/-1}
+  .hB .row{grid-template-columns:minmax(0,1fr) 200px}
+  .hB .stats{grid-column:1/-1;grid-template-rows:none;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tB .grid{grid-template-columns:1fr 1fr}
+  .tC .box{grid-template-columns:minmax(0,1fr)}
+  .tC .cell + .cell{border-left:0;border-top:1px solid var(--line)}
+  .trA .big,.trA .s5,.trA .s4{grid-column:span 12}
+  .trB .prev{position:static;order:-1}
+  .rC .spread{grid-template-columns:1fr 1fr}
+  .rC .info{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .finder{grid-template-columns:minmax(0,1fr)}
+  .hB .row{grid-template-columns:minmax(0,1fr)}
+  .hB .stats{grid-template-columns:minmax(0,1fr)}
+  .hB .reelc{max-width:240px}
+  .hC .cons{grid-template-columns:1fr 1fr}
+  .dA .grid,.tB .grid,.rB .grid{grid-template-columns:minmax(0,1fr)}
+  .dC .lead-c{grid-template-columns:minmax(0,1fr)}
+  .dC .lead-c .ph{aspect-ratio:4/3}
+  .trB .row{grid-template-columns:44px minmax(0,1fr) 40px}
+  .trB .row .p{display:none}
+  .rA .thumbs{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .rC .spread{grid-template-columns:minmax(0,1fr)}
+  .hA .art .ph{border-radius:160px 160px var(--r-xl) var(--r-xl)}
+}
+</style>
+
+<!-- =========================== 01 HERO =========================== -->
+<section class="opt" id="s-hero" data-s="hero">
+{RAIL:hero:01:Header and hero:A=Full-bleed smile|B=Arch portraits|C=Expanding panels|D=Rotating editorial|E=Forest concierge}
+
+<!-- A -->
+<div class="v" data-v="A">
+  <div class="xA">
+    <img class="bg" src="img/hero/smile-wide.webp" alt="Close-up of a woman laughing with a bright, natural smile">
+    <div class="tint"></div>
+    <header class="wrap hd">
+      <div class="l"><button class="tx" type="button"><span class="ibtn">{i:menu:sm}</span><span>Menu</span></button><a class="tx hide-m" href="#s-treat"><span>Treatments</span></a></div>
+      <img class="logo" src="img/dk-logo-reversed.svg" alt="Dental Krafts">
+      <div class="r"><a class="btn btn-sm ghost" href="#s-clin">{i:phone-call:sm} 98104 48720</a><a class="btn btn-w btn-sm" href="#s-book">Book a visit</a></div>
+    </header>
+    <div class="wrap body">
+      <div>
+        <span class="eyebrow rise">{i:award:sm} Specialist dentists · Gurgaon</span>
+        <h1 class="d rise d2">Your smile, <em>explained</em> before it begins.</h1>
+      </div>
+      <div class="side rise d3">
+        <p>Implants, smile design and children's dentistry from two specialists trained at AIIMS New Delhi and PGIMER Chandigarh. You see your X-rays, options and price first.</p>
+        <div class="cta"><a class="btn btn-w" href="#s-book">Book a visit <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-wa" href="#s-book">{i:whatsapp:sm} WhatsApp</a></div>
+      </div>
+    </div>
+    <div class="wrap"><div class="xs rise d4">
+      <div>{i:award}<span><b>MDS, AIIMS New Delhi</b>Dr Ruchi Goel · implants</span></div>
+      <div>{i:medal}<span><b>MDS, PGIMER · silver medal</b>Dr Parmod Gulia · kids</span></div>
+      <div>{i:star}<span><b>5.0 on Practo</b>1,000+ patient stories</span></div>
+      <div>{i:map-pin}<span><b>Two clinics, open 6 days</b>Golf Course Rd · Sushant Lok 2</span></div>
+    </div></div>
+    <span class="credit">Photo: Lesly Juarez / Unsplash</span>
+  </div>
+</div>
+
+<!-- B -->
+<div class="v" data-v="B" hidden>
+  <div class="xB">
+    <div class="wrap"><header class="pill">
+      <img class="logo" src="img/dk-logo-colour.svg" alt="Dental Krafts">
+      <ul>{NAVL}</ul>
+      <div class="find">{i:map-pin}<select aria-label="Choose a clinic"><option>Sector 53 · Golf Course Rd</option><option>Sector 57 · Sushant Lok 2</option></select><a class="btn btn-p btn-sm" href="#s-book">Book</a></div>
+      <a class="btn btn-p btn-sm mob" href="#s-book">Book a visit</a>
+    </header></div>
+    <div class="wrap stage">
+      <div class="arch l"><img src="img/hero/laugh-woman.webp" alt="A woman laughing, her smile wide and natural" style="object-position:50% 30%"><div class="glass stk"><img class="ill" src="img/3d/glowing_star_3d.webp" alt=""><span><b>5.0 on Practo</b><span>1,000+ patient stories</span></span></div></div>
+      <div class="mid">
+        <span class="chip chip-r">{i:award:sm} AIIMS New Delhi · PGIMER Chandigarh</span>
+        <h1 class="d">Smile like you <em>mean it</em> again.</h1>
+        <p class="lead">Specialist care from Dr Ruchi Goel and Dr Parmod Gulia, with your plan and price explained before anything begins. Two clinics in Gurgaon.</p>
+        <div class="cta"><a class="btn btn-p" href="#s-book">Book a visit <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-s" href="#s-book">{i:whatsapp:sm} Chat on WhatsApp</a></div>
+        <div class="q">What brings you in?</div>
+        <div class="cons">
+          <a href="#s-treat">{i:tooth-implant}Missing teeth</a><a href="#s-treat">{i:tooth-alert}Tooth pain</a><a href="#s-treat">{i:braces-teeth}Gaps or crooked</a><a href="#s-treat">{i:sparkles}Stained teeth</a><a href="#s-kids">{i:first-tooth}My child's teeth</a>
+        </div>
+      </div>
+      <div class="arch r"><img src="img/hero/smile-man.webp" alt="A man smiling broadly at the camera" style="object-position:50% 35%"><div class="glass stk"><img class="ill" src="img/3d/tooth_3d.webp" alt=""><span><b>Implants from ₹30,000</b><span>Planned by Dr Ruchi Goel</span></span></div></div>
+    </div>
+    <div class="wrap"><div class="tr">
+      <a href="#s-treat"><img src="img/implants-3d-render.webp" alt=""><span><b>Implants</b><span>from ₹30,000</span></span></a>
+      <a href="#s-treat"><img src="img/rct-tooth-model.webp" alt=""><span><b>Root canal</b><span>from ₹6,000</span></span></a>
+      <a href="#s-treat"><img src="img/crowns-ceramic-row.webp" alt=""><span><b>Crowns</b><span>from ₹12,000</span></span></a>
+      <a href="#s-treat"><img src="img/veneer-placement.webp" alt=""><span><b>Veneers</b><span>smile design</span></span></a>
+      <a href="#s-treat"><img src="img/aligner-insert.webp" alt=""><span><b>Aligners</b><span>and braces</span></span></a>
+      <a href="#s-kids"><img src="img/kids-exam.webp" alt=""><span><b>Kids</b><span>Dr Parmod Gulia</span></span></a>
+    </div>
+    <p class="credit">Photos: Yogendra Singh and Vitaly Gariev / Unsplash</p></div>
+  </div>
+</div>
+
+<!-- C -->
+<div class="v" data-v="C" hidden>
+  <div class="xC">
+    <header class="wrap hd">
+      <img class="logo" src="img/dk-logo-colour.svg" alt="Dental Krafts">
+      <ul>{NAVL}</ul>
+      <div class="seg3"><a href="#s-clin">{i:phone-call} Call</a><a href="#s-book">{i:whatsapp} WhatsApp</a><a class="on" href="#s-book">{i:calendar-check} Book</a></div>
+    </header>
+    <div class="wrap top">
+      <div><span class="eyebrow">{i:tooth:sm} Dental Krafts · Gurgaon</span><h1 class="d">Specialists for every <em>smile</em> in the family.</h1></div>
+      <div><p>Dr Ruchi Goel (MDS, AIIMS New Delhi) for implants, crowns and smile design. Dr Parmod Gulia (MDS, PGIMER Chandigarh) for children. Your plan and price are explained first.</p><div class="cta"><a class="btn btn-p" href="#s-book">Book a visit <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-s" href="#s-docs">Meet the dentists</a></div></div>
+    </div>
+    <div class="wrap"><div class="pans" id="xc-p">
+      <a class="pn on" href="#s-treat"><img src="img/hero/smile-teal.webp" alt="Close-up of a woman's smile" style="object-position:60% 50%"><span class="lab"><span class="n">01</span><span style="min-width:0"><b>Smile design</b><span class="sub">Veneers, whitening and aligners</span></span><span class="go">{i:arrow-up-right:sm}</span></span></a>
+      <a class="pn" href="#s-docs"><img src="img/ai/doctors-duo.webp" alt="Dr Parmod Gulia and Dr Ruchi Goel in the clinic" style="object-position:50% 30%"><span class="lab"><span class="n">02</span><span style="min-width:0"><b>The specialists</b><span class="sub">Dr Ruchi Goel · Dr Parmod Gulia</span></span><span class="go">{i:arrow-up-right:sm}</span></span></a>
+      <a class="pn" href="#s-videos"><img src="img/reel-02-dr-ruchi-explains.webp" alt="Dr Ruchi Goel speaking to camera"><span class="play">{i:play}</span><span class="lab"><span class="n">03</span><span style="min-width:0"><b>Dr Ruchi explains</b><span class="sub">Short answers to common questions</span></span><span class="go">{i:arrow-up-right:sm}</span></span></a>
+      <a class="pn" href="#s-kids"><img src="img/kids-exam.webp" alt="A child having a gentle dental check-up"><span class="lab"><span class="n">04</span><span style="min-width:0"><b>Kids' dentistry</b><span class="sub">Dr Parmod Gulia, pediatric specialist</span></span><span class="go">{i:arrow-up-right:sm}</span></span></a>
+    </div>
+    <div class="foot"><span>{i:star:sm} 5.0 on Practo · 1,000+ patient stories</span><span>{i:clock:sm} 10 am – 8:30 pm · closed Wednesdays</span><span class="credit">Smile photo: Kamal Hoseinianzade / Unsplash</span></div></div>
+  </div>
+</div>
+
+<!-- D -->
+<div class="v" data-v="D" hidden>
+  <div class="xD">
+    <div class="ut"><div class="wrap"><span>Dentists in Gurgaon · <b>AIIMS · PGIMER</b></span><span>Golf Course Rd · Sushant Lok 2 · <b class="tnum">98104 48720</b></span></div></div>
+    <div class="wrap"><header class="hd">
+      <ul class="l">{NAVL}</ul>
+      <img class="logo" src="img/dk-logo-colour.svg" alt="Dental Krafts">
+      <div class="r"><a class="btn btn-s btn-sm" href="#s-clin">{i:phone-call:sm} Call</a><a class="btn btn-p btn-sm" href="#s-book">Book a visit</a></div>
+    </header></div>
+    <div class="wrap top">
+      <h1 class="d">Specialist care for <span class="rot" id="xd-rot" aria-live="polite"><span class="on">every smile.</span><span>missing teeth.</span><span>your child's first visit.</span><span>a second opinion.</span><span>the whole family.</span></span></h1>
+      <div><p>Two specialists, trained at AIIMS New Delhi and PGIMER Chandigarh. Every plan and price is explained before treatment begins.</p><div class="cta"><a class="btn btn-p" href="#s-book">Book a visit <span class="bic">{i:arrow-right:sm}</span></a><a class="btn btn-s" href="#s-book">{i:whatsapp:sm} Chat on WhatsApp</a></div></div>
+    </div>
+    <div class="wrap">
+      <div class="frame"><div class="pic" id="xd-pic">
+        <img class="on" src="img/hero/lips-white.webp" alt="Close-up of a bright, even smile" style="object-position:70% 50%">
+        <img src="img/implant-man-pointing.webp" alt="A patient pointing to his new implant tooth">
+        <img src="img/kids-exam.webp" alt="A child at a gentle dental check-up">
+        <img src="img/ai/doctors-duo.webp" alt="Dr Parmod Gulia and Dr Ruchi Goel" style="object-position:50% 30%">
+        <img src="img/hero/family.webp" alt="A family smiling together" style="object-position:50% 30%">
+        <span class="k">Dental Krafts · Gurgaon</span>
+        <div class="dots" id="xd-dots"><button aria-label="Every smile" class="on"></button><button aria-label="Missing teeth"></button><button aria-label="Your child's first visit"></button><button aria-label="A second opinion"></button><button aria-label="The whole family"></button></div>
+        <div class="glass cap"><span class="badge" id="xd-ic">{i:sparkles}</span><span><b id="xd-t">Smile design</b><span id="xd-s">Veneers, whitening and aligners, planned by Dr Ruchi Goel</span></span></div>
+      </div></div>
+      <div class="facts">
+        <div><b class="tnum">2012</b><span>AIIMS MDS entrance topper</span></div>
+        <div><b>Silver</b><span>medal, MDS at PGIMER</span></div>
+        <div><b class="tnum">5.0</b><span>Practo · 1,000+ stories</span></div>
+        <div><b class="tnum">₹500</b><span>consultation with exam</span></div>
+      </div>
+      <p class="credit">Photos: Kamal Hoseinianzade and Nilanka Kariyawasam / Unsplash, plus Dental Krafts</p>
+    </div>
+  </div>
+</div>
+
+<!-- E -->
+<div class="v" data-v="E" hidden>
+  <div class="xE on-dark">
+    <header class="wrap hd">
+      <img class="logo" src="img/dk-logo-reversed.svg" alt="Dental Krafts">
+      <ul>{NAVL}</ul>
+      <div class="r"><span class="stat-live xlive"><i></i><span>Open today</span></span><a class="btn btn-w btn-sm" href="#s-book">Book a visit</a></div>
+    </header>
+    <div class="wrap stage">
+      <div class="l">
+        <span class="eyebrow rise">{i:award:sm} AIIMS New Delhi · PGIMER Chandigarh</span>
+        <h1 class="d rise d2">A smile worth <em>showing</em>, planned by specialists.</h1>
+        <p class="lead rise d3">Tell us what's bothering you. We'll tell you who you'll see, where prices start, and when we can see you.</p>
+        <div class="cc rise d4">
+          <div class="t">What brings you in? <span class="xlive-t">Open today</span></div>
+          <div class="ch" id="xe-ch">
+            <button data-img="60f" aria-pressed="true" data-d="r" data-p="Implants from ₹30,000 · dentures from ₹5,000">{i:tooth-implant}Missing teeth</button>
+            <button data-img="40m" aria-pressed="false" data-d="b" data-p="Root canal from ₹6,000 · same-day pain relief when we can">{i:tooth-alert}Tooth pain</button>
+            <button data-img="60f" aria-pressed="false" data-d="r" data-p="Ceramic crowns from ₹12,000">{i:broken-tooth}Chipped or broken</button>
+            <button data-img="30f" aria-pressed="false" data-d="b" data-p="Veneers, braces or aligners, after an exam">{i:braces-teeth}Gaps or crooked</button>
+            <button data-img="30f" aria-pressed="false" data-d="b" data-p="Whitening from ₹10,000">{i:sparkles}Stained teeth</button>
+            <button data-img="30f" aria-pressed="false" data-d="p" data-p="Consultation ₹500 · babies to teens">{i:first-tooth}My child's teeth</button>
+          </div>
+          <div class="res">
+            <span class="who" id="xe-who"><img src="img/ai/dr-ruchi-portrait.webp" alt=""></span>
+            <span style="min-width:0"><b id="xe-n">You'll see Dr Ruchi Goel</b><span class="s" id="xe-p">Implants from ₹30,000 · dentures from ₹5,000</span></span>
+            <a class="btn btn-p btn-sm" href="#s-book" id="xe-b">Book with Dr Ruchi <span class="bic">{i:arrow-right:sm}</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="r">
+        <div class="ph">
+          <img class="on" id="xe-img" src="img/ai/hero-smile-30f.webp" alt="A woman laughing with a warm, natural smile"><img id="xe-img2" src="img/ai/hero-smile-60f.webp" alt="">
+          <div class="glass fl f1"><b class="tnum">5.0</b><span><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span><small>Practo · 1,000+ patient stories</small></span></div>
+          <a class="glass fl f2" href="#s-res"><span class="mini"><img src="img/ba-12-smile-makeover__before.webp" alt=""><img src="img/ba-12-smile-makeover__after.webp" alt=""></span><span><b>Real smile makeovers</b><span>Before and after, from our clinics</span></span><span class="arw2">{i:arrow-right:sm}</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="band"><div class="mq">{XBAND}{XBAND}</div></div>
+  </div>
+</div>
+</section>
+
+<!-- =========================== 02 TRUST =========================== -->
+<section class="opt" id="s-trust" data-s="trust">
+{RAIL:trust:02:Trust strip:A=Credential ticker|B=Milestone cards|C=Ratings panel}
+
+<div class="v" data-v="A">
+  <div class="tA">
+    <div class="mq" aria-label="Credentials">
+      {TICKER}{TICKER}
+    </div>
+    <div class="press"><span>As featured in</span><img src="img/press-ani-logo.webp" alt="ANI"><span class="trib">The Tribune</span></div>
+  </div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="tB sec" style="padding-block:56px;background:var(--petal)"><div class="wrap grid">
+    <div class="c"><img class="ill" src="img/3d/sports_medal_3d.webp" alt=""><b class="tnum">2012</b><span>Dr Ruchi was the AIIMS MDS entrance topper</span></div>
+    <div class="c"><img class="ill" src="img/3d/graduation_cap_3d.webp" alt=""><b>Silver</b><span>Dr Parmod's medal at PGIMER Chandigarh, MDS 2013</span></div>
+    <div class="c"><img class="ill" src="img/3d/trophy_3d.webp" alt=""><b class="tnum">2025</b><span>National Achievers Award, presented to Dr Ruchi</span></div>
+    <div class="c"><img class="ill" src="img/3d/glowing_star_3d.webp" alt=""><b class="tnum">5.0</b><span>On Practo, from 1,000+ patient stories</span></div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="tC sec" style="padding-block:56px"><div class="wrap"><div class="box">
+    <div class="cell"><span class="src">{i:star} Practo</span><div class="big"><b class="tnum">5.0</b><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span></div><small>Sector 57 · 933 patient stories<br>Sector 53 · 67 patient stories</small></div>
+    <div class="cell"><span class="src">{i:star} Justdial</span><div class="big"><b class="tnum">4.9</b><span class="stars">{i:star}{i:star}{i:star}{i:star}{i:star}</span></div><small>1,240+ ratings across both clinics</small></div>
+    <div class="cell"><span class="src">{i:quote} What patients say</span><p class="q" id="tc-q">“The best part was their honesty. They only suggested what was truly needed.”</p><small id="tc-w">Dewesh Kumar · aligners and implants</small><div class="qd" id="tc-d"><i class="on"></i><i></i><i></i></div></div>
+  </div></div></div>
+</div>
+</section>
+
+<!-- =========================== 03 DOCTORS =========================== -->
+<section class="opt" id="s-docs" data-s="doctors">
+{RAIL:doctors:03:Meet the dentists:A=Two equal cards|B=Tabbed profile with timeline|C=Dr Ruchi featured}
+
+<div class="v" data-v="A">
+  <div class="dA sec"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Meet your dentists</span><h2 class="d h2">Two specialists. One roof. <em>Every age.</em></h2><p class="lead">Most clinics have general dentists who refer complex cases out. At Dental Krafts, the specialists are the founders, and they're the ones who treat you.</p></div></div>
+    <div class="grid">
+      <article class="doc">
+        <div class="ph"><img src="img/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel, prosthodontist and implantologist"><div class="glass tag"><b>Dr Ruchi Goel</b><span>Prosthodontist and implantologist</span></div></div>
+        <div class="body"><div class="chips"><span class="chip">{i:award} AIIMS New Delhi</span><span class="chip">{i:medal} Entrance topper 2012</span><span class="chip">Reg. A-7387</span></div><p>Implants, dentures, crowns and full-mouth rehabilitation. Dr Ruchi plans complex cases end to end and walks you through every step, and every cost, before anything begins.</p><div class="acts"><a class="btn btn-p btn-sm" href="#s-book">Book with Dr Ruchi</a><a class="link" href="#s-docs">View profile {i:arrow-right:sm}</a></div></div>
+      </article>
+      <article class="doc">
+        <div class="ph"><img src="img/ai/dr-parmod-portrait.webp" alt="Dr Parmod Gulia, pediatric and preventive dentist"><div class="glass tag"><b>Dr Parmod Gulia</b><span>Pediatric and preventive dentist</span></div></div>
+        <div class="body"><div class="chips"><span class="chip">{i:award} PGIMER Chandigarh</span><span class="chip">{i:medal} Silver medal</span><span class="chip">Reg. A-12323</span></div><p>Calm, patient care for children, teens and adults. Families have stayed with him for more than a decade, from first teeth to root canals.</p><div class="acts"><a class="btn btn-p btn-sm" href="#s-book">Book with Dr Parmod</a><a class="link" href="#s-docs">View profile {i:arrow-right:sm}</a></div></div>
+      </article>
+    </div>
+    <div class="strip"><p><span class="badge badge-w">{i:user-heart}</span>Not sure who to see? Book with either. They plan complex cases together, often in the same visit.</p><a class="btn btn-l btn-sm" href="#s-book">Book with either</a></div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="dB sec"><div class="wrap">
+    <span class="eyebrow">Meet your dentists</span><h2 class="d h2">The specialists are the founders, <em>and they treat you.</em></h2>
+    <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-doc="r"><img src="img/ai/dr-ruchi-portrait.webp" alt="">Dr Ruchi Goel</button><button role="tab" aria-selected="false" data-doc="p"><img src="img/ai/dr-parmod-portrait.webp" alt="">Dr Parmod Gulia</button></div>
+    <div class="panel" data-pan="r">
+      <div class="ph"><img src="img/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel"></div>
+      <div><span class="role">Prosthodontist and implantologist</span><h3 class="d" style="font-size:44px;margin:6px 0 0">Dr Ruchi Goel</h3>
+        <ul class="tl"><li><span class="y">2007</span><span class="dt"></span><div><b>BDS</b><span>DAV Centenary Dental College, Yamuna Nagar</span></div></li><li><span class="y">2012</span><span class="dt"></span><div><b>AIIMS MDS entrance topper</b><span>First rank in the national entrance</span></div></li><li><span class="y">2015</span><span class="dt"></span><div><b>MDS Prosthodontics, AIIMS New Delhi</b><span>Implants, crowns, dentures and full-mouth rehabilitation</span></div></li><li><span class="y">2025</span><span class="dt"></span><div><b>National Achievers Award</b><span>Presented by Gulshan Grover</span></div></li></ul>
+        <div class="acts"><a class="btn btn-p" href="#s-book">Book with Dr Ruchi</a><span class="chip">{i:star} 98% on Practo · 268 votes</span><span class="chip">Reg. A-7387</span></div></div>
+    </div>
+    <div class="panel" data-pan="p" hidden>
+      <div class="ph"><img src="img/ai/dr-parmod-portrait.webp" alt="Dr Parmod Gulia"></div>
+      <div><span class="role">Pediatric and preventive dentist</span><h3 class="d" style="font-size:44px;margin:6px 0 0">Dr Parmod Gulia</h3>
+        <ul class="tl"><li><span class="y">2008</span><span class="dt"></span><div><b>BDS</b><span>Government Dental College, Rohtak</span></div></li><li><span class="y">2013</span><span class="dt"></span><div><b>MDS Pedodontics, PGIMER Chandigarh</b><span>Silver medal</span></div></li><li><span class="y">2013</span><span class="dt"></span><div><b>Senior Research Fellow, AIIMS</b><span>2013 to 2014</span></div></li><li><span class="y">2014</span><span class="dt"></span><div><b>ISPPD best paper</b><span>Indian Society of Pedodontics and Preventive Dentistry</span></div></li></ul>
+        <div class="acts"><a class="btn btn-p" href="#s-book">Book with Dr Parmod</a><span class="chip">{i:star} 95% on Practo · 740 votes</span><span class="chip">Reg. A-12323</span></div></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="dC sec"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Meet your dentists</span><h2 class="d h2">Led by an AIIMS <em>prosthodontist.</em></h2></div><p class="lead" style="max-width:420px">Dr Ruchi plans every complex case. Dr Parmod cares for children and families. Both consult at both clinics.</p></div>
+    <div class="grid">
+      <article class="lead-c on-dark">
+        <div class="ph"><img src="img/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel, prosthodontist and implantologist" style="object-position:52% 30%"></div>
+        <div class="t"><span class="eyebrow">Founder · Prosthodontist</span><h3 class="d">Dr Ruchi Goel</h3><p>Implants, dentures, crowns and full-mouth rehabilitation, planned end to end. You'll see every step and every cost before anything begins.</p>
+          <div class="kv"><div><b>MDS, AIIMS</b>New Delhi, 2015</div><div><b>Rank 1</b>AIIMS entrance 2012</div><div><b>98%</b>Practo, 268 votes</div><div><b>19 years</b>in practice</div></div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:auto"><a class="btn btn-w" href="#s-book">Book with Dr Ruchi</a><a class="link" href="#s-docs">Full profile {i:arrow-right:sm}</a></div></div>
+      </article>
+      <div class="side">
+        <article class="mini"><div class="ph"><img src="img/ai/dr-parmod-portrait.webp" alt="Dr Parmod Gulia"></div><div class="t"><span class="eyebrow">Pediatric dentist</span><h3 class="d">Dr Parmod Gulia</h3><span>MDS PGIMER Chandigarh, silver medal. Children, teens and whole families.</span><a class="link" href="#s-docs" style="align-self:flex-start;margin-top:6px">Meet Dr Parmod {i:arrow-right:sm}</a></div></article>
+        <div class="ask"><div class="avs"><img src="img/ai/dr-ruchi-portrait.webp" alt=""><img src="img/ai/dr-parmod-portrait.webp" alt=""></div><b>Not sure who to see?</b><span style="color:var(--muted);font-size:14.5px">Book with either. They plan complex cases together, often in the same visit.</span><a class="btn btn-wa btn-sm" href="#s-book" style="align-self:flex-start">{i:whatsapp:sm} Ask on WhatsApp</a></div>
+      </div>
+    </div>
+  </div></div>
+</div>
+</section>
+
+<!-- =========================== 04 TREATMENTS =========================== -->
+<section class="opt" id="s-treat" data-s="treatments">
+{RAIL:treatments:04:Treatments:A=Bento with photo|B=Index with live preview|C=Illustrated carousel}
+
+<div class="v" data-v="A">
+  <div class="trA sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Treatments</span><h2 class="d h2">What would you like <em>to fix?</em></h2></div><a class="link" href="#s-treat">See all treatments {i:arrow-right:sm}</a></div>
+    <div class="bento">
+      <a class="t big on-dark" href="#s-treat"><div class="ph"><img src="img/crowns-ceramic-row.webp" alt="A row of ceramic crowns"></div><div class="in"><span class="eyebrow">Dr Ruchi's speciality</span><h3 class="d h3" style="font-size:34px">Replace missing teeth</h3><p>Implants, full-arch teeth and dentures that look and chew like your own.</p><span class="pr">Implants from ₹30,000 · Dentures from ₹5,000<span class="go">{i:arrow-up-right}</span></span></div></a>
+      <a class="t s5" href="#s-treat"><span class="badge">{i:tooth-root}</span><h3 class="d h3">Save a painful tooth</h3><p>Root canals, fillings and crowns to keep your natural tooth.</p><span class="pr">Root canal from ₹6,000<span class="go">{i:arrow-up-right}</span></span></a>
+      <a class="t s5" href="#s-treat"><span class="badge">{i:sparkles}</span><h3 class="d h3">Design your smile</h3><p>Veneers, whitening and makeovers planned around your face, not a template.</p><span class="pr">Whitening from ₹10,000<span class="go">{i:arrow-up-right}</span></span></a>
+      <a class="t s4" href="#s-treat"><span class="badge">{i:braces-teeth}</span><h3 class="d h3">Straighten teeth</h3><p>Braces or near-invisible aligners, for teens and adults.</p><span class="pr">Priced after exam<span class="go">{i:arrow-up-right}</span></span></a>
+      <a class="t s4 kids" href="#s-treat"><img class="ill" src="img/3d/teddy_bear_3d.webp" alt=""><span class="badge badge-w">{i:first-tooth}</span><h3 class="d h3">Kids and teens</h3><p>First visits, sealants, fluoride and gentle fillings with a specialist.</p><span class="pr">With Dr Parmod<span class="go">{i:arrow-up-right}</span></span></a>
+      <a class="t s4" href="#s-treat"><span class="badge">{i:tooth-alert}</span><h3 class="d h3">Gums, wisdom teeth, emergencies</h3><p>Bleeding gums, impacted wisdom teeth, sudden pain. Same-day slots when we can.</p><span class="pr">Call the nearest clinic<span class="go">{i:arrow-up-right}</span></span></a>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="trB sec"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Treatments</span><h2 class="d h2">What would you like <em>to fix?</em></h2></div><a class="link" href="#s-treat">All 22 treatments {i:arrow-right:sm}</a></div>
+    <div class="grid">
+      <div class="list" id="trb">
+        <a class="row on" data-img="ai/treat-implants" data-doc="r" data-t="Implants, full-arch teeth and dentures." href="#s-treat"><span class="badge">{i:tooth-implant}</span><span><b>Replace missing teeth</b><span class="s">Implants, full-arch teeth, dentures</span></span><span class="p">from ₹30,000</span><span class="ar">{i:arrow-right:sm}</span></a>
+        <a class="row" data-img="ai/treat-rootcanal" data-doc="e" data-t="Root canals, fillings and crowns." href="#s-treat"><span class="badge">{i:tooth-root}</span><span><b>Save a painful tooth</b><span class="s">Root canals, fillings, crowns</span></span><span class="p">from ₹6,000</span><span class="ar">{i:arrow-right:sm}</span></a>
+        <a class="row" data-img="ai/treat-smile-design" data-doc="r" data-t="Veneers, whitening and smile makeovers." href="#s-treat"><span class="badge">{i:sparkles}</span><span><b>Design your smile</b><span class="s">Veneers, whitening, makeovers</span></span><span class="p">from ₹10,000</span><span class="ar">{i:arrow-right:sm}</span></a>
+        <a class="row" data-img="ai/treat-aligners" data-doc="e" data-t="Braces or near-invisible aligners." href="#s-treat"><span class="badge">{i:retainer-teeth}</span><span><b>Straighten teeth</b><span class="s">Braces, clear aligners</span></span><span class="p">after exam</span><span class="ar">{i:arrow-right:sm}</span></a>
+        <a class="row" data-img="ai/treat-kids" data-doc="p" data-t="First visits, sealants, fluoride and gentle fillings." href="#s-treat"><span class="badge">{i:first-tooth}</span><span><b>Kids and teens</b><span class="s">With a specialist pediatric dentist</span></span><span class="p">₹500 visit</span><span class="ar">{i:arrow-right:sm}</span></a>
+        <a class="row" data-img="ai/treat-gums-emergency" data-doc="e" data-t="Bleeding gums, wisdom teeth, sudden pain." href="#s-treat"><span class="badge">{i:tooth-alert}</span><span><b>Gums and emergencies</b><span class="s">Same-day slots when we can</span></span><span class="p">call us</span><span class="ar">{i:arrow-right:sm}</span></a>
+      </div>
+      <aside class="prev on-dark"><div class="ph"><img id="trb-img" src="img/ai/treat-implants.webp" alt=""></div><div class="in"><span class="eyebrow" id="trb-k">Replace missing teeth</span><span id="trb-t">Implants, full-arch teeth and dentures.</span><div class="who"><img id="trb-wimg" src="img/ai/dr-ruchi-portrait.webp" alt=""><span id="trb-w">Usually with Dr Ruchi Goel</span></div><a class="btn btn-w btn-sm" style="align-self:flex-start;margin-top:8px" href="#s-book">Book for this</a></div></aside>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="trC sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Treatments</span><h2 class="d h2">What would you like <em>to fix?</em></h2></div><div class="arrows"><button class="arw" data-rail="trc" data-dir="-1" aria-label="Previous">{i:arrow-left}</button><button class="arw" data-rail="trc" data-dir="1" aria-label="Next">{i:arrow-right}</button></div></div>
+    <div class="rail" id="trc">
+      <a class="card3" href="#s-treat"><div class="top"><img class="ill" src="img/3d/tooth_3d.webp" alt=""></div><div class="in"><h3 class="d h3">Replace missing teeth</h3><p>Implants, full-arch teeth and dentures that chew like your own.</p><div class="pr"><span class="chip">from ₹30,000</span><span class="go arw" style="width:42px;height:42px">{i:arrow-right:sm}</span></div></div></a>
+      <a class="card3" href="#s-treat"><div class="top"><img class="ill" src="img/3d/shield_3d.webp" alt=""></div><div class="in"><h3 class="d h3">Save a painful tooth</h3><p>Root canals, fillings and crowns that keep your natural tooth.</p><div class="pr"><span class="chip">from ₹6,000</span><span class="go arw" style="width:42px;height:42px">{i:arrow-right:sm}</span></div></div></a>
+      <a class="card3" href="#s-treat"><div class="top"><img class="ill" src="img/3d/gem_stone_3d.webp" alt=""></div><div class="in"><h3 class="d h3">Design your smile</h3><p>Veneers, whitening and makeovers planned around your face.</p><div class="pr"><span class="chip">from ₹10,000</span><span class="go arw" style="width:42px;height:42px">{i:arrow-right:sm}</span></div></div></a>
+      <a class="card3" href="#s-treat"><div class="top"><img class="ill" src="img/3d/sparkles_3d.webp" alt=""></div><div class="in"><h3 class="d h3">Straighten teeth</h3><p>Braces or near-invisible aligners, for teens and adults.</p><div class="pr"><span class="chip">after exam</span><span class="go arw" style="width:42px;height:42px">{i:arrow-right:sm}</span></div></div></a>
+      <a class="card3" href="#s-treat"><div class="top"><img class="ill" src="img/3d/teddy_bear_3d.webp" alt=""></div><div class="in"><h3 class="d h3">Kids and teens</h3><p>First visits and gentle care with a specialist pediatric dentist.</p><div class="pr"><span class="chip">₹500 visit</span><span class="go arw" style="width:42px;height:42px">{i:arrow-right:sm}</span></div></div></a>
+      <a class="card3" href="#s-treat"><div class="top"><img class="ill" src="img/3d/alarm_clock_3d.webp" alt=""></div><div class="in"><h3 class="d h3">Emergencies</h3><p>Sudden pain, a broken tooth or swelling. Same-day slots when we can.</p><div class="pr"><span class="chip">call us</span><span class="go arw" style="width:42px;height:42px">{i:arrow-right:sm}</span></div></div></a>
+    </div>
+    <div class="prog"><i id="trc-p"></i></div>
+  </div></div>
+</div>
+</section>
+
+<!-- =========================== 05 RESULTS =========================== -->
+<section class="opt" id="s-res" data-s="results">
+{RAIL:results:05:Smile results:A=Big slider with cases|B=Hover grid|C=Case spread}
+
+<div class="v" data-v="A">
+  <div class="rA sec"><div class="wrap">
+    <div class="filters" id="ra-f"><button class="chip" aria-pressed="true">All</button><button class="chip" aria-pressed="false">Implants</button><button class="chip" aria-pressed="false">Crowns and bridges</button><button class="chip" aria-pressed="false">Dentures</button><button class="chip" aria-pressed="false">Veneers and gaps</button><button class="chip" aria-pressed="false">Whitening</button></div>
+    <div class="grid">
+      <div>
+        <div class="ba" id="ra-ba"><img id="ra-b" src="img/ba-13-smile-makeover__before.webp" alt="Before"><img id="ra-a" class="af" src="img/ba-13-smile-makeover__after.webp" alt="After"><span class="tg l">Before</span><span class="tg r">After</span><span class="kn"><i>{i:arrow-left:sm}{i:arrow-right:sm}</i></span><input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after"></div>
+        <div class="thumbs" id="ra-t"></div>
+      </div>
+      <div class="cap"><span class="eyebrow">Real patients · real results</span><h2 class="d h2" style="margin-bottom:0">Results from <em>our own</em> chairs.</h2><b id="ra-c">Badly decayed upper front teeth rebuilt with ceramic crowns.</b><p class="fine">Every photo is a Dental Krafts patient, shared with consent. Individual results vary.</p><a class="btn btn-s" href="#s-res" style="margin-top:12px">See all 33 cases</a></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="v" data-v="B" hidden>
+  <div class="rB sec" style="background:var(--petal)"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Real patients · real results</span><h2 class="d h2">Results from <em>our own</em> chairs.</h2><p class="lead">Hover or tap a case to see the after photo. Shared with patient consent.</p></div><a class="link" href="#s-res">See all 33 cases {i:arrow-right:sm}</a></div>
+    <div class="grid" id="rb-g"></div>
+  </div></div>
+</div>
+
+<div class="v" data-v="C" hidden>
+  <div class="rC sec"><div class="wrap">
+    <div class="head"><div><span class="eyebrow">Real patients · real results</span><h2 class="d h2">Results from <em>our own</em> chairs.</h2></div><p class="lead" style="max-width:420px">One case at a time, before and after side by side. Every photo is a Dental Krafts patient, shared with consent.</p></div>
+    <div class="spread">
+      <div class="half"><img id="rc-b" src="img/ba-13-smile-makeover__before.webp" alt="Before"><span class="tg">Before</span></div>
+      <div class="half after"><img id="rc-a" src="img/ba-13-smile-makeover__after.webp" alt="After"><span class="tg">After</span></div>
+      <div class="info on-dark"><span class="n tnum" id="rc-n">Case 1 of 6</span><span class="chip chip-d" id="rc-k" style="align-self:flex-start;background:var(--forest-2)">Crowns</span><b id="rc-c">Badly decayed upper front teeth rebuilt with ceramic crowns.</b><div class="arrows"><button class="arw" id="rc-p" aria-label="Previous case">{i:arrow-left}</button><button class="arw" id="rc-x" aria-label="Next case">{i:arrow-right}</button></div></div>
+    </div>
+  </div></div>
+</div>
+</section>
