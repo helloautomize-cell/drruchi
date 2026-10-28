@@ -38,7 +38,7 @@ export default function Gallery() {
       </div></section>
 
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
-        <CtaBand title="Want results" em="like these?" text="Book a ₹500 consultation. We'll show you what's possible for your teeth, with a written plan and estimate." />
+        <CtaBand title="Want results" em="like these?" text="Book a consultation. We'll show you what's possible for your teeth, with a written plan." />
       </div></section>
     </>
   );

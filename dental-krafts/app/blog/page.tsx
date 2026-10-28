@@ -9,7 +9,7 @@ import { doctorById } from "@/content/doctors";
 export const metadata: Metadata = {
   title: "Dental Blog | Questions Answered by Specialists | Dental Krafts",
   description:
-    "Plain-English dental articles written and reviewed by Dr Ruchi Goel (AIIMS) and Dr Parmod Gulia (PGIMER) — costs, implants, kids' teeth and more.",
+    "Plain-English dental articles written and reviewed by Dr Ruchi Goel (AIIMS) and Dr Parmod Gulia (PGIMER) — implants, kids' teeth and more.",
   alternates: { canonical: "/blog" },
 };
 
@@ -43,7 +43,7 @@ export default function Blog() {
       </div></section>
 
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
-        <CtaBand title="Rather ask" em="a dentist?" text="Book a ₹500 consultation and ask your own questions — you'll leave with a plan and a written estimate." />
+        <CtaBand title="Rather ask" em="a dentist?" text="Book a consultation and ask your own questions — you'll leave with a written plan." />
       </div></section>
     </>
   );

@@ -36,7 +36,7 @@ export function SiteFooter() {
         <div><h4>Dental Krafts</h4><ul>
           <li><Link href="/our-dentists">Our dentists</Link></li>
           <li><Link href="/gallery">Results</Link></li>
-          <li><Link href="/treatment-costs">Costs</Link></li>
+          <li><Link href="/#videos">Videos</Link></li>
           <li><Link href="/patient-stories">Patient stories</Link></li>
           <li><Link href="/blog">Blog</Link></li>
           <li><Link href="/about-us">About</Link></li>

@@ -48,7 +48,7 @@ export default function OurDentists() {
             <div className="ph"><img src="/images/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel, prosthodontist and implantologist" style={{ objectPosition: "52% 30%" }} loading="lazy" /></div>
             <div className="t">
               <span className="eyebrow">Founder · Prosthodontist</span><h3 className="d">Dr Ruchi Goel</h3>
-              <p>Implants, dentures, crowns and full-mouth rehabilitation, planned end to end. You'll see every step and every cost before anything begins.</p>
+              <p>Implants, dentures, crowns and full-mouth rehabilitation, planned end to end. You'll see every step explained before anything begins.</p>
               <div className="kv"><div><b>MDS, AIIMS</b>New Delhi, 2015</div><div><b>Rank 1</b>AIIMS entrance 2012</div><div><b>98%</b>Practo, 268 votes</div><div><b>19 years</b>in practice</div></div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: "auto" }}>
                 <Link className="btn btn-w" href="/contact-us?doctor=Dr%20Ruchi%20Goel">Book with Dr Ruchi</Link>
@@ -62,7 +62,7 @@ export default function OurDentists() {
               <div className="t"><span className="eyebrow">Pediatric dentist</span><h3 className="d">Dr Parmod Gulia</h3><span>MDS PGIMER Chandigarh, silver medal. Children, teens and whole families.</span>
                 <Link className="link" href="/dr-parmod-gulia" style={{ alignSelf: "flex-start", marginTop: 6 }}>Meet Dr Parmod <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
             </article></Reveal>
-            <Reveal delay={120}><div className="ask"><div className="avs"><img src="/images/ai/dr-ruchi-portrait.webp" alt="" /><img src="/images/ai/dr-parmod-portrait.webp" alt="" /></div><b>Not sure who to see?</b><span style={{ color: "var(--muted)", fontSize: "14.5px" }}>Book with either. They plan complex cases together, often in the same visit.</span><Link className="btn btn-w btn-sm" href="/contact-us" style={{ alignSelf: "flex-start" }}>Book a ₹500 visit</Link></div></Reveal>
+            <Reveal delay={120}><div className="ask"><div className="avs"><img src="/images/ai/dr-ruchi-portrait.webp" alt="" /><img src="/images/ai/dr-parmod-portrait.webp" alt="" /></div><b>Not sure who to see?</b><span style={{ color: "var(--muted)", fontSize: "14.5px" }}>Book with either. They plan complex cases together, often in the same visit.</span><Link className="btn btn-w btn-sm" href="/contact-us" style={{ alignSelf: "flex-start" }}>Book a visit</Link></div></Reveal>
           </div>
         </div>
       </div></section>
@@ -85,7 +85,7 @@ export default function OurDentists() {
 
       {/* CTA */}
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
-        <CtaBand title="Book with" em="either dentist." text="A ₹500 consultation with a full examination. You'll leave with a plan and a written estimate." />
+        <CtaBand title="Book with" em="either dentist." text="A consultation with a full examination. You'll leave with a plan, in writing." />
       </div></section>
     </>
   );

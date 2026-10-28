@@ -29,7 +29,6 @@ const RELATED: Record<string, string[]> = {
   "Kids' teeth": ["pediatric-dentist"],
   Cosmetic: ["smile-makeover", "dental-veneers", "teeth-whitening"],
   "Gums and cleaning": ["gum-disease", "teeth-cleaning"],
-  Costs: [],
   "Everyday care": ["general-dentistry", "teeth-cleaning"],
 };
 
@@ -100,7 +99,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <div className="band2" style={{ margin: "34px 0" }}>
           <div>
             <h2 className="d" style={{ fontSize: "clamp(26px,3vw,40px)" }}>Rather ask <em>a dentist?</em></h2>
-            <p>A ₹500 consultation answers your own questions, with a written estimate.</p>
+            <p>A consultation answers your own questions, with a written plan.</p>
           </div>
           <div className="cta"><Link className="btn btn-w" href="/contact-us">Book a visit <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link></div>
         </div>
@@ -109,7 +108,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <div className="rel">
             <span className="chip">Related treatments:</span>
             {related.map((t) => <Link key={t!.slug} className="chip" href={`/${t!.slug}`}>{t!.name}</Link>)}
-            <Link className="chip" href="/treatment-costs">Treatment costs</Link>
+            <Link className="chip" href="/treatments">All treatments</Link>
           </div>
         )}
 

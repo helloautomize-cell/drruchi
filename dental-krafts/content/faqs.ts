@@ -1,5 +1,5 @@
 export const homeFaqs = [
-  { q: "How much does a consultation cost?", a: "₹500, including an examination by the dentist. X-rays, if needed, are charged separately and explained first." },
+  { q: "Will I know what my treatment involves before it starts?", a: "Yes. After the exam the dentist explains the options, the number of visits and what each step involves, and you decide before anything starts." },
   { q: "Which clinic should I visit?", a: "Whichever is closer. Both dentists consult at both clinics on set days, so call to check who's in." },
   { q: "Are you open on weekends?", a: "Yes, Saturday and Sunday. We're closed only on Wednesdays." },
   { q: "Do you treat children?", a: "Yes. Dr Parmod Gulia is a specialist pediatric dentist (MDS, PGIMER Chandigarh), and he sees babies, children, teens and children with special needs." },

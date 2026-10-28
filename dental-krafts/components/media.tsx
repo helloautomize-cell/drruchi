@@ -138,6 +138,111 @@ export function StoryQuote({ stories }: { stories: { q: string; name: string; su
   );
 }
 
+/** Shared: pause every v5 reel except the one just played. */
+function pauseOthers(except?: HTMLVideoElement | null) {
+  document.querySelectorAll<HTMLVideoElement>(".dk5-reel video,.dk5-svid video").forEach((v) => {
+    if (v !== except && !v.paused) v.pause();
+  });
+}
+
+/** v5 reel card (9:16) — poster+button until clicked, then a real <video controls autoPlay>.
+    One at a time; pauses when the card leaves the viewport. */
+export function Reel5({ reel }: { reel: Reel }) {
+  const [play, setPlay] = useState(false);
+  const vidRef = useRef<HTMLVideoElement>(null);
+  const wrapRef = useRef<HTMLElement>(null);
+
+  /* native listener — a poster click must work even if React's synthetic
+     events are detached after a hydration recovery */
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const h = () => setPlay((p) => { if (!p) pauseOthers(); return true; });
+    el.addEventListener("click", h);
+    return () => el.removeEventListener("click", h);
+  }, []);
+
+  useEffect(() => {
+    if (!play) return;
+    vidRef.current?.play().catch(() => {});
+    const el = wrapRef.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (!e.isIntersecting && vidRef.current && !vidRef.current.paused) vidRef.current.pause(); });
+    }, { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [play]);
+
+  return (
+    <article className={`dk5-reel${play ? " on" : ""}`} ref={wrapRef}
+      role={play ? undefined : "button"} tabIndex={play ? undefined : 0}
+      onKeyDown={play ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pauseOthers(); setPlay(true); } }}
+      aria-label={play ? undefined : `Play: ${reel.title}`}>
+      {play ? (
+        <video ref={vidRef} src={`/videos/${reel.file}`} controls autoPlay playsInline poster={posterOf(reel)}
+          onPlay={(e) => pauseOthers(e.currentTarget)} onEnded={() => setPlay(false)} />
+      ) : (
+        <>
+          <img src={posterOf(reel)} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+          <span className="dk5-rp" aria-hidden="true">
+            <span className="pb"><Icon name="play" cls="ic" /></span>
+            <span className="dk5-rtx"><b>{reel.title}</b><small>{reel.who ?? "Dr Ruchi Goel · 1 min"}</small></span>
+          </span>
+        </>
+      )}
+    </article>
+  );
+}
+
+/** v5 9:16 video story card for the stories carousel — same play behaviour as Reel5. */
+export function StoryVid5({ reel }: { reel: Reel }) {
+  const [play, setPlay] = useState(false);
+  const vidRef = useRef<HTMLVideoElement>(null);
+  const wrapRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const h = () => setPlay((p) => { if (!p) pauseOthers(); return true; });
+    el.addEventListener("click", h);
+    return () => el.removeEventListener("click", h);
+  }, []);
+
+  useEffect(() => {
+    if (!play) return;
+    vidRef.current?.play().catch(() => {});
+    const el = wrapRef.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (!e.isIntersecting && vidRef.current && !vidRef.current.paused) vidRef.current.pause(); });
+    }, { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [play]);
+
+  return (
+    <article className={`dk5-svid${play ? " on" : ""}`} ref={wrapRef}
+      role={play ? undefined : "button"} tabIndex={play ? undefined : 0}
+      onKeyDown={play ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pauseOthers(); setPlay(true); } }}
+      aria-label={play ? `Video: ${reel.title}` : `Play ${reel.title}`}>
+      {play ? (
+        <video ref={vidRef} src={`/videos/${reel.file}`} controls autoPlay playsInline poster={posterOf(reel)}
+          onPlay={(e) => pauseOthers(e.currentTarget)} onEnded={() => setPlay(false)} />
+      ) : (
+        <>
+          <img src={posterOf(reel)} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+          <span className="tag2">Video story</span>
+          <span className="dk5-rp" aria-hidden="true">
+            <span className="pb"><Icon name="play" cls="ic" /></span>
+            <span className="dk5-rtx"><b>{reel.title}</b><small>{reel.who ?? "Patient story"}</small></span>
+          </span>
+        </>
+      )}
+    </article>
+  );
+}
+
 /** v4 video story card (.story.vid) — poster + tag + play pill inside the stories carousel. */
 export function StoryVid({ reel }: { reel: Reel }) {
   const [play, setPlay] = useState(false);

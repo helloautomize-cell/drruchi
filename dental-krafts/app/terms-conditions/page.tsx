@@ -32,13 +32,13 @@ export default function TermsConditions() {
           <h2>2. Appointments</h2>
           <ul>
             <li><b>Booking:</b> you can book appointments via our website, by phone, or in person at our clinic.</li>
-            <li><b>Cancellation:</b> if you need to cancel or reschedule, please let us know at least 24 hours in advance to avoid a cancellation fee.</li>
+            <li><b>Cancellation:</b> if you need to cancel or reschedule, please let us know at least 24 hours in advance so we can offer the slot to someone else.</li>
             <li><b>Punctuality:</b> arriving on time helps us stay on schedule and ensures you get the most out of your appointment. If you're running late, please call us.</li>
           </ul>
 
           <h2>3. Payment</h2>
           <ul>
-            <li><b>Fees:</b> we'll let you know the cost of services before your treatment starts. We accept payments by credit/debit card, UPI and cash.</li>
+            <li><b>Payment:</b> you'll know what your treatment involves before it starts. We accept payments by credit/debit card, UPI and cash.</li>
             <li><b>Insurance:</b> we accept various insurance plans. Please check with us to confirm if your plan is accepted and what's covered. We'll give you an itemised bill for reimbursement.</li>
           </ul>
 

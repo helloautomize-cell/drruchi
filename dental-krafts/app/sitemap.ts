@@ -10,7 +10,6 @@ const STATIC = [
   "/dr-parmod-gulia",
   "/treatments",
   "/gallery",
-  "/treatment-costs",
   "/patient-stories",
   "/dental-clinic-sector-53-gurgaon",
   "/dental-clinic-sector-57-gurgaon",

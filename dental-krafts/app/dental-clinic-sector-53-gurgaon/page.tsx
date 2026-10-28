@@ -19,14 +19,14 @@ const c = clinics[0];
 const QUOTE = reviewById("rishav");
 
 const TOP8: [string, string, string][] = [
-  ["Dental implants", "from ₹30,000", "/dental-implants"],
-  ["Root canal treatment", "from ₹6,000", "/root-canal-treatment"],
-  ["Crowns and bridges", "from ₹12,000", "/dental-crowns"],
-  ["Kids' dentistry", "₹500 consultation", "/pediatric-dentist"],
-  ["Teeth whitening", "from ₹10,000", "/teeth-whitening"],
-  ["Dentures", "from ₹5,000", "/dentures"],
-  ["Teeth cleaning", "quoted at visit", "/teeth-cleaning"],
-  ["Emergency care", "call us", "/emergency-dentist"],
+  ["Dental implants", "Dr Ruchi", "/dental-implants"],
+  ["Root canal treatment", "Either dentist", "/root-canal-treatment"],
+  ["Crowns and bridges", "Dr Ruchi", "/dental-crowns"],
+  ["Kids' dentistry", "Dr Parmod", "/pediatric-dentist"],
+  ["Teeth whitening", "Either dentist", "/teeth-whitening"],
+  ["Dentures", "Dr Ruchi", "/dentures"],
+  ["Teeth cleaning", "Either dentist", "/teeth-cleaning"],
+  ["Emergency care", "Call us", "/emergency-dentist"],
 ];
 
 const MOS: [string, string][] = [
@@ -120,7 +120,7 @@ export default function Sector53() {
           <Link className="tl" href="/treatments" style={{ justifySelf: "end" }}>All 21 treatments <Icon name="arrow-right" cls="ic ic-sm" /></Link>
         </div>
         <div className="tg2 tnum">
-          {TOP8.map(([name, price, href]) => <Link key={href} href={href}><b>{name}</b><span>{price}</span></Link>)}
+          {TOP8.map(([name, who, href]) => <Link key={href} href={href}><b>{name}</b><span>{who}</span></Link>)}
         </div>
       </div></section>
 

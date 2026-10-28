@@ -109,7 +109,7 @@ export const doctors: Doctor[] = [
       { q: "When should my child first see a dentist?", a: "By their first birthday, or within six months of the first tooth. Early visits are short, friendly and mostly about prevention." },
       { q: "Why see a pediatric dentist instead of a general dentist?", a: "Children's teeth, behaviour and growth are different. A pediatric dentist has three more years of training in exactly that." },
       { q: "Do milk teeth really need fillings?", a: "Yes, usually. Milk teeth hold space for adult teeth, and an untreated cavity can cause pain, infection and crowding later." },
-      { q: "What is treatment under general anaesthesia?", a: "For very young or anxious children, or children with special needs, who need a lot of treatment, it's done in a hospital operating theatre with an anaesthetist, all in one session. We'll explain the costs separately (hospital charges are set by the hospital)." },
+      { q: "What is treatment under general anaesthesia?", a: "For very young or anxious children, or children with special needs, who need a lot of treatment, it's done in a hospital operating theatre with an anaesthetist, all in one session. The hospital side is planned and quoted by the hospital, and we explain it separately." },
     ],
   },
 ];

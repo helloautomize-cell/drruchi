@@ -6,6 +6,7 @@ import { BaShowcase } from "@/components/ba-slider";
 import { QA, Eb } from "@/components/bits";
 import { Toc } from "@/components/interactive";
 import { treatments, treatmentBySlug, treatmentGroups } from "@/content/treatments";
+import { treatmentImages } from "@/content/treatment-images";
 import { doctorById } from "@/content/doctors";
 import { clinics } from "@/content/clinics";
 import { caseByFile } from "@/content/results";
@@ -37,6 +38,10 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
 
   const group = treatmentGroups.find((g) => g.name === t.group);
   const who = WHO[t.doctor];
+  const imgs = treatmentImages[t.slug] ?? [];
+  const GsImg = ({ i }: { i: number }) => imgs[i] ? (
+    <figure className="gsim"><img loading="lazy" decoding="async" src={imgs[i].src} alt={imgs[i].alt} /><figcaption>{imgs[i].alt}</figcaption></figure>
+  ) : null;
   const results = t.resultFiles.map(caseByFile).filter((c): c is NonNullable<typeof c> => Boolean(c && c.consent !== false));
   const revs = t.reviewIds.map(reviewById).filter(Boolean);
   const rel = t.related.map(treatmentBySlug).filter(Boolean).slice(0, 4);
@@ -46,7 +51,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
     ["t-how", "How it works"],
     ...(t.options.length ? [["t-opt", "Your options"] as [string, string]] : []),
     ...(t.steps.length ? [["t-steps", "Step by step"] as [string, string]] : []),
-    ["t-cost", "What it costs"],
+    ["t-plan", "Before anything starts"],
     ...(results.length ? [["t-res", "Results"] as [string, string]] : []),
     ["t-care", "Aftercare"],
     ["t-faq", "Questions"],
@@ -72,7 +77,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
           <h1 className="d h1m">{emLast(t.h1)}</h1>
           <p className="sub">{t.sub}</p>
           <div className="row">
-            <Link className="btn btn-p" href={`/contact-us?concern=${encodeURIComponent(t.name)}`}>Book a ₹500 consultation <Icon name="arrow-right" cls="ic ic-sm" /></Link>
+            <Link className="btn btn-p" href={`/contact-us?concern=${encodeURIComponent(t.name)}`}>Book a consultation <Icon name="arrow-right" cls="ic ic-sm" /></Link>
             <a className="btn btn-wa" href={`https://wa.me/919810448720?text=${encodeURIComponent(`Hello Dental Krafts, I'd like to ask about ${t.name.toLowerCase()}.`)}`}><Icon name="whatsapp" cls="ic ic-sm" /> Ask on WhatsApp</a>
           </div>
         </div>
@@ -82,9 +87,9 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
       {/* 2 · Facts bar */}
       <section className="f4" aria-label="Key facts"><div className="wrap">
         <div><small>Planned by</small><Link className="who" href={who.href} style={{ textDecoration: "none", color: "inherit" }}><img src={who.img} alt="" /><b>{who.label}</b></Link></div>
-        <div><small>Typical cost</small><b className="tnum">{t.costChip ?? "Written estimate"}</b><span className="fine">itemised before anything starts</span></div>
-        <div><small>First visit</small><b className="tnum">₹500</b><span className="fine">examination and X-rays if needed</span></div>
-        <div><small>{t.urgent ? "Urgent cases" : "You leave with"}</small><b>{t.urgent ? "Same-day slots" : "A written plan"}</b><span className="fine">{t.urgent ? "when we can — call first" : "options and prices, in writing"}</span></div>
+        <div><small>Planning</small><b>Explained first</b><span className="fine">itemised before anything starts</span></div>
+        <div><small>First visit</small><b>Exam &amp; X-rays</b><span className="fine">only if they're needed</span></div>
+        <div><small>{t.urgent ? "Urgent cases" : "You leave with"}</small><b>{t.urgent ? "Same-day slots" : "A written plan"}</b><span className="fine">{t.urgent ? "when we can — call first" : "options and visits, in writing"}</span></div>
       </div></section>
 
       {/* 3 · Guide */}
@@ -98,12 +103,14 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
               <ul className="fit">
                 {t.forYou.map((f) => <li key={f.title}><Icon name="check" /><span><b>{f.title}.</b> {f.text}</span></li>)}
               </ul>
+              <GsImg i={0} />
             </section>
           )}
           <section className="gs" id="t-how">
             <Eb>How it works</Eb>
             <h2 className="d h2">{emLast(t.howTitle)}</h2>
             {t.howText.map((p, i) => <p key={i}>{p}</p>)}
+            <GsImg i={1} />
           </section>
           {t.options.length > 0 && (
             <section className="gs" id="t-opt">
@@ -112,6 +119,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
               <div className="opts">
                 {t.options.map((o) => <div key={o.title}><b>{o.title}</b><span>{o.text}</span></div>)}
               </div>
+              <GsImg i={2} />
             </section>
           )}
           {t.steps.length > 0 && (
@@ -121,24 +129,18 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
               <ol className="tline">
                 {t.steps.map((s) => <li key={s.title}><div><b>{s.title}</b><span>{s.text}</span></div></li>)}
               </ol>
+              <GsImg i={3} />
             </section>
           )}
-          <section className="gs" id="t-cost">
-            <Eb>What it costs</Eb>
-            <h2 className="d h2">Every part, priced <em>separately</em>.</h2>
-            {t.costRows && t.costRows.length > 0 ? (
-              <>
-                <table className="ctab tnum">
-                  <thead><tr><th scope="col">Item</th><th scope="col">Typical range</th></tr></thead>
-                  <tbody>
-                    {t.costRows.map((r) => <tr key={r.item} className={r.total ? "tot" : undefined}><th scope="row">{r.item}</th><td>{r.range}</td></tr>)}
-                  </tbody>
-                </table>
-                <p className="fine" style={{ marginTop: 16 }}>Typical range. Your written estimate follows the examination and itemises each part.</p>
-              </>
-            ) : (
-              <p>Quoted after your examination — you'll get a written, itemised estimate before anything starts. <Link className="tl" href="/treatment-costs">See typical ranges</Link></p>
-            )}
+          <section className="gs" id="t-plan">
+            <Eb>Before anything starts</Eb>
+            <h2 className="d h2">A written plan, <em>itemised</em>.</h2>
+            <p>After the examination you get a written plan: your options, what each step involves and how many visits it takes — itemised part by part. You decide before anything begins, and there's no pressure to start that day.</p>
+            <ul className="fit" style={{ gridTemplateColumns: "minmax(0,1fr)" }}>
+              <li><Icon name="check" /><span><b>Options, simplest to ideal.</b> You'll hear the honest trade-offs of each.</span></li>
+              <li><Icon name="check" /><span><b>Everything in writing.</b> Take it home, ask anything, decide when you're ready.</span></li>
+              <li><Icon name="check" /><span><b>Second opinions welcome.</b> Bring your X-rays and the plan you were given.</span></li>
+            </ul>
           </section>
           {results.length > 0 && (
             <section className="gs" id="t-res">
@@ -164,6 +166,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
                 return <div key={a}>{m ? <><b>{m[1]}</b><span>{m[2]}</span></> : <span>{a}</span>}</div>;
               })}
             </div>
+            <GsImg i={4} />
           </section>
           <section className="gs" id="t-faq">
             <Eb>Questions</Eb>
@@ -182,7 +185,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
           </div>
           <div className="rel">
             {rel.map((r) => (
-              <Link key={r!.slug} href={`/${r!.slug}`}><div className="ph"><img loading="lazy" src={r!.heroImage} alt="" /></div><b>{r!.name} <Icon name="arrow-right" cls="ic ic-sm" /></b><span>{r!.costChip ?? r!.sub.slice(0, 60)}</span></Link>
+              <Link key={r!.slug} href={`/${r!.slug}`}><div className="ph"><img loading="lazy" src={r!.heroImage} alt="" /></div><b>{r!.name} <Icon name="arrow-right" cls="ic ic-sm" /></b><span>{r!.sub.slice(0, 60)}</span></Link>
             ))}
           </div>
         </div></section>
@@ -206,7 +209,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
           <Eb>{`Questions about ${t.name.toLowerCase()}?`}</Eb>
           <h2 className="d h2" style={{ marginTop: 22 }}>Leave with a plan and a written <em>estimate</em>.</h2>
         </div>
-        <div className="row"><a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a><Link className="btn btn-p" href={`/contact-us?concern=${encodeURIComponent(t.name)}`}>Book a ₹500 consultation <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
+        <div className="row"><a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a><Link className="btn btn-p" href={`/contact-us?concern=${encodeURIComponent(t.name)}`}>Book a consultation <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
       </div></section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(LD) }} />

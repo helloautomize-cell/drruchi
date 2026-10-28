@@ -59,6 +59,7 @@ header.hd::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;ba
 /* 7. Cursor label for drag and play areas (fine pointers only) */
 .cur{position:fixed;left:0;top:0;z-index:90;width:92px;height:92px;margin:-46px 0 0 -46px;border-radius:50%;background:var(--ink);color:var(--white);display:grid;place-items:center;font-size:13px;font-weight:600;letter-spacing:.06em;pointer-events:none;scale:0;opacity:0;transition:scale .35s cubic-bezier(.19,1,.22,1),opacity .25s}
 .cur.on{scale:1;opacity:1}
+.cur[data-tone="play"]{background:var(--wa)}
 @media (hover:none),(pointer:coarse){.cur{display:none}}
 
 /* 8. Live status pulse */

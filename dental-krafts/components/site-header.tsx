@@ -9,7 +9,7 @@ const NAV: [string, string][] = [
   ["Treatments", "/treatments"],
   ["Our dentists", "/our-dentists"],
   ["Results", "/gallery"],
-  ["Costs", "/treatment-costs"],
+  ["Videos", "/#videos"],
   ["Clinics", "/#clinics"],
   ["Patient stories", "/patient-stories"],
 ];
@@ -27,7 +27,7 @@ export function SiteHeader({ active }: { active?: string }) {
     <>
       <div className="util"><div className="wrap">
         <OpenStatus className="live" />
-        <span className="ph">
+        <span className="phs">
           {clinics.map((c) => <span key={c.id}><b>{c.short}</b> · <a href={c.phoneHref}>{c.phone}</a></span>)}
         </span>
         <nav className="lang" aria-label="Language"><a href="/" aria-current="true">EN</a><Link href="/japanese" lang="ja">日本語</Link><Link href="/korean" lang="ko">한국어</Link></nav>

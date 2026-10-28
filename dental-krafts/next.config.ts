@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/dr-pramod-gulia", destination: "/dr-parmod-gulia", permanent: true },
+      { source: "/treatment-costs", destination: "/treatments", permanent: true },
       { source: "/our-doctors", destination: "/our-dentists", permanent: true },
       { source: "/gallery/", destination: "/gallery", permanent: true },
     ];

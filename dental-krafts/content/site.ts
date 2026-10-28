@@ -11,10 +11,8 @@ export const site = {
   practo: "https://www.practo.com/gurgaon/clinic/dental-krafts-sector-57",
   justdial:
     "https://www.justdial.com/Gurgaon/Dental-Krafts-Sector-57/011PXX11-XX11-190307175113-F1T6_BZDET",
-  consultFee: "₹500",
   signage: "Expert Dentists from AIIMS & PGI (CHD)",
   // feature flags
-  showPrices: true,
   showGoogleRating: false,
   bookingEndpoint: process.env.BOOKING_ENDPOINT ?? "",
   gaId: "G-435EXMXJGW",

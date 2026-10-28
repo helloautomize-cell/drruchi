@@ -8,7 +8,6 @@ export type Treatment = {
   h1: string;          // full H1 text
   sub: string;
   doctor: "ruchi" | "parmod" | "either";
-  costChip?: string;
   urgent?: boolean;    // true for emergency-dentist, toothache-treatment, root-canal-treatment
   heroImage: string;   // /images/... path from image map D
   heroAlt: string;
@@ -20,7 +19,6 @@ export type Treatment = {
   supportAlt?: string;
   options: { title: string; text: string }[];
   steps: { title: string; text: string }[];  // 3-6 numbered steps
-  costRows?: { item: string; range: string; total?: boolean }[];
   aftercare: string[];
   faqs: { q: string; a: string }[];
   resultFiles: string[]; // BA file basenames without __before/__after, e.g. "ba-03-back-teeth-implant"; from image map D "Results to show" or 06b "Results:" — omit files marked ⚠/consent issues except keep listed ones
@@ -37,12 +35,11 @@ export const treatments: Treatment[] = [
     name: "Dental implants",
     group: "Replace missing teeth",
     metaTitle: "Dental Implants in Gurgaon | Dental Krafts",
-    metaDesc: "Replace missing teeth with implants planned by Dr Ruchi Goel (MDS, AIIMS). Typical cost ₹30,000–₹55,000. Real results, written estimate.",
+    metaDesc: "Replace missing teeth with implants planned by Dr Ruchi Goel (MDS, AIIMS). Real results, written plan before anything starts.",
     eyebrow: "Replace missing teeth",
     h1: "Dental implants in Gurgaon",
     sub: "A fixed tooth that looks, feels and chews like your own, planned by an AIIMS-trained prosthodontist.",
     doctor: "ruchi",
-    costChip: "₹30,000 – ₹55,000 per tooth",
     heroImage: "/images/ai/treat-implants.webp",
     heroAlt: "A dental implant with a ceramic crown",
     heroCard: { b: "3 to 6 months", s: "From implant to final crown" },
@@ -68,18 +65,11 @@ export const treatments: Treatment[] = [
     ],
     steps: [
       { title: "Consultation & scan", text: "Dr Ruchi examines you and checks bone height and width on an X-ray or 3D scan." },
-      { title: "Plan & estimate", text: "You see where the implant will go, the timeline and the cost, in writing." },
+      { title: "Plan & estimate", text: "You see where the implant will go, the timeline and what each step involves, in writing." },
       { title: "Placement", text: "A short procedure under local anaesthesia, usually about an hour for one implant." },
       { title: "Healing (3–6 months)", text: "You may wear a temporary tooth. The bone bonds to the implant." },
       { title: "Final crown", text: "We take an impression and fit a zirconia or ceramic crown matched to your teeth." },
       { title: "Reviews", text: "Check-ups and cleaning keep the implant healthy for the long term." },
-    ],
-    costRows: [
-      { item: "Consultation & X-rays", range: "₹500 – ₹2,000" },
-      { item: "Implant placement", range: "₹20,000 – ₹40,000" },
-      { item: "Abutment & crown", range: "₹10,000 – ₹20,000" },
-      { item: "Implant + crown, typical total", range: "₹30,000 – ₹55,000", total: true },
-      { item: "Bone graft, sinus lift (if needed)", range: "quoted after scan" },
     ],
     aftercare: [
       "Soft food and no hard chewing on that side for the first few days.",
@@ -92,7 +82,7 @@ export const treatments: Treatment[] = [
       { q: "How long do implants last?", a: "With good care and regular check-ups, many last 15–20 years or more. The crown on top may need replacing sooner." },
       { q: "Am I too old for an implant?", a: "Age isn't the limit. Bone health and general health are. Many of our implant patients are in their 60s and 70s." },
       { q: "I have diabetes. Can I get an implant?", a: "Usually yes, if it's well controlled. We'll check with you and your physician." },
-      { q: "Why is there such a range in cost?", a: "It depends on the implant system, the crown material, and whether you need bone grafting. Your estimate will itemise each." },
+      { q: "What decides how my implant is planned?", a: "The implant system, the crown material, and whether you need bone grafting. Your written plan will itemise each." },
     ],
     resultFiles: ["ba-03-back-teeth-implant", "ba-04-back-implant-teeth", "ba-05-back-teeth-implant", "ba-29-teeth-implant"],
     reviewIds: ["subhash", "aditya", "sabita"],
@@ -103,12 +93,11 @@ export const treatments: Treatment[] = [
     name: "All-on-4 dental implants",
     group: "Replace missing teeth",
     metaTitle: "All-on-4 Dental Implants in Gurgaon | Dental Krafts",
-    metaDesc: "A full set of fixed teeth on 4–6 implants. Planned by Dr Ruchi Goel, prosthodontist, AIIMS. Typical ₹1.5–4 lakh per jaw.",
+    metaDesc: "A full set of fixed teeth on 4–6 implants. Planned by Dr Ruchi Goel, prosthodontist, AIIMS. Written plan before anything starts.",
     eyebrow: "Replace missing teeth",
     h1: "All-on-4 and All-on-6: a full set of fixed teeth",
     sub: "For people who've lost most of their teeth, or are tired of loose dentures. Teeth that stay in, day and night.",
     doctor: "ruchi",
-    costChip: "₹1,50,000 – ₹4,00,000 per jaw",
     heroImage: "/images/ai/treat-implants.webp",
     heroAlt: "A dental implant with a ceramic crown",
     heroCard: { b: "Same-day teeth", s: "Fixed temporary teeth within days, in suitable cases" },
@@ -129,11 +118,11 @@ export const treatments: Treatment[] = [
       { title: "All-on-4", text: "A full set of fixed teeth on four implants." },
       { title: "All-on-6", text: "Six implants, for more support." },
       { title: "Fixed final teeth", text: "In acrylic-on-titanium or zirconia." },
-      { title: "Implant-retained overdenture", text: "Removable, lower cost." },
+      { title: "Implant-retained overdenture", text: "Removable, and simpler to maintain." },
     ],
     steps: [
       { title: "3D scan & smile planning", text: "We scan your jaws and plan the new teeth around your face." },
-      { title: "Written plan", text: "You see the timeline and cost in writing before anything starts." },
+      { title: "Written plan", text: "You see the timeline and what each step involves, in writing, before anything starts." },
       { title: "Same-day placement", text: "Extractions, if needed, and implant placement on the same day." },
       { title: "Fixed temporary teeth", text: "Temporary teeth go on while the implants heal over 3–6 months." },
       { title: "Final teeth", text: "Your permanent bridge is fitted and checked against your bite." },
@@ -146,7 +135,7 @@ export const treatments: Treatment[] = [
     ],
     faqs: [
       { q: "Will I ever be without teeth?", a: "In most cases, no. Temporary teeth are fitted while the implants heal." },
-      { q: "Is it better than dentures?", a: "For most people, yes. It doesn't move, doesn't cover the palate, and you can chew much harder foods. It does cost more." },
+      { q: "Is it better than dentures?", a: "For most people, yes. It doesn't move, doesn't cover the palate, and you can chew much harder foods. It is a bigger treatment." },
       { q: "How long does the whole process take?", a: "Usually 3–6 months from start to final teeth." },
     ],
     resultFiles: ["ba-22-full-mouth-rehabilitation", "ba-24-full-mouth-rehabilitation", "ba-02-full-mouth-rehabilitation"],
@@ -158,12 +147,11 @@ export const treatments: Treatment[] = [
     name: "Dentures",
     group: "Replace missing teeth",
     metaTitle: "Dentures in Gurgaon | Complete & Partial | Dental Krafts",
-    metaDesc: "Comfortable dentures made by a prosthodontist. Complete, partial, immediate and implant-supported. From ₹5,000.",
+    metaDesc: "Comfortable dentures made by a prosthodontist. Complete, partial, immediate and implant-supported, by a prosthodontist.",
     eyebrow: "Replace missing teeth",
     h1: "Dentures that fit, made by a specialist",
     sub: "Comfortable, natural-looking dentures, made by a prosthodontist (the specialist who designs replacement teeth).",
     doctor: "ruchi",
-    costChip: "From ₹5,000",
     heroImage: "/images/ai/treat-dentures.webp",
     heroAlt: "A pair of realistic complete dentures",
     forYou: [
@@ -219,7 +207,6 @@ export const treatments: Treatment[] = [
     h1: "Full-mouth rehabilitation",
     sub: "When many teeth are worn, broken or missing, we rebuild them together so your bite, chewing and smile work as one again.",
     doctor: "ruchi",
-    costChip: "Quoted at consultation",
     heroImage: "/images/ai/treat-smile-design.webp",
     heroAlt: "Porcelain veneers beside a hand mirror",
     forYou: [
@@ -278,7 +265,6 @@ export const treatments: Treatment[] = [
     h1: "Root canal treatment in Gurgaon",
     sub: "Stop the pain and save your own tooth. Done under local anaesthesia, often in a single visit.",
     doctor: "parmod",
-    costChip: "₹6,000 – ₹12,000 per tooth",
     urgent: true,
     heroImage: "/images/ai/treat-rootcanal.webp",
     heroAlt: "A tooth model cut to show the roots",
@@ -309,11 +295,6 @@ export const treatments: Treatment[] = [
       { title: "Filling and sealing", text: "The canals are filled and sealed so bacteria can't return." },
       { title: "Crown", text: "Usually advised on back teeth to stop the tooth cracking." },
     ],
-    costRows: [
-      { item: "Root canal, one tooth", range: "₹6,000 – ₹12,000" },
-      { item: "Re-treatment of an old root canal", range: "quoted after X-ray" },
-      { item: "Crown after root canal", range: "₹12,000 – ₹20,000" },
-    ],
     aftercare: [
       "Avoid chewing on the tooth until the numbness wears off and until the crown is fitted.",
       "Mild tenderness for 2–3 days is normal.",
@@ -323,7 +304,7 @@ export const treatments: Treatment[] = [
       { q: "Is a root canal painful?", a: "The treatment itself is done under local anaesthesia. Most patients say it felt like a long filling. It's the infection that hurts, and the root canal stops it." },
       { q: "Can it be done in one visit?", a: "Often, yes. Badly infected teeth may need two." },
       { q: "Why do I need a crown afterwards?", a: "A root-treated back tooth is more brittle. A crown protects it from cracking." },
-      { q: "Wouldn't it be cheaper to remove the tooth?", a: "Today, yes. But replacing it later with an implant or bridge costs more. Keeping your own tooth is usually the better long-term choice." },
+      { q: "Wouldn't it be cheaper to remove the tooth?", a: "Removing it is quicker today, but replacing it later is a bigger treatment. Keeping your own tooth is usually the better long-term choice." },
     ],
     resultFiles: [],
     reviewIds: ["vijay", "khushbu", "anushka"],
@@ -334,12 +315,11 @@ export const treatments: Treatment[] = [
     name: "Dental fillings",
     group: "Save a tooth",
     metaTitle: "Tooth Fillings in Gurgaon | Dental Krafts",
-    metaDesc: "Repair cavities and chips with tooth-coloured fillings that blend in. Typical ₹2,000–₹4,000.",
+    metaDesc: "Repair cavities and chips with tooth-coloured fillings that blend in. Tooth-coloured, one visit.",
     eyebrow: "Save a tooth",
     h1: "Tooth-coloured fillings",
     sub: "Catch a cavity early and a small filling is all you need.",
     doctor: "parmod",
-    costChip: "₹2,000 – ₹4,000",
     heroImage: "/images/ai/treat-rootcanal.webp",
     heroAlt: "A tooth model cut to show the roots",
     heroCard: { b: "30–45 minutes", s: "Usual time for a filling" },
@@ -386,12 +366,11 @@ export const treatments: Treatment[] = [
     name: "Crowns & bridges",
     group: "Save a tooth",
     metaTitle: "Dental Crowns & Bridges in Gurgaon | Dental Krafts",
-    metaDesc: "Strong, natural-looking zirconia and ceramic crowns by an AIIMS prosthodontist. Typical ₹12,000–₹20,000.",
+    metaDesc: "Strong, natural-looking zirconia and ceramic crowns by an AIIMS prosthodontist. Written plan before anything starts.",
     eyebrow: "Save a tooth",
     h1: "Crowns and bridges",
     sub: "A crown protects a weak tooth. A bridge replaces a missing one. Both are made to match your smile.",
     doctor: "ruchi",
-    costChip: "₹12,000 – ₹20,000 per crown",
     heroImage: "/images/ai/treat-crowns.webp",
     heroAlt: "A row of ceramic dental crowns",
     heroCard: { b: "5–7 days", s: "From impression to final crown" },
@@ -449,7 +428,6 @@ export const treatments: Treatment[] = [
     h1: "Smile makeover",
     sub: "A smile designed around your face, previewed before we touch a tooth.",
     doctor: "ruchi",
-    costChip: "Quoted at consultation",
     heroImage: "/images/ai/treat-smile-design.webp",
     heroAlt: "Porcelain veneers beside a hand mirror",
     forYou: [
@@ -502,7 +480,6 @@ export const treatments: Treatment[] = [
     h1: "Dental veneers",
     sub: "A thin, custom shell on the front of a tooth that fixes colour, shape and small gaps.",
     doctor: "ruchi",
-    costChip: "Quoted at consultation",
     heroImage: "/images/ai/treat-smile-design.webp",
     heroAlt: "Porcelain veneers beside a hand mirror",
     forYou: [
@@ -546,12 +523,11 @@ export const treatments: Treatment[] = [
     name: "Teeth whitening",
     group: "Smile design",
     metaTitle: "Teeth Whitening in Gurgaon | Dental Krafts",
-    metaDesc: "Safe, dentist-supervised whitening. In-clinic in about an hour, or custom take-home trays. Typical ₹10,000–₹20,000.",
+    metaDesc: "Safe, dentist-supervised whitening. In-clinic in about an hour, or custom take-home trays. In-clinic or take-home, dentist supervised.",
     eyebrow: "Smile design",
     h1: "Teeth whitening",
     sub: "Brighter teeth, safely, under a dentist's eye.",
     doctor: "either",
-    costChip: "₹10,000 – ₹20,000",
     heroImage: "/images/ai/hero-smile-30f.webp",
     heroAlt: "A woman laughing with a warm, natural smile",
     heroCard: { b: "About 1 hour", s: "For in-clinic whitening" },
@@ -603,7 +579,6 @@ export const treatments: Treatment[] = [
     h1: "Cosmetic dentistry",
     sub: "Small changes or a whole new smile, always planned to look like you.",
     doctor: "ruchi",
-    costChip: "Quoted at consultation",
     heroImage: "/images/ai/hero-smile-30f.webp",
     heroAlt: "A woman laughing with a warm, natural smile",
     forYou: [
@@ -656,7 +631,6 @@ export const treatments: Treatment[] = [
     h1: "Braces",
     sub: "Straighter teeth and a healthier bite, at any age.",
     doctor: "either",
-    costChip: "Quoted at consultation",
     heroImage: "/images/ai/treat-aligners.webp",
     heroAlt: "Clear aligners on their case",
     heroCard: { b: "12–24 months", s: "Typical treatment time" },
@@ -709,7 +683,6 @@ export const treatments: Treatment[] = [
     h1: "Invisalign and clear aligners",
     sub: "Straighten your teeth without wires. Nearly invisible, and removable when you eat.",
     doctor: "either",
-    costChip: "Quoted at consultation",
     heroImage: "/images/ai/treat-aligners.webp",
     heroAlt: "Clear aligners on their case",
     heroCard: { b: "20–22 hours", s: "Daily wear for the best result" },
@@ -923,12 +896,11 @@ export const treatments: Treatment[] = [
     name: "Wisdom tooth removal",
     group: "Gums, surgery and urgent care",
     metaTitle: "Wisdom Tooth Extraction in Gurgaon | Dental Krafts",
-    metaDesc: "Painful or impacted wisdom tooth? X-ray assessment and careful removal under local anaesthesia. Typical ₹2,000–₹8,000.",
+    metaDesc: "Painful or impacted wisdom tooth? X-ray assessment and careful removal under local anaesthesia.",
     eyebrow: "Gums, surgery and urgent care",
     h1: "Wisdom tooth removal",
     sub: "Not every wisdom tooth needs to come out. We'll check with an X-ray and tell you honestly.",
     doctor: "either",
-    costChip: "₹2,000 – ₹8,000",
     heroImage: "/images/ai/treat-gums-emergency.webp",
     heroAlt: "Water, floss and a soft toothbrush",
     forYou: [
@@ -1190,10 +1162,10 @@ export const treatments: Treatment[] = [
 export const treatmentBySlug = (slug: string) => treatments.find((t) => t.slug === slug)!;
 
 export const treatmentGroups = [
-  { name: "Replace missing teeth", desc: "Implants, full-arch teeth and dentures that look and chew like your own.", price: "Implants from ₹30,000 · dentures from ₹5,000", icon: "tooth-implant", img: "/images/ai/treat-implants.webp", doctor: "ruchi" },
-  { name: "Save a tooth", desc: "Root canals, fillings and crowns to keep your natural tooth.", price: "from ₹6,000", icon: "tooth-root", img: "/images/ai/treat-rootcanal.webp", doctor: "either" },
-  { name: "Smile design", desc: "Veneers, whitening and makeovers planned around your face, not a template.", price: "from ₹10,000", icon: "sparkles", img: "/images/ai/treat-smile-design.webp", doctor: "ruchi" },
-  { name: "Straighten teeth", desc: "Braces or near-invisible aligners, for teens and adults.", price: "after exam", icon: "retainer-teeth", img: "/images/ai/treat-aligners.webp", doctor: "either" },
-  { name: "Kids and teens", desc: "First visits, sealants, fluoride and gentle fillings with a specialist.", price: "₹500 visit", icon: "first-tooth", img: "/images/ai/treat-kids.webp", doctor: "parmod" },
-  { name: "Gums, surgery and urgent care", desc: "Bleeding gums, wisdom teeth, sudden pain. Same-day slots when we can.", price: "call us", icon: "tooth-alert", img: "/images/ai/treat-gums-emergency.webp", doctor: "either" },
+  { name: "Replace missing teeth", desc: "Implants, full-arch teeth and dentures that look and chew like your own.", icon: "tooth-implant", img: "/images/ai/treat-implants.webp", doctor: "ruchi" },
+  { name: "Save a tooth", desc: "Root canals, fillings and crowns to keep your natural tooth.", icon: "tooth-root", img: "/images/ai/treat-rootcanal.webp", doctor: "either" },
+  { name: "Smile design", desc: "Veneers, whitening and makeovers planned around your face, not a template.", icon: "sparkles", img: "/images/ai/treat-smile-design.webp", doctor: "ruchi" },
+  { name: "Straighten teeth", desc: "Braces or near-invisible aligners, for teens and adults.", icon: "retainer-teeth", img: "/images/ai/treat-aligners.webp", doctor: "either" },
+  { name: "Kids and teens", desc: "First visits, sealants, fluoride and gentle fillings with a specialist.", icon: "first-tooth", img: "/images/ai/treat-kids.webp", doctor: "parmod" },
+  { name: "Gums, surgery and urgent care", desc: "Bleeding gums, wisdom teeth, sudden pain. Same-day slots when we can.", icon: "tooth-alert", img: "/images/ai/treat-gums-emergency.webp", doctor: "either" },
 ] as const;

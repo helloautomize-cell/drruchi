@@ -75,7 +75,7 @@ export default function DrRuchiGoel() {
 
       {/* 2 · Pull statement */}
       <section className="pull"><div className="wrap">
-        <p>What patients mention most: she explains the plan, the alternatives and the cost <em>before anything begins</em>.</p>
+        <p>What patients mention most: she explains the plan and the alternatives <em>before anything begins</em>.</p>
         <small>From Dr Ruchi's verified Practo reviews</small>
       </div></section>
 
@@ -88,7 +88,7 @@ export default function DrRuchiGoel() {
           <div className="prose">
             <p>Dr Ruchi Goel is a prosthodontist: a dentist who specialises in replacing and rebuilding teeth. Her work covers dental implants, every type of denture, crowns and bridges, smile design and full-mouth rehabilitation, the complex cases where many teeth need to work together again.</p>
             <p>She topped the AIIMS MDS entrance examination in 2012 and completed her postgraduate training in prosthodontics at AIIMS New Delhi, after clinical years at PGIMER Chandigarh and PGIMS Rohtak. Her research at AIIMS on occlusal splints for patients with severe tooth wear was published in the <i>International Journal of Prosthodontics and Restorative Dentistry</i> (2023).</p>
-            <p>Before anything begins, she walks you through the plan, the alternatives and the cost, often with your photos and X-rays on screen.</p>
+            <p>Before anything begins, she walks you through the plan and the alternatives, often with your photos and X-rays on screen.</p>
           </div>
           <div className="def"><b>What is a prosthodontist?</b><p>A dentist with three more years of specialist training in replacing and restoring teeth: implants, dentures, crowns, bridges and complex rebuilding. In India it's an MDS in Prosthodontics.</p></div>
         </div>
@@ -185,7 +185,7 @@ export default function DrRuchiGoel() {
       <section className="cta"><div className="wrap">
         <div>
           <Eb>Book with Dr Ruchi</Eb>
-          <h2 className="d h2" style={{ marginTop: 22 }}>A ₹500 consultation, and a plan in <em>writing</em>.</h2>
+          <h2 className="d h2" style={{ marginTop: 22 }}>A consultation, and a plan in <em>writing</em>.</h2>
         </div>
         <div className="row"><a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a><Link className="btn btn-p" href="/contact-us?doctor=Dr%20Ruchi%20Goel">Book a visit <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
       </div></section>

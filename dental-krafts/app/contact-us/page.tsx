@@ -9,7 +9,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = {
   title: "Book a Visit | Dental Krafts Gurgaon | Sector 53 & 57",
   description:
-    "Book a ₹500 consultation at Dental Krafts, Gurgaon. Clinics in Sector 53 (South Point Mall) and Sector 57 (Bestech Central Square). Call or WhatsApp.",
+    "Book a consultation at Dental Krafts, Gurgaon. Clinics in Sector 53 (South Point Mall) and Sector 57 (Bestech Central Square). Call or WhatsApp.",
   alternates: { canonical: "/contact-us" },
 };
 

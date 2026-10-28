@@ -38,7 +38,7 @@ export default function MedicalTourism() {
         <div className="head"><div><span className="eyebrow">How it works</span><h2 className="d h2">Start from <em>wherever</em> you are.</h2></div></div>
         <div className="steps n5">
           <div><b>Send photos and X-rays</b><span>On WhatsApp (+91 98104 48720). Recent X-rays help us plan better.</span></div>
-          <div><b>Get a provisional plan</b><span>From Dr Ruchi or Dr Parmod, with an estimate.</span></div>
+          <div><b>Get a provisional plan</b><span>From Dr Ruchi or Dr Parmod.</span></div>
           <div><b>Plan your visit</b><span>We'll suggest how many days you need and space the appointments.</span></div>
           <div><b>Treatment in Gurgaon</b><span>At our Golf Course Road or Sushant Lok 2 clinic.</span></div>
           <div><b>Follow-up</b><span>A written summary, your X-rays, and video check-ins after you go home.</span></div>
@@ -74,21 +74,21 @@ export default function MedicalTourism() {
         <div className="ph"><img src="/images/clinic/reception-lounge.webp" alt="The Dental Krafts reception" loading="lazy" /></div>
         <div>
           <span className="eyebrow">Why Gurgaon</span>
-          <h2 className="d h2">Specialist care, <em>fraction</em> of the cost.</h2>
+          <h2 className="d h2">Specialist care, <em>planned</em> around your trip.</h2>
           <div className="prose">
-            <p>Gurgaon has modern clinics and English-speaking specialists, at costs a fraction of those in the US, UK, Australia or the Gulf — with Delhi's hotels, food and sights next door.</p>
-            <p>You'll get a written treatment plan and estimate you can share with your insurer, and we'll plan visits around your travel dates.</p>
+            <p>Gurgaon has modern clinics and English-speaking specialists — with Delhi's hotels, food and sights next door.</p>
+            <p>You'll get a written treatment plan you can share with your insurer, and we'll plan visits around your travel dates.</p>
           </div>
           <div className="rel">
             <Link className="chip" href="/japanese">日本語</Link>
             <Link className="chip" href="/korean">한국어</Link>
-            <Link className="chip" href="/treatment-costs">Typical costs</Link>
+            <Link className="chip" href="/treatments">All treatments</Link>
           </div>
         </div>
       </div></section>
 
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
-        <CtaBand title="Send photos" em="on WhatsApp." text="Send us your photos and X-rays. A specialist replies with a provisional plan and estimate." book="WhatsApp us" />
+        <CtaBand title="Send photos" em="on WhatsApp." text="Send us your photos and X-rays. A specialist replies with a provisional plan." book="WhatsApp us" />
       </div></section>
     </>
   );

@@ -63,6 +63,8 @@
   /* ---------- reveal on enter ---------- */
   function play(el){
     if(el.classList.contains("in"))return;
+    /* split lazily on first reveal — mutating pre-hydration DOM causes a hydration mismatch */
+    if(el.hasAttribute("data-split")&&!el.__split){split(el);void el.offsetWidth}
     el.classList.add("in");
     var d=parseInt(el.getAttribute("data-delay")||"0",10),r=el.getAttribute("data-r");
     if(r===null){}else if(r==="stagger"){
@@ -77,7 +79,6 @@
   }
   function observe(root){
     var els=$$("[data-split],[data-r],[data-unveil],[data-count],.eb",root);
-    $$("[data-split]",root).forEach(split);
     if(!motionOK()){els.forEach(function(e){e.classList.add("in")});return}
     io=io||new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){play(e.target);io.unobserve(e.target)}})},{rootMargin:"0px 0px -9% 0px",threshold:.12});
     els.forEach(function(e){io.observe(e)});
@@ -133,7 +134,7 @@
     var x=0,y=0,cx=0,cy=0,run=0;
     function loop(){cx+=(x-cx)*.22;cy+=(y-cy)*.22;c.style.transform="translate("+cx+"px,"+cy+"px)";if(Math.abs(x-cx)+Math.abs(y-cy)>.3)run=requestAnimationFrame(loop);else run=0}
     $$("[data-cursor]",root).forEach(function(el){
-      el.addEventListener("pointerenter",function(e){c.textContent=el.getAttribute("data-cursor");x=cx=e.clientX;y=cy=e.clientY;c.style.transform="translate("+x+"px,"+y+"px)";c.classList.add("on")});
+      el.addEventListener("pointerenter",function(e){c.textContent=el.getAttribute("data-cursor");c.dataset.tone=el.getAttribute("data-cursor-tone")||"";x=cx=e.clientX;y=cy=e.clientY;c.style.transform="translate("+x+"px,"+y+"px)";c.classList.add("on")});
       el.addEventListener("pointermove",function(e){x=e.clientX;y=e.clientY;if(!run)run=requestAnimationFrame(loop)});
       el.addEventListener("pointerleave",function(){c.classList.remove("on")});
     });
@@ -166,13 +167,15 @@
     if(next)next.addEventListener("click",function(){stop();step(1)});
     tr.addEventListener("scroll",function(){requestAnimationFrame(upd)},{passive:true});
     tr.addEventListener("keydown",function(e){if(e.key==="ArrowRight"){e.preventDefault();stop();step(1)}if(e.key==="ArrowLeft"){e.preventDefault();stop();step(-1)}});
-    /* mouse drag (touch uses native swipe) */
-    var down=false,sx=0,sl=0,moved=0;
-    tr.addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse"||e.button!==0)return;down=true;moved=0;sx=e.clientX;sl=tr.scrollLeft;tr.classList.add("drag");stop()});
+    /* mouse drag (touch uses native swipe) — skipped on data-nodrag rails */
+    var down=false,sx=0,sl=0,moved=0,dragged=false;
+    if(!el.hasAttribute("data-nodrag")){
+    tr.addEventListener("pointerdown",function(e){if(e.pointerType!=="mouse"||e.button!==0)return;down=true;dragged=false;moved=0;sx=e.clientX;sl=tr.scrollLeft;tr.classList.add("drag");stop()});
     W.addEventListener("pointermove",function(e){if(!down)return;var dx=e.clientX-sx;moved=Math.max(moved,Math.abs(dx));tr.scrollLeft=sl-dx});
-    W.addEventListener("pointerup",function(){if(!down)return;down=false;tr.classList.remove("drag");var v=tr.scrollLeft-sl,i=idx();if(moved<6)return;if(v>40)i=Math.min(i+1,items.length-1);go(i)});
-    tr.addEventListener("click",function(e){if(moved>6){e.preventDefault();e.stopPropagation()}},true);
+    W.addEventListener("pointerup",function(){if(!down)return;down=false;tr.classList.remove("drag");var v=tr.scrollLeft-sl,i=idx();if(moved<6)return;dragged=Math.abs(v)>8;if(v>40)i=Math.min(i+1,items.length-1);go(i)});
+    tr.addEventListener("click",function(e){if(dragged){dragged=false;e.preventDefault();e.stopPropagation()}},true);
     tr.addEventListener("dragstart",function(e){e.preventDefault()});
+    }
     /* autoplay: only in view, never while hovered, stops for good after the visitor takes over */
     function stop(){hold=1;clearInterval(timer);timer=0}
     function tick(){if(!D.body.contains(el)){clearInterval(timer);return}if(!hold&&visible&&!hover&&!D.hidden)step(1)}

@@ -17,12 +17,12 @@ export const metadata: Metadata = {
 const c = clinics[0];
 
 const TOP6: [string, string, string, string][] = [
-  ["tooth-implant", "Dental implants", "from ₹30,000", "/dental-implants"],
-  ["tooth-root", "Root canal treatment", "from ₹6,000", "/root-canal-treatment"],
-  ["tooth", "Crowns and bridges", "from ₹12,000", "/dental-crowns"],
-  ["first-tooth", "Kids' dentistry", "₹500 consultation", "/pediatric-dentist"],
-  ["sparkles", "Smile design & whitening", "from ₹10,000", "/smile-makeover"],
-  ["tooth-alert", "Emergency care", "call us", "/emergency-dentist"],
+  ["tooth-implant", "Dental implants", "Dr Ruchi", "/dental-implants"],
+  ["tooth-root", "Root canal treatment", "Either dentist", "/root-canal-treatment"],
+  ["tooth", "Crowns and bridges", "Dr Ruchi", "/dental-crowns"],
+  ["first-tooth", "Kids' dentistry", "Dr Parmod", "/pediatric-dentist"],
+  ["sparkles", "Smile design & whitening", "Dr Ruchi", "/smile-makeover"],
+  ["tooth-alert", "Emergency care", "Call us", "/emergency-dentist"],
 ];
 
 const rishav = reviewById("rishav");
@@ -56,7 +56,7 @@ export default function GolfCourseRoad() {
           <h2 className="d h2">Five minutes off <em>the main road.</em></h2>
           <div className="prose">
             <p>Dental Krafts Sector 53 sits on the 2nd floor of South Point Mall, DLF Phase 5 — a landmark on Golf Course Road with lifts and parking. The founders treat you themselves: Dr Ruchi Goel, a prosthodontist trained at AIIMS New Delhi, and Dr Parmod Gulia, a pediatric dentist and PGIMER silver medallist.</p>
-            <p>It's open Monday to Sunday, 10 am to 8 pm, closed Wednesdays — rated 5.0 on Practo. A consultation costs ₹500, and you'll see a written estimate before any treatment starts.</p>
+            <p>It's open Monday to Sunday, 10 am to 8 pm, closed Wednesdays — rated 5.0 on Practo. You'll see a written plan before any treatment starts.</p>
           </div>
           <div className="drive">
             {c.driveTimes.map(([from, min]) => <span className="chip" key={from}>{from} <b>{min}</b></span>)}
@@ -67,9 +67,9 @@ export default function GolfCourseRoad() {
         <div>
           <span className="eyebrow">Most-searched treatments here</span>
           <div className="cards" style={{ gridTemplateColumns: "minmax(0,1fr)", marginTop: 20 }}>
-            {TOP6.map(([ic, name, price, href]) => (
+            {TOP6.map(([ic, name, who, href]) => (
               <Link className="cd" key={href} href={href} style={{ flexDirection: "row", alignItems: "center", gap: 14, padding: 14 }}>
-                <span className="badge"><Icon name={ic} /></span><b style={{ fontSize: 17 }}>{name}</b><span style={{ marginLeft: "auto", whiteSpace: "nowrap" }}>{price}</span>
+                <span className="badge"><Icon name={ic} /></span><b style={{ fontSize: 17 }}>{name}</b><span style={{ marginLeft: "auto", whiteSpace: "nowrap" }}>{who}</span>
               </Link>
             ))}
           </div>
@@ -86,7 +86,7 @@ export default function GolfCourseRoad() {
       </div></section>
 
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
-        <CtaBand title="Minutes from" em="Golf Course Road." text="Book a ₹500 consultation at the Sector 53 clinic. You'll leave with a plan and a written estimate." book="Book at Sector 53" />
+        <CtaBand title="Minutes from" em="Golf Course Road." text="Book a consultation at the Sector 53 clinic. You'll leave with a written plan." book="Book at Sector 53" />
       </div></section>
     </>
   );

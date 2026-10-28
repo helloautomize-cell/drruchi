@@ -7,7 +7,7 @@ import { treatments, treatmentGroups } from "@/content/treatments";
 export const metadata: Metadata = {
   title: "Dental Treatments in Gurgaon | Implants, RCT, Kids | Dental Krafts",
   description:
-    "All 21 dental treatments at Dental Krafts, Gurgaon — implants, root canals, kids' dentistry, braces, whitening and more. Specialist care, prices explained first.",
+    "All 21 dental treatments at Dental Krafts, Gurgaon — implants, root canals, kids' dentistry, braces, whitening and more. Specialist care, explained first.",
   alternates: { canonical: "/treatments" },
 };
 
@@ -38,7 +38,7 @@ export default function TreatmentsHub() {
                 <Link key={t.slug} href={`/${t.slug}`} className="row">
                   <span className="badge"><Icon name={g.icon} /></span>
                   <span><b>{t.name}</b><span className="s">{t.sub}</span></span>
-                  <span className="p">{t.costChip ?? ""}</span>
+                  <span className="p"></span>
                   <span className="ar"><Icon name="arrow-right" cls="ic ic-sm" /></span>
                 </Link>
               ))}
@@ -50,8 +50,8 @@ export default function TreatmentsHub() {
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
         <CtaBand
           title="Not sure" em="what you need?"
-          text="Book a ₹500 consultation. We'll examine, explain and give you options, with no pressure to start that day."
-          book="Book a ₹500 visit"
+          text="Book a consultation. We'll examine, explain and give you options, with no pressure to start that day."
+          book="Book a visit"
         />
       </div></section>
     </>

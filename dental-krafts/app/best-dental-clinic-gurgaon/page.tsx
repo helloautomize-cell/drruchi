@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const QUESTIONS = [
   { icon: "user-heart", q: "Who will actually treat me?", a: "At Dental Krafts, the founders: a prosthodontist (AIIMS New Delhi) and a pediatric dentist (PGIMER Chandigarh). No juniors, no referrals out." },
   { icon: "shield-check", q: "Are they registered specialists?", a: "Yes — Delhi State Dental Council registrations A-7387 and A-12323, and both hold an MDS." },
-  { icon: "receipt", q: "Will I see the cost first?", a: "Yes. A written, itemised estimate before treatment, with options from simplest to ideal." },
+  { icon: "receipt", q: "Will I see the plan first?", a: "Yes. A written, itemised plan before treatment, with options from simplest to ideal." },
   { icon: "star", q: "What do other patients say?", a: "5.0 on Practo across 1,000+ patient stories, and 4.9 on Justdial." },
   { icon: "clock", q: "Is it convenient?", a: "Two clinics — Sector 53 and Sector 57 — open six days a week, 10 am till 8 or 8:30 pm. Closed Wednesdays." },
 ];
@@ -31,7 +31,7 @@ export default function BestInGurgaon() {
             <h1 className="d">Choosing a dental clinic <em>in Gurgaon</em></h1>
             <p className="sub">Five questions worth asking any clinic — and how we answer them.</p>
             <div className="cta">
-              <Link className="btn btn-w" href="/contact-us">Book a ₹500 visit <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link>
+              <Link className="btn btn-w" href="/contact-us">Book a visit <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link>
               <a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function BestInGurgaon() {
       </div></section>
 
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
-        <CtaBand title="Judge us" em="in person." text="A ₹500 consultation with an examination. You'll see your options and the cost before anything begins." />
+        <CtaBand title="Judge us" em="in person." text="A consultation with a full examination. You'll see your options before anything begins." />
       </div></section>
     </>
   );

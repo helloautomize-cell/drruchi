@@ -162,7 +162,7 @@ export default function DrParmodGulia() {
       <section className="cta"><div className="wrap">
         <div>
           <Eb>Book with Dr Parmod</Eb>
-          <h2 className="d h2" style={{ marginTop: 22 }}>A ₹500 visit, and a plan for your <em>child</em>.</h2>
+          <h2 className="d h2" style={{ marginTop: 22 }}>A first visit, and a plan for your <em>child</em>.</h2>
         </div>
         <div className="row"><a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a><Link className="btn btn-p" href="/contact-us?doctor=Dr%20Parmod%20Gulia">Book a visit <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
       </div></section>

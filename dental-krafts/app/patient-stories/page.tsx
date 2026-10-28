@@ -85,7 +85,7 @@ export default function PatientStories() {
             <a className="btn btn-w" href={site.practo} target="_blank" rel="noopener">Review on Practo <Icon name="arrow-up-right" cls="ic ic-sm" /></a>
           </div>
         </div>
-        <CtaBand title="Ready to be" em="the next story?" text="Book a ₹500 consultation. You'll leave with a plan and a written estimate." />
+        <CtaBand title="Ready to be" em="the next story?" text="Book a consultation. You'll leave with a plan and a written estimate." />
       </div></section>
     </>
   );
