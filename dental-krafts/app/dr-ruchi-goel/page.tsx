@@ -1,52 +1,31 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
-import { BaSlider } from "@/components/ba-slider";
-import { ReelCard } from "@/components/media";
-import { QA, CtaBand } from "@/components/bits";
-import { Reveal } from "@/components/reveal";
+import { OpenStatus } from "@/components/open-status";
+import { BaShowcase } from "@/components/ba-slider";
+import { VPlaylist } from "@/components/media";
+import { QA, Eb } from "@/components/bits";
 import { doctorById } from "@/content/doctors";
 import { clinics } from "@/content/clinics";
 import { reviewById } from "@/content/reviews";
 import { caseByFile } from "@/content/results";
 import { site } from "@/content/site";
-import { emLast, ic } from "@/lib/inner";
 
 export const metadata: Metadata = {
   title: "Dr Ruchi Goel | Prosthodontist & Implantologist, AIIMS | Gurgaon",
-  description:
-    "Dr Ruchi Goel, BDS, MDS (AIIMS New Delhi), AIIMS MDS entrance topper. Dental implants, dentures, crowns, smile design and full-mouth rehab at Dental Krafts, Gurgaon.",
+  description: "Dr Ruchi Goel, BDS, MDS (AIIMS New Delhi), AIIMS MDS entrance topper. Dental implants, dentures, crowns, smile design and full-mouth rehab at Dental Krafts, Gurgaon.",
   alternates: { canonical: "/dr-ruchi-goel" },
 };
 
 const d = doctorById("ruchi");
 
 const REELS = [
-  { file: "reel-01-dr-ruchi-explains.mp4", title: "The most common dental problem in the world" },
-  { file: "reel-02-dr-ruchi-explains.mp4", title: "A minute with Dr Ruchi" },
-  { file: "reel-03-dr-ruchi-explains.mp4", title: "Are you ignoring this early sign?" },
-  { file: "reel-04-dr-ruchi-explains.mp4", title: "Dental myths, busted" },
-  { file: "reel-06-dr-ruchi-explains.mp4", title: "Top 5 habits for healthy teeth" },
+  { file: "reel-03-dr-ruchi-explains.mp4", title: "Are you ignoring this early sign?", poster: "/images/reels/reel-03-dr-ruchi-explains-sq.webp" },
+  { file: "reel-04-dr-ruchi-explains.mp4", title: "Dental myths, busted", poster: "/images/reels/reel-04-dr-ruchi-explains-sq.webp" },
 ];
 
-const CASES = [
-  "ba-13-smile-makeover",
-  "ba-12-smile-makeover",
-  "ba-16-crowns",
-  "ba-22-full-mouth-rehabilitation",
-  "ba-24-full-mouth-rehabilitation",
-  "ba-29-teeth-implant",
-]
-  .map(caseByFile)
-  .filter((c) => c && c.consent !== false);
-
-const AWARDS = [
-  ["awards/national-achievers-2025-gulshan-grover-1.webp", "National Achievers Award 2025, presented to Dr Ruchi Goel by Gulshan Grover"],
-  ["awards/aiims-prosthodontics-celebration.webp", "A token of appreciation from the HOD, Division of Prosthodontics, AIIMS New Delhi"],
-  ["awards/national-achievers-2025-mahima-chaudhry.webp", "With Mahima Chaudhry at the National Achievers Award 2025"],
-  ["awards/prime-impact-excellence-award.webp", "Business and Profession Excellence Award"],
-  ["awards/clinic-celebrity-visit-king.webp", "Singer King visits Dental Krafts"],
-] as const;
+const CASES = ["ba-13-smile-makeover", "ba-24-full-mouth-rehabilitation", "ba-03-back-teeth-implant"]
+  .map(caseByFile).filter((c): c is NonNullable<typeof c> => Boolean(c && c.consent !== false));
 
 const PHYSICIAN_LD = {
   "@context": "https://schema.org",
@@ -66,12 +45,7 @@ const PHYSICIAN_LD = {
     { "@type": "Organization", name: "Indian Prosthodontic Society" },
   ],
   award: "National Achievers Award 2025",
-  worksFor: clinics.map((c) => ({
-    "@type": "Dentist",
-    name: `Dental Krafts — ${c.name}`,
-    address: c.address,
-    telephone: c.phone,
-  })),
+  worksFor: clinics.map((c) => ({ "@type": "Dentist", name: `Dental Krafts — ${c.name}`, address: c.address, telephone: c.phone })),
   sameAs: ["https://www.practo.com/gurgaon/doctor/dr-ruchi-goel-dentist"],
 };
 
@@ -79,129 +53,141 @@ export default function DrRuchiGoel() {
   return (
     <>
       {/* 1 · Hero */}
-      <section className="ihero"><div className="wrap">
-        <div className="crumb"><Link href="/">Home</Link> / <Link href="/our-dentists">Our dentists</Link> / Dr Ruchi Goel</div>
-        <div className="g">
-          <div>
-            <span className="eyebrow"><Icon name="award" cls="ic ic-sm" /> {d.eyebrow}</span>
-            <h1 className="d">Dr Ruchi <em>Goel</em></h1>
-            <p className="sub">{d.degree}</p>
-            <div className="chips">
-              {d.chips.map((c) => <span className="chip" key={c.label}><Icon name={ic(c.icon)} cls="ic ic-sm" /> {c.label}</span>)}
-            </div>
-            <div className="cta">
-              <Link className="btn btn-w" href="/contact-us?doctor=Dr%20Ruchi%20Goel">Book with Dr Ruchi <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link>
-              <a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> Chat on WhatsApp</a>
-            </div>
+      <section className="dh"><div className="wrap">
+        <div>
+          <nav className="crumb" aria-label="Breadcrumb"><Link href="/">Home</Link><i>/</i><Link href="/our-dentists">Our dentists</Link><i>/</i><span>Dr Ruchi Goel</span></nav>
+          <Eb>{d.eyebrow}</Eb>
+          <h1 className="d h1x">Dr Ruchi <em>Goel</em></h1>
+          <p className="sub">{d.degree}</p>
+          <div className="facts">
+            <div><b className="tnum">Rank 1</b><span>AIIMS MDS entrance examination, 2012</span></div>
+            <div><b className="tnum">98%</b><span>recommend her, from 268 Practo votes</span></div>
+            <div><b className="tnum">2007</b><span>practising since</span></div>
           </div>
-          <div className="ph">
-            <img src={d.portrait} alt="Dr Ruchi Goel, prosthodontist and implantologist" style={{ objectPosition: "50% 25%" }} />
-            <div className="glass fl f1"><span className="big tnum">98%</span><span><b>Practo patient votes</b><small>268 patients, as of Oct 2026</small></span></div>
+          <div className="row" style={{ margin: 0 }}>
+            <Link className="btn btn-p" href="/contact-us?doctor=Dr%20Ruchi%20Goel">Book with Dr Ruchi <Icon name="arrow-right" cls="ic ic-sm" /></Link>
+            <a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> Chat on WhatsApp</a>
           </div>
+          <p className="note">Reg. A-7387, Delhi State Dental Council · Consults at both clinics</p>
         </div>
+        <div className="portrait"><img src={d.portrait} alt="Dr Ruchi Goel, prosthodontist and implantologist" fetchPriority="high" /></div>
       </div></section>
 
-      {/* 2 · About */}
-      <section className="sp"><div className="wrap two">
+      {/* 2 · Pull statement */}
+      <section className="pull"><div className="wrap">
+        <p>What patients mention most: she explains the plan, the alternatives and the cost <em>before anything begins</em>.</p>
+        <small>From Dr Ruchi's verified Practo reviews</small>
+      </div></section>
+
+      {/* 3 · About */}
+      <section className="sec"><div className="wrap abx">
+        <div className="ph"><img loading="lazy" src={d.atWork} alt="Dr Ruchi Goel at work in the clinic" /></div>
         <div>
-          <span className="eyebrow">About Dr Ruchi</span>
-          <h2 className="d h2">Rebuilding smiles, one <em>careful plan</em> at a time.</h2>
+          <Eb>About Dr Ruchi</Eb>
+          <h2 className="d h2" style={{ margin: "22px 0 30px" }}>Rebuilding smiles, one careful <em>plan</em> at a time.</h2>
           <div className="prose">
             <p>Dr Ruchi Goel is a prosthodontist: a dentist who specialises in replacing and rebuilding teeth. Her work covers dental implants, every type of denture, crowns and bridges, smile design and full-mouth rehabilitation, the complex cases where many teeth need to work together again.</p>
-            <p>She topped the AIIMS MDS entrance examination in 2012 and completed her postgraduate training in prosthodontics at AIIMS New Delhi, after clinical years at PGIMER Chandigarh and PGIMS Rohtak. Her research at AIIMS on occlusal splints for patients with severe tooth wear was published in the <em>International Journal of Prosthodontics and Restorative Dentistry</em> (2023).</p>
-            <p>Patients mention one thing about her most often: she explains the plan, the alternatives and the cost before anything begins, often with photos and X-rays on screen.</p>
+            <p>She topped the AIIMS MDS entrance examination in 2012 and completed her postgraduate training in prosthodontics at AIIMS New Delhi, after clinical years at PGIMER Chandigarh and PGIMS Rohtak. Her research at AIIMS on occlusal splints for patients with severe tooth wear was published in the <i>International Journal of Prosthodontics and Restorative Dentistry</i> (2023).</p>
+            <p>Before anything begins, she walks you through the plan, the alternatives and the cost, often with your photos and X-rays on screen.</p>
           </div>
-        </div>
-        <div className="ph"><img src={d.atWork} alt="Dr Ruchi Goel holding a dental implant model" style={{ objectPosition: "50% 40%" }} loading="lazy" /></div>
-      </div></section>
-
-      {/* 3 · Credentials */}
-      <section className="sp p"><div className="wrap">
-        <div className="head"><div><span className="eyebrow">Credentials</span><h2 className="d h2">Trained at India's <em>top institutes.</em></h2></div></div>
-        <div className="tl">
-          {d.timeline.map((t) => (
-            <div key={t.year + t.text} className={t.key ? "k" : undefined}><b className="tnum">{t.year}</b><span>{t.text}</span></div>
-          ))}
-        </div>
-        <p className="note">Registration A-7387, Delhi State Dental Council (2015).</p>
-      </div></section>
-
-      {/* 4 · What she treats */}
-      <section className="sp"><div className="wrap">
-        <div className="head"><div><span className="eyebrow">What Dr Ruchi treats</span><h2 className="d h2">Replacing and <em>rebuilding</em> teeth.</h2></div></div>
-        <div className="cards c4">
-          {d.treats.map((t) =>
-            t.href ? (
-              <Link className="cd" key={t.title} href={t.href}><span className="badge"><Icon name={ic(t.icon)} /></span><b>{t.title}</b><span>{t.sub}</span></Link>
-            ) : (
-              <div className="cd" key={t.title}><span className="badge"><Icon name={ic(t.icon)} /></span><b>{t.title}</b><span>{t.sub}</span></div>
-            )
-          )}
+          <div className="def"><b>What is a prosthodontist?</b><p>A dentist with three more years of specialist training in replacing and restoring teeth: implants, dentures, crowns, bridges and complex rebuilding. In India it's an MDS in Prosthodontics.</p></div>
         </div>
       </div></section>
 
-      {/* 5 · Cases */}
-      <section className="sp b"><div className="wrap">
-        <div className="head"><div><span className="eyebrow">Her cases</span><h2 className="d h2">Cases planned by <em>Dr Ruchi.</em></h2></div><Link className="link" href="/gallery">See all results <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
-        <div className="res3">
-          {CASES.map((c) => (
-            <figure key={c!.file}>
-              <BaSlider file={c!.file} />
-              <figcaption>{c!.cat}<span>{c!.caption}</span></figcaption>
-            </figure>
-          ))}
+      {/* 4 · Career */}
+      <section className="sec tint-white bt"><div className="wrap">
+        <div className="sh">
+          <Eb>Training and career</Eb>
+          <h2 className="d h2">From AIIMS to your <em>chair</em>.</h2>
+          <p className="lead">Memberships: Indian Dental Association · Indian Prosthodontic Society.</p>
         </div>
-        <p className="note">Shared with patient consent. Individual results vary.</p>
-      </div></section>
-
-      {/* 6 · Videos */}
-      <section className="sp"><div className="wrap">
-        <div className="head"><div><span className="eyebrow">Dr Ruchi explains</span><h2 className="d h2">Short answers, <em>straight</em> from her.</h2></div><a className="link" href={site.youtube} target="_blank" rel="noopener">More on YouTube <Icon name="arrow-up-right" cls="ic ic-sm" /></a></div>
-        <div className="reels">
-          {REELS.map((r) => <Reveal key={r.file}><ReelCard reel={r} /></Reveal>)}
-        </div>
-      </div></section>
-
-      {/* 7 · Recognition */}
-      <section className="gA sec on-dark"><div className="wrap">
-        <div className="head"><div><span className="eyebrow">Recognition</span><h2 className="d h2" style={{ color: "var(--white)" }}>Recognised by peers <em>and the profession.</em></h2></div></div>
-        <div className="rail">
-          {AWARDS.map(([src, cap]) => (
-            <figure key={src}><div className="ph"><img src={`/images/${src}`} alt={cap} loading="lazy" /></div><figcaption>{cap}</figcaption></figure>
-          ))}
-        </div>
-      </div></section>
-
-      {/* 8 · Reviews */}
-      <section className="sp p"><div className="wrap">
-        <div className="head"><div><span className="eyebrow">What patients say</span><h2 className="d h2">"She takes her time, <em>never</em> in a hurry."</h2></div><span className="chip"><Icon name="star" cls="ic ic-sm" /> 98% on Practo · 268 votes</span></div>
-        <div className="qs">
-          {d.reviews.map((id) => {
-            const r = reviewById(id);
-            return <blockquote key={id}><p>“{r.quote}”</p><cite>{r.name}<span>{r.treatment}</span></cite></blockquote>;
+        <div className="cv">
+          {d.timeline.map((t) => {
+            const [b, ...rest] = t.text.split(" · ");
+            return <div key={t.year + t.text} className={t.key ? "hi" : undefined}><span className="y tnum">{t.year}</span><b>{b}</b><span>{rest.join(" · ")}</span></div>;
           })}
         </div>
       </div></section>
 
-      {/* 9 · Where to see her + FAQ */}
-      <section className="sp"><div className="wrap fw">
+      {/* 5 · What she treats */}
+      <section className="sec tint-mist"><div className="wrap">
+        <Eb>What Dr Ruchi treats</Eb>
+        <h2 className="d h2" style={{ margin: "22px 0 40px", maxWidth: "16ch" }}>Teeth that need to work <em>again</em>.</h2>
+        <ul className="words">
+          {d.treats.map((t) => <li key={t.title}><Link href={t.href ?? "/treatments"}>{t.title}</Link></li>)}
+        </ul>
+      </div></section>
+
+      {/* 6 · Cases */}
+      <section className="sec"><div className="wrap rx">
         <div>
-          <span className="eyebrow">Where to see Dr Ruchi</span>
-          <h2 className="d h2">Both clinics, <em>on set days.</em></h2>
-          <p className="lead">Call to confirm which clinic Dr Ruchi is at today.</p>
+          <Eb>Cases planned by Dr Ruchi</Eb>
+          <h2 className="d h2" style={{ margin: "22px 0 28px" }}>Her work, <em>before</em> and after.</h2>
+          <p className="case-k" data-k>{CASES[0]?.cat}</p>
+          <p className="case-c" data-c>{CASES[0]?.caption}</p>
+          <p className="fine">Shared with patient consent. Individual results vary.</p>
+        </div>
+        <BaShowcase cases={CASES} />
+      </div></section>
+
+      {/* 7 · Reviews */}
+      <section className="sec tint-white bt"><div className="wrap">
+        <div className="sh">
+          <Eb>What patients say</Eb>
+          <h2 className="d h2">In their own <em>words</em>.</h2>
+          <p className="lead">Verified Practo reviews, lightly trimmed.</p>
+        </div>
+        <div className="qg">
+          {d.reviews.slice(0, 4).map((id) => {
+            const r = reviewById(id);
+            return <figure key={id}><blockquote>“{r.quote}”</blockquote><figcaption><b>{r.name}</b> · {r.treatment}</figcaption></figure>;
+          })}
+        </div>
+      </div></section>
+
+      {/* 8 · Videos */}
+      <section className="sec"><div className="wrap vx">
+        <VPlaylist reels={REELS} />
+        <div>
+          <Eb>Dr Ruchi explains</Eb>
+          <h2 className="d h2" style={{ marginTop: 22 }}>One question, one <em>minute</em>.</h2>
+        </div>
+      </div></section>
+
+      {/* 9 · Where + FAQ */}
+      <section className="sec tint-white bt"><div className="wrap">
+        <div className="sh">
+          <Eb>Where to see Dr Ruchi</Eb>
+          <h2 className="d h2">Both clinics, on <em>set days</em>.</h2>
+          <p className="lead">Call to confirm which clinic she's at today.</p>
+        </div>
+        <div className="where">
           {clinics.map((c) => (
-            <Link className="mini-c" key={c.id} href={c.slug}>
-              <img src={c.image} alt={c.imageAlt} loading="lazy" />
-              <span><b>{c.name}</b><span className="tnum">{c.phone} · {c.hoursLabel}</span></span>
-            </Link>
+            <div key={c.id}>
+              <h3 className="h3">{c.short}</h3>
+              <address>{c.address}</address>
+              <span><OpenStatus clinicId={c.id} className="live" /><span className="hrs2" style={{ display: "block" }}>{c.hoursLabel} · closed Wed</span></span>
+              <div className="row" style={{ margin: 0 }}><a className="btn btn-s btn-sm" href={c.phoneHref}><Icon name="phone-call" cls="ic ic-sm" /> {c.phone}</a></div>
+            </div>
           ))}
+        </div>
+      </div></section>
+
+      <section className="sec"><div className="wrap fx">
+        <div className="stick">
+          <Eb>Questions</Eb>
+          <h2 className="d h2" style={{ marginTop: 22 }}>Asked about Dr Ruchi's <em>work</em>.</h2>
         </div>
         <div>{d.faqs.map((f) => <QA key={f.q} q={f.q} a={f.a} />)}</div>
       </div></section>
 
       {/* 10 · CTA */}
-      <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
-        <CtaBand title="Book with" em="Dr Ruchi." text="A ₹500 consultation with a full examination. You'll leave with a plan and a written estimate." book="Book with Dr Ruchi" />
+      <section className="cta"><div className="wrap">
+        <div>
+          <Eb>Book with Dr Ruchi</Eb>
+          <h2 className="d h2" style={{ marginTop: 22 }}>A ₹500 consultation, and a plan in <em>writing</em>.</h2>
+        </div>
+        <div className="row"><a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a><Link className="btn btn-p" href="/contact-us?doctor=Dr%20Ruchi%20Goel">Book a visit <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
       </div></section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PHYSICIAN_LD) }} />

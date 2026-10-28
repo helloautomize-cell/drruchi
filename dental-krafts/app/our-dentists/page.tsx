@@ -44,7 +44,7 @@ export default function OurDentists() {
       <section className="dC sec"><div className="wrap">
         <Reveal><div className="head"><div><span className="eyebrow">Two specialists, one roof</span><h2 className="d h2">Led by an AIIMS <em>prosthodontist.</em></h2></div></div></Reveal>
         <div className="grid">
-          <Reveal><article className="lead-c on-dark">
+          <Reveal><article className="lead-c">
             <div className="ph"><img src="/images/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel, prosthodontist and implantologist" style={{ objectPosition: "52% 30%" }} loading="lazy" /></div>
             <div className="t">
               <span className="eyebrow">Founder · Prosthodontist</span><h3 className="d">Dr Ruchi Goel</h3>

@@ -83,8 +83,8 @@ export default function AboutUs() {
       </div></section>
 
       {/* Recognition */}
-      <section className="gA sec on-dark"><div className="wrap">
-        <div className="head"><div><span className="eyebrow">Recognition</span><h2 className="d h2" style={{ color: "var(--white)" }}>Recognised by peers <em>and the profession.</em></h2></div></div>
+      <section className="sec tint-white bt"><div className="wrap">
+        <div className="head"><div><span className="eyebrow">Recognition</span><h2 className="d h2">Recognised by peers <em>and the profession.</em></h2></div></div>
         <div className="rail">
           {AWARDS.map(([src, cap]) => (
             <figure key={src}><div className="ph"><img src={`/images/${src}`} alt={cap} loading="lazy" /></div><figcaption>{cap}</figcaption></figure>
@@ -94,7 +94,7 @@ export default function AboutUs() {
 
       {/* CTA */}
       <section className="sp"><div className="wrap">
-        <div className="band2 on-dark">
+        <div className="band2">
           <div><h2 className="d">Meet the <em>dentists.</em></h2><p>Prosthodontics and pediatric dentistry, under one roof — the people who plan your treatment are the people who do it.</p></div>
           <div className="cta">
             <Link className="btn btn-w" href="/our-dentists">Meet the dentists <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link>

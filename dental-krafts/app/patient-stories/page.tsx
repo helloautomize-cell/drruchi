@@ -76,7 +76,7 @@ export default function PatientStories() {
 
       {/* Closing */}
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
-        <div className="band2 on-dark" style={{ marginBottom: 16 }}>
+        <div className="band2" style={{ marginBottom: 16 }}>
           <div>
             <h2 className="d">Had a visit <em>with us?</em></h2>
             <p>Share your story on Practo or Google — it helps other patients choose.</p>

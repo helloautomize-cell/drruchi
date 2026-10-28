@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Figtree } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import "./dk-motion.css";
 import { Sprites } from "@/components/sprites";
+import { Motion } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyBar } from "@/components/sticky-bar";
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#1E3A30" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#FAF8F4" };
 
 const ORG = {
   "@context": "https://schema.org",
@@ -43,9 +45,11 @@ const ORG = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${figtree.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${fraunces.variable} ${figtree.variable}`}>
       <body>
+        <Script id="dk-motion-flag" strategy="beforeInteractive">{`(function(h){if(!matchMedia("(prefers-reduced-motion: reduce)").matches){h.classList.add("js-m");setTimeout(function(){if(!window.DKM)h.classList.remove("js-m")},3000)}})(document.documentElement)`}</Script>
         <a className="skip" href="#main">Skip to content</a>
+        <Motion />
         <Sprites />
         <SiteHeader />
         <main id="main">{children}</main>

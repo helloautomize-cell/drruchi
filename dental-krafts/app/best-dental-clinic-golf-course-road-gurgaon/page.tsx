@@ -40,7 +40,7 @@ export default function GolfCourseRoad() {
             <div className="cta">
               <Link className="btn btn-w" href="/contact-us?clinic=Sector%2053%20%C2%B7%20Golf%20Course%20Road">Book a visit <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link>
               <a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a>
-              <a className="btn btn-sm" style={{ background: "transparent", color: "var(--white)", boxShadow: "inset 0 0 0 1.5px rgba(255,251,245,.6)" }} href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`} target="_blank" rel="noopener"><Icon name="map-route" cls="ic ic-sm" /> Directions</a>
+              <a className="btn btn-s btn-sm" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`} target="_blank" rel="noopener"><Icon name="map-route" cls="ic ic-sm" /> Directions</a>
             </div>
           </div>
           <div className="ph">

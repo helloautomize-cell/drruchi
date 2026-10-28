@@ -35,28 +35,28 @@ export default function ContactUs() {
       </div></section>
 
       {/* Booking form */}
-      <section className="bkB sec"><div className="wrap">
-        <div style={{ textAlign: "center", marginBottom: 28 }}><span className="eyebrow">The form</span><h2 className="d h2">Three <em>quick</em> steps.</h2></div>
+      <section className="sec tint-sage"><div className="wrap">
+        <div className="sh c"><p className="eb"><span className="tri"><i /><i /><i /></span>The form</p><h2 className="d h2">Tell us in one <em>sentence</em>.</h2></div>
         <BookingForm />
       </div></section>
 
       {/* Clinic cards */}
-      <section className="clA sec" style={{ background: "var(--blush)" }}><div className="wrap">
-        <div className="head"><div><span className="eyebrow">Or visit us</span><h2 className="d h2">Two clinics. <em>Pick the closer one.</em></h2></div></div>
-        <div className="grid">
+      <section className="sec"><div className="wrap">
+        <div className="sh"><p className="eb"><span className="tri"><i /><i /><i /></span>Or visit us</p><h2 className="d h2">Two clinics. <em>Pick the closer one.</em></h2></div>
+        <div className="cl">
           {clinics.map((c) => (
-            <article className="cl" key={c.id}>
-              <div className="ph"><img src={c.image} alt={c.imageAlt} loading="lazy" /><span className="glass st"><OpenStatus clinicId={c.id} className="stat-live" /></span></div>
-              <div className="in">
-                <h3 className="d">{c.name}</h3>
-                <div className="ad"><Icon name="map-pin" /><span>{c.address}</span></div>
-                <div className="ad"><Icon name="phone-call" /><span className="tnum">{c.phone}</span></div>
-                <div className="ad"><Icon name="clock" /><span>{c.hoursLabel} · closed Wednesdays</span></div>
-                <div className="near">{c.nearby.map((n) => <span key={n}>{n}</span>)}</div>
-                <div className="acts">
-                  <a className="btn btn-p btn-sm" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`} target="_blank" rel="noopener"><Icon name="navigation" cls="ic ic-sm" /> Directions</a>
-                  <a className="btn btn-s btn-sm" href={c.phoneHref}><Icon name="phone-call" cls="ic ic-sm" /> Call {c.short}</a>
-                  <Link className="btn btn-s btn-sm" href={c.slug}><Icon name="arrow-right" cls="ic ic-sm" /> Clinic page</Link>
+            <article className="cc2" key={c.id}>
+              <div className="ph"><img src={c.image} alt={c.imageAlt} loading="lazy" /></div>
+              <div className="bd">
+                <OpenStatus clinicId={c.id} className="live" />
+                <h3 className="h3">{c.name}</h3>
+                <address>{c.address}</address>
+                <dl className="hrs"><dt>Mon, Tue, Thu–Sun</dt><dd>{c.hoursLabel}</dd><dt>Wednesday</dt><dd>Closed</dd></dl>
+                <p className="near" style={{ margin: 0 }}>Near {c.nearby.join(", ")}</p>
+                <div className="row" style={{ marginTop: 6 }}>
+                  <a className="btn btn-p btn-sm" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`} target="_blank" rel="noopener"><Icon name="map-pin" cls="ic ic-sm" /> Directions</a>
+                  <a className="btn btn-s btn-sm" href={c.phoneHref}><Icon name="phone-call" cls="ic ic-sm" /> {c.phone}</a>
+                  <Link className="tl" href={c.slug}>Clinic page <Icon name="arrow-right" cls="ic ic-sm" /></Link>
                 </div>
               </div>
             </article>

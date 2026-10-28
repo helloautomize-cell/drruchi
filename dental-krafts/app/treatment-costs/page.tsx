@@ -87,7 +87,7 @@ export default function TreatmentCosts() {
         </div>
         <div className="after">
           <span className="eyebrow">Good to know</span>
-          <h3 className="d" style={{ margin: "10px 0 0", fontSize: 30, color: "var(--white)" }}>No pressure, ever</h3>
+          <h3 className="d" style={{ margin: "10px 0 0", fontSize: 30 }}>No pressure, ever</h3>
           <ul>
             <li><Icon name="check" />Your estimate is written down and itemised.</li>
             <li><Icon name="check" />Second opinions are welcome — bring your X-rays.</li>

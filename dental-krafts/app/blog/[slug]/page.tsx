@@ -97,7 +97,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* Mid-article CTA */}
-        <div className="band2 on-dark" style={{ margin: "34px 0" }}>
+        <div className="band2" style={{ margin: "34px 0" }}>
           <div>
             <h2 className="d" style={{ fontSize: "clamp(26px,3vw,40px)" }}>Rather ask <em>a dentist?</em></h2>
             <p>A ₹500 consultation answers your own questions, with a written estimate.</p>

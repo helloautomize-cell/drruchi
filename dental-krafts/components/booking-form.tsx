@@ -1,57 +1,86 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Icon } from "./icons";
-import { clinics } from "@/content/clinics";
-import { doctors } from "@/content/doctors";
+import { FitSelect } from "./concierge";
 import { site } from "@/content/site";
 
-const CONCERNS = [
-  ["tooth-implant", "Missing teeth"], ["tooth-root", "Tooth pain"], ["broken-tooth", "Broken tooth"],
-  ["braces-teeth", "Crooked teeth"], ["sparkles", "Stained teeth"], ["first-tooth", "My child's teeth"],
-  ["teeth", "Dentures"], ["x-ray", "Second opinion"], ["x-ray", "Not sure"],
-] as const;
+const DOC_OPTS = ["either dentist", "Dr Ruchi Goel", "Dr Parmod Gulia"];
+const CONCERN_OPTS = ["missing teeth", "tooth pain", "a broken tooth", "crooked teeth", "stained teeth", "my child's teeth", "dentures", "a second opinion", "a check-up"];
+const CLINIC_OPTS = ["either clinic", "Sector 53", "Sector 57"];
+
+const CONCERN_MAP: Record<string, string> = {
+  "missing teeth": "missing teeth", "tooth pain": "tooth pain",
+  "a chipped tooth": "a broken tooth", "chipped or broken": "a broken tooth", "broken tooth": "a broken tooth",
+  "gaps or crooked": "crooked teeth", "crooked teeth": "crooked teeth", "gaps or crooked teeth": "crooked teeth",
+  "stained teeth": "stained teeth", "my child's teeth": "my child's teeth",
+  "dentures": "dentures", "second opinion": "a second opinion", "a second opinion": "a second opinion",
+  "not sure": "a check-up", "a check-up": "a check-up", "check-up": "a check-up",
+};
+const normConcern = (v: string | null) => (v && CONCERN_MAP[v.toLowerCase()]) || "missing teeth";
+const normClinic = (v: string | null) => (v && v.includes("53") ? "Sector 53" : v && v.includes("57") ? "Sector 57" : "either clinic");
+const normDoctor = (v: string | null) => (v && v.toLowerCase().includes("ruchi") ? "Dr Ruchi Goel" : v && v.toLowerCase().includes("parmod") ? "Dr Parmod Gulia" : "either dentist");
+
+const DN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export function BookingForm({ presetClinic, presetDoctor, presetConcern }: { presetClinic?: string; presetDoctor?: string; presetConcern?: string }) {
-  const [step, setStep] = useState(1);
-  const [concern, setConcern] = useState(presetConcern ?? "Missing teeth");
-  const [clinic, setClinic] = useState(presetClinic ?? "Either clinic");
-  const [doctor, setDoctor] = useState(presetDoctor ?? "Either dentist");
-  const [date, setDate] = useState("");
-  const [tod, setTod] = useState("Morning");
   const [name, setName] = useState("");
+  const [doctor, setDoctor] = useState(() => normDoctor(presetDoctor ?? null));
+  const [concern, setConcern] = useState(() => normConcern(presetConcern ?? null));
+  const [clinic, setClinic] = useState(() => presetClinic ? normClinic(presetClinic) : "either clinic");
+  const [day, setDay] = useState("");
+  const [days, setDays] = useState<string[]>([]);
   const [phone, setPhone] = useState("");
   const [hp, setHp] = useState("");
   const [err, setErr] = useState("");
   const [done, setDone] = useState("");
   const [busy, setBusy] = useState(false);
-  const [minDate, setMinDate] = useState("");
 
   useEffect(() => {
-    setMinDate(new Date().toISOString().slice(0, 10));
+    // next 12 days, skipping Wednesdays
+    const t = new Date(), out: string[] = [];
+    for (let k = 0; out.length < 12; k++) {
+      const d = new Date(t.getFullYear(), t.getMonth(), t.getDate() + k);
+      if (d.getDay() === 3) continue;
+      out.push(`${k === 0 ? "today, " : k === 1 ? "tomorrow, " : ""}${DN[d.getDay()]} ${d.getDate()} ${MN[d.getMonth()]}`);
+    }
+    setDays(out);
   }, []);
 
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
-    if (!presetConcern && q.get("concern")) setConcern(q.get("concern")!);
-    else if (!presetConcern && q.get("c")) setConcern("Not sure");
-    if (!presetClinic && q.get("clinic")) setClinic(q.get("clinic")!);
-    if (!presetDoctor && q.get("doctor")) setDoctor(q.get("doctor")!);
+    if (!presetConcern && q.get("concern")) setConcern(normConcern(q.get("concern")));
+    else if (!presetConcern && q.get("c") === "not-sure") setConcern("a check-up");
+    if (!presetClinic && q.get("clinic")) setClinic(normClinic(q.get("clinic")));
+    else if (!presetClinic && q.get("c") && q.get("c") !== "not-sure") setClinic(normClinic(q.get("c")));
+    if (!presetDoctor && q.get("doctor")) setDoctor(normDoctor(q.get("doctor")));
+    // concierge prefill bridge
+    const onBook = (e: Event) => {
+      const d = (e as CustomEvent).detail as { concern?: string; clinic?: string; doctor?: string };
+      if (!presetConcern && d.concern) setConcern(normConcern(d.concern));
+      if (!presetClinic && d.clinic) setClinic(normClinic(d.clinic));
+      if (!presetDoctor && d.doctor) setDoctor(normDoctor(d.doctor));
+    };
+    window.addEventListener("dk-book", onBook);
+    return () => window.removeEventListener("dk-book", onBook);
   }, [presetConcern, presetClinic, presetDoctor]);
 
-  const wa = `https://wa.me/919810448720?text=${encodeURIComponent(`Hello Dental Krafts, I'd like to book a visit for ${concern} at ${clinic}.`)}`;
+  const sentence = `Hello Dental Krafts, my name is ${name.trim() || "…"}. I'd like to see ${doctor} about ${concern} at ${clinic}${day ? ` on ${day}` : ", on the earliest day"}.`;
+  const wa = `https://wa.me/919810448720?text=${encodeURIComponent(sentence)}`;
 
-  async function submit() {
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
     setErr("");
+    if (hp) return;
     if (!name.trim()) return setErr("Please enter your name.");
     if (phone.replace(/\D/g, "").length !== 10) return setErr("Please enter a 10-digit mobile number.");
-    if (date && new Date(date + "T12:00").getDay() === 3) return setErr("We're closed on Wednesdays. Please pick another day.");
-    if (hp) return;
     setBusy(true);
     try {
       if (site.bookingEndpoint) {
         await fetch(site.bookingEndpoint, {
           method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ name, phone, concern, clinic, doctor, date, timeOfDay: tod }),
+          body: JSON.stringify({ name: name.trim(), phone, concern, clinic, doctor, day }),
         });
       }
       setDone(`Thanks, ${name.trim()}. We'll call you from +91 98104 48720 within working hours.`);
@@ -61,68 +90,45 @@ export function BookingForm({ presetClinic, presetDoctor, presetConcern }: { pre
   }
 
   return (
-    <div className="box" id="book">
-      <div className="stp">
-        {["What's wrong", "Where and who", "Your details"].map((t, i) => (
-          <div key={t} className={step === i + 1 ? "on" : step > i + 1 ? "dn" : ""}><i>{i + 1}</i><span>{t}</span></div>
-        ))}
+    <form className="bk" onSubmit={submit} noValidate data-r>
+      {!done && (
+        <div>
+          <p className="sent">Hello, my name is{" "}
+            <input className="w" autoComplete="name" placeholder="your name" aria-label="Your name" value={name} onChange={(e) => setName(e.target.value)} />. I'd like to see{" "}
+            <FitSelect id="b-doc" label="Dentist" value={doctor} onChange={setDoctor}>
+              {DOC_OPTS.map((o) => <option key={o}>{o}</option>)}
+            </FitSelect>{" "}
+            about{" "}
+            <FitSelect id="b-con" label="Concern" value={concern} onChange={setConcern}>
+              {CONCERN_OPTS.map((o) => <option key={o}>{o}</option>)}
+            </FitSelect>{" "}
+            at{" "}
+            {presetClinic ? <em style={{ color: "var(--orange-ink)", fontFamily: "var(--display)", borderBottom: "1.5px solid var(--line-2)", paddingBottom: 2 }}>{normClinic(presetClinic)}</em> : (
+              <FitSelect id="b-cl" label="Clinic" value={clinic} onChange={setClinic}>
+                {CLINIC_OPTS.map((o) => <option key={o}>{o}</option>)}
+              </FitSelect>
+            )}{" "}
+            on{" "}
+            <FitSelect id="b-date" label="Preferred day" value={day} onChange={setDay}>
+              <option value="">the earliest day</option>
+              {days.map((d) => <option key={d} value={d}>{d}</option>)}
+            </FitSelect>. Please call me on{" "}
+            <input className="w" inputMode="numeric" autoComplete="tel-national" placeholder="10-digit mobile" aria-label="10-digit mobile number" maxLength={10} value={phone} onChange={(e) => setPhone(e.target.value)} />.
+          </p>
+          <input className="hp" tabIndex={-1} autoComplete="off" aria-hidden="true" value={hp} onChange={(e) => setHp(e.target.value)} />
+          <p className="err" role="alert" aria-live="polite">{err}</p>
+          <div className="foot">
+            <p>By sending this, you agree Dental Krafts may contact you about your enquiry. See our <Link href="/privacy-policy">Privacy Policy</Link>.</p>
+            <div className="row" style={{ margin: 0 }}>
+              <a className="btn btn-wa" href={wa} target="_blank" rel="noopener"><Icon name="whatsapp" cls="ic ic-sm" /> Send on WhatsApp</a>
+              <button className="btn btn-p" type="submit" disabled={busy}>{busy ? "Sending…" : "Request appointment"} <Icon name="arrow-right" cls="ic ic-sm" /></button>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`ok${done ? " show" : ""}`} aria-live="polite">
+        <p className="sent">{done || "Thank you. We'll call you within working hours."}</p>
       </div>
-      {step === 1 && (
-        <div className="pane">
-          <b className="d" style={{ fontSize: 24 }}>What brings you in?</b>
-          <div className="opts">
-            {CONCERNS.map(([ic, l]) => (
-              <button key={l} className="op" aria-pressed={concern === l} onClick={() => setConcern(l)}><Icon name={ic} />{l}</button>
-            ))}
-          </div>
-          <div className="nav2"><span style={{ color: "var(--muted)", fontSize: 14 }}>Takes about a minute</span>
-            <button className="btn btn-p" onClick={() => setStep(2)}>Continue <Icon name="arrow-right" cls="ic ic-sm" /></button></div>
-        </div>
-      )}
-      {step === 2 && (
-        <div className="pane">
-          <b className="d" style={{ fontSize: 24 }}>Where and with whom?</b>
-          <div className="two">
-            <label className="f">Clinic
-              <select value={clinic} onChange={(e) => setClinic(e.target.value)}>
-                <option>Either clinic</option>{clinics.map((c) => <option key={c.id}>{c.name}</option>)}
-              </select></label>
-            <label className="f">Dentist
-              <select value={doctor} onChange={(e) => setDoctor(e.target.value)}>
-                <option>Either dentist</option>{doctors.map((d) => <option key={d.id}>{d.name}</option>)}
-              </select></label>
-            <label className="f">Preferred date
-              <input type="date" value={date} min={minDate || undefined} onChange={(e) => setDate(e.target.value)} /></label>
-            <label className="f">Time of day
-              <select value={tod} onChange={(e) => setTod(e.target.value)}><option>Morning</option><option>Afternoon</option><option>Evening</option></select></label>
-          </div>
-          <div className="nav2">
-            <button className="btn btn-s" onClick={() => setStep(1)}><Icon name="arrow-left" cls="ic ic-sm" /> Back</button>
-            <button className="btn btn-p" onClick={() => setStep(3)}>Continue <Icon name="arrow-right" cls="ic ic-sm" /></button>
-          </div>
-        </div>
-      )}
-      {step === 3 && !done && (
-        <div className="pane">
-          <b className="d" style={{ fontSize: 24 }}>How do we reach you?</b>
-          <div className="two">
-            <label className="f">Your name<input autoComplete="name" placeholder="Full name" value={name} onChange={(e) => setName(e.target.value)} /></label>
-            <label className="f">Phone number<input inputMode="numeric" autoComplete="tel" placeholder="10-digit mobile" value={phone} onChange={(e) => setPhone(e.target.value)} /></label>
-          </div>
-          <label className="hp" aria-hidden="true">Leave empty<input tabIndex={-1} autoComplete="off" value={hp} onChange={(e) => setHp(e.target.value)} /></label>
-          {err && <p role="alert" style={{ color: "#A33B2A", fontWeight: 600 }}>{err}</p>}
-          <div className="nav2">
-            <button className="btn btn-s" onClick={() => setStep(2)}><Icon name="arrow-left" cls="ic ic-sm" /> Back</button>
-            <button className="btn btn-p" disabled={busy} onClick={submit}>{busy ? "Sending…" : "Request appointment"}</button>
-          </div>
-          <p className="consent" style={{ marginTop: 16 }}>By submitting, you agree that Dental Krafts may contact you about your enquiry. See our <a href="/privacy-policy" style={{ color: "var(--rose)" }}>Privacy Policy</a>. Prefer WhatsApp? <a href={wa} style={{ color: "var(--rose)", fontWeight: 650 }}>Chat with us</a>.</p>
-        </div>
-      )}
-      {done && (
-        <div className="pane"><div className="okmsg" role="status"><Icon name="check" /> {done}</div>
-          <p className="consent" style={{ marginTop: 14 }}>In a hurry? <a href={wa} style={{ color: "var(--rose)", fontWeight: 650 }}>WhatsApp us</a> or call {clinics[0].phone} (Sector 53) / {clinics[1].phone} (Sector 57).</p>
-        </div>
-      )}
-    </div>
+    </form>
   );
 }
