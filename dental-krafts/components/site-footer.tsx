@@ -21,8 +21,8 @@ export function SiteFooter() {
           <p style={{ color: "var(--ink-2)", fontSize: 15, maxWidth: "34ch", margin: "18px 0 20px" }}>Specialist dental care in Gurgaon, from dentists trained at AIIMS and PGIMER.</p>
           <Link className="btn btn-p btn-sm" href="/contact-us">Book a visit</Link>
           <div className="soc">
-            <a href={site.instagram} aria-label="Instagram"><Icon name="heart" cls="ic ic-sm" /></a>
-            <a href={site.facebook} aria-label="Facebook"><Icon name="quote" cls="ic ic-sm" /></a>
+            <a href={site.instagram} aria-label="Instagram"><Icon name="instagram" cls="ic ic-sm" /></a>
+            <a href={site.facebook} aria-label="Facebook"><Icon name="facebook" cls="ic ic-sm" /></a>
             <a href={site.youtube} aria-label="YouTube"><Icon name="youtube" cls="ic ic-sm" /></a>
           </div>
         </div>
