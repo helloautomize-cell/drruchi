@@ -265,3 +265,5 @@
   }
   W.DKM={init:init,destroy:destroy,lenis:function(){return lenis},scrollTo:function(t,o){if(lenis)lenis.scrollTo(t,o);else (typeof t==="string"?D.querySelector(t):t).scrollIntoView({behavior:"smooth"})}};
 })();
+
+export {}

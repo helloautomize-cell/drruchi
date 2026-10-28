@@ -21,7 +21,7 @@ const ROW_WHO_LABEL: Record<string, string> = {
 export function TreatmentsIndex() {
   const [sel, setSel] = useState(0);
   const g = treatmentGroups[sel];
-  const [base, setBase] = useState(g.img);
+  const [base, setBase] = useState<string>(g.img);
   const [nx, setNx] = useState<string | null>(null);
 
   /* the incoming photo wipes up over the settled one (v4); under reduced motion it just swaps */
