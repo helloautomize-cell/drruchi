@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { OpenStatus, ClinicWeek } from "@/components/open-status";
@@ -8,9 +9,10 @@ import { clinics } from "@/content/clinics";
 import { doctors } from "@/content/doctors";
 import { reviewById } from "@/content/reviews";
 import { site } from "@/content/site";
+import { JsonLd, clinicNode, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Dentist in Sector 57, Sushant Lok 2 | Bestech Central Square | Dental Krafts",
+  title: "Dentist in Sector 57, Sushant Lok 2 | Dental Krafts",
   description: "Dental Krafts Sector 57, UG-12, 1st Floor, Bestech Central Square Mall, opp. Hong Kong Bazaar. Open 10 am–8:30 pm, closed Wed. Call +91 95992 52018.",
   alternates: { canonical: "/dental-clinic-sector-57-gurgaon" },
 };
@@ -35,21 +37,10 @@ const MOS: [string, string][] = [
   ["/images/doctors/dk-doctors-performing-procedure-2.webp", "Sterile instruments ready for treatment"],
 ];
 
-const LD = {
-  "@context": "https://schema.org",
-  "@type": ["Dentist", "LocalBusiness"],
-  name: "Dental Krafts — Sector 57, Sushant Lok 2",
-  url: `${site.domain}${c.slug}`,
-  image: `${site.domain}${c.image}`,
-  telephone: c.phone,
-  priceRange: "₹₹",
-  address: { "@type": "PostalAddress", streetAddress: "UG-12, 1st Floor, Bestech Central Square Mall, Opp. Hong Kong Bazaar Road, Block G, Sushant Lok 2", addressLocality: "Sector 57, Gurugram", addressRegion: "Haryana", postalCode: "122011", addressCountry: "IN" },
-  geo: { "@type": "GeoCoordinates", latitude: 28.4216, longitude: 77.0904 },
-  hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`,
-  openingHoursSpecification: ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"].map((d) => ({ "@type": "OpeningHoursSpecification", dayOfWeek: d, opens: "10:00", closes: "20:30" })),
-  aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: c.practoStories },
-  sameAs: [site.practo, site.justdial],
-};
+const LD = [
+  clinicNode(c),
+  breadcrumb([["Home", "/"], ["Clinics", "/contact-us"], ["Sector 57", c.slug]]),
+];
 
 export default function Sector57() {
   return (
@@ -73,8 +64,8 @@ export default function Sector57() {
         </aside>
       </div>
       <div className="wrap mos" aria-label="Clinic photos">
-        <figure className="ph"><img src={MOS[0][0]} alt={MOS[0][1]} fetchPriority="high" /><figcaption>{MOS[0][1]}</figcaption></figure>
-        {MOS.slice(1).map(([src, alt]) => <figure className="ph" key={src}><img loading="lazy" src={src} alt={alt} /><figcaption>{alt}</figcaption></figure>)}
+        <figure className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src={MOS[0][0]} width={1400} height={900} alt={MOS[0][1]} fetchPriority="high" /><figcaption>{MOS[0][1]}</figcaption></figure>
+        {MOS.slice(1).map(([src, alt]) => <figure className="ph" key={src}><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={src} width={1200} height={800} alt={alt} /><figcaption>{alt}</figcaption></figure>)}
       </div></section>
 
       {/* 2 · Getting here + drive times */}
@@ -107,7 +98,7 @@ export default function Sector57() {
           <Link className="btn btn-p" href="/contact-us?concern=My%20child%27s%20teeth" style={{ marginTop: 8 }}>Book your child's visit <Icon name="arrow-right" cls="ic ic-sm" /></Link>
         </div>
         <div className="ph" style={{ borderRadius: "var(--r-lg)", overflow: "hidden", aspectRatio: "4/3", background: "#262422" }}>
-          <img loading="lazy" src="/images/clinic/kids-operatory-mural-clean.webp" alt="The children's treatment room with a painted mural" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src="/images/clinic/kids-operatory-mural-clean.webp" width={370} height={430} alt="The children's treatment room with a painted mural" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
         </div>
       </div></section>
 
@@ -121,7 +112,7 @@ export default function Sector57() {
         <div className="dm">
           {doctors.map((doc) => (
             <Link key={doc.id} href={doc.slug}>
-              <img loading="lazy" src={doc.portrait} alt={doc.name} />
+              <Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={doc.portrait} width={1055} height={1318} alt={doc.name} />
               <span><small>{doc.role}</small><b>{doc.name}</b><span>{doc.slug.includes("ruchi") ? "MDS Prosthodontics, AIIMS New Delhi" : "MDS, PGIMER Chandigarh, silver medal"}</span></span>
             </Link>
           ))}
@@ -156,7 +147,7 @@ export default function Sector57() {
         <BookingForm presetClinic={c.name} />
       </div></section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(LD) }} />
+      <JsonLd data={LD} />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { OpenStatus, ClinicWeek } from "@/components/open-status";
@@ -8,9 +9,10 @@ import { clinics } from "@/content/clinics";
 import { doctors } from "@/content/doctors";
 import { reviewById } from "@/content/reviews";
 import { site } from "@/content/site";
+import { JsonLd, clinicNode, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Dentist in Sector 53, Golf Course Road | South Point Mall | Dental Krafts",
+  title: "Dentist in Sector 53, Golf Course Road | Dental Krafts",
   description: "Dental Krafts Sector 53, DSP-211, 2nd Floor, South Point Mall, Golf Course Road. AIIMS & PGIMER dentists. Open 10 am–8 pm, closed Wed. Call +91 98104 48720.",
   alternates: { canonical: "/dental-clinic-sector-53-gurgaon" },
 };
@@ -35,21 +37,10 @@ const MOS: [string, string][] = [
   ["/images/doctors/dk-doctors-performing-procedure-1.webp", "Both dentists during a procedure"],
 ];
 
-const LD = {
-  "@context": "https://schema.org",
-  "@type": ["Dentist", "LocalBusiness"],
-  name: "Dental Krafts — Sector 53, Golf Course Road",
-  url: `${site.domain}${c.slug}`,
-  image: `${site.domain}${c.image}`,
-  telephone: c.phone,
-  priceRange: "₹₹",
-  address: { "@type": "PostalAddress", streetAddress: "DSP-211, 2nd Floor, South Point Mall, Golf Course Road, DLF Phase 5", addressLocality: "Sector 53, Gurugram", addressRegion: "Haryana", postalCode: "122002", addressCountry: "IN" },
-  geo: { "@type": "GeoCoordinates", latitude: 28.448, longitude: 77.0991 },
-  hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`,
-  openingHoursSpecification: ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"].map((d) => ({ "@type": "OpeningHoursSpecification", dayOfWeek: d, opens: "10:00", closes: "20:00" })),
-  aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: c.practoStories },
-  sameAs: [site.practo, site.justdial],
-};
+const LD = [
+  clinicNode(c),
+  breadcrumb([["Home", "/"], ["Clinics", "/contact-us"], ["Sector 53", c.slug]]),
+];
 
 export default function Sector53() {
   return (
@@ -73,8 +64,8 @@ export default function Sector53() {
         </aside>
       </div>
       <div className="wrap mos" aria-label="Clinic photos">
-        <figure className="ph"><img src={MOS[0][0]} alt={MOS[0][1]} fetchPriority="high" /><figcaption>{MOS[0][1]}</figcaption></figure>
-        {MOS.slice(1).map(([src, alt]) => <figure className="ph" key={src}><img loading="lazy" src={src} alt={alt} /><figcaption>{alt}</figcaption></figure>)}
+        <figure className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src={MOS[0][0]} width={1400} height={900} alt={MOS[0][1]} fetchPriority="high" /><figcaption>{MOS[0][1]}</figcaption></figure>
+        {MOS.slice(1).map(([src, alt]) => <figure className="ph" key={src}><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={src} width={1200} height={800} alt={alt} /><figcaption>{alt}</figcaption></figure>)}
       </div></section>
 
       {/* 2 · Getting here + drive times */}
@@ -105,7 +96,7 @@ export default function Sector53() {
         <div className="dm">
           {doctors.map((doc) => (
             <Link key={doc.id} href={doc.slug}>
-              <img loading="lazy" src={doc.portrait} alt={doc.name} />
+              <Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={doc.portrait} width={1055} height={1318} alt={doc.name} />
               <span><small>{doc.role}</small><b>{doc.name}</b><span>{doc.slug.includes("ruchi") ? "MDS Prosthodontics, AIIMS New Delhi" : "MDS, PGIMER Chandigarh, silver medal"}</span></span>
             </Link>
           ))}
@@ -140,7 +131,7 @@ export default function Sector53() {
         <BookingForm presetClinic={c.name} />
       </div></section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(LD) }} />
+      <JsonLd data={LD} />
     </>
   );
 }

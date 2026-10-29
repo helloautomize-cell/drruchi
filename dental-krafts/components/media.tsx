@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "./icons";
 
@@ -14,7 +15,7 @@ export function ReelCard({ reel }: { reel: Reel }) {
         <video src={`/videos/${reel.file}`} controls autoPlay playsInline />
       ) : (
         <>
-          <img src={posterOf(reel)} alt="" loading="lazy" />
+          <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt="" loading="lazy" />
           <button className="play" aria-label={`Play ${reel.title}`} onClick={() => setPlay(true)}><span><Icon name="play" cls="ic" /></span></button>
           <span className="cap2"><b>{reel.title}</b><span>{reel.who ?? "Dr Ruchi Goel · 1 min"}</span></span>
         </>
@@ -97,7 +98,7 @@ export function VPlaylist({ reels }: { reels: Reel[] }) {
           <video src={`/videos/${reels[sel].file}`} controls autoPlay playsInline />
         ) : (
           <button type="button" aria-label={`Play ${reels[sel].title}`} onClick={() => { stopped.current = true; anim.current?.cancel(); setPlay(true); }} style={{ position: "absolute", inset: 0, border: 0, padding: 0, background: "none", cursor: "pointer", width: "100%" }}>
-            <img ref={imgRef} src={posterOf(r)} alt={r.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <Image sizes="(max-width: 768px) 100vw, 760px" ref={imgRef} src={posterOf(r)} width={540} height={960} alt={r.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             <span className="play"><span><Icon name="play" cls="ic" /></span><span style={{ all: "unset" }}>Watch · 1 min</span></span>
           </button>
         )}
@@ -184,7 +185,7 @@ export function Reel5({ reel }: { reel: Reel }) {
           onPlay={(e) => pauseOthers(e.currentTarget)} onEnded={() => setPlay(false)} />
       ) : (
         <>
-          <img src={posterOf(reel)} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+          <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
           <span className="dk5-rp" aria-hidden="true">
             <span className="pb"><Icon name="play" cls="ic" /></span>
             <span className="dk5-rtx"><b>{reel.title}</b><small>{reel.who ?? "Dr Ruchi Goel · 1 min"}</small></span>
@@ -231,7 +232,7 @@ export function StoryVid5({ reel }: { reel: Reel }) {
           onPlay={(e) => pauseOthers(e.currentTarget)} onEnded={() => setPlay(false)} />
       ) : (
         <>
-          <img src={posterOf(reel)} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+          <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
           <span className="tag2">Video story</span>
           <span className="dk5-rp" aria-hidden="true">
             <span className="pb"><Icon name="play" cls="ic" /></span>
@@ -252,7 +253,7 @@ export function StoryVid({ reel }: { reel: Reel }) {
         <video src={`/videos/${reel.file}`} controls autoPlay playsInline />
       ) : (
         <button type="button" aria-label={`Play ${reel.title}`} onClick={() => setPlay(true)} style={{ position: "absolute", inset: 0, border: 0, padding: 0, background: "none", cursor: "pointer", width: "100%" }}>
-          <img src={posterOf(reel)} alt={reel.title} loading="lazy" />
+          <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt={reel.title} loading="lazy" />
           <span className="tag2">Video story</span>
           <span className="play"><span><Icon name="play" cls="ic" /></span>{reel.title} · 1 min</span>
         </button>
@@ -270,7 +271,7 @@ export function VideoCard({ reel }: { reel: Reel }) {
         <video src={`/videos/${reel.file}`} controls autoPlay playsInline />
       ) : (
         <button type="button" aria-label={`Play ${reel.title}`} onClick={() => setPlay(true)} style={{ position: "absolute", inset: 0, border: 0, padding: 0, background: "none", cursor: "pointer", width: "100%" }}>
-          <img src={posterOf(reel)} alt={reel.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt={reel.title} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           <span className="play"><span><Icon name="play" cls="ic" /></span>{reel.title} · 1 min</span>
         </button>
       )}

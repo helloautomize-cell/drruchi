@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Icon } from "./icons";
 
@@ -9,8 +10,8 @@ export function BaSlider({ file, altB = "Before treatment", altA = "After treatm
   const ref = useRef<HTMLDivElement>(null);
   return (
     <div className="ba" ref={ref} role="group" aria-label="Before and after comparison" style={ratio ? { aspectRatio: ratio } : undefined}>
-      <img src={`/images/results/split/${file}__before.webp`} alt={altB} loading="lazy" />
-      <img className="af" src={`/images/results/split/${file}__after.webp`} alt={altA} loading="lazy" />
+      <Image sizes="(max-width: 768px) 100vw, 760px" src={`/images/results/split/${file}__before.webp`} width={1600} height={800} alt={altB} loading="lazy" />
+      <Image sizes="(max-width: 768px) 100vw, 760px" className="af" src={`/images/results/split/${file}__after.webp`} width={1600} height={800} alt={altA} loading="lazy" />
       <span className="hd2" /><span className="kn"><span style={{ display: "flex" }}><Icon name="arrow-left" cls="ic ic-sm" /><Icon name="arrow-right" cls="ic ic-sm" /></span></span>
       <span className="lb l">Before</span><span className="lb r">After</span>
       <input type="range" min={0} max={100} defaultValue={50}
@@ -93,8 +94,8 @@ export function BaShowcase({ cases }: { cases: BaCase[] }) {
   return (
     <div ref={box}>
       <div className={`ba${sw ? " sw" : ""}`} ref={ba} data-unveil>
-        <img src={`/images/results/split/${c.file}__before.webp`} alt="Before treatment" />
-        <img className="af" src={`/images/results/split/${c.file}__after.webp`} alt="After treatment" />
+        <Image sizes="(max-width: 768px) 100vw, 760px" src={`/images/results/split/${c.file}__before.webp`} width={1600} height={800} alt="Before treatment" />
+        <Image sizes="(max-width: 768px) 100vw, 760px" className="af" src={`/images/results/split/${c.file}__after.webp`} width={1600} height={800} alt="After treatment" />
         <span className="hd2" /><span className="kn"><span style={{ display: "flex" }}><Icon name="arrow-left" cls="ic ic-sm" /><Icon name="arrow-right" cls="ic ic-sm" /></span></span>
         <span className="lb l">Before</span><span className="lb r">After</span>
         <input ref={rng} type="range" min={0} max={100} defaultValue={50}
@@ -112,7 +113,7 @@ export function BaShowcase({ cases }: { cases: BaCase[] }) {
       <div className="thumbs" ref={rail}>
         {cases.map((x, i) => (
           <button key={x.file} type="button" aria-label={x.caption} aria-pressed={i === sel} onClick={() => { touched.current = true; show(i); }}>
-            <img src={`/images/results/split/${x.file}__after.webp`} alt="" loading="lazy" />
+            <Image sizes="(max-width: 768px) 100vw, 760px" src={`/images/results/split/${x.file}__after.webp`} width={1600} height={800} alt="" loading="lazy" />
           </button>
         ))}
       </div>

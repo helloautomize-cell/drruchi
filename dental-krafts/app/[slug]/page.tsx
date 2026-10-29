@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Icon } from "@/components/icons";
@@ -12,7 +13,10 @@ import { clinics } from "@/content/clinics";
 import { caseByFile } from "@/content/results";
 import { reviewById } from "@/content/reviews";
 import { site } from "@/content/site";
+import { JsonLd, medicalProcedure, medicalWebPage, faqPage, breadcrumb } from "@/lib/schema";
 import { emLast } from "@/lib/inner";
+
+export const ensureStatic = "navigation";
 
 export function generateStaticParams() {
   return treatments.map((t) => ({ slug: t.slug }));
@@ -21,7 +25,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const t = treatmentBySlug(slug);
-  if (!t) return {};
+  if (!t) notFound();
   return { title: t.metaTitle, description: t.metaDesc, alternates: { canonical: `/${t.slug}` } };
 }
 
@@ -40,7 +44,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
   const who = WHO[t.doctor];
   const imgs = treatmentImages[t.slug] ?? [];
   const GsImg = ({ i }: { i: number }) => imgs[i] ? (
-    <figure className="gsim"><img loading="lazy" decoding="async" src={imgs[i].src} alt={imgs[i].alt} /><figcaption>{imgs[i].alt}</figcaption></figure>
+    <figure className="gsim"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src={imgs[i].src} width={1200} height={800} alt={imgs[i].alt} /><figcaption>{imgs[i].alt}</figcaption></figure>
   ) : null;
   const results = t.resultFiles.map(caseByFile).filter((c): c is NonNullable<typeof c> => Boolean(c && c.consent !== false));
   const revs = t.reviewIds.map(reviewById).filter(Boolean);
@@ -58,13 +62,10 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
   ];
 
   const LD = [
-    { "@context": "https://schema.org", "@type": "MedicalProcedure", name: t.name, alternateName: t.h1, description: t.sub, url: `${site.domain}/${t.slug}`, procedureType: "https://schema.org/TherapeuticProcedure", bodyLocation: "Teeth and mouth", provider: { "@type": "Dentist", name: "Dental Krafts", url: site.domain } },
-    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: t.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
-    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: site.domain },
-      { "@type": "ListItem", position: 2, name: "Treatments", item: `${site.domain}/treatments` },
-      { "@type": "ListItem", position: 3, name: t.name, item: `${site.domain}/${t.slug}` },
-    ] },
+    medicalProcedure(t),
+    medicalWebPage(t),
+    faqPage(t.faqs),
+    breadcrumb([["Home", "/"], ["Treatments", "/treatments"], [t.name, `/${t.slug}`]]),
   ];
 
   return (
@@ -81,12 +82,12 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
             <a className="btn btn-wa" href={`https://wa.me/919810448720?text=${encodeURIComponent(`Hello Dental Krafts, I'd like to ask about ${t.name.toLowerCase()}.`)}`}><Icon name="whatsapp" cls="ic ic-sm" /> Ask on WhatsApp</a>
           </div>
         </div>
-        <div className="ph"><img src={t.heroImage} alt={t.heroAlt} fetchPriority="high" /></div>
+        <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src={t.heroImage} width={1536} height={1024} alt={t.heroAlt} fetchPriority="high" /></div>
       </div></section>
 
       {/* 2 · Facts bar */}
       <section className="f4" aria-label="Key facts"><div className="wrap">
-        <div><small>Planned by</small><Link className="who" href={who.href} style={{ textDecoration: "none", color: "inherit" }}><img src={who.img} alt="" /><b>{who.label}</b></Link></div>
+        <div><small>Planned by</small><Link className="who" href={who.href} style={{ textDecoration: "none", color: "inherit" }}><Image sizes="(max-width: 768px) 100vw, 760px" src={who.img} width={60} height={60} alt="" /><b>{who.label}</b></Link></div>
         <div><small>Planning</small><b>Explained first</b><span className="fine">itemised before anything starts</span></div>
         <div><small>First visit</small><b>Exam &amp; X-rays</b><span className="fine">only if they're needed</span></div>
         <div><small>{t.urgent ? "Urgent cases" : "You leave with"}</small><b>{t.urgent ? "Same-day slots" : "A written plan"}</b><span className="fine">{t.urgent ? "when we can — call first" : "options and visits, in writing"}</span></div>
@@ -185,7 +186,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
           </div>
           <div className="rel">
             {rel.map((r) => (
-              <Link key={r!.slug} href={`/${r!.slug}`}><div className="ph"><img loading="lazy" src={r!.heroImage} alt="" /></div><b>{r!.name} <Icon name="arrow-right" cls="ic ic-sm" /></b><span>{r!.sub.slice(0, 60)}</span></Link>
+              <Link key={r!.slug} href={`/${r!.slug}`}><div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={r!.heroImage} width={1536} height={1024} alt="" /></div><b>{r!.name} <Icon name="arrow-right" cls="ic ic-sm" /></b><span>{r!.sub.slice(0, 60)}</span></Link>
             ))}
           </div>
         </div></section>
@@ -212,7 +213,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
         <div className="row"><a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a><Link className="btn btn-p" href={`/contact-us?concern=${encodeURIComponent(t.name)}`}>Book a consultation <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
       </div></section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(LD) }} />
+      <JsonLd data={LD} />
     </>
   );
 }

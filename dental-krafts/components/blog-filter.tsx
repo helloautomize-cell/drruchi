@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { postCategories } from "@/content/posts";
 
 export type BlogCard = {
@@ -29,7 +30,7 @@ export function BlogFilter({ posts }: { posts: BlogCard[] }) {
       <div className="blgrid">
         {list.map((p) => (
           <Link className="blc" key={p.slug} href={`/blog/${p.slug}`}>
-            <div className="ph"><img src={p.image} alt="" loading="lazy" /></div>
+            <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src={p.image} width={1536} height={1024} alt="" loading="lazy" /></div>
             <div className="in">
               <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--rose)" }}>{p.category}</span>
               <b>{p.title}</b>

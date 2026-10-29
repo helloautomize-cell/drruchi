@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { CtaBand } from "@/components/bits";
@@ -34,7 +35,7 @@ export default function Blog() {
             <h1 className="d">Dental questions, <em>answered.</em></h1>
             <p className="sub">Plain-English articles written and reviewed by Dr Ruchi Goel and Dr Parmod Gulia.</p>
           </div>
-          <div className="ph"><img src="/images/ai/treat-smile-design.webp" alt="Porcelain veneers beside a hand mirror" /></div>
+          <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/treat-smile-design.webp" width={1536} height={1024} alt="Porcelain veneers beside a hand mirror" /></div>
         </div>
       </div></section>
 

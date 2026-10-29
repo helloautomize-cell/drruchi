@@ -1,6 +1,6 @@
 export const site = {
   name: "Dental Krafts",
-  domain: "https://www.dentalkrafts.com",
+  domain: "https://dentalkrafts.com",
   email: "kraftsdental@gmail.com",
   whatsapp: "+91 98104 48720",
   whatsappLink:

@@ -4,7 +4,6 @@ import { treatments } from "@/content/treatments";
 import { posts } from "@/content/posts";
 
 const STATIC = [
-  "",
   "/our-dentists",
   "/dr-ruchi-goel",
   "/dr-parmod-gulia",
@@ -16,8 +15,6 @@ const STATIC = [
   "/best-dental-clinic-golf-course-road-gurgaon",
   "/best-dental-clinic-gurgaon",
   "/medical-tourism",
-  "/japanese",
-  "/korean",
   "/about-us",
   "/blog",
   "/contact-us",
@@ -25,14 +22,35 @@ const STATIC = [
   "/terms-conditions",
 ];
 
+const LANGS = {
+  "en-IN": `${site.domain}/`,
+  ja: `${site.domain}/japanese`,
+  ko: `${site.domain}/korean`,
+  "x-default": `${site.domain}/`,
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [
+    {
+      url: site.domain,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 1,
+      alternates: { languages: LANGS },
+    },
+    ...["/japanese", "/korean"].map((p) => ({
+      url: `${site.domain}${p}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+      alternates: { languages: LANGS },
+    })),
     ...STATIC.map((p) => ({
       url: `${site.domain}${p}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
-      priority: p === "" ? 1 : 0.8,
+      priority: p === "/treatments" ? 0.9 : 0.8,
     })),
     ...treatments.map((t) => ({
       url: `${site.domain}/${t.slug}`,

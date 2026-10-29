@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "./icons";
 import { FitSelect } from "./concierge";
 import { Icon as I2 } from "./icons";
@@ -150,7 +151,7 @@ export function BookingV5() {
       {opts.map((o) => (
         <label key={o.v}>
           <input type="radio" name={name} value={o.v} checked={val === o.v} onChange={() => set(o.v)} />
-          <span>{o.img && <img src={o.img} alt="" />}{o.label}</span>
+          <span>{o.img && <Image sizes="(max-width: 768px) 100vw, 760px" src={o.img} width={60} height={60} alt="" />}{o.label}</span>
         </label>
       ))}
     </div>
@@ -159,7 +160,7 @@ export function BookingV5() {
   return (
     <div className="dk5-bk" data-r>
       <aside className="dk5-side">
-        <figure><img loading="lazy" decoding="async" src="/images/clinic/reception-lounge.webp" alt="The Dental Krafts reception" /></figure>
+        <figure><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src="/images/clinic/reception-modern.webp" width={1200} height={1499} alt="The Dental Krafts reception" /></figure>
         <div className="dk5-inf">
           <p className="k">Prefer to talk?</p>
           {clinics.map((c) => (

@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyBar } from "@/components/sticky-bar";
 import { site, OG_IMAGE } from "@/content/site";
+import { JsonLd, organization, webSite } from "@/lib/schema";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -27,25 +28,20 @@ export const metadata: Metadata = {
   },
   description:
     "Implants, root canals, kids' dentistry and smile design by Dr Ruchi Goel (AIIMS) and Dr Parmod Gulia (PGIMER). Rated 5.0 on Practo. Clinics in Sector 53 & 57.",
-  openGraph: { images: [OG_IMAGE], siteName: "Dental Krafts", locale: "en_IN" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  openGraph: { images: [OG_IMAGE], siteName: "Dental Krafts", locale: "en_IN", type: "website" },
   twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#FAF8F4" };
 
-const ORG = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Dental Krafts",
-  url: site.domain,
-  logo: `${site.domain}/images/brand/dk-logo-colour.svg`,
-  email: site.email,
-  sameAs: [site.instagram, site.facebook, site.youtube, site.practo],
-};
-
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${fraunces.variable} ${figtree.variable}`}>
+    <html lang="en-IN" data-scroll-behavior="smooth" suppressHydrationWarning className={`${fraunces.variable} ${figtree.variable}`}>
       <body>
         <Script id="dk-motion-flag" strategy="beforeInteractive">{`(function(h){if(!matchMedia("(prefers-reduced-motion: reduce)").matches){h.classList.add("js-m");setTimeout(function(){if(!window.DKM)h.classList.remove("js-m")},3000)}})(document.documentElement)`}</Script>
         <a className="skip" href="#main">Skip to content</a>
@@ -55,9 +51,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main">{children}</main>
         <SiteFooter />
         <StickyBar />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG) }} />
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`} strategy="afterInteractive" />
-        <Script id="ga4" strategy="afterInteractive">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${site.gaId}');`}</Script>
+        <JsonLd data={[organization(), webSite()]} />
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`} strategy="lazyOnload" />
+        <Script id="ga4" strategy="lazyOnload">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${site.gaId}');`}</Script>
       </body>
     </html>
   );

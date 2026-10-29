@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { OpenStatus } from "@/components/open-status";
@@ -30,7 +31,7 @@ export default function ContactUs() {
               <a className="chip" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp us</a>
             </div>
           </div>
-          <div className="ph"><img src="/images/clinic/reception-lounge-wide.webp" alt="The Dental Krafts reception lounge" /></div>
+          <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/clinic/reception-lounge-wide.webp" width={1128} height={624} alt="The Dental Krafts reception lounge" /></div>
         </div>
       </div></section>
 
@@ -46,7 +47,7 @@ export default function ContactUs() {
         <div className="cl">
           {clinics.map((c) => (
             <article className="cc2" key={c.id}>
-              <div className="ph"><img src={c.image} alt={c.imageAlt} loading="lazy" /></div>
+              <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src={c.image} width={1400} height={1200} alt={c.imageAlt} loading="lazy" /></div>
               <div className="bd">
                 <OpenStatus clinicId={c.id} className="live" />
                 <h3 className="h3">{c.name}</h3>

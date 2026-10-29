@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { OpenStatus } from "@/components/open-status";
@@ -10,6 +11,7 @@ import { clinics } from "@/content/clinics";
 import { reviewById } from "@/content/reviews";
 import { caseByFile } from "@/content/results";
 import { site } from "@/content/site";
+import { JsonLd, physicianNode, faqPage, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Dr Ruchi Goel | Prosthodontist & Implantologist, AIIMS | Gurgaon",
@@ -20,34 +22,18 @@ export const metadata: Metadata = {
 const d = doctorById("ruchi");
 
 const REELS = [
-  { file: "reel-03-dr-ruchi-explains.mp4", title: "Are you ignoring this early sign?", poster: "/images/reels/reel-03-dr-ruchi-explains-sq.webp" },
-  { file: "reel-04-dr-ruchi-explains.mp4", title: "Dental myths, busted", poster: "/images/reels/reel-04-dr-ruchi-explains-sq.webp" },
+  { file: "reel-03.mp4", title: "Are you ignoring this early sign?", poster: "/images/reels/reel-03-dr-ruchi-explains-sq.webp" },
+  { file: "reel-04.mp4", title: "Dental myths, busted", poster: "/images/reels/reel-04-dr-ruchi-explains-sq.webp" },
 ];
 
 const CASES = ["ba-13-smile-makeover", "ba-24-full-mouth-rehabilitation", "ba-03-back-teeth-implant"]
   .map(caseByFile).filter((c): c is NonNullable<typeof c> => Boolean(c && c.consent !== false));
 
-const PHYSICIAN_LD = {
-  "@context": "https://schema.org",
-  "@type": "Physician",
-  name: "Dr Ruchi Goel",
-  jobTitle: "Prosthodontist & Implantologist",
-  image: `${site.domain}${d.portrait}`,
-  url: `${site.domain}/dr-ruchi-goel`,
-  identifier: "A-7387",
-  medicalSpecialty: "Prosthodontics",
-  alumniOf: [
-    { "@type": "CollegeOrUniversity", name: "All India Institute of Medical Sciences, New Delhi" },
-    { "@type": "CollegeOrUniversity", name: "D.A.V. Centenary Dental College, Yamuna Nagar" },
-  ],
-  memberOf: [
-    { "@type": "Organization", name: "Indian Dental Association" },
-    { "@type": "Organization", name: "Indian Prosthodontic Society" },
-  ],
-  award: "National Achievers Award 2025",
-  worksFor: clinics.map((c) => ({ "@type": "Dentist", name: `Dental Krafts — ${c.name}`, address: c.address, telephone: c.phone })),
-  sameAs: ["https://www.practo.com/gurgaon/doctor/dr-ruchi-goel-dentist"],
-};
+const LD = [
+  physicianNode("ruchi"),
+  faqPage(d.faqs),
+  breadcrumb([["Home", "/"], ["Our dentists", "/our-dentists"], ["Dr Ruchi Goel", "/dr-ruchi-goel"]]),
+];
 
 export default function DrRuchiGoel() {
   return (
@@ -70,7 +56,7 @@ export default function DrRuchiGoel() {
           </div>
           <p className="note">Reg. A-7387, Delhi State Dental Council · Consults at both clinics</p>
         </div>
-        <div className="portrait"><img src={d.portrait} alt="Dr Ruchi Goel, prosthodontist and implantologist" fetchPriority="high" /></div>
+        <div className="portrait"><Image sizes="(max-width: 768px) 100vw, 760px" src={d.portrait} width={1055} height={1318} alt="Dr Ruchi Goel, prosthodontist and implantologist" fetchPriority="high" /></div>
       </div></section>
 
       {/* 2 · Pull statement */}
@@ -81,7 +67,7 @@ export default function DrRuchiGoel() {
 
       {/* 3 · About */}
       <section className="sec"><div className="wrap abx">
-        <div className="ph"><img loading="lazy" src={d.atWork} alt="Dr Ruchi Goel at work in the clinic" /></div>
+        <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={d.atWork} width={1536} height={1024} alt="Dr Ruchi Goel at work in the clinic" /></div>
         <div>
           <Eb>About Dr Ruchi</Eb>
           <h2 className="d h2" style={{ margin: "22px 0 30px" }}>Rebuilding smiles, one careful <em>plan</em> at a time.</h2>
@@ -190,7 +176,7 @@ export default function DrRuchiGoel() {
         <div className="row"><a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a><Link className="btn btn-p" href="/contact-us?doctor=Dr%20Ruchi%20Goel">Book a visit <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
       </div></section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PHYSICIAN_LD) }} />
+      <JsonLd data={LD} />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { CtaBand } from "@/components/bits";
@@ -29,7 +30,7 @@ export default function MedicalTourism() {
               <Link className="btn btn-w" href="/contact-us">Book a visit <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link>
             </div>
           </div>
-          <div className="ph"><img src="/images/ai/doctors-duo.webp" alt="Dr Ruchi Goel and Dr Parmod Gulia" /></div>
+          <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/doctors-duo.webp" width={1536} height={1024} alt="Dr Ruchi Goel and Dr Parmod Gulia" /></div>
         </div>
       </div></section>
 
@@ -71,7 +72,7 @@ export default function MedicalTourism() {
 
       {/* Why Gurgaon */}
       <section className="sp"><div className="wrap two">
-        <div className="ph"><img src="/images/clinic/reception-lounge.webp" alt="The Dental Krafts reception" loading="lazy" /></div>
+        <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/clinic/reception-lounge.webp" width={1128} height={758} alt="The Dental Krafts reception" loading="lazy" /></div>
         <div>
           <span className="eyebrow">Why Gurgaon</span>
           <h2 className="d h2">Specialist care, <em>planned</em> around your trip.</h2>

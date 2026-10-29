@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { CtaBand } from "@/components/bits";
@@ -36,7 +37,7 @@ export default function OurDentists() {
               <Link className="btn btn-w" href="/contact-us">Book with either dentist <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link>
             </div>
           </div>
-          <div className="ph"><img src="/images/ai/doctors-duo.webp" alt="Dr Ruchi Goel and Dr Parmod Gulia" /></div>
+          <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/doctors-duo.webp" width={1536} height={1024} alt="Dr Ruchi Goel and Dr Parmod Gulia" /></div>
         </div>
       </div></section>
 
@@ -45,7 +46,7 @@ export default function OurDentists() {
         <Reveal><div className="head"><div><span className="eyebrow">Two specialists, one roof</span><h2 className="d h2">Led by an AIIMS <em>prosthodontist.</em></h2></div></div></Reveal>
         <div className="grid">
           <Reveal><article className="lead-c">
-            <div className="ph"><img src="/images/ai/dr-ruchi-portrait.webp" alt="Dr Ruchi Goel, prosthodontist and implantologist" style={{ objectPosition: "52% 30%" }} loading="lazy" /></div>
+            <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/dr-ruchi-portrait.webp" width={1374} height={1145} alt="Dr Ruchi Goel, prosthodontist and implantologist" style={{ objectPosition: "52% 30%" }} loading="lazy" /></div>
             <div className="t">
               <span className="eyebrow">Founder · Prosthodontist</span><h3 className="d">Dr Ruchi Goel</h3>
               <p>Implants, dentures, crowns and full-mouth rehabilitation, planned end to end. You'll see every step explained before anything begins.</p>
@@ -58,11 +59,11 @@ export default function OurDentists() {
           </article></Reveal>
           <div className="side">
             <Reveal delay={60}><article className="mini">
-              <div className="ph"><img src="/images/ai/dr-parmod-portrait.webp" alt="Dr Parmod Gulia, pediatric dentist" loading="lazy" /></div>
+              <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/dr-parmod-portrait.webp" width={1540} height={1021} alt="Dr Parmod Gulia, pediatric dentist" loading="lazy" /></div>
               <div className="t"><span className="eyebrow">Pediatric dentist</span><h3 className="d">Dr Parmod Gulia</h3><span>MDS PGIMER Chandigarh, silver medal. Children, teens and whole families.</span>
                 <Link className="link" href="/dr-parmod-gulia" style={{ alignSelf: "flex-start", marginTop: 6 }}>Meet Dr Parmod <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
             </article></Reveal>
-            <Reveal delay={120}><div className="ask"><div className="avs"><img src="/images/ai/dr-ruchi-portrait.webp" alt="" /><img src="/images/ai/dr-parmod-portrait.webp" alt="" /></div><b>Not sure who to see?</b><span style={{ color: "var(--muted)", fontSize: "14.5px" }}>Book with either. They plan complex cases together, often in the same visit.</span><Link className="btn btn-w btn-sm" href="/contact-us" style={{ alignSelf: "flex-start" }}>Book a visit</Link></div></Reveal>
+            <Reveal delay={120}><div className="ask"><div className="avs"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/dr-ruchi-portrait.webp" width={1374} height={1145} alt="" /><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/dr-parmod-portrait.webp" width={1540} height={1021} alt="" /></div><b>Not sure who to see?</b><span style={{ color: "var(--muted)", fontSize: "14.5px" }}>Book with either. They plan complex cases together, often in the same visit.</span><Link className="btn btn-w btn-sm" href="/contact-us" style={{ alignSelf: "flex-start" }}>Book a visit</Link></div></Reveal>
           </div>
         </div>
       </div></section>

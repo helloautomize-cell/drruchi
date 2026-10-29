@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { CtaBand } from "@/components/bits";
@@ -35,7 +36,7 @@ export default function BestInGurgaon() {
               <a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a>
             </div>
           </div>
-          <div className="ph"><img src="/images/ai/doctors-duo.webp" alt="Dr Ruchi Goel and Dr Parmod Gulia" /></div>
+          <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/doctors-duo.webp" width={1536} height={1024} alt="Dr Ruchi Goel and Dr Parmod Gulia" /></div>
         </div>
       </div></section>
 
@@ -53,7 +54,7 @@ export default function BestInGurgaon() {
         <div className="docs2">
           {clinics.map((c) => (
             <Link key={c.id} href={c.slug}>
-              <img src={c.image} alt={c.imageAlt} loading="lazy" />
+              <Image sizes="(max-width: 768px) 100vw, 760px" src={c.image} width={1400} height={1200} alt={c.imageAlt} loading="lazy" />
               <span><b>{c.name}</b><span>{c.shortAddress} · {c.phone}</span></span>
             </Link>
           ))}

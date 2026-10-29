@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "./icons";
 import { site } from "@/content/site";
 
@@ -49,7 +50,7 @@ export function QuoteCard({ q, name, sub, avatar }: { q: string; name: string; s
       <span className="stars"><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /></span>
       <p>“{q}”</p>
       <div className="who">
-        {avatar ? <img src={avatar} alt="" /> : <span className="ini">{name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</span>}
+        {avatar ? <Image sizes="(max-width: 768px) 100vw, 760px" src={avatar} width={88} height={88} alt="" /> : <span className="ini">{name.split(" ").map((w) => w[0]).slice(0, 2).join("")}</span>}
         <span><b>{name}</b> · {sub}</span>
       </div>
     </div>

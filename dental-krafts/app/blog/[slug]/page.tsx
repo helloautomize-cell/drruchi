@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Icon } from "@/components/icons";
@@ -6,6 +7,9 @@ import { posts, postBySlug } from "@/content/posts";
 import { doctorById } from "@/content/doctors";
 import { treatments } from "@/content/treatments";
 import { site } from "@/content/site";
+import { JsonLd, articleNode, breadcrumb } from "@/lib/schema";
+
+export const ensureStatic = "navigation";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -14,7 +18,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const p = postBySlug(slug);
-  if (!p) return {};
+  if (!p) notFound();
   const desc = p.excerpt.replace(/[“”]/g, '"').slice(0, 155);
   return {
     title: p.title,
@@ -44,25 +48,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     .filter(Boolean);
 
   const LD = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: p.title,
-      description: p.excerpt,
-      image: `${site.domain}${p.image}`,
-      author: { "@type": "Physician", name: doc.name, url: `${site.domain}${doc.slug}` },
-      publisher: { "@type": "Organization", name: "Dental Krafts", url: site.domain },
-      mainEntityOfPage: `${site.domain}/blog/${p.slug}`,
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: site.domain },
-        { "@type": "ListItem", position: 2, name: "Blog", item: `${site.domain}/blog` },
-        { "@type": "ListItem", position: 3, name: p.title, item: `${site.domain}/blog/${p.slug}` },
-      ],
-    },
+    articleNode(p),
+    breadcrumb([["Home", "/"], ["Blog", "/blog"], [p.title, `/blog/${p.slug}`]]),
   ];
 
   return (
@@ -113,7 +100,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         )}
 
         <div className="authorbox">
-          <img src={doc.portrait} alt={doc.name} />
+          <Image sizes="(max-width: 768px) 100vw, 760px" src={doc.portrait} width={1055} height={1318} alt={doc.name} />
           <span>
             <b>{doc.name}</b>
             <span>{doc.degree}</span>
@@ -123,7 +110,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <p className="mrev"><Icon name="shield-check" cls="ic" /> Medically reviewed by {doc.name}, {doc.degree.split(",")[1]?.trim() ?? doc.role}.</p>
       </div></section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(LD) }} />
+      <JsonLd data={LD} />
     </>
   );
 }

@@ -17,7 +17,7 @@ export function SiteFooter() {
     <footer>
       <div className="wrap fg">
         <div>
-          <img src="/images/brand/dk-logo-colour.svg" alt="Dental Krafts" style={{ height: 56, width: "auto" }} />
+          <img src="/images/brand/dk-logo-colour.svg" alt="Dental Krafts" width={130} height={56} style={{ height: 56, width: "auto" }} />
           <p style={{ color: "var(--ink-2)", fontSize: 15, maxWidth: "34ch", margin: "18px 0 20px" }}>Specialist dental care in Gurgaon, from dentists trained at AIIMS and PGIMER.</p>
           <Link className="btn btn-p btn-sm" href="/contact-us">Book a visit</Link>
           <div className="soc">
@@ -29,7 +29,7 @@ export function SiteFooter() {
         <div><h4>Treatments</h4><ul>{TREAT_LINKS.map(([l, h]) => <li key={h}><Link href={h}>{l}</Link></li>)}</ul></div>
         <div><h4>Clinics</h4><ul>
           {clinics.map((c) => (
-            <li key={c.id}><Link href={c.slug}>{c.name}</Link><span className="tnum" style={{ display: "block", fontSize: 14, color: "var(--ink-2)" }}>{c.phone}</span></li>
+            <li key={c.id}><Link href={c.slug}>{c.name}</Link><span style={{ display: "block", fontSize: 13, color: "var(--ink-2)" }}>{c.address}</span><span className="tnum" style={{ display: "block", fontSize: 14, color: "var(--ink-2)" }}>{c.phone} · {c.hoursLabel}, closed Wed</span></li>
           ))}
           <li style={{ marginTop: 8 }}><a href={`mailto:${site.email}`}>{site.email}</a></li>
         </ul></div>

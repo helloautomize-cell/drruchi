@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { CtaBand } from "@/components/bits";
@@ -27,7 +28,7 @@ export default function Gallery() {
             </div>
           </div>
           <div className="ph">
-            <img src="/images/results/split/ba-13-smile-makeover__after.webp" alt="After a smile makeover with ceramic crowns" />
+            <Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/hero-smile-30f.webp" width={1536} height={1024} alt="A happy patient smiling after her treatment" />
           </div>
         </div>
       </div></section>

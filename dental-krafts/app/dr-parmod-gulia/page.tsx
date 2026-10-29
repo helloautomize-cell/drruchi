@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { OpenStatus } from "@/components/open-status";
@@ -9,6 +10,7 @@ import { clinics } from "@/content/clinics";
 import { reviewById } from "@/content/reviews";
 import { caseByFile } from "@/content/results";
 import { site } from "@/content/site";
+import { JsonLd, physicianNode, faqPage, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Dr Parmod Gulia | Pediatric Dentist, PGIMER | Gurgaon",
@@ -21,18 +23,11 @@ const d = doctorById("parmod");
 const CASES = ["ba-11-complete-dentures-face", "ba-12-smile-makeover", "ba-13-smile-makeover"]
   .map(caseByFile).filter((c): c is NonNullable<typeof c> => Boolean(c && c.consent !== false));
 
-const PHYSICIAN_LD = {
-  "@context": "https://schema.org",
-  "@type": "Physician",
-  name: "Dr Parmod Gulia",
-  jobTitle: "Pediatric and Preventive Dentist",
-  image: `${site.domain}${d.portrait}`,
-  url: `${site.domain}/dr-parmod-gulia`,
-  identifier: "A-12323",
-  medicalSpecialty: "Paedodontics",
-  alumniOf: [{ "@type": "CollegeOrUniversity", name: "PGIMER Chandigarh" }],
-  worksFor: clinics.map((c) => ({ "@type": "Dentist", name: `Dental Krafts — ${c.name}`, address: c.address, telephone: c.phone })),
-};
+const LD = [
+  physicianNode("parmod"),
+  faqPage(d.faqs),
+  breadcrumb([["Home", "/"], ["Our dentists", "/our-dentists"], ["Dr Parmod Gulia", "/dr-parmod-gulia"]]),
+];
 
 export default function DrParmodGulia() {
   return (
@@ -55,7 +50,7 @@ export default function DrParmodGulia() {
           </div>
           <p className="note">Reg. A-12323, Delhi State Dental Council · Consults at both clinics</p>
         </div>
-        <div className="portrait"><img src={d.portrait} alt="Dr Parmod Gulia, pediatric and preventive dentist" fetchPriority="high" /></div>
+        <div className="portrait"><Image sizes="(max-width: 768px) 100vw, 760px" src={d.portrait} width={1055} height={1318} alt="Dr Parmod Gulia, pediatric and preventive dentist" fetchPriority="high" /></div>
       </div></section>
 
       {/* 2 · Pull statement */}
@@ -66,7 +61,7 @@ export default function DrParmodGulia() {
 
       {/* 3 · About */}
       <section className="sec"><div className="wrap abx">
-        <div className="ph"><img loading="lazy" src={d.atWork} alt="Dr Parmod Gulia at work in the clinic" /></div>
+        <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={d.atWork} width={1536} height={1024} alt="Dr Parmod Gulia at work in the clinic" /></div>
         <div>
           <Eb>About Dr Parmod</Eb>
           <h2 className="d h2" style={{ margin: "22px 0 30px" }}>Calm, careful dentistry for <em>children</em> — and their parents.</h2>
@@ -167,7 +162,7 @@ export default function DrParmodGulia() {
         <div className="row"><a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> WhatsApp</a><Link className="btn btn-p" href="/contact-us?doctor=Dr%20Parmod%20Gulia">Book a visit <Icon name="arrow-right" cls="ic ic-sm" /></Link></div>
       </div></section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PHYSICIAN_LD) }} />
+      <JsonLd data={LD} />
     </>
   );
 }

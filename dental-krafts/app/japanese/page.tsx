@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import { Icon } from "@/components/icons";
@@ -6,6 +7,7 @@ import { QA, CtaBand } from "@/components/bits";
 import { intlPages } from "@/content/intl";
 import { clinics } from "@/content/clinics";
 import { site } from "@/content/site";
+import { JsonLd, faqPage, breadcrumb } from "@/lib/schema";
 
 const noto = Noto_Sans_JP({ subsets: ["latin"], weight: ["400", "700"], display: "swap" });
 const p = intlPages.find((x) => x.lang === "ja")!;
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
   description: p.metaDesc,
   alternates: {
     canonical: "/japanese",
-    languages: { "en-IN": "/", ja: "/japanese", ko: "/korean" },
+    languages: { "en-IN": "/", ja: "/japanese", ko: "/korean", "x-default": "/" },
   },
 };
 
@@ -38,7 +40,16 @@ export default function Japanese() {
               <a className="btn btn-wa" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" /> {p.ctaWa}</a>
             </div>
           </div>
-          <div className="ph"><img src="/images/ai/doctors-duo.webp" alt="Ruchi Goel医師とParmod Gulia医師" /></div>
+          <div className="ph" style={{ alignSelf: "start", aspectRatio: "4/3" }}><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/doctors-duo.webp" width={1536} height={1024} alt="Ruchi Goel医師とParmod Gulia医師" style={{ objectPosition: "center 15%" }} /></div>
+        </div>
+      </div></section>
+
+      {/* Clinic photos */}
+      <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14 }}>
+          {["/images/clinic/reception-modern.webp", "/images/clinic/clinic-kids-colourful.webp", "/images/clinic/clinic-mallfront.webp"].map((src) => (
+            <div className="ph" key={src} style={{ aspectRatio: "4/3", borderRadius: 18 }}><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={src} width={1200} height={800} alt="Dental Krafts clinic" /></div>
+          ))}
         </div>
       </div></section>
 
@@ -61,7 +72,7 @@ export default function Japanese() {
           <p className="lead">{p.clinicsNote}</p>
           {clinics.map((c) => (
             <Link className="mini-c" key={c.id} href={c.slug}>
-              <img src={c.image} alt={c.imageAlt} loading="lazy" />
+              <Image sizes="(max-width: 768px) 100vw, 760px" src={c.image} width={1400} height={1200} alt={c.imageAlt} loading="lazy" />
               <span><b>{c.name}</b><span className="tnum">{c.phone} · {c.hoursLabel}</span></span>
             </Link>
           ))}
@@ -78,6 +89,7 @@ export default function Japanese() {
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
         <CtaBand title="ご相談を" em="お待ちしています。" text={p.sub} book={p.ctaBook} />
       </div></section>
+      <JsonLd data={[faqPage(p.faqs, "ja"), breadcrumb([["Home", "/"], ["日本語", "/japanese"]])]} />
     </div>
   );
 }

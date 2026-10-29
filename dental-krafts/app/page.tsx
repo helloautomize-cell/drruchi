@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import { Icon } from "@/components/icons";
 import { OpenStatus } from "@/components/open-status";
 import { Reel5, StoryVid5 } from "@/components/media";
@@ -9,6 +11,7 @@ import { QA, Eb } from "@/components/bits";
 import { caseByFile } from "@/content/results";
 import { homeFaqs } from "@/content/faqs";
 import { clinics } from "@/content/clinics";
+import { JsonLd, clinicNode, physicianNode, faqPage, videoObject } from "@/lib/schema";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -76,16 +79,23 @@ const TCARDS: { t: string; p: string; img: string; alt: string; who: "ruchi" | "
 ];
 
 const MOSAIC: { cls: string; src: string; alt: string; cap: string }[] = [
-  { cls: "a", src: "/images/clinic/reception-lounge-wide.webp", alt: "The reception lounge at Dental Krafts", cap: "Reception, Sector 53" },
-  { cls: "b", src: "/images/clinic/sector-53-storefront.webp", alt: "Dental Krafts storefront at South Point Mall", cap: "South Point Mall, Golf Course Road" },
-  { cls: "c", src: "/images/clinic/sector-57-operatory.webp", alt: "A treatment room at Dental Krafts Sector 57", cap: "Treatment room, Sector 57" },
-  { cls: "d", src: "/images/doctors/dk-doctors-performing-procedure-wide.webp", alt: "Dr Ruchi Goel and Dr Parmod Gulia treating a patient together", cap: "Complex cases, treated together" },
-  { cls: "e", src: "/images/clinic/kids-operatory-mural-clean.webp", alt: "The children's treatment room with a painted mural", cap: "The children's room" },
-  { cls: "f", src: "/images/clinic/storefront-signage-reception.webp", alt: "The Dental Krafts entrance and reception", cap: "Walk-in entrance" },
-  { cls: "g", src: "/images/clinic/storefront-signage-wide.webp", alt: "Dental Krafts storefront signage reading specialists trained at AIIMS and PGIMER", cap: "Specialists trained at AIIMS and PGIMER" },
+  { cls: "a", src: "/images/clinic/clinic-kids-colourful.webp", alt: "A colourful treatment room at Dental Krafts", cap: "Inside the clinic" },
+  { cls: "b", src: "/images/clinic/clinic-kids-cheerful.webp", alt: "The children's treatment room with a painted mural", cap: "The children's room" },
+  { cls: "c", src: "/images/clinic/clinic-mint.webp", alt: "A mint-green treatment room at Dental Krafts", cap: "Treatment room" },
+  { cls: "d", src: "/images/clinic/clinic-mallfront.webp", alt: "Dental Krafts storefront at South Point Mall", cap: "South Point Mall, Golf Course Road" },
+  { cls: "e", src: "/images/clinic/clinic-reception-2.webp", alt: "The Dental Krafts reception lounge", cap: "Reception" },
+  { cls: "f", src: "/images/clinic/reception-modern.webp", alt: "The Dental Krafts front desk", cap: "Front desk" },
+  { cls: "g", src: "/images/clinic/clinic-reception-gold.webp", alt: "The gold-accented Dental Krafts reception", cap: "Reception, Sector 53" },
 ];
 
-const FAQ_LD = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: homeFaqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) };
+const HOME_LD = [
+  faqPage(homeFaqs),
+  ...clinics.map(clinicNode),
+  physicianNode("ruchi"),
+  physicianNode("parmod"),
+  ...REELS.map(videoObject),
+  ...VID_STORIES.map(videoObject),
+];
 
 export default function Home() {
   return (
@@ -96,23 +106,23 @@ export default function Home() {
           <div>
             <Eb r>AIIMS New Delhi · PGIMER Chandigarh</Eb>
             <h1 className="d" data-split data-delay="120">Specialist dentists for your whole <em>family</em>.</h1>
-            <p className="lead" data-r data-delay="380">Dr Ruchi Goel and Dr Parmod Gulia see every patient themselves, at two clinics in Gurgaon.</p>
-            <div className="dk5-acts" data-r data-delay="520">
+            <p className="lead rise" style={{ "--rd": "380ms" } as CSSProperties}>Dr Ruchi Goel and Dr Parmod Gulia see every patient themselves, at two clinics in Gurgaon.</p>
+            <div className="dk5-acts rise" style={{ "--rd": "520ms" } as CSSProperties}>
               <BookLink className="btn btn-p">Book a visit <Icon name="arrow-right" cls="ic ic-sm" /></BookLink>
               <a className="btn btn-s" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" />WhatsApp us</a>
             </div>
-            <p className="dk5-rt" data-r data-delay="640">
-              <span className="stars" aria-label="5 out of 5"><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /></span>
+            <p className="dk5-rt rise" style={{ "--rd": "640ms" } as CSSProperties}>
+              <span className="stars" role="img" aria-label="5 out of 5"><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /></span>
               <b className="tnum">5.0</b> on Practo · 1,000+ patient stories
             </p>
           </div>
-          <div className="dk5-duo" data-r data-delay="260">
-            <figure className="dk5-pc" data-unveil><img src="/images/v5/hero-ruchi.webp" alt="Dr Ruchi Goel, prosthodontist, holding a model of a dental implant" fetchPriority="high" /><figcaption><b>Dr Ruchi Goel</b><span>Prosthodontist &amp; implantologist · AIIMS</span></figcaption></figure>
-            <figure className="dk5-pc b" data-unveil><img src="/images/v5/hero-parmod.webp" alt="Dr Parmod Gulia, pediatric dentist, with a tooth toy" /><figcaption><b>Dr Parmod Gulia</b><span>Pediatric dentist · PGIMER</span></figcaption></figure>
-            <div className="dk5-seal" data-r data-delay="900"><span className="n tnum" data-count>17+</span><span className="l">years of<br />experience</span></div>
+          <div className="dk5-duo rise" style={{ "--rd": "260ms" } as CSSProperties}>
+            <figure className="dk5-pc unv"><Image sizes="(max-width: 768px) 45vw, 400px" src="/images/v5/hero-ruchi.webp" width={1024} height={1280} alt="Dr Ruchi Goel, prosthodontist, holding a model of a dental implant" preload /><figcaption><b>Dr Ruchi Goel</b><span>Prosthodontist &amp; implantologist · AIIMS</span></figcaption></figure>
+            <figure className="dk5-pc b unv"><Image sizes="(max-width: 768px) 45vw, 400px" src="/images/v5/hero-parmod.webp" width={1055} height={1318} alt="Dr Parmod Gulia, pediatric dentist, with a tooth toy" /><figcaption><b>Dr Parmod Gulia</b><span>Pediatric dentist · PGIMER</span></figcaption></figure>
+            <div className="dk5-seal rise" style={{ "--rd": "900ms" } as CSSProperties}><span className="n tnum" data-count>17+</span><span className="l">years of<br />experience</span></div>
           </div>
         </div>
-        <div className="wrap dk5-ask" data-r data-delay="700">
+        <div className="wrap dk5-ask rise" style={{ "--rd": "700ms" } as CSSProperties}>
           <span className="q">What brings you in?</span>
           <div className="dk5-chips">{CHIPS.map((c) => <BookLink key={c} topic={c}>{c}</BookLink>)}</div>
         </div>
@@ -126,21 +136,21 @@ export default function Home() {
           <div><span className="n tnum" data-count>5.0</span><span className="k">on Practo</span><small>1,000+ patient stories · 4.9 on Justdial</small></div>
           <div><span className="n tnum">2</span><span className="k">clinics in Gurgaon</span><small>Sector 53 Golf Course Road · Sector 57 Sushant Lok 2</small></div>
         </div>
-        <div className="wrap dk5-press"><span>As featured in</span><img loading="lazy" decoding="async" src="/images/awards/press-ani-logo.webp" alt="ANI" /><b>The Tribune</b></div>
+        <div className="wrap dk5-press"><span>As featured in</span><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src="/images/awards/press-ani-logo.webp" width={400} height={227} alt="ANI" /><b>The Tribune</b></div>
       </section>
 
       {/* 3 · Dentists */}
       <section className="sec" id="dentists"><div className="wrap">
         <div className="sh c">
           <Eb>Meet your dentists</Eb>
-          <h2 className="d h2" data-split>Two specialists, <em>one</em> clinic.</h2>
+          <h2 className="d h2" data-split>Two specialists, <em>side by side.</em></h2>
           <p className="lead" data-r data-delay="180">They work side by side at both clinics. Whichever of them you see, they plan complex cases together, so your family keeps one file.</p>
         </div>
         <div className="dk5-docs">
           <article className="dk5-doc" data-r>
-            <figure className="ph" data-unveil><img loading="lazy" decoding="async" src="/images/v5/doc-ruchi-clinic.webp" alt="Dr Ruchi Goel at the Dental Krafts clinic" /></figure>
+            <figure className="ph" data-unveil><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src="/images/v5/doc-ruchi-clinic.webp" width={1536} height={1024} alt="Dr Ruchi Goel at the Dental Krafts clinic" /></figure>
             <p className="role">Prosthodontist &amp; implantologist</p>
-            <h3 className="d nm">Dr Ruchi <em>Goel</em></h3>
+            <h3 className="d nm">Dr Ruchi Goel</h3>
             <p className="cred">BDS · MDS Prosthodontics, AIIMS New Delhi</p>
             <p className="bio">Replaces and rebuilds teeth: implants, dentures, crowns and full-mouth rehabilitation, planned end to end and explained step by step.</p>
             <dl>
@@ -155,9 +165,9 @@ export default function Home() {
             </div>
           </article>
           <article className="dk5-doc" data-r>
-            <figure className="ph" data-unveil><img loading="lazy" decoding="async" src="/images/v5/doc-parmod-clinic.webp" alt="Dr Parmod Gulia at the Dental Krafts clinic" /></figure>
+            <figure className="ph" data-unveil><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src="/images/v5/doc-parmod-clinic.webp" width={1536} height={1024} alt="Dr Parmod Gulia at the Dental Krafts clinic" /></figure>
             <p className="role">Pediatric &amp; preventive dentist</p>
-            <h3 className="d nm">Dr Parmod <em>Gulia</em></h3>
+            <h3 className="d nm">Dr Parmod Gulia</h3>
             <p className="cred">BDS · MDS Pedodontics, PGIMER Chandigarh</p>
             <p className="bio">Calm, unhurried care for babies, children, teens and children with special needs, plus root canals and check-ups for their parents.</p>
             <dl>
@@ -173,7 +183,7 @@ export default function Home() {
           </article>
         </div>
         <div className="dk5-together" data-r>
-          <img loading="lazy" decoding="async" src="/images/v5/doctors-together-new.webp" alt="Dr Parmod Gulia and Dr Ruchi Goel at Dental Krafts" />
+          <Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src="/images/v5/doctors-together-new.webp" width={800} height={533} alt="Dr Parmod Gulia and Dr Ruchi Goel at Dental Krafts" />
           <p><b>Not sure who to see?</b> Book with either. If you need the other specialist, they'll join you in the same visit.</p>
           <a className="btn btn-wa btn-sm" href={site.whatsappLink}><Icon name="whatsapp" cls="ic ic-sm" />Ask on WhatsApp</a>
         </div>
@@ -189,14 +199,14 @@ export default function Home() {
         <div className="dk5-tgrid" data-r="stagger">
           {TCARDS.map((c) => (
             <BookLink key={c.t} className="dk5-tc" topic={c.t}>
-              <span className="ph"><img loading="lazy" decoding="async" src={c.img} alt={c.alt} /></span>
+              <span className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src={c.img} width={1200} height={900} alt={c.alt} /></span>
               <span className="bd">
                 <span className="h3">{c.t} <Icon name="arrow-right" cls="ic ic-sm" /></span>
                 <span className="p">{c.p}</span>
                 <span className="dk5-who">
                   <span className="dk5-av">
-                    {c.who !== "parmod" && <img src={RUCHI.img} alt="" />}
-                    {c.who !== "ruchi" && <img src={PARMOD.img} alt="" />}
+                    {c.who !== "parmod" && <Image sizes="(max-width: 768px) 100vw, 760px" src={RUCHI.img} width={88} height={88} alt="" />}
+                    {c.who !== "ruchi" && <Image sizes="(max-width: 768px) 100vw, 760px" src={PARMOD.img} width={88} height={88} alt="" />}
                   </span>
                   {c.whoLabel}
                 </span>
@@ -228,7 +238,7 @@ export default function Home() {
         </div>
         <div className="dk5-mos" data-r="stagger">
           {MOSAIC.map((m) => (
-            <figure className={`m ${m.cls}`} key={m.cls} data-par="0.04"><img loading="lazy" decoding="async" src={m.src} alt={m.alt} /><figcaption>{m.cap}</figcaption></figure>
+            <figure className={`m ${m.cls}`} key={m.cls} data-par="0.04"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src={m.src} width={1400} height={930} alt={m.alt} /><figcaption>{m.cap}</figcaption></figure>
           ))}
         </div>
       </div></section>
@@ -244,7 +254,7 @@ export default function Home() {
           {STEPS.map((s) => <div className="st" key={s.no}><span className="no tnum">{s.no}</span><h3 className="h3">{s.t}</h3><p>{s.p}</p><span className="tag">{s.tag}</span></div>)}
         </div>
         <div className="promise" data-r>
-          <img loading="lazy" src="/images/clinic/reception-lounge.webp" alt="The Dental Krafts reception" />
+          <Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src="/images/clinic/reception-lounge.webp" width={1128} height={758} alt="The Dental Krafts reception" />
           <blockquote>“They only suggested what was truly needed and explained every option before treatment.”<cite>Dewesh Kumar, aligners and implants · Verified on Practo</cite></blockquote>
         </div>
       </div></section>
@@ -264,7 +274,7 @@ export default function Home() {
             {VID_STORIES.map((r) => <StoryVid5 key={r.file} reel={r} />)}
             {STORIES.map((s) => (
               <article className="story" key={s.name}>
-                <div className="top"><span className="stars" aria-label="5 out of 5"><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /></span><span className="vf">Verified · Practo</span></div>
+                <div className="top"><span className="stars" role="img" aria-label="5 out of 5"><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /></span><span className="vf">Verified · Practo</span></div>
                 <blockquote>“{s.q}”</blockquote>
                 <div className="by"><span className="ini" aria-hidden="true">{s.name[0]}</span><span><b>{s.name}</b><small>{s.sub}</small></span></div>
               </article>
@@ -313,7 +323,7 @@ export default function Home() {
           </div></div>
           <div className="rtrack" data-pin-track tabIndex={0} aria-label="Award photos" data-r="stagger">
             {AWARDS.map(([src, cap], i) => (
-              <figure className="rc" key={src} style={{ margin: 0 }}><div className="ph"><img loading="lazy" src={`/images/${src}`} alt={cap} /></div><span className="no">{String(i + 1).padStart(2, "0")}</span><p>{cap}</p></figure>
+              <figure className="rc" key={src} style={{ margin: 0 }}><div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={`/images/${src}`} width={1200} height={800} alt={cap} /></div><span className="no">{String(i + 1).padStart(2, "0")}</span><p>{cap}</p></figure>
             ))}
           </div>
           <div className="wrap rec-ctl"><span className="bar" data-progress><i /></span><span className="hint">Keep scrolling</span></div>
@@ -346,7 +356,7 @@ export default function Home() {
         <div className="cl" data-r="stagger">
           {clinics.map((c) => (
             <article className="cc2" key={c.id}>
-              <div className="ph"><img loading="lazy" src={c.image} alt={c.imageAlt} /></div>
+              <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src={c.image} width={1400} height={1200} alt={c.imageAlt} /></div>
               <div className="bd">
                 <OpenStatus clinicId={c.id} className="live" />
                 <h3 className="h3">{c.name}</h3>
@@ -366,7 +376,7 @@ export default function Home() {
         </div>
       </div></section>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_LD) }} />
+      <JsonLd data={HOME_LD} />
     </>
   );
 }

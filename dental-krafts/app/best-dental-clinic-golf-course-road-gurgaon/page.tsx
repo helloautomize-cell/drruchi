@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { OpenStatus } from "@/components/open-status";
@@ -44,7 +45,7 @@ export default function GolfCourseRoad() {
             </div>
           </div>
           <div className="ph">
-            <img src="/images/clinic/storefront-signage-wide.webp" alt="Dental Krafts storefront inside South Point Mall, Golf Course Road" />
+            <Image sizes="(max-width: 768px) 100vw, 760px" src="/images/clinic/storefront-signage-wide.webp" width={1128} height={680} alt="Dental Krafts storefront inside South Point Mall, Golf Course Road" />
             <div className="glass fl f1"><span className="big tnum">5.0</span><span><b>Practo · Sector 53</b><small>{c.practoStories} patient stories</small></span></div>
           </div>
         </div>

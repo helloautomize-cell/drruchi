@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { ReelCard } from "@/components/media";
@@ -35,7 +36,7 @@ export default function PatientStories() {
               <a className="btn btn-wa" href={site.practo} target="_blank" rel="noopener"><Icon name="star" cls="ic ic-sm" /> Read on Practo</a>
             </div>
           </div>
-          <div className="ph"><img src="/images/reels/reel-07-patient-rekha-seth.webp" alt="Rekha Seth, a Dental Krafts patient" /></div>
+          <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/reels/reel-07-patient-rekha-seth.webp" width={540} height={960} alt="Rekha Seth, a Dental Krafts patient" /></div>
         </div>
       </div></section>
 
@@ -55,7 +56,7 @@ export default function PatientStories() {
           <ReelCard reel={{ file: "reel-08-patient-testimonial-male.mp4", title: "A patient shares his experience", who: "Video story · 1 min" }} />
           {YT.map((y) => (
             <a className="reel" key={y.id} href={`https://www.youtube.com/watch?v=${y.id}`} target="_blank" rel="noopener">
-              <img src={`https://i.ytimg.com/vi/${y.id}/hqdefault.jpg`} alt="" loading="lazy" />
+              <Image sizes="(max-width: 768px) 100vw, 760px" src={`https://i.ytimg.com/vi/${y.id}/hqdefault.jpg`} width={480} height={360} alt="" loading="lazy" />
               <span className="play"><Icon name="play" cls="ic" /></span>
               <span className="cap"><b>{y.title}</b><span>YouTube</span></span>
             </a>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Icon } from "@/components/icons";
 import { site } from "@/content/site";
@@ -48,7 +49,7 @@ export default function AboutUs() {
               <Link className="btn btn-w" href="/our-dentists">Meet the dentists <span className="bic"><Icon name="arrow-right" cls="ic ic-sm" /></span></Link>
             </div>
           </div>
-          <div className="ph"><img src="/images/ai/doctors-duo.webp" alt="Dr Ruchi Goel and Dr Parmod Gulia" /></div>
+          <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/ai/doctors-duo.webp" width={1536} height={1024} alt="Dr Ruchi Goel and Dr Parmod Gulia" /></div>
         </div>
       </div></section>
 
@@ -63,7 +64,7 @@ export default function AboutUs() {
             <p>Today Dental Krafts has two clinics, on Golf Course Road and in Sushant Lok 2. More than 1,000 patients have written about us on Practo, and many families have been coming for over a decade.</p>
           </div>
         </div>
-        <div className="ph"><img src="/images/clinic/reception-lounge-wide.webp" alt="The Dental Krafts reception lounge" loading="lazy" /></div>
+        <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src="/images/clinic/reception-lounge-wide.webp" width={1128} height={624} alt="The Dental Krafts reception lounge" loading="lazy" /></div>
       </div></section>
 
       {/* Values */}
@@ -87,8 +88,27 @@ export default function AboutUs() {
         <div className="head"><div><span className="eyebrow">Recognition</span><h2 className="d h2">Recognised by peers <em>and the profession.</em></h2></div></div>
         <div className="rail">
           {AWARDS.map(([src, cap]) => (
-            <figure key={src}><div className="ph"><img src={`/images/${src}`} alt={cap} loading="lazy" /></div><figcaption>{cap}</figcaption></figure>
+            <figure key={src}><div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src={`/images/${src}`} width={1200} height={800} alt={cap} loading="lazy" /></div><figcaption>{cap}</figcaption></figure>
           ))}
+        </div>
+      </div></section>
+
+      {/* Facts */}
+      <section className="sp" style={{ paddingTop: 0 }}><div className="wrap two">
+        <div>
+          <span className="eyebrow">The practice in numbers</span>
+          <h2 className="d h2">Dental Krafts, <em>at a glance.</em></h2>
+        </div>
+        <div className="prose">
+          <dl className="wk" style={{ margin: 0 }}>
+            <div style={{ display: "contents" }}><dt>Founded</dt><dd>2015, Gurgaon — by Dr Ruchi Goel and Dr Parmod Gulia</dd></div>
+            <div style={{ display: "contents" }}><dt>Experience</dt><dd>17+ years in practice (Dr Ruchi since 2007, Dr Parmod since 2008)</dd></div>
+            <div style={{ display: "contents" }}><dt>Dentists</dt><dd>Dr Ruchi Goel — MDS Prosthodontics, AIIMS New Delhi · Dr Parmod Gulia — MDS Paedodontics, PGIMER Chandigarh</dd></div>
+            <div style={{ display: "contents" }}><dt>Registrations</dt><dd>A-7387 and A-12323, Delhi State Dental Council</dd></div>
+            <div style={{ display: "contents" }}><dt>Memberships</dt><dd>Indian Dental Association · Indian Prosthodontic Society · Indian Society of Pedodontics &amp; Preventive Dentistry</dd></div>
+            <div style={{ display: "contents" }}><dt>Sector 53</dt><dd>DSP-211, 2nd Floor, South Point Mall, Golf Course Road, DLF Phase 5, Gurugram 122002</dd></div>
+            <div style={{ display: "contents" }}><dt>Sector 57</dt><dd>UG-12, 1st Floor, Bestech Central Square Mall, Sushant Lok 2, Gurugram 122011</dd></div>
+          </dl>
         </div>
       </div></section>
 

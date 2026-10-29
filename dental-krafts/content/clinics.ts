@@ -47,8 +47,8 @@ export const clinics: Clinic[] = [
       ["HUDA City Centre", "20"],
       ["Golf Course Ext Rd", "20"],
     ],
-    image: "/images/clinic/sector-53-storefront.webp",
-    imageAlt: "Dental Krafts Sector 53 storefront, South Point Mall",
+    image: "/images/clinic/clinic-reception-2.webp",
+    imageAlt: "Dental Krafts Sector 53 storefront with gold signage, South Point Mall",
     practoStories: 67,
   },
   {
@@ -81,8 +81,8 @@ export const clinics: Clinic[] = [
       ["DLF Phase 3", "15"],
       ["DLF Phase 4", "15"],
     ],
-    image: "/images/clinic/sector-57-operatory.webp",
-    imageAlt: "Dental Krafts Sector 57 treatment room",
+    image: "/images/clinic/clinic-mint.webp",
+    imageAlt: "A mint-green treatment room at Dental Krafts Sector 57",
     practoStories: 933,
   },
 ];
