@@ -103,7 +103,7 @@ export function HeroSwap() {
             className={`dk5-pc ${d.cls}`}
             onClick={() => { if (front !== d.who) api.current.set(d.who); }}
           >
-            <Image src={d.src} width={d.w} height={d.h} alt={d.alt} sizes="(max-width: 768px) 78vw, 380px" preload={d.preload} />
+            <Image src={d.src} width={d.w} height={d.h} alt={d.alt} sizes="(max-width: 768px) 78vw, 380px" preload={d.preload} fetchPriority={d.who === "ruchi" ? "high" : "auto"} />
             <figcaption><b>{d.name}</b><span>{d.role}</span></figcaption>
             <span className="dk5-tab" aria-hidden="true">{d.name}</span>
           </figure>
