@@ -109,8 +109,8 @@ export default function Home() {
       {/* 1 · Hero */}
       <section className="dk5-hero" aria-label="Dental Krafts">
         <div className="wrap dk5-g">
-          <div>
-            <Eb r>AIIMS New Delhi · PGIMER Chandigarh</Eb>
+          <Eb r>AIIMS New Delhi · PGIMER Chandigarh</Eb>
+          <div className="dk5-txt">
             <h1 className="d" data-split data-delay="120">Specialist dentists for your whole <em>family</em>.</h1>
             <p className="lead rise" style={{ "--rd": "380ms" } as CSSProperties}>Dr Ruchi Goel and Dr Parmod Gulia see every patient themselves, at two clinics in Gurgaon.</p>
             <div className="dk5-acts rise" style={{ "--rd": "520ms" } as CSSProperties}>

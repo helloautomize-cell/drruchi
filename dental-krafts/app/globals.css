@@ -891,7 +891,10 @@ a.cd:hover{transform:translateY(-3px)}
 /* ================= homepage v5 ================= */
 /* hero: light text column, two equal doctor portraits, one experience seal */
 .dk5-hero{padding-block:clamp(20px,2.6vw,40px) clamp(18px,2vw,28px)}
-.dk5-hero .dk5-g{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(36px,5vw,88px);align-items:center}
+.dk5-hero .dk5-g{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);column-gap:clamp(36px,5vw,88px);row-gap:0;align-items:center}
+.dk5-hero .dk5-g>.eb{grid-column:1;align-self:end}
+.dk5-hero .dk5-txt{grid-column:1}
+.dk5-hero .dk5-swap{grid-column:2;grid-row:1/span 2}
 .dk5-hero h1{font-size:clamp(40px,4.7vw,70px);line-height:1;margin:18px 0 18px;max-width:11ch}
 .dk5-hero .lead{max-width:34ch}
 .dk5-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
@@ -1071,8 +1074,11 @@ a.cd:hover{transform:translateY(-3px)}
 .gsim figcaption{font-size:13.5px;color:var(--ink-3);margin-top:10px}
 
 @media (max-width:1080px){
-  .dk5-hero .dk5-g{grid-template-columns:1fr}
-  .dk5-hero h1{max-width:14ch}
+  .dk5-hero .dk5-g{grid-template-columns:1fr;row-gap:28px}
+  .dk5-hero .dk5-g>.eb{order:1}
+  .dk5-hero .dk5-swap{order:2;grid-column:1;grid-row:auto}
+  .dk5-hero .dk5-txt{order:3}
+  .dk5-hero h1{max-width:14ch;margin-top:0}
   .dk5-duo{max-width:640px}
   .dk5-proof .dk5-pg{grid-template-columns:1fr 1fr}
   .dk5-proof .dk5-pg>div:nth-child(3){border-left:0;padding-left:0}
