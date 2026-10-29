@@ -1571,3 +1571,5 @@ a.mt-pc:hover{transform:translateY(-4px)}
   .mrq-track{animation:none}
 }
 @media (max-width:640px){.mrq-track{--mqd:28s}}
+
+button.dk5-reel,button.dk5-svid{border:0;padding:0;font:inherit;color:inherit;text-align:left}

@@ -238,7 +238,7 @@
 
   /* ---------- smooth scrolling ---------- */
   function smooth(){
-    if(!motionOK()||!W.Lenis||lenis)return;
+    if(!motionOK()||!W.Lenis||!FINE.matches||lenis)return;
     var L=lenis=new W.Lenis({lerp:.11,wheelMultiplier:1,smoothWheel:true});
     function f(t){if(lenis!==L)return;L.raf(t);requestAnimationFrame(f)}requestAnimationFrame(f);
     if(D.__dkAnchors)return;D.__dkAnchors=1;

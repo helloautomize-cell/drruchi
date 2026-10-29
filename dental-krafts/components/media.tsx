@@ -175,24 +175,20 @@ export function Reel5({ reel }: { reel: Reel }) {
     return () => io.disconnect();
   }, [play]);
 
-  return (
-    <article className={`dk5-reel${play ? " on" : ""}`} ref={wrapRef}
-      role={play ? undefined : "button"} tabIndex={play ? undefined : 0}
-      onKeyDown={play ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pauseOthers(); setPlay(true); } }}
-      aria-label={play ? undefined : `Play: ${reel.title}`}>
-      {play ? (
-        <video ref={vidRef} src={`/videos/${reel.file}`} controls autoPlay playsInline poster={posterOf(reel)}
-          onPlay={(e) => pauseOthers(e.currentTarget)} onEnded={() => setPlay(false)} />
-      ) : (
-        <>
-          <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-          <span className="dk5-rp" aria-hidden="true">
-            <span className="pb"><Icon name="play" cls="ic" /></span>
-            <span className="dk5-rtx"><b>{reel.title}</b><small>{reel.who ?? "Dr Ruchi Goel · 1 min"}</small></span>
-          </span>
-        </>
-      )}
+  return play ? (
+    <article className="dk5-reel on" ref={wrapRef}>
+      <video ref={vidRef} src={`/videos/${reel.file}`} controls autoPlay playsInline poster={posterOf(reel)}
+        onPlay={(e) => pauseOthers(e.currentTarget)} onEnded={() => setPlay(false)} />
     </article>
+  ) : (
+    <button type="button" className="dk5-reel" ref={wrapRef as React.RefObject<HTMLButtonElement>} aria-label={`Play: ${reel.title}`}
+      onClick={() => { pauseOthers(); setPlay(true); }}>
+      <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      <span className="dk5-rp" aria-hidden="true">
+        <span className="pb"><Icon name="play" cls="ic" /></span>
+        <span className="dk5-rtx"><b>{reel.title}</b><small>{reel.who ?? "Dr Ruchi Goel · 1 min"}</small></span>
+      </span>
+    </button>
   );
 }
 
@@ -222,25 +218,21 @@ export function StoryVid5({ reel }: { reel: Reel }) {
     return () => io.disconnect();
   }, [play]);
 
-  return (
-    <article className={`dk5-svid${play ? " on" : ""}`} ref={wrapRef}
-      role={play ? undefined : "button"} tabIndex={play ? undefined : 0}
-      onKeyDown={play ? undefined : (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pauseOthers(); setPlay(true); } }}
-      aria-label={play ? `Video: ${reel.title}` : `Play ${reel.title}`}>
-      {play ? (
-        <video ref={vidRef} src={`/videos/${reel.file}`} controls autoPlay playsInline poster={posterOf(reel)}
-          onPlay={(e) => pauseOthers(e.currentTarget)} onEnded={() => setPlay(false)} />
-      ) : (
-        <>
-          <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-          <span className="tag2">Video story</span>
-          <span className="dk5-rp" aria-hidden="true">
-            <span className="pb"><Icon name="play" cls="ic" /></span>
-            <span className="dk5-rtx"><b>{reel.title}</b><small>{reel.who ?? "Patient story"}</small></span>
-          </span>
-        </>
-      )}
+  return play ? (
+    <article className="dk5-svid on" ref={wrapRef} aria-label={`Video: ${reel.title}`}>
+      <video ref={vidRef} src={`/videos/${reel.file}`} controls autoPlay playsInline poster={posterOf(reel)}
+        onPlay={(e) => pauseOthers(e.currentTarget)} onEnded={() => setPlay(false)} />
     </article>
+  ) : (
+    <button type="button" className="dk5-svid" ref={wrapRef as React.RefObject<HTMLButtonElement>} aria-label={`Play ${reel.title}`}
+      onClick={() => { pauseOthers(); setPlay(true); }}>
+      <Image sizes="(max-width: 768px) 100vw, 760px" src={posterOf(reel)} width={540} height={960} alt="" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+      <span className="tag2">Video story</span>
+      <span className="dk5-rp" aria-hidden="true">
+        <span className="pb"><Icon name="play" cls="ic" /></span>
+        <span className="dk5-rtx"><b>{reel.title}</b><small>{reel.who ?? "Patient story"}</small></span>
+      </span>
+    </button>
   );
 }
 

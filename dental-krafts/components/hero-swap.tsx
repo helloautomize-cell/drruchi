@@ -27,7 +27,7 @@ const DOCTORS = [
     name: "Dr Parmod Gulia",
     role: "Pediatric dentist · PGIMER",
     btn: "Children and family care",
-    preload: false,
+    preload: true,
   },
 ] as const;
 
