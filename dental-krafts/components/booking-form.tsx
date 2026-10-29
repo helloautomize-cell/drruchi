@@ -65,11 +65,26 @@ export function BookLink({ topic, doctor, href = "#book", className, children, .
   topic?: string; doctor?: "Dr Ruchi Goel" | "Dr Parmod Gulia"; href?: string;
   className?: string; children: React.ReactNode;
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "className" | "children" | "onClick">) {
+  const go = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    window.dispatchEvent(new CustomEvent("dk-book", { detail: { topic: topic && TOPIC_MAP[topic.trim()], doctor } }));
+    if (href.startsWith("#")) {
+      /* Native smooth scroll to the booking panel — bypasses the Lenis anchor
+         handler so a stale smooth-scroll instance can't swallow the click. */
+      e.preventDefault();
+      e.stopPropagation();
+      const t = document.querySelector<HTMLElement>(href);
+      if (t) {
+        const y = t.getBoundingClientRect().top + window.scrollY - 84;
+        const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: Math.max(0, y), behavior: reduced ? "auto" : "smooth" });
+      }
+    }
+  };
   return (
     <a
       href={href}
       className={className}
-      onClick={() => window.dispatchEvent(new CustomEvent("dk-book", { detail: { topic: topic && TOPIC_MAP[topic.trim()], doctor } }))}
+      onClick={go}
       {...rest}
     >
       {children}

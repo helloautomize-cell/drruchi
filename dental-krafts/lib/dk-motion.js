@@ -62,10 +62,10 @@
 
   /* ---------- reveal on enter ---------- */
   function play(el){
-    if(el.classList.contains("in"))return;
+    if(el.hasAttribute("data-in"))return;
     /* split lazily on first reveal — mutating pre-hydration DOM causes a hydration mismatch */
     if(el.hasAttribute("data-split")&&!el.__split){split(el);void el.offsetWidth}
-    el.classList.add("in");
+    el.setAttribute("data-in","");
     var d=parseInt(el.getAttribute("data-delay")||"0",10),r=el.getAttribute("data-r");
     if(r===null){}else if(r==="stagger"){
       Array.prototype.slice.call(el.children).forEach(function(c,i){
@@ -79,7 +79,7 @@
   }
   function observe(root){
     var els=$$("[data-split],[data-r],[data-unveil],[data-count],.eb",root);
-    if(!motionOK()){els.forEach(function(e){e.classList.add("in")});return}
+    if(!motionOK()){els.forEach(function(e){e.setAttribute("data-in","")});return}
     io=io||new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){play(e.target);io.unobserve(e.target)}})},{rootMargin:"0px 0px -9% 0px",threshold:.12});
     els.forEach(function(e){io.observe(e)});
   }

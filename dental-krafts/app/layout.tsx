@@ -8,6 +8,7 @@ import { Motion } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { StickyBar } from "@/components/sticky-bar";
+import { DesktopDock } from "@/components/desktop-dock";
 import { site, OG_IMAGE } from "@/content/site";
 import { JsonLd, organization, webSite } from "@/lib/schema";
 
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s | Dental Krafts",
   },
   description:
-    "Implants, root canals, kids' dentistry and smile design by Dr Ruchi Goel (AIIMS) and Dr Parmod Gulia (PGIMER). Rated 5.0 on Practo. Clinics in Sector 53 & 57.",
+    "Implants, root canals, kids' dentistry and smile design by Dr Ruchi Goel (AIIMS) and Dr Parmod Gulia (PGIMER). Clinics in Sector 53 & 57, Gurgaon.",
   robots: {
     index: true,
     follow: true,
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main">{children}</main>
         <SiteFooter />
         <StickyBar />
+        <DesktopDock />
         <JsonLd data={[organization(), webSite()]} />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`} strategy="lazyOnload" />
         <Script id="ga4" strategy="lazyOnload">{`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${site.gaId}');`}</Script>

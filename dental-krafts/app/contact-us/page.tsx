@@ -6,9 +6,10 @@ import { OpenStatus } from "@/components/open-status";
 import { BookingForm } from "@/components/booking-form";
 import { clinics } from "@/content/clinics";
 import { site } from "@/content/site";
+import { JsonLd, clinicNode, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Book a Visit | Dental Krafts Gurgaon | Sector 53 & 57",
+  title: { absolute: "Book a Visit | Dental Krafts Gurgaon | Sector 53 & 57" },
   description:
     "Book a consultation at Dental Krafts, Gurgaon. Clinics in Sector 53 (South Point Mall) and Sector 57 (Bestech Central Square). Call or WhatsApp.",
   alternates: { canonical: "/contact-us" },
@@ -84,6 +85,7 @@ export default function ContactUs() {
           <p className="note">Saturday and Sunday we're open as usual.</p>
         </div>
       </div></section>
+      <JsonLd data={[...clinics.map(clinicNode), breadcrumb([["Home", "/"], ["Book a visit", "/contact-us"]])]} />
     </>
   );
 }

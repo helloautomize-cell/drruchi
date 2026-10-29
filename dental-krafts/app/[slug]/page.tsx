@@ -7,6 +7,7 @@ import { BaShowcase } from "@/components/ba-slider";
 import { QA, Eb } from "@/components/bits";
 import { Toc } from "@/components/interactive";
 import { treatments, treatmentBySlug, treatmentGroups } from "@/content/treatments";
+import { v7Treatments } from "@/content/treatments-v7";
 import { treatmentImages } from "@/content/treatment-images";
 import { doctorById } from "@/content/doctors";
 import { clinics } from "@/content/clinics";
@@ -26,7 +27,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const t = treatmentBySlug(slug);
   if (!t) notFound();
-  return { title: t.metaTitle, description: t.metaDesc, alternates: { canonical: `/${t.slug}` } };
+  const v = v7Treatments[slug];
+  return { title: { absolute: v?.metaTitle ?? t.metaTitle }, description: v?.metaDesc ?? t.metaDesc, alternates: { canonical: `/${t.slug}` } };
 }
 
 const WHO = {
@@ -40,15 +42,17 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
   const t = treatmentBySlug(slug);
   if (!t) notFound();
 
+  const v = v7Treatments[slug];
   const group = treatmentGroups.find((g) => g.name === t.group);
-  const who = WHO[t.doctor];
-  const imgs = treatmentImages[t.slug] ?? [];
+  const who = WHO[v?.doctor ?? t.doctor];
+  /* v7: three live-site photos per page — hero, how-it-works, aftercare. */
+  const imgs = v ? [undefined, v.imgs.how, undefined, undefined, v.imgs.why] : (treatmentImages[t.slug] ?? []);
   const GsImg = ({ i }: { i: number }) => imgs[i] ? (
     <figure className="gsim"><Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" decoding="async" src={imgs[i].src} width={1200} height={800} alt={imgs[i].alt} /><figcaption>{imgs[i].alt}</figcaption></figure>
   ) : null;
   const results = t.resultFiles.map(caseByFile).filter((c): c is NonNullable<typeof c> => Boolean(c && c.consent !== false));
   const revs = t.reviewIds.map(reviewById).filter(Boolean);
-  const rel = t.related.map(treatmentBySlug).filter(Boolean).slice(0, 4);
+  const rel = (v?.related ?? t.related).map(treatmentBySlug).filter(Boolean).slice(0, 4);
 
   const toc: [string, string][] = [
     ...(t.forYou.length ? [["t-for", "Is this for you?"] as [string, string]] : []),
@@ -61,10 +65,12 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
     ["t-faq", "Questions"],
   ];
 
+  const faqs = v?.faqs ?? t.faqs;
+  const tm = v ? { ...t, h1: v.h1, sub: v.answer, howText: [v.how], aftercare: [v.recovery], metaTitle: v.metaTitle, metaDesc: v.metaDesc, doctor: v.doctor } : t;
   const LD = [
-    medicalProcedure(t),
-    medicalWebPage(t),
-    faqPage(t.faqs),
+    medicalProcedure(tm),
+    medicalWebPage(tm),
+    faqPage(faqs),
     breadcrumb([["Home", "/"], ["Treatments", "/treatments"], [t.name, `/${t.slug}`]]),
   ];
 
@@ -75,14 +81,15 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
         <div>
           <nav className="crumb" aria-label="Breadcrumb"><Link href="/">Home</Link><i>/</i><Link href="/treatments">Treatments</Link><i>/</i><span>{t.name}</span></nav>
           <Eb>{t.eyebrow}</Eb>
-          <h1 className="d h1m">{emLast(t.h1)}</h1>
-          <p className="sub">{t.sub}</p>
+          <h1 className="d h1m">{emLast(v?.h1 ?? t.h1)}</h1>
+          <p className="sub">{v?.answer ?? t.sub}</p>
           <div className="row">
             <Link className="btn btn-p" href={`/contact-us?concern=${encodeURIComponent(t.name)}`}>Book a consultation <Icon name="arrow-right" cls="ic ic-sm" /></Link>
             <a className="btn btn-wa" href={`https://wa.me/919810448720?text=${encodeURIComponent(`Hello Dental Krafts, I'd like to ask about ${t.name.toLowerCase()}.`)}`}><Icon name="whatsapp" cls="ic ic-sm" /> Ask on WhatsApp</a>
           </div>
+          <p className="th-led">Led by <Link href={who.href}><b>{who.label}</b></Link></p>
         </div>
-        <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src={t.heroImage} width={1536} height={1024} alt={t.heroAlt} fetchPriority="high" /></div>
+        <div className="ph"><Image sizes="(max-width: 768px) 100vw, 760px" src={v?.imgs.hero.src ?? t.heroImage} width={1536} height={1024} alt={v?.imgs.hero.alt ?? t.heroAlt} fetchPriority="high" /></div>
       </div></section>
 
       {/* 2 · Facts bar */}
@@ -97,12 +104,13 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
       <section className="sec"><div className="wrap gd">
         <Toc links={toc} />
         <div>
-          {t.forYou.length > 0 && (
+          {(v?.forYou.length || t.forYou.length > 0) && (
             <section className="gs" id="t-for">
               <Eb>Is this for you?</Eb>
               <h2 className="d h2">If any of these sound <em>familiar</em>.</h2>
               <ul className="fit">
-                {t.forYou.map((f) => <li key={f.title}><Icon name="check" /><span><b>{f.title}.</b> {f.text}</span></li>)}
+                {v ? v.forYou.map((f) => <li key={f}><Icon name="check" /><span>{f}</span></li>)
+                    : t.forYou.map((f) => <li key={f.title}><Icon name="check" /><span><b>{f.title}.</b> {f.text}</span></li>)}
               </ul>
               <GsImg i={0} />
             </section>
@@ -110,25 +118,25 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
           <section className="gs" id="t-how">
             <Eb>How it works</Eb>
             <h2 className="d h2">{emLast(t.howTitle)}</h2>
-            {t.howText.map((p, i) => <p key={i}>{p}</p>)}
+            {(v ? [v.how] : t.howText).map((p, i) => <p key={i}>{p}</p>)}
             <GsImg i={1} />
           </section>
-          {t.options.length > 0 && (
+          {(v?.options.length || t.options.length > 0) && (
             <section className="gs" id="t-opt">
               <Eb>Your options</Eb>
               <h2 className="d h2">Ways to <em>treat it</em>.</h2>
               <div className="opts">
-                {t.options.map((o) => <div key={o.title}><b>{o.title}</b><span>{o.text}</span></div>)}
+                {(v?.options ?? t.options).map((o) => <div key={o.title}><b>{o.title}</b><span>{o.text}</span></div>)}
               </div>
               <GsImg i={2} />
             </section>
           )}
-          {t.steps.length > 0 && (
+          {(v?.steps.length || t.steps.length > 0) && (
             <section className="gs" id="t-steps">
               <Eb>Step by step</Eb>
               <h2 className="d h2">What happens, and <em>when</em>.</h2>
               <ol className="tline">
-                {t.steps.map((s) => <li key={s.title}><div><b>{s.title}</b><span>{s.text}</span></div></li>)}
+                {(v?.steps ?? t.steps).map((s) => <li key={s.title}><div><b>{s.title}</b><span>{s.text}</span></div></li>)}
               </ol>
               <GsImg i={3} />
             </section>
@@ -159,20 +167,27 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
             </section>
           )}
           <section className="gs" id="t-care">
-            <Eb>Aftercare</Eb>
-            <h2 className="d h2">Looking after it <em>afterwards</em>.</h2>
-            <div className="care">
-              {t.aftercare.map((a) => {
-                const m = a.match(/^([^:–—]{3,60})[:–—]\s*(.+)$/);
-                return <div key={a}>{m ? <><b>{m[1]}</b><span>{m[2]}</span></> : <span>{a}</span>}</div>;
-              })}
-            </div>
+            <Eb>Aftercare{who.label !== "Either dentist" ? " and who treats you" : ""}</Eb>
+            <h2 className="d h2">Looking after <em>the result</em>.</h2>
+            {v ? (
+              <>
+                <p>{v.recovery}</p>
+                <p>{v.why}</p>
+              </>
+            ) : (
+              <div className="care">
+                {t.aftercare.map((a) => {
+                  const m = a.match(/^([^:–—]{3,60})[:–—]\s*(.+)$/);
+                  return <div key={a}>{m ? <><b>{m[1]}</b><span>{m[2]}</span></> : <span>{a}</span>}</div>;
+                })}
+              </div>
+            )}
             <GsImg i={4} />
           </section>
           <section className="gs" id="t-faq">
-            <Eb>Questions</Eb>
-            <h2 className="d h2">What people <em>ask</em> us.</h2>
-            <div>{t.faqs.map((f) => <QA key={f.q} q={f.q} a={f.a} />)}</div>
+            <Eb>FAQs</Eb>
+            <h2 className="d h2">Questions about <em>{t.name.toLowerCase()}</em>.</h2>
+            <div>{faqs.map((f) => <QA key={f.q} q={f.q} a={f.a} />)}</div>
           </section>
         </div>
       </div></section>

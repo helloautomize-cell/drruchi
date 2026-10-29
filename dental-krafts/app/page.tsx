@@ -4,7 +4,9 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { Icon } from "@/components/icons";
 import { OpenStatus } from "@/components/open-status";
-import { Reel5, StoryVid5 } from "@/components/media";
+import { Reel5 } from "@/components/media";
+import { HeroSwap } from "@/components/hero-swap";
+import { VisitWaterfall } from "@/components/visit-waterfall";
 import { BaShowcase } from "@/components/ba-slider";
 import { BookingV5, BookLink } from "@/components/booking-form";
 import { QA, Eb } from "@/components/bits";
@@ -15,9 +17,9 @@ import { JsonLd, clinicNode, physicianNode, faqPage, videoObject } from "@/lib/s
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Dental Clinic in Gurgaon | AIIMS & PGIMER Dentists | Dental Krafts",
+  title: { absolute: "Dental Clinic in Gurgaon | AIIMS & PGIMER Dentists | Dental Krafts" },
   description: "Implants, root canals, kids' dentistry and smile design by Dr Ruchi Goel (AIIMS) and Dr Parmod Gulia (PGIMER). Rated 5.0 on Practo. Clinics in Sector 53 & 57.",
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/", languages: { "en-IN": "/", ja: "/japanese", ko: "/korean", "x-default": "/" } },
 };
 
 const HOME_CASES = [
@@ -52,12 +54,16 @@ const STORIES = [
 ];
 
 const AWARDS = [
-  ["awards/national-achievers-2025-gulshan-grover-1.webp", "National Achievers Award 2025, presented to Dr Ruchi Goel by Gulshan Grover"],
-  ["awards/aiims-prosthodontics-celebration.webp", "A token of appreciation from the HOD, Division of Prosthodontics, AIIMS New Delhi"],
-  ["awards/parmod-gulia-mds-degree-health-minister.webp", "Dr Parmod Gulia receives his MDS from the Union Health Minister"],
-  ["awards/national-achievers-2025-mahima-chaudhry.webp", "With Mahima Chaudhry at the National Achievers Award 2025"],
-  ["awards/prime-impact-excellence-award.webp", "Business and Profession Excellence Award"],
-  ["awards/clinic-celebrity-visit-king.webp", "Singer King visits Dental Krafts"],
+  ["awards/prime-impact-excellence-award.webp", "Prime Impact Brand, Business and Profession Excellence Award"],
+  ["awards/aiims-prosthodontics-hod.webp", "The HOD, Prosthodontics, AIIMS New Delhi, presents a token of appreciation at the celebration event"],
+  ["awards/parmod-gulia-mds-health-minister.webp", "Dr Parmod Gulia receives his Master's degree from the Health Minister of India"],
+  ["awards/national-achievers-2025-gulshan-grover-1.webp", "Honoured at the National Achievers Award 2025 by Gulshan Grover"],
+  ["awards/national-achievers-2025-backdrop.webp", "National Achievers Award 2025"],
+  ["awards/national-achievers-2025-gulshan-grover-2.webp", "On stage at the National Achievers Award 2025, Delhi"],
+  ["awards/with-singer-king.webp", "With the singer King at Dental Krafts"],
+  ["awards/with-jj-communication.webp", "With JJ Communication"],
+  ["awards/national-achievers-2025-mahima-chaudhry.webp", "Honoured at the National Achievers Award 2025 by Mahima Chaudhry"],
+  ["awards/national-achievers-2025-vindu-dara-singh.webp", "With Vindu Dara Singh at the National Achievers Award 2025"],
 ] as const;
 
 const STEPS = [
@@ -67,7 +73,7 @@ const STEPS = [
   { no: "4", t: "Aftercare", p: "A follow-up check, and the same dentist next time. Many families have stayed for over a decade.", tag: "One file for the family" },
 ];
 
-const CHIPS = ["Missing teeth", "Tooth pain", "A better smile", "Crooked teeth", "My child's teeth", "Bleeding gums"];
+
 
 const TCARDS: { t: string; p: string; img: string; alt: string; who: "ruchi" | "parmod" | "either"; whoLabel: string }[] = [
   { t: "Replace missing teeth", p: "Implants, dentures and full-arch fixed teeth that look and chew like your own.", img: "/images/v5/t-implants.webp", alt: "A dental implant with its crown", who: "ruchi", whoLabel: "Usually with Dr Ruchi" },
@@ -116,15 +122,7 @@ export default function Home() {
               <b className="tnum">5.0</b> on Practo · 1,000+ patient stories
             </p>
           </div>
-          <div className="dk5-duo rise" style={{ "--rd": "260ms" } as CSSProperties}>
-            <figure className="dk5-pc unv"><Image sizes="(max-width: 768px) 45vw, 400px" src="/images/v5/hero-ruchi.webp" width={1024} height={1280} alt="Dr Ruchi Goel, prosthodontist, holding a model of a dental implant" preload /><figcaption><b>Dr Ruchi Goel</b><span>Prosthodontist &amp; implantologist · AIIMS</span></figcaption></figure>
-            <figure className="dk5-pc b unv"><Image sizes="(max-width: 768px) 45vw, 400px" src="/images/v5/hero-parmod.webp" width={1055} height={1318} alt="Dr Parmod Gulia, pediatric dentist, with a tooth toy" /><figcaption><b>Dr Parmod Gulia</b><span>Pediatric dentist · PGIMER</span></figcaption></figure>
-            <div className="dk5-seal rise" style={{ "--rd": "900ms" } as CSSProperties}><span className="n tnum" data-count>17+</span><span className="l">years of<br />experience</span></div>
-          </div>
-        </div>
-        <div className="wrap dk5-ask rise" style={{ "--rd": "700ms" } as CSSProperties}>
-          <span className="q">What brings you in?</span>
-          <div className="dk5-chips">{CHIPS.map((c) => <BookLink key={c} topic={c}>{c}</BookLink>)}</div>
+          <HeroSwap />
         </div>
       </section>
 
@@ -250,9 +248,7 @@ export default function Home() {
           <h2 className="d h2" data-split>A clear plan, <em>before</em> we start.</h2>
           <p className="lead" data-r data-delay="180">Four steps, the same for a filling or a full set of implants. Second opinions are welcome at step one.</p>
         </div>
-        <div className="steps" data-steps data-r="stagger">
-          {STEPS.map((s) => <div className="st" key={s.no}><span className="no tnum">{s.no}</span><h3 className="h3">{s.t}</h3><p>{s.p}</p><span className="tag">{s.tag}</span></div>)}
-        </div>
+        <VisitWaterfall steps={STEPS} />
         <div className="promise" data-r>
           <Image sizes="(max-width: 768px) 100vw, 760px" loading="lazy" src="/images/clinic/reception-lounge.webp" width={1128} height={758} alt="The Dental Krafts reception" />
           <blockquote>“They only suggested what was truly needed and explained every option before treatment.”<cite>Dewesh Kumar, aligners and implants · Verified on Practo</cite></blockquote>
@@ -269,23 +265,25 @@ export default function Home() {
             <div><span className="n" data-count>4.9</span><small>Justdial · 1,240+ ratings · Oct 2026</small></div>
           </div>
         </div></div>
-        <div className="crs" data-carousel data-autoplay="6500" role="region" aria-roledescription="carousel" aria-label="Patient stories">
-          <div className="track" data-track data-cursor="Drag" tabIndex={0} data-r="stagger">
-            {VID_STORIES.map((r) => <StoryVid5 key={r.file} reel={r} />)}
-            {STORIES.map((s) => (
-              <article className="story" key={s.name}>
-                <div className="top"><span className="stars" role="img" aria-label="5 out of 5"><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /></span><span className="vf">Verified · Practo</span></div>
-                <blockquote>“{s.q}”</blockquote>
-                <div className="by"><span className="ini" aria-hidden="true">{s.name[0]}</span><span><b>{s.name}</b><small>{s.sub}</small></span></div>
-              </article>
-            ))}
-          </div>
-          <div className="wrap ctl">
-            <span className="ctr" data-counter>01 <span>/ 07</span></span>
-            <span className="bar" data-progress><i /></span>
-            <div className="qnav">
-              <button type="button" data-prev aria-label="Previous story"><Icon name="arrow-left" cls="ic" /></button>
-              <button type="button" data-next aria-label="Next story"><Icon name="arrow-right" cls="ic" /></button>
+        <div className="crs mrq" role="region" aria-roledescription="marquee" aria-label="Patient stories">
+          <div className="mrq-track">
+            <div className="mrq-half" data-r="stagger">
+              {STORIES.map((s) => (
+                <article className="story" key={s.name}>
+                  <div className="top"><span className="stars" role="img" aria-label="5 out of 5"><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /></span><span className="vf">Verified · Practo</span></div>
+                  <blockquote>“{s.q}”</blockquote>
+                  <div className="by"><span className="ini" aria-hidden="true">{s.name[0]}</span><span><b>{s.name}</b><small>{s.sub}</small></span></div>
+                </article>
+              ))}
+            </div>
+            <div className="mrq-half" aria-hidden="true">
+              {STORIES.map((s) => (
+                <article className="story" key={"d" + s.name}>
+                  <div className="top"><span className="stars" role="img" aria-label="5 out of 5"><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /><Icon name="star" cls="ic ic-sm fill" /></span><span className="vf">Verified · Practo</span></div>
+                  <blockquote>“{s.q}”</blockquote>
+                  <div className="by"><span className="ini" aria-hidden="true">{s.name[0]}</span><span><b>{s.name}</b><small>{s.sub}</small></span></div>
+                </article>
+              ))}
             </div>
           </div>
         </div>
@@ -319,7 +317,7 @@ export default function Home() {
           <div className="wrap"><div className="sh">
             <Eb>Recognition</Eb>
             <h2 className="d h2" data-split>Recognised by peers and the <em>profession</em>.</h2>
-            <p className="lead" data-r data-delay="180">Moments from AIIMS, PGIMER and the award nights since.</p>
+            <p className="lead" data-r data-delay="180">Ten moments from AIIMS, PGIMER and the award nights since.</p>
           </div></div>
           <div className="rtrack" data-pin-track tabIndex={0} aria-label="Award photos" data-r="stagger">
             {AWARDS.map(([src, cap], i) => (

@@ -23,6 +23,9 @@ const nextConfig: NextConfig = {
       { source: "/dr-pramod-gulia", destination: "/dr-parmod-gulia", permanent: true },
       { source: "/treatment-costs", destination: "/treatments", permanent: true },
       { source: "/our-doctors", destination: "/our-dentists", permanent: true },
+      { source: "/blog/best-painless-dentist-gurgaon", destination: "/blog/gentle-dentist-gurgaon", permanent: true },
+      { source: "/blog/dental-implants-types-procedure-benefits-cost-risks", destination: "/blog/dental-implants-types-procedure-benefits-risks", permanent: true },
+      { source: "/blog/tooth-filling-treatment-type-cost", destination: "/blog/tooth-filling-treatment-types", permanent: true },
       // canonical host: www and http both collapse onto https://dentalkrafts.com
       {
         source: "/:path*",

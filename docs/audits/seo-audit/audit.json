@@ -1,0 +1,195 @@
+{
+  "site": "https://dentalkrafts.com",
+  "audited_at": "2026-10-29",
+  "overall_score": 70,
+  "area_scores": {
+    "crawling_ai_bot_access": 9,
+    "technical": 6,
+    "schema": 8,
+    "eeat": 6,
+    "pillar_linking": 4,
+    "faqs": 7,
+    "entities_semantics": 7,
+    "keywords": 7,
+    "content_humanness": 5,
+    "aeo_geo_readiness": 8
+  },
+  "issues": [
+    {
+      "id": "A-01",
+      "priority": "P0",
+      "title": "Title template doubles '| Dental Krafts' suffix",
+      "affected": ["app/treatments/page.tsx", "app/[slug]/page.tsx", "app/our-dentists/page.tsx", "app/contact-us/page.tsx", "app/dental-clinic-sector-53-gurgaon/page.tsx", "app/dental-clinic-sector-57-gurgaon/page.tsx", "most page.tsx metadata"],
+      "evidence": "<title>Dental Treatments in Gurgaon | Implants, RCT, Kids | Dental Krafts | Dental Krafts</title> served on /treatments, /dental-implants, /our-dentists, /contact-us, clinic pages",
+      "fix": "Drop the trailing '| Dental Krafts' from page-level title strings, or set title:{absolute:...} where the source title already includes the suffix (e.g. t.metaTitle in app/[slug]/page.tsx)."
+    },
+    {
+      "id": "A-02",
+      "priority": "P1",
+      "title": "Only 2 patient guides; pillar clusters empty",
+      "affected": ["content/guides.ts", "app/guides/**"],
+      "evidence": "sitemap lists only /guides/child-first-dental-visit and /guides/dental-implant-vs-bridge; GUIDE_CATEGORIES has 6 categories with 0-1 articles each; checklist requires 5 supporting articles per pillar",
+      "fix": "Write 5 supporting articles per pillar; keep empty /guides/category/* pages out of sitemap/nav until filled."
+    },
+    {
+      "id": "A-03",
+      "priority": "P1",
+      "title": "Banned/risky terms in blog corpus",
+      "affected": ["content/posts.ts"],
+      "evidence": "L245-272 'painless' ~15x (slug best-painless-dentist-gurgaon); L962-970 'fees/charges'; L659 'dental-implants-types-procedure-benefits-cost-risks'; L1909 'tooth-filling-treatment-type-cost' (slugs contain 'cost'); L264 'game-changer'; L1118 'an Root Canal Treatment specialist' (grammar); reviews.ts:16 quote contains 'charges'",
+      "fix": "Rewrite or retire offending posts; rename cost-containing slugs and add permanent 301s in next.config.ts; fix grammar; remove 'charges' wording."
+    },
+    {
+      "id": "A-04",
+      "priority": "P1",
+      "title": "Missing Editorial Policy and Medical Disclaimer trust pages",
+      "affected": ["app/", "components/site-footer.tsx"],
+      "evidence": "No /editorial-policy or /medical-disclaimer route; footer links only About/Contact/Privacy/Terms",
+      "fix": "Create both pages with clinic-approved copy and link them in the footer."
+    },
+    {
+      "id": "A-05",
+      "priority": "P1",
+      "title": "Hydration mismatch from motion engine",
+      "affected": ["lib/dk-motion.js", "components/motion.tsx", "app/dk-motion.css"],
+      "evidence": "dev server log on /root-canal-treatment: <p className=\"eb\" +client / -server \"eb in\"> — dk-motion adds .in before hydration completes",
+      "fix": "Start IntersectionObservers inside requestIdleCallback post-mount (verify timing), or apply reveal state via a data-* attribute React does not own."
+    },
+    {
+      "id": "A-06",
+      "priority": "P1",
+      "title": "Home page emits no hreflang",
+      "affected": ["app/page.tsx"],
+      "evidence": "curl / shows zero hreflang links; ja/ko pages define languages but home does not",
+      "fix": "Add alternates.languages { 'en-IN':'/', ja:'/japanese', ko:'/korean', 'x-default':'/' } to home metadata."
+    },
+    {
+      "id": "A-07",
+      "priority": "P1",
+      "title": "Meta descriptions over 155 chars",
+      "affected": ["app/layout.tsx", "app/treatments/page.tsx", "clinic pages"],
+      "evidence": "home ~168 chars, /treatments ~162, clinic pages ~163",
+      "fix": "Trim to <=155 chars keeping location + doctor + proof."
+    },
+    {
+      "id": "A-08",
+      "priority": "P1",
+      "title": "Blog posts lack visible dates/reviewed-by; Article schema lacks datePublished",
+      "affected": ["content/posts.ts", "app/blog/[slug]/page.tsx", "lib/schema.tsx"],
+      "evidence": "blog page shows 'By Dr Parmod Gulia · 4 min read' only; no published/updated date; schema has dateModified but no datePublished",
+      "fix": "Add published/updated fields to posts, render 'Written by / Medically reviewed by / date' near top, emit datePublished in articleNode."
+    },
+    {
+      "id": "A-09",
+      "priority": "P1",
+      "title": "guides/[slug] and guides/category/[category] lack ensureStatic",
+      "affected": ["app/guides/[slug]/page.tsx", "app/guides/category/[category]/page.tsx"],
+      "evidence": "dev log: 'params accessed outside Suspense may prevent navigation from being instant' error; build output lists routes as PPR (◐)",
+      "fix": "Add export const ensureStatic = 'navigation' to both route files (same fix applied to [slug] and blog/[slug])."
+    },
+    {
+      "id": "A-10",
+      "priority": "P2",
+      "title": "/our-dentists emits no Physician schema",
+      "affected": ["app/our-dentists/page.tsx"],
+      "evidence": "Served HTML contains only Organization + WebSite ld+json",
+      "fix": "Emit physicianNode('ruchi') and physicianNode('parmod') via JsonLd."
+    },
+    {
+      "id": "A-11",
+      "priority": "P2",
+      "title": "/gallery emits no ImageObject schema",
+      "affected": ["app/gallery/page.tsx"],
+      "evidence": "Served HTML contains only Organization + WebSite",
+      "fix": "Emit imageObject() for each consented case."
+    },
+    {
+      "id": "A-12",
+      "priority": "P2",
+      "title": "/contact-us emits no ContactPoint/LocalBusiness schema",
+      "affected": ["app/contact-us/page.tsx"],
+      "evidence": "Served HTML contains only Organization + WebSite",
+      "fix": "Emit clinicNode() pair or a ContactPage with ContactPoint entries."
+    },
+    {
+      "id": "A-13",
+      "priority": "P2",
+      "title": "Sitemap lastModified = build timestamp",
+      "affected": ["app/sitemap.ts"],
+      "evidence": "lastmod>2026-10-29T07:20:31 on static/treatment/blog URLs; guides use real dates",
+      "fix": "Use real per-content modified dates (add a modified field or per-route constants)."
+    },
+    {
+      "id": "A-14",
+      "priority": "P2",
+      "title": "best-dental-clinic-* pages near-orphan",
+      "affected": ["app/best-dental-clinic-golf-course-road-gurgaon/page.tsx", "app/best-dental-clinic-gurgaon/page.tsx"],
+      "evidence": "0 inbound links on / and /treatments; only 1 on /dental-implants",
+      "fix": "Link them from the footer or clinic pages."
+    },
+    {
+      "id": "A-15",
+      "priority": "P2",
+      "title": "robots.txt missing Claude-User and Perplexity-User",
+      "affected": ["app/robots.ts"],
+      "evidence": "AI_BOTS list lacks both; checklist requires them",
+      "fix": "Append 'Claude-User' and 'Perplexity-User' to AI_BOTS."
+    },
+    {
+      "id": "A-16",
+      "priority": "P2",
+      "title": "OG image not 1200x630",
+      "affected": ["content/site.ts", "public/images/ai/doctors-duo.webp"],
+      "evidence": "doctors-duo.webp is 1536x1024",
+      "fix": "Export a dedicated 1200x630 og-image variant."
+    },
+    {
+      "id": "A-17",
+      "priority": "P2",
+      "title": "AI writing tells in blog corpus",
+      "affected": ["content/posts.ts"],
+      "evidence": "'game-changer' L264, 'daunting task' L250, filler closers; 16 hits on banned-phrase scan",
+      "fix": "Edit or retire the weakest posts; keep guides-style voice."
+    },
+    {
+      "id": "A-18",
+      "priority": "P3",
+      "title": "No manifest.webmanifest",
+      "affected": ["app/"],
+      "evidence": "No manifest route in build output",
+      "fix": "Add app/manifest.ts with name, icons, theme_color."
+    },
+    {
+      "id": "A-19",
+      "priority": "P3",
+      "title": "/guides index title thin",
+      "affected": ["app/guides/page.tsx"],
+      "evidence": "served title 'Patient guides | Dental Krafts' (30 chars; spec wants 50-60)",
+      "fix": "Lengthen to e.g. 'Dental Patient Guides | Written by Specialists | Dental Krafts'."
+    },
+    {
+      "id": "A-20",
+      "priority": "P3",
+      "title": "No Wikidata/Wikipedia sameAs links",
+      "affected": ["lib/schema.tsx"],
+      "evidence": "sameAs only lists social profiles",
+      "fix": "Add Wikidata/Wikipedia sameAs for doctors/clinic where profiles exist."
+    },
+    {
+      "id": "A-21",
+      "priority": "P3",
+      "title": "vercel.app preview deploy not confirmed noindex",
+      "affected": ["hosting"],
+      "evidence": "cannot verify locally; checklist requires preview URLs noindexed",
+      "fix": "Set X-Robots-Tag: noindex on the Vercel preview project or via vercel.json headers."
+    }
+  ],
+  "client_needs": [
+    "Editorial policy and medical disclaimer copy (client approval)",
+    "Verified founding year and Google review counts",
+    "Google Business Profile claim/verify for both clinics (same NAP)",
+    "Decide noindex on drruchi-five.vercel.app",
+    "Choose which legacy blog posts to keep vs retire",
+    "Policy decision on INR cost content (audit wants it; site rule bans it)"
+  ]
+}

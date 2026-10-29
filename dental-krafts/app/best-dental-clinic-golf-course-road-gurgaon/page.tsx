@@ -9,7 +9,7 @@ import { reviewById } from "@/content/reviews";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Dentist on Golf Course Road, Gurgaon | Dental Krafts Sector 53",
+  title: { absolute: "Dentist on Golf Course Road, Gurgaon | Dental Krafts Sector 53" },
   description:
     "Dental Krafts Sector 53 is inside South Point Mall on Golf Course Road. Specialist care from AIIMS & PGIMER-trained dentists. Open 10 am–8 pm, closed Wed.",
   alternates: { canonical: "/best-dental-clinic-golf-course-road-gurgaon" },

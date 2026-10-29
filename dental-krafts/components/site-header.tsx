@@ -19,6 +19,7 @@ const NAV: [string, string][] = [
   ["Dental tourism", "/medical-tourism"],
   ["Clinics", "/#clinics"],
   ["Patient stories", "/patient-stories"],
+  ["Patient guides", "/guides"],
 ];
 
 export function SiteHeader({ active }: { active?: string }) {
@@ -28,6 +29,7 @@ export function SiteHeader({ active }: { active?: string }) {
   const lang = path.startsWith("/korean") ? "ko" : path.startsWith("/japanese") ? "ja" : "en";
   const nav = NAV_I18N[lang] ?? NAV;
   const book = BOOK_I18N[lang] ?? "Book a visit";
+  const guideArt = /^\/guides\/(?!category(?:\/|$))[^/]+\/?$/.test(path);
   useEffect(() => {
     const onS = () => setSc(window.scrollY > 10);
     onS();
@@ -56,7 +58,7 @@ export function SiteHeader({ active }: { active?: string }) {
           {nav.map(([l, h]) => <Link key={l} href={h}>{l}</Link>)}
           <Link className="btn btn-p" href="/contact-us">{book}</Link>
         </nav>
-      </div></header>
+      </div>{guideArt && <span className="gd-prog" aria-hidden="true" />}</header>
     </>
   );
 }

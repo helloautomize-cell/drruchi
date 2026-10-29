@@ -7,7 +7,7 @@ import { clinics } from "@/content/clinics";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Best Dental Clinic in Gurgaon? How to Choose | Dental Krafts",
+  title: { absolute: "Best Dental Clinic in Gurgaon? How to Choose | Dental Krafts" },
   description:
     "Five questions worth asking any dental clinic in Gurgaon — and how Dental Krafts answers them. AIIMS & PGIMER specialists, 5.0 on Practo, two clinics.",
   alternates: { canonical: "/best-dental-clinic-gurgaon" },

@@ -5,10 +5,11 @@ import { Icon } from "@/components/icons";
 import { CtaBand } from "@/components/bits";
 import { Reveal } from "@/components/reveal";
 import { doctors } from "@/content/doctors";
+import { JsonLd, physicianNode, breadcrumb } from "@/lib/schema";
 import { reviewById } from "@/content/reviews";
 
 export const metadata: Metadata = {
-  title: "Our Dentists | AIIMS & PGIMER Specialists | Dental Krafts Gurgaon",
+  title: { absolute: "Our Dentists | AIIMS & PGIMER Specialists | Dental Krafts Gurgaon" },
   description:
     "Meet Dr Ruchi Goel, prosthodontist and implantologist (AIIMS), and Dr Parmod Gulia, pediatric dentist (PGIMER, silver medal). Book at Sector 53 or 57.",
   alternates: { canonical: "/our-dentists" },
@@ -25,6 +26,7 @@ const bipin = reviewById("bipin");
 export default function OurDentists() {
   return (
     <>
+      <JsonLd data={[physicianNode("ruchi"), physicianNode("parmod"), breadcrumb([["Home", "/"], ["Our dentists", "/our-dentists"]])]} />
       {/* Hero */}
       <section className="ihero"><div className="wrap">
         <div className="crumb"><Link href="/">Home</Link> / Our dentists</div>

@@ -18,4 +18,4 @@ export const site = {
   gaId: "G-435EXMXJGW",
 };
 
-export const OG_IMAGE = "/images/ai/doctors-duo.webp";
+export const OG_IMAGE = "/images/ai/og-doctors-duo-1200x630.webp";

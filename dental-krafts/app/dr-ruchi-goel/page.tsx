@@ -14,7 +14,7 @@ import { site } from "@/content/site";
 import { JsonLd, physicianNode, faqPage, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Dr Ruchi Goel | Prosthodontist & Implantologist, AIIMS | Gurgaon",
+  title: { absolute: "Dr Ruchi Goel | Prosthodontist, AIIMS | Dental Krafts" },
   description: "Dr Ruchi Goel, BDS, MDS (AIIMS New Delhi), AIIMS MDS entrance topper. Dental implants, dentures, crowns, smile design and full-mouth rehab at Dental Krafts, Gurgaon.",
   alternates: { canonical: "/dr-ruchi-goel" },
 };

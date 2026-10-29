@@ -2,6 +2,7 @@ import { site } from "@/content/site";
 import { clinics } from "@/content/clinics";
 import { doctors } from "@/content/doctors";
 import { treatments } from "@/content/treatments";
+import { guidesByDate } from "@/content/guides";
 
 
 const U = (p: string) => `${site.domain}${p}`;
@@ -43,6 +44,10 @@ function build(): string {
   lines.push(`- [Before and after results](${U("/gallery")}) — cases shared with patient consent`);
   lines.push(`- [Patient stories](${U("/patient-stories")}) — verified reviews from Practo and Justdial`);
   lines.push(`- [Blog](${U("/blog")}) — dental questions answered by the specialists`);
+  lines.push(`- [Patient guides](${U("/guides")}) — in-depth, plain-language guides written by one specialist and medically reviewed by the other`);
+  for (const g of guidesByDate()) {
+    lines.push(`  - [${g.title}](${U(`/guides/${g.slug}`)}) — ${g.excerpt}`);
+  }
   lines.push(`- [International patients / dental tourism](${U("/medical-tourism")})`);
   lines.push(`- [日本語](${U("/japanese")}) · [한국어](${U("/korean")}) — language summaries`);
   lines.push(`- [About Dental Krafts](${U("/about-us")})`);

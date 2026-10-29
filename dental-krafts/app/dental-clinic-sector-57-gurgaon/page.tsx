@@ -12,7 +12,7 @@ import { site } from "@/content/site";
 import { JsonLd, clinicNode, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Dentist in Sector 57, Sushant Lok 2 | Dental Krafts",
+  title: { absolute: "Dentist in Sector 57, Sushant Lok 2 | Dental Krafts" },
   description: "Dental Krafts Sector 57, UG-12, 1st Floor, Bestech Central Square Mall, opp. Hong Kong Bazaar. Open 10 am–8:30 pm, closed Wed. Call +91 95992 52018.",
   alternates: { canonical: "/dental-clinic-sector-57-gurgaon" },
 };

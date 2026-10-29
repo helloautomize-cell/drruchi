@@ -5,7 +5,7 @@ import { Icon } from "@/components/icons";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "About Dental Krafts | Specialist Dental Practice in Gurgaon",
+  title: { absolute: "About Dental Krafts | Specialist Dental Practice in Gurgaon" },
   description:
     "Dental Krafts was founded by two specialists — Dr Ruchi Goel (AIIMS) and Dr Parmod Gulia (PGIMER). Our story, our values and two clinics in Gurgaon.",
   alternates: { canonical: "/about-us" },

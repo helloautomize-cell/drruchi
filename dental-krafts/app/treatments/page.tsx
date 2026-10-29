@@ -8,7 +8,7 @@ import { site } from "@/content/site";
 import { JsonLd, treatmentsCollection, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Dental Treatments in Gurgaon | Implants, RCT, Kids | Dental Krafts",
+  title: { absolute: "Dental Treatments in Gurgaon | Implants, RCT, Kids | Dental Krafts" },
   description:
     "All 21 dental treatments at Dental Krafts, Gurgaon — implants, root canals, kids' dentistry, braces, whitening and more. Specialist care, explained first.",
   alternates: { canonical: "/treatments" },

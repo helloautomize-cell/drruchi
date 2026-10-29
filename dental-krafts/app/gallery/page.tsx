@@ -5,9 +5,10 @@ import { Icon } from "@/components/icons";
 import { CtaBand } from "@/components/bits";
 import { GalleryGrid } from "@/components/gallery-grid";
 import { visibleCases } from "@/content/results";
+import { JsonLd, imageObject, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Before & After Dental Results | Dental Krafts Gurgaon",
+  title: { absolute: "Before & After Dental Results | Dental Krafts Gurgaon" },
   description:
     "Real before-and-after results from Dental Krafts patients — implants, crowns, dentures, full-mouth rehabilitation, veneers and whitening. Shared with consent.",
   alternates: { canonical: "/gallery" },
@@ -41,6 +42,7 @@ export default function Gallery() {
       <section className="sp" style={{ paddingTop: 0 }}><div className="wrap">
         <CtaBand title="Want results" em="like these?" text="Book a consultation. We'll show you what's possible for your teeth, with a written plan." />
       </div></section>
+      <JsonLd data={[breadcrumb([["Home", "/"], ["Results", "/gallery"]]), ...visibleCases.map(imageObject)]} />
     </>
   );
 }

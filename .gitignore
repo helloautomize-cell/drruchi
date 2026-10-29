@@ -22,3 +22,6 @@ dental-krafts-assets-orig/
 Thumbs.db
 .DS_Store
 dental-krafts-live-upgrade.zip
+
+# consumed reference packs, zips and asset backups (kept locally)
+_archive/

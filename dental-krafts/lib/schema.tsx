@@ -3,6 +3,7 @@ import { site, OG_IMAGE } from "@/content/site";
 import { clinics, type Clinic } from "@/content/clinics";
 import { doctorById } from "@/content/doctors";
 import { treatments, type Treatment } from "@/content/treatments";
+import { GUIDE_CATEGORIES, GUIDE_AUTHORS, guidesByDate, type Guide, type DoctorKey } from "@/content/guides";
 import type { Post } from "@/content/posts";
 import type { Case } from "@/content/results";
 
@@ -288,11 +289,161 @@ export function articleNode(p: Post) {
     description: p.excerpt,
     image: abs(p.image),
     author: { "@id": p.author === "parmod" ? ID.parmod : ID.ruchi, "@type": "Physician", name: doc.name, url: abs(doc.slug) },
-    reviewedBy: { "@id": p.author === "parmod" ? ID.parmod : ID.ruchi },
+    reviewedBy: { "@id": p.author === "parmod" ? ID.ruchi : ID.parmod },
     publisher: { "@id": ID.org },
     mainEntityOfPage: abs(`/blog/${p.slug}`),
     inLanguage: "en-IN",
     dateModified: LAST_REVIEWED,
+  };
+}
+
+/* --------------------------------- guides -------------------------------- */
+
+/** Person node for guide author/reviewer — links to the site-wide physician @ids. */
+function guidePerson(id: DoctorKey) {
+  const a = GUIDE_AUTHORS[id];
+  return {
+    "@type": "Person",
+    "@id": id === "ruchi" ? ID.ruchi : ID.parmod,
+    name: a.name,
+    jobTitle: a.role,
+    url: abs(a.url),
+    image: abs(a.img),
+    alumniOf: a.alumni.map((n) => ({ "@type": "CollegeOrUniversity", name: n })),
+    worksFor: clinics.map((c) => ({ "@id": c.id === "sector53" ? ID.clinic53 : ID.clinic57 })),
+  };
+}
+
+const guideListItems = (list: Guide[]) =>
+  list.map((g, i) => ({ "@type": "ListItem", position: i + 1, url: abs(`/guides/${g.slug}`), name: g.title }));
+
+/** /guides — CollectionPage + ItemList + BreadcrumbList, one @graph. */
+export function guidesIndexGraph() {
+  const url = abs("/guides");
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: "Patient guides from Dental Krafts",
+        description: "Plain-language dental guides written by Dr Ruchi Goel and Dr Parmod Gulia, specialist dentists in Gurgaon.",
+        isPartOf: { "@id": ID.website },
+        about: { "@id": ID.org },
+        breadcrumb: { "@id": `${url}#breadcrumb` },
+        mainEntity: { "@id": `${url}#list` },
+        inLanguage: "en-IN",
+      },
+      { "@type": "ItemList", "@id": `${url}#list`, itemListElement: guideListItems(guidesByDate()) },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: abs("/") },
+          { "@type": "ListItem", position: 2, name: "Patient guides", item: url },
+        ],
+      },
+    ],
+  };
+}
+
+/** /guides/category/[category] — same shape as the index, filtered list. */
+export function guideCategoryGraph(catSlug: string) {
+  const cat = GUIDE_CATEGORIES.find((c) => c.slug === catSlug);
+  const url = abs(`/guides/category/${catSlug}`);
+  const list = guidesByDate().filter((g) => g.category === catSlug);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: `${cat?.name ?? "Guides"} — patient guides from Dental Krafts`,
+        description: `Plain-language dental guides on ${(cat?.name ?? "dental care").toLowerCase()}, written and reviewed by the specialists at Dental Krafts, Gurgaon.`,
+        isPartOf: { "@id": ID.website },
+        about: { "@id": ID.org },
+        breadcrumb: { "@id": `${url}#breadcrumb` },
+        mainEntity: { "@id": `${url}#list` },
+        inLanguage: "en-IN",
+      },
+      { "@type": "ItemList", "@id": `${url}#list`, itemListElement: guideListItems(list) },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: abs("/") },
+          { "@type": "ListItem", position: 2, name: "Patient guides", item: abs("/guides") },
+          { "@type": "ListItem", position: 3, name: cat?.name ?? catSlug, item: url },
+        ],
+      },
+    ],
+  };
+}
+
+/** /guides/[slug] — WebPage + MedicalWebPage/BlogPosting + BreadcrumbList + FAQPage. */
+export function guideArticleGraph(g: Guide) {
+  const url = abs(`/guides/${g.slug}`);
+  const cat = GUIDE_CATEGORIES.find((c) => c.slug === g.category);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: g.title,
+        description: g.dek,
+        isPartOf: { "@id": ID.website },
+        breadcrumb: { "@id": `${url}#breadcrumb` },
+        primaryImageOfPage: abs(g.image),
+        inLanguage: "en-IN",
+      },
+      {
+        "@type": ["MedicalWebPage", "BlogPosting"],
+        "@id": `${url}#article`,
+        headline: g.title,
+        name: g.title,
+        description: g.dek,
+        url,
+        mainEntityOfPage: { "@id": `${url}#webpage` },
+        image: abs(g.image),
+        datePublished: g.published,
+        dateModified: g.modified,
+        lastReviewed: g.modified,
+        articleSection: cat?.name,
+        wordCount: g.wordCount,
+        about: { "@type": g.about.type, name: g.about.name, sameAs: g.about.sameAs },
+        audience: { "@type": "PeopleAudience", audienceType: "Patient" },
+        author: guidePerson(g.author),
+        reviewedBy: guidePerson(g.reviewer),
+        publisher: { "@id": ID.org },
+        isPartOf: { "@id": ID.website },
+        inLanguage: "en-IN",
+        citation: g.sources.map((s) => s.url),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: abs("/") },
+          { "@type": "ListItem", position: 2, name: "Patient guides", item: abs("/guides") },
+          { "@type": "ListItem", position: 3, name: cat?.name ?? g.category, item: abs(`/guides/category/${g.category}`) },
+          { "@type": "ListItem", position: 4, name: g.title, item: url },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#faq`,
+        inLanguage: "en-IN",
+        mainEntity: g.faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    ],
   };
 }
 

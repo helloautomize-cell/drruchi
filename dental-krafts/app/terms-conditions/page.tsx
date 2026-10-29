@@ -4,7 +4,7 @@ import { Icon } from "@/components/icons";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions | Dental Krafts Gurgaon",
+  title: { absolute: "Terms and Conditions | Dental Krafts Gurgaon" },
   description:
     "Review Dental Krafts' Terms and Conditions for our services, appointment policies, payment details, and responsibilities. Contact us for more information.",
   alternates: { canonical: "/terms-conditions" },

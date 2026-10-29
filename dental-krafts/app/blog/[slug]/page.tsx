@@ -107,7 +107,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             <Link className="link" href={doc.slug} style={{ marginTop: 6 }}>Full profile <Icon name="arrow-right" cls="ic ic-sm" /></Link>
           </span>
         </div>
-        <p className="mrev"><Icon name="shield-check" cls="ic" /> Medically reviewed by {doc.name}, {doc.degree.split(",")[1]?.trim() ?? doc.role}.</p>
+        <p className="mrev"><Icon name="shield-check" cls="ic" /> Medically reviewed by {doc.name}, {doc.degree.split(",")[1]?.trim() ?? doc.role} · Last updated October 2026.</p>
       </div></section>
 
       <JsonLd data={LD} />

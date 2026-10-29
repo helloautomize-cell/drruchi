@@ -12,7 +12,7 @@ import { site } from "@/content/site";
 import { JsonLd, clinicNode, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Dentist in Sector 53, Golf Course Road | Dental Krafts",
+  title: { absolute: "Dentist in Sector 53, Golf Course Road | Dental Krafts" },
   description: "Dental Krafts Sector 53, DSP-211, 2nd Floor, South Point Mall, Golf Course Road. AIIMS & PGIMER dentists. Open 10 am–8 pm, closed Wed. Call +91 98104 48720.",
   alternates: { canonical: "/dental-clinic-sector-53-gurgaon" },
 };

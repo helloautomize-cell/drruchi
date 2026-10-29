@@ -9,7 +9,7 @@ import { reviews } from "@/content/reviews";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Patient Reviews | Dental Krafts Gurgaon | 5.0 on Practo",
+  title: { absolute: "Patient Reviews | Dental Krafts Gurgaon | 5.0 on Practo" },
   description:
     "1,000+ patient stories on Practo, rated 5.0. Real reviews of implants, root canals, kids' dentistry and more at Dental Krafts, Gurgaon.",
   alternates: { canonical: "/patient-stories" },

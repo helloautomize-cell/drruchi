@@ -3,6 +3,7 @@ import { clinics } from "@/content/clinics";
 import { doctors } from "@/content/doctors";
 import { treatments } from "@/content/treatments";
 import { homeFaqs } from "@/content/faqs";
+import { guidesByDate } from "@/content/guides";
 
 
 const U = (p: string) => `${site.domain}${p}`;
@@ -91,6 +92,8 @@ function build(): string {
   L.push(`- [Before and after results](${U("/gallery")})`);
   L.push(`- [Patient stories](${U("/patient-stories")})`);
   L.push(`- [Blog](${U("/blog")})`);
+  L.push(`- [Patient guides](${U("/guides")})`);
+  for (const g of guidesByDate()) L.push(`  - [${g.title}](${U(`/guides/${g.slug}`)}) — ${g.excerpt}`);
   L.push(`- [International patients](${U("/medical-tourism")})`);
   L.push(`- [日本語](${U("/japanese")}) · [한국어](${U("/korean")})`);
   L.push(`- [About Dental Krafts](${U("/about-us")})`);

@@ -8,7 +8,7 @@ import { posts } from "@/content/posts";
 import { doctorById } from "@/content/doctors";
 
 export const metadata: Metadata = {
-  title: "Dental Blog | Questions Answered by Specialists | Dental Krafts",
+  title: { absolute: "Dental Blog | Questions Answered by Specialists | Dental Krafts" },
   description:
     "Plain-English dental articles written and reviewed by Dr Ruchi Goel (AIIMS) and Dr Parmod Gulia (PGIMER) — implants, kids' teeth and more.",
   alternates: { canonical: "/blog" },

@@ -4,7 +4,7 @@ import { Icon } from "@/components/icons";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Dental Krafts Gurgaon",
+  title: { absolute: "Privacy Policy | Dental Krafts Gurgaon" },
   description:
     "Learn what information Dental Krafts collects through its website and clinics, how it is used, and how to contact us about your privacy.",
   alternates: { canonical: "/privacy-policy" },

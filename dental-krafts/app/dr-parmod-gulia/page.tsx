@@ -13,7 +13,7 @@ import { site } from "@/content/site";
 import { JsonLd, physicianNode, faqPage, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Dr Parmod Gulia | Pediatric Dentist, PGIMER | Gurgaon",
+  title: { absolute: "Dr Parmod Gulia | Pediatric Dentist, PGIMER | Dental Krafts" },
   description: "Dr Parmod Gulia, BDS, MDS (Paedodontics & Preventive Dentistry), PGIMER Chandigarh, silver medal. Children's dentistry and root canals at Dental Krafts, Gurgaon.",
   alternates: { canonical: "/dr-parmod-gulia" },
 };
