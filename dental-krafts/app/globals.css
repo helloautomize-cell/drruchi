@@ -827,7 +827,7 @@ a.cd:hover{transform:translateY(-3px)}
 /* stories carousel */
 #stories .sh{align-items:end}
 #stories .scores{margin:0;width:100%;max-width:520px;justify-self:end}
-.crs .track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+.crs .track{position:relative;display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
   padding:6px max(20px,calc((100vw - 1280px)/2 + 20px)) 18px;scroll-padding-inline:max(20px,calc((100vw - 1280px)/2 + 20px));cursor:grab;outline-offset:-3px}
 .crs .track::-webkit-scrollbar{display:none}
 .crs .track.drag{scroll-snap-type:none;cursor:grabbing;user-select:none}

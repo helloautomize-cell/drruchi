@@ -157,7 +157,7 @@
     var auto=parseInt(el.getAttribute("data-autoplay")||"0",10),timer=0,hold=0,visible=false,hover=false;
     function idx(){var l=tr.scrollLeft+parseFloat(getComputedStyle(tr).scrollPaddingLeft||0)+4,b=0;items.forEach(function(it,i){if(it.offsetLeft<=l)b=i});return b}
     function max(){return tr.scrollWidth-tr.clientWidth}
-    function go(i){i=(i+items.length)%items.length;var pad=parseFloat(getComputedStyle(tr).scrollPaddingLeft||0);tr.scrollTo({left:items[i].offsetLeft-pad,behavior:motionOK()?"smooth":"auto"})}
+    function go(i){i=(i+items.length)%items.length;items[i].scrollIntoView({block:"nearest",inline:"start",behavior:motionOK()?"smooth":"auto"})}
     function upd(){var m=max(),p=m>0?tr.scrollLeft/m:1,i=idx();if(tr.scrollLeft>=m-4)i=items.length-1;
       if(bar)bar.style.setProperty("--p",Math.max(p,(1/items.length)).toFixed(3));
       if(ctr)ctr.innerHTML=String(i+1).padStart(2,"0")+" <span>/ "+String(items.length).padStart(2,"0")+"</span>";

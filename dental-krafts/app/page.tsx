@@ -297,7 +297,7 @@ export default function Home() {
           <p className="lead" data-r data-delay="180">Filmed in our clinics, the way you'd watch them on your phone. Tap one to play with sound.</p>
         </div></div>
         <div className="crs dk5-reels" data-carousel data-nodrag role="region" aria-roledescription="carousel" aria-label="Short videos from the dentists">
-          <div className="track" data-track data-cursor="Play" data-cursor-tone="play" tabIndex={0} data-r="stagger">
+          <div className="track" data-track data-lenis-prevent data-cursor="Play" data-cursor-tone="play" tabIndex={0} data-r="stagger">
             {REELS.map((r) => <Reel5 key={r.file} reel={r} />)}
           </div>
           <div className="wrap ctl">
