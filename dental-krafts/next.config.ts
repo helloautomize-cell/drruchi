@@ -26,17 +26,12 @@ const nextConfig: NextConfig = {
       { source: "/blog/best-painless-dentist-gurgaon", destination: "/blog/gentle-dentist-gurgaon", permanent: true },
       { source: "/blog/dental-implants-types-procedure-benefits-cost-risks", destination: "/blog/dental-implants-types-procedure-benefits-risks", permanent: true },
       { source: "/blog/tooth-filling-treatment-type-cost", destination: "/blog/tooth-filling-treatment-types", permanent: true },
-      // canonical host: www and http both collapse onto https://dentalkrafts.com
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.dentalkrafts.com" }],
-        destination: "https://dentalkrafts.com/:path*",
-        permanent: true,
-      },
+      // canonical host is https://www.dentalkrafts.com; apex → www is handled
+      // by the Vercel domain redirect, so no www/apex rule exists here.
       {
         source: "/:path*",
         has: [{ type: "header", key: "x-forwarded-proto", value: "http" }],
-        destination: "https://dentalkrafts.com/:path*",
+        destination: "https://www.dentalkrafts.com/:path*",
         permanent: true,
       },
     ];

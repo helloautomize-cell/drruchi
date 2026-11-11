@@ -20,7 +20,7 @@ export type Guide = {
   faq: { q: string; a: string }[]; sources: { title: string; url: string; site: string }[];
 };
 
-export const SITE = "https://dentalkrafts.com";
+export const SITE = "https://www.dentalkrafts.com";
 
 export const GUIDE_CATEGORIES = [
   {
