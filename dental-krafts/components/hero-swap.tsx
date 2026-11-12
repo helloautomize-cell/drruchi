@@ -33,7 +33,7 @@ const DOCTORS = [
 
 type Who = (typeof DOCTORS)[number]["who"];
 
-/** Hero doctor stack that auto-swaps every 3s. Pause on hover/focus, swipe on
+/** Hero doctor stack that auto-swaps every 5s. Pause on hover/focus, swipe on
     touch, arrow keys when focused inside, and a still frame under reduced motion. */
 export function HeroSwap() {
   const [front, setFront] = useState<Who>("ruchi");
